@@ -13,6 +13,7 @@
 - `docs/handoff/认知测评平台_协作者审核说明.md`
 - `docs/handoff/认知测评平台_Codex交接说明.md`
 - `docs/handoff/认知测评平台_修改记录与交接说明.md`
+- `docs/handoff/CSV输出结构审核索引.md`
 
 本次审核重点不是重新开发，而是做科研验证：
 
