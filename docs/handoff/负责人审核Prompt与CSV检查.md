@@ -31,7 +31,9 @@
 ```text
 晓烨，这次想请你帮忙审核你原来负责的两个范式：空间导航、看眼读心/RMET。
 
-我已经把当前 Web 代码、原始开发文档、旧版材料、修改依据、当前使用的图片和指导语都放到 GitHub 里了。你不需要自己从头翻全仓库，也不需要改代码。你可以把下面这段“复制给 Codex 的 prompt”直接交给 Codex，让它先帮你把当前实现、原始设计、修改证据和数据输出整理成表格。
+我已经把当前 Web 代码、原始开发文档、旧版材料、修改依据、当前使用的图片和指导语都放到 GitHub 里了。建议你用 Codex 来做后续审核辅助；如果你用的是 Claude、Gemini、Trae 或其他能连接 GitHub / 拉代码的编程 agent，也可以。你只需要把下面这段“复制给 Codex 的 prompt”交给它，它会自己去连接 GitHub、拉仓库、读取 handoff、扫描代码和证据文件，遇到登录或权限问题时再让你操作。
+
+如果你暂时没有这类编程 agent，也没关系。你可以先用 ChatGPT/GPT 打开 GitHub 上的 handoff 文档和对应文件，让它帮你读；如果拉代码、权限、文件位置或判断标准卡住了，再来问我。
 
 你最后主要判断：这些修改从空间导航/RMET 的心理学范式逻辑看是否合理，哪些可以接受，哪些必须改，哪些需要补文献或材料来源说明。
 ```
@@ -40,6 +42,20 @@
 
 ```text
 你现在协助刘晓烨审核“老年范式综合2 / psylogical”仓库中她负责的两个范式：空间导航、看眼读心/RMET。
+
+目标 GitHub 仓库：
+- https://github.com/Adingzhong/psylogical
+
+GitHub 接入流程：
+1. 如果当前环境已经有仓库代码，先进入仓库根目录并确认 `git remote -v` 指向上面的仓库。
+2. 如果当前环境没有代码，先尝试访问或克隆：`git clone https://github.com/Adingzhong/psylogical.git`。
+3. 如果提示没有权限、需要登录、404、Authentication failed 或无法读取仓库，不要继续猜测。请提示刘晓烨：
+   - 先确认自己的 GitHub 是否已登录；
+   - 去邮箱里查看 GitHub 邀请邮件并接受仓库/组织邀请；
+   - 如果没有邀请，让项目负责人把她加入仓库只读协作权限；
+   - 登录完成后再让你继续。
+4. 如果本地支持 GitHub CLI，可以引导她运行 `gh auth login`；如果没有 GitHub CLI，就让她在浏览器登录 GitHub 后重新授权当前 agent。
+5. 成功拉下仓库后，进入仓库根目录，只做只读扫描和整理。
 
 工作边界：
 - 不要改代码；
@@ -93,7 +109,9 @@ RMET：
 ```text
 一桦，这次想请你帮忙审核你原来负责的三个范式：Flanker、SART、VSTMB。
 
-我已经把当前 Web 代码、原始开发文档、旧版程序、关键文献、当前使用的刺激材料和指导语都放到 GitHub 里了。你不需要自己从头翻全仓库，也不需要改代码。你可以把下面这段“复制给 Codex 的 prompt”直接交给 Codex，让它先把当前参数、原始设计、修改依据和 CSV/JSON 输出整理出来。
+我已经把当前 Web 代码、原始开发文档、旧版程序、关键文献、当前使用的刺激材料和指导语都放到 GitHub 里了。建议你用 Codex 来做后续审核辅助；如果你用的是 Claude、Gemini、Trae 或其他能连接 GitHub / 拉代码的编程 agent，也可以。你只需要把下面这段“复制给 Codex 的 prompt”交给它，它会自己去连接 GitHub、拉仓库、读取 handoff、扫描代码和证据文件，遇到登录或权限问题时再让你操作。
+
+如果你暂时没有这类编程 agent，也没关系。你可以先用 ChatGPT/GPT 打开 GitHub 上的 handoff 文档和对应文件，让它帮你读；如果拉代码、权限、文件位置或判断标准卡住了，再来问我。
 
 你最后主要判断：当前 timing、trial 数、练习/正式流程、反应窗口、Go/No-go 错误定义、VSTMB 条件和输出字段是否仍符合你原来的范式设计和文献逻辑。
 ```
@@ -102,6 +120,20 @@ RMET：
 
 ```text
 你现在协助许一桦审核“老年范式综合2 / psylogical”仓库中她负责的三个范式：Flanker、SART、VSTMB。
+
+目标 GitHub 仓库：
+- https://github.com/Adingzhong/psylogical
+
+GitHub 接入流程：
+1. 如果当前环境已经有仓库代码，先进入仓库根目录并确认 `git remote -v` 指向上面的仓库。
+2. 如果当前环境没有代码，先尝试访问或克隆：`git clone https://github.com/Adingzhong/psylogical.git`。
+3. 如果提示没有权限、需要登录、404、Authentication failed 或无法读取仓库，不要继续猜测。请提示许一桦：
+   - 先确认自己的 GitHub 是否已登录；
+   - 去邮箱里查看 GitHub 邀请邮件并接受仓库/组织邀请；
+   - 如果没有邀请，让项目负责人把她加入仓库只读协作权限；
+   - 登录完成后再让你继续。
+4. 如果本地支持 GitHub CLI，可以引导她运行 `gh auth login`；如果没有 GitHub CLI，就让她在浏览器登录 GitHub 后重新授权当前 agent。
+5. 成功拉下仓库后，进入仓库根目录，只做只读扫描和整理。
 
 工作边界：
 - 不要改代码；
@@ -165,7 +197,9 @@ VSTMB：
 ```text
 朝琮，这次想请你帮忙审核你原来负责的两个范式：图片记忆/N-back、连线测试/TMT。
 
-我已经把当前 Web 代码、原始开发文档、旧版程序、关键文献、当前使用的图片材料、layout 和指导语都放到 GitHub 里了。你不需要自己从头翻全仓库，也不需要改代码。你可以把下面这段“复制给 Codex 的 prompt”直接交给 Codex，让它先把当前实现、原始设计、修改依据和 CSV/轨迹输出整理出来。
+我已经把当前 Web 代码、原始开发文档、旧版程序、关键文献、当前使用的图片材料、layout 和指导语都放到 GitHub 里了。建议你用 Codex 来做后续审核辅助；如果你用的是 Claude、Gemini、Trae 或其他能连接 GitHub / 拉代码的编程 agent，也可以。你只需要把下面这段“复制给 Codex 的 prompt”交给它，它会自己去连接 GitHub、拉仓库、读取 handoff、扫描代码和证据文件，遇到登录或权限问题时再让你操作。
+
+如果你暂时没有这类编程 agent，也没关系。你可以先用 ChatGPT/GPT 打开 GitHub 上的 handoff 文档和对应文件，让它帮你读；如果拉代码、权限、文件位置或判断标准卡住了，再来问我。
 
 你最后主要判断：N-back 的 B1/B2/B3/B4 流程和图片难度是否合理，TMT 的触屏流程、layout、错误处理、完成时间和轨迹记录是否仍符合原始设计与研究目标。
 ```
@@ -174,6 +208,20 @@ VSTMB：
 
 ```text
 你现在协助黄朝琮审核“老年范式综合2 / psylogical”仓库中他负责的两个范式：图片记忆/N-back、连线测试/TMT。
+
+目标 GitHub 仓库：
+- https://github.com/Adingzhong/psylogical
+
+GitHub 接入流程：
+1. 如果当前环境已经有仓库代码，先进入仓库根目录并确认 `git remote -v` 指向上面的仓库。
+2. 如果当前环境没有代码，先尝试访问或克隆：`git clone https://github.com/Adingzhong/psylogical.git`。
+3. 如果提示没有权限、需要登录、404、Authentication failed 或无法读取仓库，不要继续猜测。请提示黄朝琮：
+   - 先确认自己的 GitHub 是否已登录；
+   - 去邮箱里查看 GitHub 邀请邮件并接受仓库/组织邀请；
+   - 如果没有邀请，让项目负责人把他加入仓库只读协作权限；
+   - 登录完成后再让你继续。
+4. 如果本地支持 GitHub CLI，可以引导他运行 `gh auth login`；如果没有 GitHub CLI，就让他在浏览器登录 GitHub 后重新授权当前 agent。
+5. 成功拉下仓库后，进入仓库根目录，只做只读扫描和整理。
 
 工作边界：
 - 不要改代码；
@@ -233,12 +281,28 @@ VSTMB：
 敬力，这部分主要是你自己后续确认：画钟测试和语音测评。
 
 仓库里已经放了当前 Web 代码、旧版画钟程序、语音原始 PPT、当前使用的语音图片和指导语。你可以把下面这段 prompt 给 Codex，让它先整理当前实现、输出文件和风险点。你最后主要判断：画钟轨迹/截图是否够评分，语音是否必须改成主持人手动开始/停止录音。
+
+如果后面需要让别人协助这一部分，也建议优先使用 Codex；Claude、Gemini、Trae 或其他能连接 GitHub / 拉代码的编程 agent 也可以。没有这类 agent 时，就用 ChatGPT/GPT 打开 GitHub 上的 handoff 和对应代码文件先看，遇到权限或文件定位问题再找我。
 ```
 
 ### 复制给 Codex 的 prompt
 
 ```text
 你现在协助戴敬力审核“老年范式综合2 / psylogical”仓库中的画钟测试和语音测评。
+
+目标 GitHub 仓库：
+- https://github.com/Adingzhong/psylogical
+
+GitHub 接入流程：
+1. 如果当前环境已经有仓库代码，先进入仓库根目录并确认 `git remote -v` 指向上面的仓库。
+2. 如果当前环境没有代码，先尝试访问或克隆：`git clone https://github.com/Adingzhong/psylogical.git`。
+3. 如果提示没有权限、需要登录、404、Authentication failed 或无法读取仓库，不要继续猜测。请提示戴敬力：
+   - 先确认自己的 GitHub 是否已登录；
+   - 去邮箱里查看 GitHub 邀请邮件并接受仓库/组织邀请；
+   - 如果没有邀请，让项目负责人把他加入仓库只读协作权限；
+   - 登录完成后再让你继续。
+4. 如果本地支持 GitHub CLI，可以引导他运行 `gh auth login`；如果没有 GitHub CLI，就让他在浏览器登录 GitHub 后重新授权当前 agent。
+5. 成功拉下仓库后，进入仓库根目录，只做只读扫描和整理。
 
 工作边界：
 - 不要改代码；
