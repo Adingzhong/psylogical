@@ -1,0 +1,1322 @@
+\ Pergamon
+
+PII] S9917Ð2821"86#99904Ð7
+
+Neuropsycholo`ia\ Vol[ 24\ No[ 5\ pp[ 636Ð647\ 0886
+Þ 0886 Elsevier Science Ltd[ All rights reserved
+Printed in Great Britain
+9917Ð2821:86 ,06[99¦9[99
+
+{Oops;|] Performance correlates of everyday
+attentional failures in traumatic brain injured and
+normal subjects
+IAN H[ ROBERTSON\ TOM MANLY\ JACKIE ANDRADE\ BART T[ BADDELEY and
+JENNY YIEND
+MRC Applied Psychology Unit\ Cambridge\ U[K[
+"Received 18 September 0885^ accepted 13 December 0885#
+
+Abstract*Insu.cient attention to tasks can result in slips of action as automatic\ unintended action sequences are triggered
+inappropriately[ Such slips arise in part from de_cits in sustained attention\ which are particularly likely to happen following frontal
+lobe and white matter damage in traumatic brain injury "TBI#[ We present a reliable laboratory paradigm that elicits such slips of
+action and demonstrates high correlations between the severity of brain damage and relative!reported everyday attention failures in
+a group of 23 TBI patients[ We also demonstrate signi_cant correlations between self! and informant!reported everyday attentional
+failures and performance on this paradigm in a group of 64 normal controls[ The paradigm "the Sustained Attention to Response
+Task*SART# involves the withholding of key presses to rare "one in nine# targets[ Performance on the SART correlates signi_cantly
+with performance on tests of sustained attention\ but not other types of attention\ supporting the view that this is indeed a measure
+of sustained attention[ We also show that errors "false presses# on the SART can be predicted by a signi_cant shortening of reaction
+times in the immediately preceding responses\ supporting the view that these errors are a result of {drift| of controlled processing
+into automatic responding consequent on impaired sustained attention to task[ We also report a highly signi_cant correlation of
+−9[47 between SART performance and Glasgow Coma Scale Scores in the TBI group[ Þ 0886 Elsevier Science Ltd[
+Key Words] attention^ traumatic brain injury^ attentional failures in daily life^ sustained attention^ brain damage[
+
+attention system of the brain described by Posner and
+Peterson ð13Ł "0889# is important in such errors[ In the
+present paper\ we de_ne sustained attention as the ability
+to self!sustain mindful\ conscious processing of stimuli
+whose repetitive\ non!arousing qualities would otherwise
+lead to habituation and distraction to other stimuli[ In
+short\ we distinguish between the capacity for endogen!
+ous modulation of alertness "self!sustained attention#
+with exogenously controlled alertness\ which is governed
+by factors such as novelty\ salience and stimulus change[
+A possible link between slips of action on the one hand
+and sustained attention abilities on the other would be
+important for two reasons]
+
+Introduction
+Oops;*Pouring cream into a requested black co}ee or
+throwing away the vegetables while keeping their peelings
+are examples of action slips common in the everyday lives
+of normal people ð2\ 10Ł[ Such slips tend to happen when
+attention to task is degraded through such factors as
+boredom\ worry or dividing attention between several
+tasks simultaneously[ There is a considerable normal
+variation in action!error!proneness ð2Ł\ and brain dam!
+age*particularly to the frontal lobes of the brain*
+increases the likelihood that individuals will stray from
+intended goals and hence make errors ð22\ 23Ł[
+While many di}erent cognitive processes may underlie
+such slips of action ð21Ł\ it is likely that the sustained
+
+0[ The search for attentional performance measures that
+correlate with everyday slips of action in the normal
+population have yielded little success ð14Ł\ and this
+may be because adequate measures of sustained atten!
+tion were not obtained[
+1[ We lack an adequate characterization of the attention
+de_cits shown by traumatically brain injured "TBI#
+patients[ The clinical tests that have been shown to be
+
+*
+ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ
+ Address for correspondence] Ian H[ Robertson\ MRC
+Applied Psychology Unit\ Rehabilitation Research Group\ Box
+47\ Addenbrooke|s Hospital\ Cambridge CB1 1QQ\ U[K[^ tel[]
+¦33 0112 244183\ ext[ 243^ fax] ¦33 0112 405529^ e!mail]
+ian[robertsonÝmrc!apu[cam[ac[uk[
+
+636
+
+637
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+sensitive to TBI\ such as the Paced Auditory Serial
+Addition Test "PASAT# ð00\ 01Ł\ involve multiple cog!
+nitive operations\ and hence it is not possible to delin!
+eate precisely the way in which patients fail on this test[
+In fact\ most authors in this area interpret impaired
+clinical performance on such tests as being due to
+reduced speed of processing ð00\ 01\ 31Ł\ rather than
+in terms of any more speci_c attentional processes[
+As shall be seen below\ there are strong grounds for
+believing that sustained attention may be particularly
+compromised following TBI\ and hence an attempt
+at a more theoretically coherent characterization of
+attentional failures following TBI\ partly in terms of
+impaired sustained attention\ seems warranted[
+Traumatic brain injury particularly a}ects the frontal
+lobes ð27\ 32Ł and white matter ð03\ 27Ł of the brain[
+White matter damage has been shown to a}ect sustained
+attention particularly ð15\ 29Ł\ as have frontal lobe lesions
+mainly of the right hemisphere ð5\ 6\ 12\ 18\ 35Ł[ Reported
+problems of attention and concentration occur in the
+majority of severely traumatically brain!injured patients
+ð06\ 39Ł[
+In the present paper\ we argue that the action slips of
+the normal population show characteristics in common
+with the attentional failures of traumatically brain injured
+patients\ albeit in a less extreme form[ We argue that
+one signi_cant factor determining such slips are transient
+lapses in attention to task indicative of faulty sustained
+attention[ In contrast to early work suggesting that sus!
+tained attention or vigilance in normal humans only
+shows decrements after several tens of minutes ð05Ł\ recent
+research shows that right fronto!parietal systems are
+active over periods as short as 39 sec ð12Ł\ and perhaps
+even over briefer periods ð33Ł[
+The vulnerability of frontal and white matter areas to
+traumatic brain injury leads plausibly to the prediction
+that such patients will display sustained attention de_cits\
+and such a prediction is also reinforced by the nature of
+the attention problems reported by relatives of traumatic
+brain injured patients[ Detection of such de_cits using
+conventional vigilance!based perceptual detection para!
+digms has yielded mixed results\ however ð3\ 04\ 11\ 34Ł\
+and some authors have even denied that traumatic brain
+injury results in attentional problems over and above
+di.culties presented by general mental slowing ð31Ł[
+One reason for the di.culty experienced to date in
+_nding consistent performance correlates of sustained
+attention de_cits reported by brain injured people\ may
+well lie in the sustained attention paradigms employed[
+Typically\ continuous performance tests will require par!
+ticipants to monitor long sequences of stimuli and
+respond on detecting infrequent targets[ Such paradigms
+are\ arguably\ highly vulnerable to rapid automatization
+in the sense of Schneider and Shi}rin|s distinction
+between automatic and controlled\ e}ortful processing
+ð20Ł[ Certainly\ such tasks have problems with ceiling
+e}ects\ which have led researchers to perceptually
+
+degrade targets or load working memory in order to
+reduce high levels of performance ð11Ł[ In support of this
+view\ one study showed that vigilance decrements were
+only observed in a task that required controlled process!
+ing\ but not in one where the responding relied on auto!
+matic processing ð8Ł[
+We proposed that sustained attention to task would be
+taxed more heavily "and therefore that a greater range of
+performance would be seen in tasks of shorter duration#
+if the automatic response set could be transferred to the
+non!targets[ In this case\ when rare targets occur\ active\
+controlled processing must be triggered to overcome or
+out!compete the prepotent automatic response[ Hence\
+in the present study\ we used a continuous performance
+paradigm involving key presses to frequently presented
+non!targets\ but with the requirement to withhold motor
+responses to occasional targets "Sustained Attention to
+Response Task*SART#[ It was predicted that such a
+task would require a high level of continuous attention
+to response and be sensitive to transitory reduction in
+attention or {lapses|\ while keeping to a minimum
+demands on other cognitive processes such as memory\
+planning and general intellectual e}ort[
+Taking the view that action lapses in both normals
+and TBI patients can be attributed in part to sustained
+attention de_cits\ the following hypotheses were formu!
+lated[
+
+Hypothesis 0
+It was hypothesized that there would be a signi_cant
+positive correlation in a non!brain damaged sample
+between sustained attention capacities "as measured by
+the SART error score# and self! and informant!reported
+attentional slips in everyday life[
+It was further hypothesized that there would be no
+signi_cant relationship between performance on a more
+conventional perceptual detection!based test of sustained
+attention "Triplets test# and these questionnaire
+measures\ because of the proposed additional sensitivity
+of the SART to mild attentional de_cits[
+
+Hypothesis 1
+We predicted that the TBI group would make sig!
+ni_cantly more errors than a matched control group on
+the SART sustained attention measure than on a con!
+ventional sustained attention detection!based paradigm[
+
+Hypothesis 2
+We predicted that\ within the TBI group\ pathology
+severity measured by Glasgow Coma Scale "GCS# scores
+and post!traumatic amnesia duration "PTA# would be
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+strongly related to SART!assessed sustained attention
+performance[
+
+Hypothesis 3
+Traumatic brain injury and frontal lobe damage are
+often associated with impoverished awareness of the
+extent of problems ð06\ 26Ł[ A number of factors may
+contribute towards this\ including reduced sensitivity to
+feedback and reduced attention to errors ð09Ł[ It was
+therefore predicted that\ whereas SART measures may
+show a relationship with self!reported attentional failures
+in a brain!injured group\ the reports of informants who
+are familiar with the patient may show the strongest
+predictive relationship[
+
+Hypothesis 4
+Performance on the SART clearly requires the ability
+to withhold a response[ Response inhibition in classic
+go:no!go paradigms has been shown to be impaired par!
+ticularly after medial frontal lesions ð02Ł\ and given the
+likely location of damage in traumatic brain injury\ such
+a task is liable to be sensitive to subtle e}ects of damage[
+However\ we have argued that this continuous per!
+formance task will be sensitive to the ability to endogen!
+ously sustain attention[ Arbitrating between the relative
+contributions of an ine.ciency in response inhibition per
+se and a failure to inhibit responses due to a lack of
+continuous attention to response is\ of course\ di.cult
+and indeed somewhat circular within this task[ However\
+assuming that these phenomena are separable and that
+both may contribute to a poor performance\ it is possible
+to draw support for the claim that SART is sensitive to
+sustained attention by predicting]
+0[ The SART measures would show a stronger relation!
+ship to other validated measures of sustained attention
+"which have no such obvious response inhibition
+characteristics# than to measures of other attentional
+capacities "including one with an arguably strong
+response inhibitory component#[
+1[ The occurrence of errors in the task can be predicted
+by monitoring ~uctuations in the timing of accurate
+performance[ In other words\ an error can be seen not
+simply as an isolated failure in withholding a response
+but as the consequence of a failure in maintaining an
+optimum approach to the task over time[ The SART
+stimuli are highly predictable and rhythmic\ which
+allows the frequent responses to non!targets to
+become automatic and attentionally undemanding[
+E}ective sustained attention to the task would act to
+counter this e}ect so that the response to an infrequent
+stimulus could be withheld[ We would propose\ there!
+fore\ that an absence of such attention would be
+revealed in a speeding of responses to stimuli\ sugges!
+
+638
+
+tive of the response being triggered by the anticipation
+of the stimuli rather than as a result of an evaluation
+of its relevance to response[
+
+Experiment 0
+Relationship between SART measures and everyday
+attentional lapses and other {co`nitive failures| amon`
+normal controls
+The purpose of this study was to test the hypothesis
+that SART performance would correlate with everyday
+attentional failures in a normal population[
+
+Method
+Subjects[ A group of 64 control subjects "12 male\ 41
+female#\ ranging in age from 07 to 54 "mean 23[9^ S[D[
+00[9#\ were recruited from the MRC Applied Psychology
+Unit Subject Panel[
+Procedure[ Subjects were assessed in a 0!hr session[
+Apparatus and materials[ The following tests were
+given]
+
+Sustained attention to response test "SART#
+Reliability was tested by administering the procedure
+to a sub!group of 14 normal subjects ð04 women and 09
+men\ mean age 25[9 "S[D[ 7[9#^ mean SART errors 3[45
+"S[D[ 3[77#Ł on two occasions over a period of 0 week[
+The Pearson correlation in the error score "false presses#
+between these two occasions was 9[65\ showing that per!
+formance on this test is stable over time[
+In the SART procedure\ 114 single digits "14 of each
+of the nine digits# were presented visually over a 3[2!min
+period[ Each digit was presented for 149 msec\ followed
+by a 899!msec mask[ Subjects responded with a key press
+to each digit\ except 14 occasions when the digit 2
+appeared\ when they had to withhold a response[ Subjects
+used their preferred hand[ The target digit was distributed
+throughout the 114 trials in a pre!_xed quasi!random
+fashion[ The period from digit onset to digit onset was
+0049 msec[ Subjects were asked to give equal importance
+to accuracy and speed in doing the task[
+The digits were presented in one of _ve randomly allo!
+cated font sizes to enhance the demands for processing
+the numerical value\ rather than simply setting a search
+template for some peripheral feature of the no!response
+target[ These font sizes were 37 point\ 61 point\ 83 point\
+099 point and 019 point\ respectively "Symbol font#\ cor!
+responding to a height varying between 01 mm and
+18 mm[
+The mask following each digit consisted of a ring with
+a diagonal cross in the middle[ The total diameter of the
+circular mask was 18 mm[ Both digits and mask were
+
+649
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+presented centrally in white against a black background
+of the computer screen[ The screen "104 mm×024 mm]
+Macintosh 069 PowerBook# was approximately 39 cm
+from the subjects| eyes\ although no restrictions were
+placed on the subjects| movements[
+Each session was preceded by a practice period con!
+sisting of 07 presentations of digits\ two of which were
+targets[
+
+Triplets test
+One other experimental procedure was included for the
+purposes of the present study[ This was a more con!
+ventional continuous!performance!type test\ similar in
+form to the SART\ but requiring a response to infrequent
+targets rather than a response to frequent non!targets
+and no response to a target[ Two hundred and twenty!
+_ve digits were visually presented at an identical pacing
+to that used in the SART described above[ In the Triplets
+test\ however\ subjects had to respond whenever they
+detected consecutive upward or downward runs of three
+digits*for example\ 4\ 5\ 6 or 3\ 2\ 1[ They responded to
+these stimuli with a mouse key press[ As in the SART\
+there were 14 targets\ and the duration of the task was
+also 3[2 min[
+
+National adult reading test ð19Ł
+This reading test of irregularly spelled words gives an
+estimate of intelligence[
+
+Questionnaire measures of attentional failures in everyday
+life
+Cognitive failures questionnaire ð2Ł[ This self!report
+questionnaire measures slips of action and of memory in
+everyday life[
+Co`nitive failures questionnaire for others ð2Ł[ This ques!
+tionnaire is given to relatives or friends of the subject on
+which they rate slips of action and of memory in everyday
+life[
+
+Results
+Hypothesis 0[ It was hypothesized that there would
+be a signi_cant positive correlation in normals between
+SART errors and reports "by both self and independent
+informants# of attentional and other cognitive errors in
+everyday life[ There should be no such correlation
+between a conventional measure of sustained attention*
+the Triplets Test*and these questionnaire measures[
+Table 0 shows a correlation matrix showing the inter!
+relationships of the above measures\ as well as their
+associations with age and intelligence[ Only 59 out of the
+64 subjects completed CFQ questionnaires\ whereas 47
+out of 59 supplied informant questionnaires[
+Table 0 shows that\ in the normal sample\ the SART
+measures were not sensitive to the e}ects of age or of
+di}erences in estimated intelligence[ There were sig!
+ni_cant correlations between the SART and both self!
+and informant!reported cognitive failures as measured
+by the CFQ questionnaires for self and informants[ There
+were no signi_cant correlations between the Triplets Test
+and the CFQ measures[
+Hypothesis 0 was therefore supported for the SART\
+in that performance on the SART predicted self! and
+informant!reports of everyday attentional failures on the
+CFQ[ The results also indicate that the attempt to create
+a measure that was sensitive to these forms of problem
+but not to general intellectual level was\ at least for this
+sample\ successful[
+Experiment 1
+Relationship between everyday attention failures\ SART
+performance and brain dama`e severity amon` people with
+traumatic brain injury
+The aims of this experiment were to test hypotheses 1Ð4
+as outlined above[ Each hypothesis is summarized below
+prior to each analysis[
+Method
+Subjects[ A consecutive sample of 23 traumatically
+brain injured patients who were between 8 and 07 months
+
+Table 0[ Relationship between SART and Triplets performance and questionnaire self! and informant
+reports of attentional failures in a group of normals "n59#
+—
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+CFQ
+CFQ
+NART
+Triplets
+self
+relative
+IQ
+Age
+"number correct#
+SART
+−9[16
+−9[18
+n[s[
+n[s[
+9[21
+Triplets "number correct#
+n[s[
+n[s[
+n[s[
+n[s[
+NART IQ
+n[s[
+n[s[
+n[s[
+n[s[
+Age
+n[s[
+n[s[
+—
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+P³9[94[
+CFQ self] Cognitive Failures Questionnaire ð2Ł[
+CFQ relative] Cognitive Failures Questionnaire for others ð2Ł[
+NART] National Adult Reading Test[
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+640
+
+post!injury and who had been admitted for at least 37 hr
+to Addenbrooke|s hospital in Cambridge were assessed[
+The following exclusions were made]
+
+injury\ and one aim of the study was to compare the
+sensitivity to traumatic brain injury of this test to the
+response inhibition procedures[
+
+0[ Resident outside of the East Anglia area[
+1[ Pre!trauma history of epilepsy or other neurological
+condition[
+2[ History of drug or alcohol problems[
+3[ History of major psychiatric disorder[
+4[ Reported hearing di.culties[
+
+Triplets
+
+The mean age of the sample was 23[7 "S[D[ 02[3#\ with
+13 males and 09 females[ The mean lowest Glasgow
+Coma Scale "available for only 29 subjects# was 00[0 "S[D[
+3[0#[ Post!traumatic amnesia duration "available for 21
+subjects# was used to classify subjects into the severity
+categories 0*mild "less than one hour#\ 1*moderate "0Ð
+13 hr#\ 2*severe "0Ð6 days#\ 3*very severe "6 Ð17 days#
+and extremely severe "more than 17 days#[ By this classi!
+_cation\ there were _ve mild\ six moderate\ _ve severe\
+_ve very severe and 00 extremely severe cases\ respec!
+tively[ The mean PASAT score "1!sec pacing# was 21[5
+"S[D[ 00[6#\ and the mean number of categories obtained
+on the Modi_ed Wisconsin Card Sorting Test "maximum
+5# ð08Ł was 4[1 "S[D[ 0[4#[ They showed a mean total error
+score of 6[6 "S[D[ 6[8# on this latter test\ of which a mean
+of 06[1) "S[D[ 08[8# were perseverative[ On the Stroop
+Test\ they showed a mean decrease in speed for the con!
+~ict over the control condition of 06[3 sec "S[D[ 6[2#[
+Procedure[ Patients were assessed over two 1!hr
+sessions\ having given informed consent to participating
+in the study[
+Apparatus[ All the measures\ with the exception of the
+National Adult Reading Test\ given to the controls in
+Experiment 0 were also given to the subjects in the current
+study[ In addition\ the following tests were given]
+
+One other experimental procedure was included for the
+purposes of the present study[ This was a more con!
+ventional continuous!performance!type test\ similar in
+form to the SART\ but requiring a response to infrequent
+targets rather than a response to frequent non!targets
+and no response to a target[ Two hundred and twenty!
+_ve digits were visually presented at an identical pacing
+to that used in the SART described above[ In the Triplets
+test\ however\ subjects had to respond whenever they
+detected consecutive upward or downward runs of three
+digits*for example 4\ 5\ 6 or 3\ 2\ 1[ They responded to
+these stimuli with a mouse key press[ As in the SART\
+there were 14 targets\ and the duration of the task was
+also 3[2 min[
+
+Measures of everyday attention failures
+The patient group and their relatives were also admin!
+istered the same two rating scales "CFQ and CFQ for
+others# used with the normal group in Experiment 0
+above[ A total of 10 of the patients and relatives com!
+pleted these instruments[
+
+Comparison group for the brain injured subjects
+SART "see Experiment 0 above#
+Tests of sustained attention[
+Lottery subtest of the Test of Everyday Attention
+"TEA# ð16\ 17Ł[
+Telephone Search with Counting Subtest of the TEA[
+Tests of attentional switchin`[
+Modi_ed Wisconsin Card Sorting Test ð08Ł[
+Visual Elevator Subtest of the TEA[
+Tests of selective attention[
+Stroop Test ð28Ł[
+Telephone Search Test of the TEA[
+In addition to the above test procedures\ the following
+were included]
+
+Paced auditory serial addition test ð00\ 01Ł "1!sec pacing#
+This test was included as it is one of the best established
+measures of attentional de_cit following traumatic brain
+
+Because the total sample of controls described in
+Experiment 0 above was not well matched in age\ sex and
+verbal intelligence with the brain injured sample\ for the
+purposes of testing Hypothesis 1\ a subset of both groups
+was selected so as to be matched on these variables[ The
+normal control group consisted of 06 subjects "six female\
+00 male^ mean age 28[7^ S[D[ 00[8^ mean percentile IQ
+70[6^ S[D[ 19[2# matched to a subsample of 11 of the
+patient group "six female\ 05 male^ mean age 23[1^ S[D[
+01[0^ mean percentile IQ 66[5^ S[D[ 07[3# for age\ sex and
+estimated premorbid IQ[ The groups were compared on
+the response inhibition and other measures[ Premorbid
+intelligence was assessed either by the National Adult
+Reading Test ð19Ł or by the Spot!the!Word Test ð0Ł[ Per!
+centile scores for estimated premorbid IQ were obtained\
+and a patient subgroup was selected who matched the
+control group on this as well as sex and age variables[
+Matching was successful as there were no statistically
+signi_cant di}erences between the two groups on age\
+sex!ratio or IQ[
+
+641
+
+I[ H[ Robertson et al[:Everyday attentional failures
+Table 1[ Scores on SART and Triplets errors as well as SART reaction times\ for the patient and control
+groups errors respectively
+—
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+SART
+Triplets
+SART reaction time for the
+SART reaction time for the
+errors
+omissions
+four presses prior to correctly
+four presses prior to
+withheld respones
+non!withheld respones
+Patients
+6[5 "3[7#
+2[8 "2[0#
+261[7 "67[2#
+299[3 "32[5#
+Controls
+3[9 "2[1#
+4[9 "3[2#
+286[0 "73[8#
+294[8 "13[1#
+F
+6[9
+1[6
+9[60
+9[03
+P
+9[90
+n[s[
+n[s[
+n[s[
+—
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Results
+Hypothesis 1] Do the SART measures distinguish con!
+trols from brain injured subjects< Table 1 shows the scores
+on the SART and Triplets errors[
+Table 1 shows that the SART signi_cantly dis!
+criminated between the two groups\ but the Triplets task
+did not\ as was predicted in the introduction[ In fact\ the
+control group made slightly fewer errors on the Triplets
+task than did the patients[
+Hypothesis 2] Patholo`y severity measured by Glas`ow
+Coma Scale "GCS# scores and post!traumatic amnesia dur!
+ation "PTA# will be stron`ly related to SART!assessed
+sustained attention performance[ For the purposes of test!
+ing this hypothesis\ the whole group of 23 brain injured
+patients was included in the analysis[ The correlations
+
+between Glasgow Coma Scale scores "GCS# and post!
+traumatic amnesia duration on the one hand\ and atten!
+tional measures on the other\ were calculated[ Figure
+0 summarizes the signi_cant results[ GCS scores were
+available for only 29 subjects[
+Figure 0 shows that the SART and PASAT scores
+were the best predictors of GCS scores among the tests
+administered[ PTA grade was best predicted by PASAT
+and Triplets[ No other correlations were statistically sig!
+ni_cant at the 4) level[
+The hypothesis that SART measures would predict the
+severity of an injury is supported\ although the apparent
+complexity of the relationships between di}erent cog!
+nitive tests and di}erent estimates of severity requires
+further consideration[
+The relative contributions of PASAT and SART to
+
+Fig[ 0[ Statistically signi_cant correlations between key attentional measures on the one hand\ and Glasgow Coma Scale scores and
+Post Traumatic Amnesia durations\ respectively[
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+642
+
+Table 2[ Correlations between self!reports of attentional failures and test performance
+"n10# "P³9[94^ $P³9[90#
+—
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+INFORMANT
+SELF Cognitive
+Cognitive Failures
+failures "CQF#
+"CQF#
+Tests of attentional switching
+Wisconsin categories
+n[s[
+n[s[
+Visual elevator
+n[s[
+−9[38
+Selective attention tests
+Stroop
+n[s[
+9[36
+Telephone search "TEA#
+n[s[
+n[s[
+Sustained attention tests
+Telephone search with counting "TEA#
+n[s[
+n[s[
+Lottery "TEA#
+n[s[
+n[s[
+SART
+SART error
+n[s[
+9[33
+Other tests
+PASAT
+n[s[
+−9[62$
+Triplets
+n[s[
+n[s[
+GCS "Glasgow Coma Scale#
+n[s[
+−9[40
+PTA "post!traumatic amnesia duration#
+n[s[
+9[47$
+—
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+P ³ 9[94[
+$P ³ 9[90[
+
+predicting GCS were therefore assessed using multiple
+regression[ PASAT and SART were entered as inde!
+pendent variables[ Only SART showed any signi_cant
+independent e}ect in the regression "t−1[92^ P9[94#[
+This was con_rmed by the fact that\ whereas the SART
+accounts for 22[6) of the variance in GCS on its own\
+adding in PASAT as an independent variable added only
+a negligible 2) to the explained variance[
+Hypothesis 3] Attentional test correlations ratin` scale
+measures of everyday problems of attention for brain
+injured people[ Self ratings[ The relationship between
+self! and informant!ratings of attentional failures on the
+CFQ scales was examined[ Table 2 shows the correlations
+between self!reports and informant!reports of attentional
+failures and test performance[ Rating scale data were
+available on only 10 of the brain injured subjects[
+Table 2 shows that zero out of 00 correlations between
+self!reports of attentional failures and attentional test
+performance are statistically signi_cant\ in contrast to
+six out of 00 "43)# of informant!reports of attentional
+failures and test performance shown in Table 2[
+Given the relatively low number of brain injured people
+on whom self and informant reports were available "10#\
+some caution is needed in drawing _rm conclusions from
+the correlational data[ However\ the results are certainly
+consistent with the proposal that\ due to problems with
+insight and attention\ informants| reports would be more
+sensitive to cognitive problems experienced by the brain!
+injured people than self!reports[
+Hypothesis 4[ "a# Relationship of SART with other
+tests of attention[ We argued that SART is\ to a great
+extent\ a test of sustained attention\ and hence we predict
+a much stronger relationship between SART and tests of
+sustained attention than with other attentional tasks\ and
+
+in particular with tests where response inhibition is
+important\ such as the Wisconsin Card Sorting Test\ the
+Visual Elevator Subtest of the Test of Everyday Attention
+and Stroop[
+To test this hypothesis\ we carried out three stepwise
+muliple regression analyses\ with SART as the dependent
+variable in each case[ Table 3 shows these three
+regressions[ In each case\ one of the three tests\ presumed
+to be sensitive to response inhibition\ was entered into the
+regression _rst\ and then two tests of sustained attention
+"Lottery and Telephone Search with Counting Subtests
+of the Test of Everyday Attention# were each loaded in
+turn into the regression to determine how much extra
+variance\ if any\ would be explained[
+In addition\ in each regression\ we also loaded in
+PASAT as the _nal independent variable\ in order to
+determine whether this sensitive yet complex benchmark
+test of TBI attention de_cits would add signi_cantly to
+the explained variance in SART[
+The _rst regression in Table 3 shows that Wisconsin
+perseverative errors are non!signi_cantly correlated with
+SART[ The addition of the Lottery added almost 07)
+of variance explained\ whereas the addition of Telephone
+Search with Counting "TSC# added a further 01)\ giving
+a total explained variance of 29)[ Adding PASAT\ how!
+ever\ contributed a non!signi_cant extra 1) to the SART
+explained variance[
+The second regression in Table 3 showed near identical
+results\ with the Visual Elevator "VE# test showing no
+signi_cant relationship with SART^ yet the addition of
+two sustained attention tasks produced an explained vari!
+ance of 21)[ Again the PASAT did not signi_cantly
+improve on this[
+The third regression produced similar results with
+
+643
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+Table 3[ Multiple regressions of attentional measures on SART
+–—–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+SART
+Percentage
+variance Additional P of added
+R
+R1
+explained
+variance
+variable
+A[ Wisconsin
+
+0[ WISC
+9[95
+9[992
+9[2
+*
+n[s[
+1[ WISC¦Lottery
+9[31
+9[07
+07
+06[6
+³9[92
+2[ WISC¦Lotter¦TSC
+9[44
+9[29
+29
+01
+³9[94
+3[ WISC¦Lotter¦TSC¦PASAT
+9[46
+9[21
+21
+1
+n[s[
+B[ Visual elevator
+0[ Visual elevator
+9[02
+9[91
+1
+*
+n[s[
+1[ VE¦Lottery
+9[31
+9[07
+07
+05
+³9[92
+2[ VE¦Lottery¦TSC
+9[46
+9[21
+21
+05
+³9[92
+3[ VE¦Lottery¦TSC¦PASAT
+9[59
+9[25
+25
+3
+n[s[
+C[ Stroop
+0[ Stroop "Increase in time of con~ict over no!con~ict
+condition#
+9[03
+9[91
+1
+*
+n[s[
+1[ Stroop¦Lottery
+9[39
+9[05
+05
+03
+³9[95
+2[ Stroop¦Lottery¦TSC
+9[41
+9[16
+16
+00
+³9[95
+3[ Stroop¦Lottery¦TSC¦PASAT
+9[43
+9[18
+18
+1
+n[s[
+–—–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Stroop\ which\ like Wisconsin and VE\ did not correlate
+signi_cantly with SART[ Again\ the explained variance
+only became signi_cant when sustained attention tasks
+were added\ and again the PASAT added no signi_cant
+extra variance[
+There were no statistically signi_cant correlations with
+any of the other attentional tests with the exception of
+Triplets*another measure of sustained attention*
+which correlated at a marginally signi_cant level\ 9[23
+"P³9[95# with SART[ The hypothesis that SART is sen!
+sitive to sustained attention and not simply to impaired
+ability to inhibit a response per se is therefore supported[
+
+Predicting errors in SART on the basis of the timing of
+accurate responses
+In order to test whether an error on the SART
+"responding to a target# could be predicted on the basis
+of performance characteristics\ which may re~ect a less!
+ening of attention to the task\ we carried out the following
+analysis[ Reaction times for each set of four correct
+presses prior to correctly inhibited targets "i[e[ presenta!
+tions of the number 2\ which did not result in a response#
+were compared with each set of four correct presses prior
+to a mistakenly pressed target "i[e[ presentations of the
+number 2\ which did result in a response# in the patient
+group[ The mean reaction time prior to correctly given
+responses was 279[5 "S[D[ 53[3#\ whereas the mean reac!
+tion time in the trials prior to mistaken presses was 234[0
+"S[D[ 48[4#[ This was a statistically signi_cant di}erence
+"t−2[214^ P³9[90#[
+A similar _nding was obtained for the controls[ The
+mean pre!correct!trial RT for controls was 265[8 "S[D[
+43[6#\ whereas the pre!false!press mean RT was 217[0
+"S[D[ 42[4#[ This di}erence remained statistically sig!
+ni_cant "t−2[54^ P³9[914# after correction of sig!
+ni_cance level for multiple t!tests[ For both groups then\
+errors may be predicted by a reduction in RTs\ inter!
+
+preted in this task\ where the occurrence of stimuli is
+highly predictable\ as indicating a lessening of active
+attention[
+There is also some indication of a group di}erence on
+the e}ect of an error on response characteristics[ The
+control group showed a signi_cant increase in RT
+between the four trials leading up to an error and the
+four trials following an error ðmean RT prior to error^
+217[001 "S[D[ 42[3#\ mean RT following error 251[671
+"S[D[ 73[2#\ t−1[046\ P³9[94Ł\ suggesting clear e}ects
+on response style[ The patients tended not to show or
+maintain such error e}ects on response style ðmean RT
+prior to error^ 234[0 "S[D[ 48[4#\ mean RT following error
+237[8 "S[D[ 67[0#\ t−9[25^ n[s[Ł[
+Figure 1 shows graphically the mean reaction times for
+the four responses preceding\ and the four responses
+after\ correct and error trials\ respectively[ Figure 1 shows
+these data for\ respectively\ the control group\ for the
+TBI group whose error rate was less than 0 standard
+deviation from the control group|s mean errors and for
+the TBI group\ who made in excess of two standard
+deviations from the control group|s errors[
+A disproportionate variability in RTs\ measured by
+within!subject variability\ has been noted in TBI patients\
+interpreted as indicating a de_cit in sustaining consistent
+performance ð27Ł[ In the present study\ analysis of vari!
+ance revealed a statistically signi_cant e}ect of group
+on RTs "F11[48\ P³9[9990#\ with the TBI subjects
+showing a greater variability "mean standard devi!
+ation88[2\ S[D[ 33[7# than the control group "mean
+standard deviation56[8\ S[D[ 08[2#[
+
+Discussion
+All _ve hypotheses received support from the data[ To
+summarize]
+0[ In normal controls\ SART performance signi_cantly
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+644
+
+Fig[ 1[ SART] Mean RTs for the four trials preceding and following correct or incorrect responses to target presentations for three
+groups[
+
+correlated with self!reports of attentional and other
+{cognitive failures| in everyday life\ as well as with
+informant reports of such failures[
+1[ SART performance discriminated an unselected sam!
+ple of brain injured subjects from age!\ sex! and IQ!
+matched controls\ whereas a more conventional per!
+ceptually!based vigilance task "Triplets# did not[
+2[ SART forms\ along with the PASAT\ the best pre!
+dictor of severity of brain damage as measured by
+lowest Glasgow Coma Scale scores of all the cognitive
+measures administered[ Coma severity was the prin!
+cipal determinant of poor SART performance[
+3[ SART\ along with several other attentional measures\
+was strongly correlated with informant reports of
+daily life attentional failures in the TBI group[ No
+attentional measures were correlated with self!
+reported problems with attention in this group[
+4[ Variance in SART performance was predicted by sus!
+tained attention test performance and not by per!
+formance on tests presumed to be sensitive to response
+inhibition[ Errors on the SART measure were pre!
+dicted from participants| performance on correct non!
+target items preceding the occurrence of a target] sub!
+jects show signi_cant speeding up of responding prior
+to error responses[ TBI patients also show a sig!
+ni_cantly reduced tendency to slow down responding
+after an error compared to the controls[ TBI patients
+showed a signi_cantly greater variability in RTs to
+stimuli compared to controls[ As no signi_cant time!
+on!task e}ects emerged for either group in terms of
+errors or RTs\ this _nding suggests that local ~uc!
+tuations in attention or {lapses| may provide a better
+
+account of poor performance on this task than a sim!
+ple decrement over time[ These results support the
+hypothesis that di.culty in maintaining continuous
+attention to the task provides a more satisfactory
+account for failure than a simple di.culty in inhibiting
+responses[
+The hypotheses set out in the introduction were therefore
+broadly supported[ The SART appears to be sensitive to
+sustained attention de_cits and predicts self!reported and
+informant!reported attentional failures in normals\ and
+informant!reported attentional failures in brain injured
+participants[ Performance on the SART measures sig!
+ni_cantly discriminated an unselected sample of brain
+injured patients "with a wide variety of severity and post!
+injury symptoms# from normal age! and premorbid IQ!
+matched controls[ SART measures were as e}ective as
+the PASAT in predicting some measures of severity of
+injury[
+The fact that Triplets did not discriminate between the
+TBI patients and normal controls\ whereas the SART
+did\ may be due to the greater sensitivity and lower auto!
+matizability of the SART\ as argued in the introduction[
+Though the Triplets is not as simple as some vigilance
+tasks where only single stimuli have to be detected\ we
+argue that numerical sequences such as 2\ 3\ 4 are
+su.ciently familiar that their detection does indeed
+require less sustained attention to task than the require!
+ment to inhibit a response in SART[ We do\ however\
+acknowledge the possibility that this _nding may be due
+to the response inhibition aspects of the SART\ although
+the fact that SART correlates uniquely with sustained
+
+645
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+attention and not other measures lends support to the
+former argument[
+As a relatively unselected group of TBI subjects of
+mixed severity\ the fact that they were broadly within
+normal limits on conventional measures\ such as Wiscon!
+sin\ is perhaps not surprising[ As a group of above!aver!
+age IQ\ this fact may have served to obscure executive
+de_cits[ Attentional and frontal de_cits can only be
+detected with di.culty with sophisticated experimental
+methods in some studies with unselected populations ð30\
+31Ł\ and the relative insensitivity of these measures for
+such populations may explain\ in part\ the superior per!
+formance of SART in the present study[
+The _nding that observed "by a close informant# atten!
+tional slips in everyday life can be predicted by laboratory
+test performance is the _rst such _nding in the literature\
+to our knowledge[ This result suggests a normal con!
+tinuum of sustained attention capacity\ bearing strongly
+on everyday life performance[ This allows us to consider
+the problems shown by TBI subjects in a similar light to
+those shown by a proportion of the normal population[
+The results also emphasize the need\ in brain injured
+groups\ to consider the reports of informants who know
+the patient well and not simply to rely on self!reports in
+considering cognitive di.culties[
+The SART measures\ while being sensitive to vari!
+ations in attentional performance within brain injured
+and normal populations\ also act as a powerful dis!
+criminator of group[ This _nding suggests that the mea!
+sures may be a useful addition in clinical assessment\ in
+both predicting real life di.culties and in supporting
+victim and family claims that an injury has led to impair!
+ment and disability[
+Other results also support the use of such measures in
+this capacity[ Currently\ the PASAT is the key instrument
+that is sensitive to the sometimes subtle processing
+impairments\ which can result from traumatic brain
+injury[ However\ as discussed\ this sensitivity must be
+somewhat set against the di.culty in interpreting per!
+formance due to the signi_cant contributions of arith!
+metical ability\ age and general intellectual resources ð1\
+4\ 7Ł\ not to mention the rather intimidating qualities of
+the task[ At least in the samples tested\ the SART was
+resistant to di}erences in age and estimates of IQ[ Con!
+ceptually\ it is an easy task to pick up\ it has little in the
+way of a memory load "there is only one target to keep
+in mind# and it only requires identi_cation of single digits[
+It seems likely that another bene_t of the simplicity of
+the SART will be its amenability to _ne!grained analysis
+through the manipulation of its few parameters[
+Whereas the SART appears to be as strong a predictor
+of some aspects of injury severity as PASAT\ SART was
+associated only with coma severity\ but not with post!
+traumatic amnesia duration\ whereas PASAT was associ!
+ated with both[ In considering these relationships\ it is of
+note that coma severity\ as assessed by GCS\ is associated
+with white matter damage ð36Ł\ which\ in turn\ has been
+associated with sustained attention de_cits ð27Ł[ The par!
+
+ticular demands that the SART makes on the ability to
+sustain attention to response therefore may underlie this
+association[ PASAT is arguably a more complex task
+demanding greater cortical involvement and hence may
+be less strongly linked to white matter damage and less
+speci_cally related to coma severity[
+Whereas it has been proposed that the SART is sen!
+sitive to variation in the ability to endogenously sustain
+attention to task\ as outlined in the introduction\ a strong
+counter claim is that the test is sensitive to the ability to
+inhibit a response\ a known impairment following frontal
+lesions\ and that additional accounts are redundant[
+Indeed\ impairments of the response selection stage of
+information processing following closed head injury have
+been reported in several Australian studies ð07\ 24\ 25Ł[
+Simply suggesting that di.culties in inhibiting a
+response\ whether in cognitive tests or in real life\ are the
+result of an absence of sustained attention to task moves
+this no further[ One way of delineating the relative con!
+tributions to performance would be to consider further
+the e}ects of time on task[ This has been the traditional
+method in the search for sustained attention de_cits in
+this group ð34Ł[
+For reasons of producing a clinically useful measure\
+the SART used in this study does not provide su.cient
+targets to perform this type of analysis reasonably in
+terms of error rates[ Whereas this is amenable to further
+experimental investigation\ it is not clear that such a view
+of an incremental decline over time is the best _t for the
+complaints of patients[ Such a design would not\ for
+example\ be sensitive to a pattern of attentional ~uc!
+tuation\ of drifting o} and on task\ which may occur over
+periods of just a few seconds ð12\ 33Ł[
+Another route to disambiguating the factors under!
+lying SART failure is to consider its relationship to other
+tests[ It has been demonstrated that the SART shows
+stronger relationships with measures of sustained atten!
+tion than with other types of attention[ What we have
+been unable to demonstrate is that it sits better with tests
+of sustained attention than it does with a {pure| measure
+of response inhibition[ A problem with doing this\ from
+our perspective\ is that it is di.cult to conceive of such
+measures that are not themselves vulnerable to a sus!
+tained attention to response argument or that are not
+contaminated with extraneous demands[
+A third source of evidence\ that we have suggested is
+of relevance to this question\ is in considering the RTs to
+non!targets that precede and follow the occurrence of
+targets[ It was proposed that\ because of the task charac!
+teristics of simplicity\ rhythmicity and predictability\ that
+waning attention to response would be characterized by
+a speeding of RT to stimuli[ Subjectively\ setting up such
+a response pattern seems to be the least e}ortful and most
+errorful way of performing the task[ Certainly errors were
+predictable by considering this factor alone[ It has also
+been claimed that the return to longer RTs that follow
+errors\ at least in normal participants\ corresponds with
+a return of e}ortful sustained attention to the task[
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+The slowing of response times following errors also
+may arise because subjects adopt a more conservative
+response criterion\ or because they inhibit automatic
+responses to a greater degree once an error has been
+made[ Thus\ on the basis of the reaction time "RT# evi!
+dence alone\ one could not argue in favour of the sus!
+tained attention hypothesis[ Taken together with the
+regression analysis data from Table 3\ however\ the sus!
+tained attention hypothesis explanation of the RT data
+becomes slightly stronger\ although certainly not conclus!
+ive[
+The convergence of evidence lends support to the view
+that the SART may be particularly sensitive to the ability
+to sustain attention to a dull but demanding task\ but
+is insu.cient to fully dismiss alternative accounts[ An
+advantage of the test|s sensitivity to variations in normal
+populations is that such questions can be further pursued
+in such groups[
+In summary\ we believe that we have developed a task
+that is sensitive to attentional de_cits in traumatic brain
+injury patients and that also may be sensitive to indi!
+vidual di}erences in everyday attention failures in normal
+controls[ The simplicity of the paradigm that shows such
+strong correlations with biological markers of severity
+of damage and everyday life performance means that
+considerable strides can be made in the future towards
+further delineating the nature of the de_cits and ulti!
+mately providing adequate rehabilitation of these de_cits[
+
+References
+0[ Baddeley\ A[ D[\ Emslie\ H[ and Nimmo!Smith\ I[\
+The Speed and Capacity of Lan`ua`e Processin` Test[
+Thames Valley Test Company\ Bury St Edmunds\
+U[K[\ 0881[
+1[ Brittain\ J[ L[\ LaMarche\ J[ A[\ Reeder\ K[ P[\ Roth\
+D[ L[ and Boll\ T[ J[ E}ects of age and IQ on paced
+auditory serial addition task "PASAT# performance[
+The Clinical Neuropsycholo`ist 4\ 052Ð064\ 0880[
+2[ Broadbent\ D[ B[\ Cooper\ P[ F[\ FitzGerald\ P[ and
+Parkes\ K[ R[ The Cognitive Failures Questionnaire
+"CFQ# and its correlates[ British Journal of Clinical
+Psycholo`y 10\ 0Ð05\ 0871[
+3[ Brouwer\ W[ H[ and Wol}elaar\ P[ C[ V[ Sustained
+attention and sustained e}ort after closed head
+injury] Detection and 9[09 Hz heart rate variability
+in a low event rate vigilance task[ Cortex 10\ 000Ð
+008\ 0874[
+4[ Chronicle\ E[ P[ and MacGregor\ N[ A[\ Are PASAT
+scores related to mathematical ability< Neuro!
+psycholo`ical Rehabilitation\ in press[
+5[ Cohen\ R[ M[\ Semple\ W[ E[\ Gross\ M[\ Holcomb\
+H[ J[\ Dowling\ S[ and Nordahl\ T[ E[ Functional
+localization of sustained attention[ Neuropsychiatry\
+Neuropsycholo`y and Behavioural Neurolo`y 0\ 2Ð19\
+0877[
+6[ Cohen\ R[ M[\ Semple\ W[ E[\ Gross\ M[\ King\ A[
+C[ and Nordahl\ T[ E[ Metabolic brain pattern of
+
+646
+
+sustained auditory discrimination[ Experimental
+Brain Research 81\ 054Ð061\ 0881[
+7[ Deary\ I[ J[\ Langan\ S[ J[\ Hepburn\ D[ A[ and
+Frier\ B[ M[ Which abilities does the PASAT test<
+Personality and Individual Differences 01\ 872Ð876\
+0880[
+8[ Fisk\ A[ D[ and Schneider\ W[ Controlled and auto!
+matic processing during tasks requiring sustained
+attention] A new approach to vigilance[ Human Fac!
+tors 12\ 626Ð649\ 0870[
+09[ Freedman\ P[ E[\ Bleiberg\ J[ and Freedland\ K[
+Anticipatory behaviour de_cits in closed head injury[
+Journal of Neurolo`y\ Neurosur`ery\ and Psychiatry
+49\ 287Ð390\ 0876[
+00[ Gronwall\ D[ M[ A[ and Wrightson\ P[ Delayed
+recovery of intellectual function after minor head
+injury[ Lancet\ II "6763#\ 0341\ 0863[
+01[ Gronwall\ D[ M[ A[ and Wrightson\ P[ Cumulative
+e}ects of concussion[ Lancet 00\ 884Ð886\ 0864[
+02[ Leimkuhler\ M[ E[ and Mesulam\ M[ M[ Reversible
+goÐno go de_cits in a case of frontal lobe tumor[
+Annals of Neurolo`y 07\ 506Ð508\ 0874[
+03[ Levin\ H[ S[\ High\ W[ M[\ Williams\ D[ H[\ Eisen!
+berg\ H[ M[\ Amparo\ E[ G[\ Guinto\ F[ C[ and
+Ewert\ J[ Dichotic listening and manual performance
+in relation to magnetic resonance imaging after
+closed head injury[ Journal of Neurolo`y\ Neuro!
+sur`ery\ and Psychiatry 41\ 0051Ð0058\ 0878[
+04[ Loken\ W[ L[\ Thornton\ A[ E[\ Otto\ R[ L[ and
+Long\ C[ L[ Sustained attention after closed head
+injury[ Neuropsycholo`y 8\ 481Ð487\ 0884[
+05[ Mackworth\ F[ J[ Vigilance\ arousal and habituation[
+Psycholo`ical Review 64\ 297Ð211\ 0857[
+06[ McKinlay\ W[ M[ The short!term outcome of severe
+blunt head injury as reported by relatives of the
+injured persons[ Journal of Neurolo`y\ Neurosur`ery\
+and Psychiatry 33\ 416Ð422\ 0870[
+07[ Murray\ R[\ Shum\ D[ K[ and McFarland\ K[ Atten!
+tional de_cits in head!injured children] An infor!
+mation!processing analysis[ Brain and Co`nition 07\
+88Ð004\ 0881[
+08[ Nelson\ H[ A modi_ed card sorting test sensitive to
+frontal lobe de_cits[ Cortex 01\ 202Ð213\ 0865[
+19[ Nelson\ H[\ The National Adult Readin` Test "NART#
+Test[ NFER\ Windsor\ 0871[
+10[ Norman\ D[ A[ and Shallice\ T[\ Attention to action]
+willed and automatic control of behaviour[ In Con!
+sciousness and Self Re`ulation\ Vol[ 3\ ed[ R[ J[ Dav!
+idson\ G[ E[ Schwartz and D[ E[ Shapiro[ Plenum\
+New York\ 0875\ pp[ 0Ð07[
+11[ Parasuraman\ R[\ Mutter\ S[ A[ and Molloy\ R[ Sus!
+tained attention following mild closed!head injury[
+Journal of Clinical and Experimental Neuro!
+psycholo`y 02\ 678Ð700\ 0880[
+12[ Pardo\ J[ V[\ Fox\ P[ T[ and Raichle\ M[ E[ Local!
+ization of a human system for sustained attention by
+positron emission tomography[ Nature 238\ 50Ð53\
+0880[
+13[ Posner\ M[ I[ and Peterson\ S[ E[ The attention sys!
+tem of the human brain[ Annual Review of Neuro!
+science 02\ 14Ð31\ 0889[
+14[ Rabbitt\ P[ and Abson\ V[ {Lost and Found|] Some
+logical and methodological limitations of self!report
+
+647
+
+I[ H[ Robertson et al[:Everyday attentional failures
+
+questionnaires as tools to study cognitive ageing[
+British Journal of Psycholo`y 70\ 0Ð05\ 0889[
+15[ Rao\ S[ M[\ Leo\ G[ J[ and Haughton\ V[ M[\ Aubin!
+Faubert\ P[ S[ and Bernardin\ L[ Correlation of mag!
+netic resonance imaging with neuropsychological
+testing in multiple sclerosis[ Neurolo`y 28\ 050Ð055\
+0878[
+16[ Robertson\ I[ H[\ Ward\ A[\ Ridgeway\ V[ and
+Nimmo!Smith\ I[\ Test of Everyday Attention[
+Thames Valley Test Company\ Bury St Edmunds\
+U[K[\ 0883[
+17[ Robertson\ I[ H[\ Ward\ T[\ Ridgeway\ V[ and
+Nimmo!Smith\ I[\ The structure of normal human
+attention] The Test of Everyday Attention[ Journal of
+the International Neuropsycholo`ical Society 1\ 414Ð
+423\ 0885[
+18[ Rueckert\ L[ and Grafman\ J[ Sustained attention
+de_cits in patients with right frontal lesions[ Neuro!
+psycholo`ia 23\ 842Ð852\ 0885[
+29[ Rueckert\ L[\ Sorensen\ L[ and Levy\ J[ Callosal
+e.ciency is related to sustained attention[ Neuro!
+psycholo`ia 21\ 048Ð062\ 0883[
+20[ Schneider\ W[ and Shi}rin\ R[ M[ Controlled and
+automatic human information processing] 0[ Detec!
+tion\ search and attention[ Psycholo`ical Review 73\
+0Ð55\ 0866[
+21[ Schwartz\ M[ F[\ Mayer\ N[ H[\ FitzpatrickDeSalme\
+E[ J[ and Montgomery\ M[ W[ Cognitive theory and
+the study of everyday action disorders after brain
+damage[ Journal of Head Trauma Rehabilitation 7\
+48Ð61\ 0882[
+22[ Shallice\ T[ and Burgess\ P[ De_cit in strategy appli!
+cation following frontal lobe damage in man[ Brain
+003\ 616Ð630\ 0880[
+23[ Shallice\ T[ and Burgess\ P[\ Higher!order cognitive
+impairment and frontal lobe lesions in man[ In Fron!
+tal Lobe Function and Dysfunction\ ed[ H[ S[ Levin\ H[
+M[ Eisenberg and A[ L[ Benton\ Oxford University
+Press\ New York\ 0880\ pp[ 014Ð027[
+24[ Shum\ D[ H[ K[\ McFarland\ K[ and Bain\ J[ D[
+E}ects of closed head injury on attentional processes]
+Generality of Sternberg|s additive factor method[
+Journal of Clinical and Experimental Neuro!
+psycholo`y 05\ 436Ð444\ 0883[
+25[ Shum\ D[ H[ K[\ McFarland\ K[\ Bain\ J[ D[ and
+Humphreys\ M[ S[ E}ects of closed head injury on
+
+attentional processes] An information processing
+stage analysis[ Journal of Clinical and Experimental
+Neuropsycholo`y 01\ 136Ð153\ 0889[
+26[ Stuss\ D[ and Benson\ D[ F[ Neuropsychological
+studies of the frontal lobes[ Psycholo`ical Bulletin 84\
+2Ð17\ 0872[
+27[ Stuss\ D[ and Gow\ A[ D[ Frontal dysfunction after
+traumatic brain injury[ Neuropsychiatry\ Neuro!
+psycholo`y and Behavior Neurolo`y 4\ 161Ð171\ 0881[
+28[ Trenerry\ M[ R[\ Crosson\ B[\ DeBoe\ J[ and Leber\
+W[ R[\ Stroop Neuropsycholo`ical Screenin` Test[
+Psychological Assessment Resources\ Odessa\ FL\
+0878[
+39[ VanZomeren\ A[ H[ and Burg\ W[ V[ D[ Residual
+complaints of patients two years after severe closed
+head injury[ Journal of Neurolo`y\ Neurosur`ery\ and
+Psychiatry 37\ 10Ð17\ 0874[
+30[ VanZomeren\ A[ H[ and Deelman\ B[ G[ Di}erential
+e}ects of simple and choice reaction after closed head
+injury[ Clinical Neurolo`y and Neurosur`ery 68\ 70Ð
+89\ 0865[
+31[ VanZomeren\ A[ H[ and Deelman\ B[ G[ Long term
+recovery of visual reaction time after closed head
+injury[ Journal of Neurolo`y\ Neurosur`ery\ and Psy!
+chiatry 37\ 10Ð17\ 0867[
+32[ Varney\ N[ R[\ Bushnell\ D[ L[\ Nathan\ M[\ Kahn\
+D[\ Roberts\ R[\ Rezai\ K[\ Walker\ W[ and Kirchner\
+P[ NeuroSPECT correlates of disabling mild head
+injury] Preliminary _ndings[ Journal of Head Trauma
+Rehabilitation 09\ 07Ð17\ 0884[
+33[ Whitehead\ R[ Right hemisphere processing superi!
+ority during sustained visual attention[ Journal of
+Co`nitive Neuroscience 2\ 218Ð224\ 0880[
+34[ Whyte\ J[\ Polansky\ M[\ Fleming\ M[\ Coslett\ H[ B[
+and Cavallucci\ C[ Sustained arousal and attention
+after traumatic brain injury[ Neuropsycholo`ia 22\
+686Ð702\ 0884[
+35[ Wilkins\ A[ J[\ Shallice\ T[ and McCarthy\ R[ Frontal
+lesions and sustained attention[ Neuropsycholo`ia 14\
+248Ð254\ 0876[
+36[ Wilson\ J[ T[ L[\ Hadley\ D[ M[\ Wiedmann\ K[ D[
+and Teasdale\ G[ M[ Neuropsychological conse!
+quences of two patterns of brain damage shown by
+MRI in survivors of severe head injury[ Journal of
+Neurolo`y\ Neurosur`ery\ and Psychiatry 48\ 217Ð
+220\ 0884[
+
+

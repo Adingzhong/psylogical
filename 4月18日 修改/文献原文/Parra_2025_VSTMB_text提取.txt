@@ -1,0 +1,1196 @@
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+2025, VOL. 32, NO. 5, 765–785
+https://doi.org/10.1080/13825585.2025.2510925
+
+Oculomotor behaviors during visual short-term memory
+binding in healthy aging
+Mario A. Parraa, Grace McPhersona, Danilo Vergeb, Nora Rotsteinc
+and Gerardo Fernándezd
+a
+
+Department of Psychological Sciences & Health, University of Strathclyde, Glasgow, UK; bChief Medical
+Officer and Chief Operating Officer, ViewMind Inc ., New York, NY, USA; cScientific Support Team, ViewMind
+Inc, New York, NY, USA; dChief Scientific Officer, ViewMind Inc., New York, NY, USA
+ABSTRACT
+
+ARTICLE HISTORY
+
+The Visual Short-Term Memory Binding Task (VSTMBT) assesses the
+cognitive ability responsible for integrating and retaining objects’
+features on a temporary basis. The VSTMBT, combined with eyetracking (ET), identified impairments in older adults with Mild
+Cognitive Impairment (MCI) who developed AD dementia 3 years
+after their baseline assessment. This study investigated whether
+age impacts oculomotor behaviors linked to the VSTMBT. We
+assessed a group of healthy young adults (18–25 years old) and
+a group of healthy older adults (60–83 years old) with the VSTMBT
+synchronized with ET. The VSTMBT required participants to detect
+changes across two consecutive arrays of either two or three bico­
+lored objects. They were asked to remember the object’s colors
+either separately (Unbound Colors Condition, UC) or combined
+(Bound Colors Condition, BC). We collected behavioral responses,
+fixation duration, saccade amplitude, and pupil dilation. Older
+adults remembered fewer objects but that was similar in the UC
+and BC conditions. Both age groups showed decreased saccade
+amplitudes and longer fixation duration in the BC condition, with
+no differential impact of age. Pupil dilation was lower in older
+adults, but such a behavior was equivalent across the UC and BC
+conditions. These null findings were confirmed by Bayesian analy­
+sis. These results suggest that binding functions and their asso­
+ciated oculomotor behaviors are resilient to age-related cognitive
+decline, highlighting the relevance of evaluating oculomotor mea­
+surements during the VSTMBT to detect the transition from normal
+to abnormal variants of aging earlier and more accurately.
+
+Received 4 October 2024
+Accepted 20 May 2025
+KEYWORDS
+
+Eye-tracking; visual shortterm memory binding;
+aging; digital biomarker;
+early detection
+
+Introduction
+Visual Short-Term Memory (VSTM) Binding refers to the cognitive ability responsible for
+integrating and temporarily retaining objects’ features such as shapes and colors into
+unified representations (i.e., conjunctive bindings ,Luck & Vogel, 1997; Wheeler &
+CONTACT Mario A. Parra
+mario.parra-rodriguez@strath.ac.uk
+Department of Psychological Sciences & Health,
+University of Strathclyde, Graham Hills Building, 40 George Street, Glasgow G1 1QE, UK
+Supplemental data for this article can be accessed online at https://doi.org/10.1080/13825585.2025.2510925
+© 2025 The Author(s). Published by Informa UK Limited, trading as Taylor & Francis Group.
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/
+licenses/by/4.0/), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly
+cited. The terms on which this article has been published allow the posting of the Accepted Manuscript in a repository by the author(s) or
+with their consent.
+
+766
+
+M. A. PARRA ET AL.
+
+Treisman, 2002). This function is different to that responsible for holding the association of
+different pieces of information (e.g., object-location, face-name, word pairs, etc.), which
+has been well investigated in long-term memory (LTM) as it is thought to be the backbone
+of episodic memory (i.e., relational binding , Mayes et al., 2007; Moses & Ryan, 2006;
+Tulving, 2002). The experimental literature has shown that integrating or binding infor­
+mation in VSTM and Working Memory (WM) requires cognitive resources (Olson & Jiang,
+2002; Wheeler & Treisman, 2002). From the seminal work of Luck and Vogel (1997) and
+Vogel et al. (2001) later refined by Wheeler and Treisman (2002), VSTM/WM binding has
+been assessed using change detection tasks (Pashler, 1988). Traditionally, tasks compare
+the ability to hold in VSTM (see Baddeley et al., 2011 for suggestions on feature binding
+and the WL model) integrated features (colored shapes, bicolored objects) relative to the
+ability to hold individual features (colors or shapes). The former task has proved more
+taxing than the latter, leading to the notion that binding features in VSTM are cognitively
+costly.
+By bringing the concept of feature binding from perception to VSTM (Treisman, 1996;
+Treisman et al., 1998) to explore the unit of representation of information in this cognitive
+system (i.e., integrated objects or features linked via additional mechanisms (Luck & Vogel,
+1997; Vogel et al., 2001)), new opportunities were created to explore if the cost of forming
+and holding unified objects in VSTM varies across the lifespan. The literature emerging
+from such a question has consistently shown that this function remains preserved until
+old age, an observation that has held regardless of the feature types (between-dimension
+binding such as shape-color, Brockmole & Logie, 2013; Brockmole et al., 2008, withindimension color–color binding, Parra et al., 2009, or even binding features of everyday
+objects, Hoefeijzers et al., 2017). These observations were in stark contrast to the wellknown age-related associative memory decline hypothesis (Naveh-Benjamin, 2000,
+Naveh-Benjamin & Cowan, 2023, Old & Naveh-Benjamin, 2008), which posits that as we
+grow older, the ability to associate information in memory rapidly declines.
+The aging literature has suggested that older adults present with a general associative
+memory decline regardless of the memoranda (i.e., face-name, object-location, pairs of
+unrelated words (Craik, 2000; Mitchell et al., 2000; Naveh-Benjamin, 2000; NavehBenjamin et al., 2007; Naveh-Benjamin, Guez, & Shulman, 2004). While age-related asso­
+ciative memory deficits have been linked to the age-related atrophy of the hippocampus
+(posterior Medial Temporal Lobe Network) and dysfunction of the frontotemporal net­
+work (Mayes et al., 2007; Peterson & Naveh-Benjamin, 2016), less is known about the
+neural underpinnings of age-insensitive VSTM Binding (VSTMB). The available evidence
+suggests that preservation of the anatomical integrity of regions of the anterior Medial
+Temporal Lobe Network such as the entorhinal and perirhinal cortex (Insausti et al., 1998)
+which are the correlates of context-free memory functions (e.g., VSTM binding, Bastin,
+2017; Didic et al., 2011) may provide an account.
+Whereas associative or relational binding declines with age, conjunctive VSTMB does
+not. That is, while older adults’ abilities to represent in LTM and in VSTM associated
+information has been consistently found to be disproportionately affected relative to their
+ability to process the individual parts (Chalfonte & Johnson, 1996; Mitchell et al.,
+2000Naveh-Benjamin et al., 2007; Naveh-Benjamin, Guez, Kilb, et al., 2004; NavehBenjamin et al., 2003), such a dissociation has been rarely found for conjunctive informa­
+tion held in VSTM (i.e., the decline in processing shape-color conjunctions has not been
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+
+767
+
+larger than that seen in processing each feature separately, see for example, Brockmole &
+Logie, 2013). Such age-preserved VSTMB abilities have been extensively replicated
+(Brockmole et al., 2008; Hoefeijzers et al., 2017; Parra et al., 2009; Rhodes, Parra, et al.,
+2015; van Geldorp et al., 2014; Yassuda et al., 2019).
+These observations are important because a memory function that remains preserved
+across the lifespan can help identify older adults who are at risk of dementia earlier and
+more accurately (Logie et al., 2015; Parra, 2022). For example, Didic et al. (2011), proposed
+that regions of the anterior Medial Temporal Lobe network, which support context-free
+memory functions (Bastin et al., 2019; Mayes et al., 2007; Wolk et al., 2008) and are
+anatomically preserved across the lifespan (Insausti et al., 1998) are affected by patholo­
+gical aging variants such as Alzheimer’s disease years to decades prior to symptoms onset
+(see Juottonen et al., 1998 for neuroanatomical evidence). Such evidence can help explain
+why the VSTMB Task (VSTMBT) has proved sensitive to the preclinical stages of
+Alzheimer’s disease (AD) (Forno et al., 2022; Koppara et al., 2015; Parra, et al., 2010a;
+Parra et al., 2022). The VSTMBT assessing color–color binding, combined with eye-tracking
+(ET), has identified impairments in older adults with Mild Cognitive Impairment (MCI) who
+have developed AD dementia 3 years after their baseline assessment Parra et al., 2022a).
+Using a version of the VSTMBT reported by Parra et al. (2009) found that, behaviorally, age
+affects VSTM in general, but there was no evidence of specific age-related VSTMB deficits.
+In this study, we investigated whether the age-insensitive property of the behavioral
+outcome measure holds for physiological measures drawn from eye-tracking.
+ET has become a reliable neuroscience method to unveil neural correlates of complex
+cognitive functions and behaviors in healthy individuals and those affected by neurop­
+sychiatric diseases (Duchowski, 2017). The technique has been traditionally used to
+explore the integrity of the motor system via directed eye movements (e.g., prosaccades, anti-saccades), and more recently oculomotor behaviors associated with cog­
+nitive and neuropsychological task performance (Duchowski, 2017; Dunn et al., 2023;
+Hodgson et al., 2019). The literature confirms that age impacts all these domains. Older
+adults typically exhibit longer saccade latencies (Yang & Kapoula, 2006), slower saccade
+speed (Abel et al., 1983), less accurate eye movements due to limited precision of
+saccades which often require corrective saccades (Irving et al., 2006), longer fixation
+durations, indicating a need for more time to process visual information (McCarley
+et al., 2012), reduced ability to smoothly follow a moving object leading to more frequent
+corrective saccades during pursuit (Moschner & Baloh, 1994), their pupillary responses to
+cognitive and visual stimuli may be slower and less pronounced (Winn et al., 1994), and
+can show instability or drift when maintaining a steady gaze, which further affects their
+ability to fixate steadily on a target (Leigh & Zee, 2015). In the field of pathological aging,
+particularly that pertinent to neurodegenerative diseases, the study of ET metrics,
+together with neuropsychological tasks, is shedding new light on the mechanisms under­
+lying disease expression. For example, using the CANTAB Spatial Working Memory task
+(Hodgson et al., 2019), found that patients with Parkinson’s disease make significantly
+fewer forward planning fixations consistent with a deficit in strategic planning. The
+authors argued that refixations might reflect weak memory traces or partial forgetting
+of information and suggested that eye movement metrics (e.g., refixations) might provide
+a more sensitive measure of impairments than traditional behavioral scores. A potential
+caveat to this methodology is that the neuropsychological task combined with ET should
+
+768
+
+M. A. PARRA ET AL.
+
+ideally be insensitive to normal aging, which is not the case for the CANTAB Spatial
+Working Memory task (Brown, 2016) and several other tasks used for the early detection
+of age-related diseases such as those that cause dementia (e.g., CANTAB Pair Associates
+Learning Task, de Jager et al., 2002). The traditional approach to address the influence of
+such a confounding variable has been to develop age-adjusted normative datasets.
+However, recent studies suggest that such norms may not always provide a reliable
+context to ascertain normality or lack thereof. This could be because the heterogeneity
+that characterizes the older population might not always be fully captured (Mungas et al.,
+2009, 2010) or simply because the very tests used to select participants to develop the
+norms are insensitive to early still subclinical stages of pathological aging such as AD (Bos
+et al., 2018; Parra et al., 2024)
+Taken together, the above-reviewed studies and the predictions on the role that ET
+methods will play as biomarkers for neurodegenerative disease (Lim et al., 2016; Marandi
+& Gazerani, 2019) they endorse the need to subject the new methodology (i.e., VSTMBT +
+ET) to an aging study. By demonstrating that this new neurocognitive biomarker is
+unaffected by the normal course of aging, we can grant further reliability to the evidence
+drawn from studies targeting age-related diseases. That was the aim of the present study.
+We focused on three ET metrics which we have proved sensitive to detect the presence
+of AD dementia and reliably predict its risk. We analyzed fixation duration, saccade
+amplitude, and pupil dilation in tasks involving individual and integrated features using
+different memory loads (Fernández & Parra, 2021, Parra et al., 2022b; Fernandez et al.,
+2022; Fernández et al., 2019). Based on the accumulated evidence from behavioral
+studies, we predicted that a general age-related decline could be observed on both
+behavioral and ET metrics, but this would not be specific to feature binding.
+
+Materials and methods
+Participants
+Data was obtained from 50 participants, from two different age categories, a younger
+adult group that involved 25 individuals between 18 and 25 years old, with a mean age of
+23 (SD = 1.70) and the older adult group that comprised 25 individuals between 60 and
+83 years old, with a mean age of 72 (SD = 6.10). The younger group had spent significantly
+more years in education compared with the older sample, with a mean of 17 years (SD =
+1.00) and 14 years of education (SD = 3.30), t (48) = 5.23, p < .001, respectively. However, it
+is worth noting that the VSTMBT has proved insensitive to the level of education of those
+assessed (Parra et al.,, 2011; Yassuda et al., 2019). A priori power analysis was conducted
+for a between-subjects design with a significance level of 0.05, assuming an effect size
+(difference in means) of 0.5 and a standard deviation of 1. The analysis indicated that with
+a sample size of 25 per group, the test would have a power of 0.86 to detect a statistically
+significant difference between the groups. A pre-screening demographic questionnaire
+and perceptual tests (see Parra et al., 2010b) ruled out color vision or perception pro­
+blems, with all participants having normal or corrected to normal visual acuity. These
+screenings were undertaken to rule out the possibility that poor performance on the
+VSTMBT could have resulted from visual or perceptual difficulties (Parra et al., 2011).
+Participants were recruited through word of mouth and from the University of Strathclyde
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+
+769
+
+Panel of Volunteers. This study was approved by the School of Psychological Sciences and
+Health Ethics Committee of the University of Strathclyde (Ref: 37/07/11/18/A).
+
+Neuropsychological assessments
+Older adults completed the Mini Mental State Examination (MMSE, Folstein et al., 1975).
+All the participants scored 26 or above, suggesting healthy cognitive functioning (M =
+28.76, SD = .97) (Law et al., 2012). Additionally, all participants completed the Test of
+Premorbid Functioning (TOPF, UK, Wechsler, 2011) to obtain a measure of their verbal IQ
+(Younger adults: M = 112.14, SD = 24.08; Older adults: M = 116.38, SD = 9.56, p = 0.416).
+
+The VSTMBT and eye movements assessment
+The task design was similar to that used previously (Fernandez et al., 2018). Participants
+were presented with arrays of objects, 60 cm away from a 21” LCD monitor screen using
+a 3 × 3 virtual grid. Participant movements were restricted by using a chin rest. Eye
+movements were recorded using Gazepoint with a sampling rate of 150 hz. All recordings
+and calibrations were binocular, and the task began after successful calibration. The
+change detection paradigm was previously described by Parra et al. (2009) and used by
+Fernandez et al. (2018). Each object was defined by a shape and a frame area, making up
+50% of the object’s surface each; both were filled with a color (see Figure 1). Both groups
+completed the same trials during the task. Trials began with a fixation screen (a cross)
+shown for 250 ms, followed by a study display for 2000 ms, an unfilled retention interval of
+900 ms and finally the test display, presented for 4000 ms (Figure 1). In half of the trials,
+objects on both displays were the same, whereas, in the other half, objects displayed
+different colors in the test display. The location of objects was randomly changed within
+a 3 × 3 virtual grid to ensure items’ location was an uninformative feature. Participants
+were requested to detect whether the study and test displays consisted of the “same” or
+“different” objects by selecting either “S” or “D” on the keyboard in front of them.
+Four experimental conditions were used (Figure 1). The Unbound Colours con­
+dition (UC) involved two or three bicolored objects with the shape and frame areas
+showing different colors. In the “different” trials, the colors from either the shape
+or the frame area (with 50% probability) of two objects of the test display were
+replaced by new colors from the available set that had not appeared in the study
+display. In the Bound Colors condition (BC), in the “different” trials, two objects
+swapped one color, either from the shape or the frame area (with 50% probability).
+In the UC trials, participants were told to focus on the colors and not their
+combinations, as new colors would be introduced. In the BC trials, participants
+were told to focus on the colors and their combinations within objects, as no new
+colors would be introduced on the second screen, but the same studied colors
+could be recombined in different objects. Both conditions involved two set sizes,
+two or three stimuli assessed memory load and the impact this could have on both
+oculomotor behavior and VSTMB performance. Task conditions (BC and UC) and
+Set Sizes (two or three) were blocked. Each block comprised 10 practice trials,
+followed by 32 test trials (i.e., 32 × 4 = 128, 16 same and 16 different for each
+block). Trials were fully randomized, and conditions were blocked and
+
+770
+
+M. A. PARRA ET AL.
+
+Figure 1. An example trial of the VSTMBT for the Bound Colour (BC) and Unbound Colour (UC)
+condition for set sizes two (upper panel) and three (lower panel).
+
+counterbalanced across participants. During the task, accuracy (i.e., percentage of
+correct recognition) was recorded for each condition. In addition, three oculomotor
+measures were considered: fixation duration, saccade amplitude, and pupil dilation
+(Fernandez et al., 2018). Operationally, increased fixation durations denote more
+time needed to process the fixated information, indicating fewer cognitive
+resources available, increased task demands, or a combination of these. Smaller
+saccade amplitudes are associated with higher cognitive effort, indicating that
+cognitive resources are redirected toward processing rather than exploring visual
+stimuli. Increased pupil diameter is known to indicate increased cognitive effort/
+load.
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+
+771
+
+Procedures
+An information sheet was provided, and all participants signed a consent form.
+Following full consent, a demographic questionnaire was completed including
+questions relating to current medication, diagnosis of neurological/nonneurological conditions, years of education and vision/auditory abilities. The
+Perceptual Binding test was then administered (Parra et al., 2010b) which com­
+prised 10 trials. Participants need to achieve 80% accuracy to be eligible for the
+memory test. None was excluded in the present study. Individuals were then asked
+to place their chin on a chin rest, while their eyes were calibrated with a standard
+13-point grid for both eyes. Subsequently, participants were presented with
+printed flash cards showing examples of the test arrays, one for each of the four
+conditions. These examples were presented individually before each condition to
+avoid confusion. This allowed individuals to familiarize themselves with the test
+instructions during the practice trials. Participants then began the experiment.
+They completed all four conditions, with verbal instructions given at the start of
+each new condition. Following the VSTMBT, both age groups completed the TOPF
+(Wechsler, 2011), whereby their responses were recorded for scoring purposes and
+IQ was calculated. In addition to the TOPF, the older group completed the MMSE
+(Folstein et al., 1975), in order to screen for MCI. Participation in the study took
+between 45 and 60 min.
+
+Statistical analysis
+We subjected the data to a three-stage analysis. First, we conducted the classical
+General Linear Model for a mixed design with between and within-subjects factors.
+This has been the model traditionally used to explore age-related decline using the
+VSTMB (Brockmole et al., 2008; Parra et al., 2009). To that aim, we defined a 2 (Age
+Group) × 2 (Condition) × 2 (Set Size) mixed ANOVA model. Behavioral and oculo­
+motor data were entered into this model separately. Main effects, two-way and
+three-way interactions, are reported (see Supplementary Material). Second,
+a Bayesian analysis (BF01 H0/H1) was carried out as our primary hypothesis sought
+evidence supporting the null hypothesis (i.e., no differential age-related decline). To
+that aim, we calculated the Binding Cost by adapting the formula proposed by Forno
+et al. (2022) and Parra et al. (2024) (i.e., Binding Cost = ((UC – BC)/UC) * 100). This
+measure informs how taxing the BC condition is relative to the baseline condition
+(UC). We calculated such a cost for all the study variables. Finally, we performed
+a whole-sample regression analysis to explore whether the mean accuracy on the
+VSTMBT could be predicted by mean oculomotor behaviors collapsing across experi­
+mental factors (Condition and Set Size). To that aim, Bayesian regression models
+were used for each predictor (see Supplementary Material S2 for a traditional step­
+wise regression model). It is not uncommon to encounter works that have combined
+or recommend the combination of Bayesian-Frequentist models to overcome the
+limitations and complement the strengths of each statistical approach (Arning et al.,
+2024; Fryer et al., 2023). Statistical analyses were performed in SPSS version 28.0.1.1
+(IBM-Corp, 2021).
+
+772
+
+M. A. PARRA ET AL.
+
+Results
+Behavioral data
+Mean behavioral data during the VSTMBT across conditions is shown in Table 1. The
+performance of the older group was similar to that of the younger group with Set Size 2
+on both the BC (92% and 95% of correct responses for older and younger participants,
+respectively) and UC condition (92% and 96%, respectively). In contrast, with Set Size 3,
+performance was lower for the older than for the younger group, both on the BC (74%
+and 81%, respectively) and the UC condition (78% and 86%, respectively).
+The Mixed ANOVA revealed a significant main effect of Group, with higher accuracy in
+the younger relative to the older group. The effect of Set Size was also significant, with
+better accuracy for Set Size 2 than Set Size 3. In addition, a significant main effect of
+Condition was found, with BC yielding lower accuracy than UC. The key Group ×
+Condition interaction was non-significant (see Supplementary Material for detailed out­
+comes of Mixed Models for Behavioral and Oculomotor Variables). As the Set Size did not
+modify the lack of Group × Condition interaction across outcome measures (i.e.,
+Behavioral and Oculomotor Variables), data were collapsed across this factor, and such
+averages were used to calculate the Binding Cost, which entered Bayesian analyses.
+Operationally, the Binding Cost indexes the cognitive effort when processing bound
+colors (i.e., BC) relative to individual colors (i.e., UC). Therefore, from a behavioral perspec­
+tive, an increased Binding Cost suggests that the participant experienced the BC condition
+as a more challenging task. For the oculomotor behaviors, this operationalization varies.
+For example, an increased Binding Cost on Fixation Durations would suggest that more
+time was needed to process stimuli during the BC than the UC condition, indicating
+a more challenging nature of the former condition. An increased Binding Cost on Saccade
+Amplitude would inform on smaller amplitudes during the UC than the BC condition,
+indicating that more cognitive resources were deployed toward the former condition.
+Finally, an increased Binding Cost on Pupil Dilation would result from larger pupil
+diameters in the BC than in the UC condition, indicating increased cognitive efforts during
+the former.
+As observed during the Mixed ANOVA model, processing BC was more costly than
+processing UC, an effect that was similar across age groups. The Bayes Factor confirmed
+that we are 4.04 times more likely to find an age-related behavioral effect of the Binding
+Cost like the one reported in Table 2 under the null hypothesis than under the alternative
+hypothesis (i.e., moderate evidence for H0), with a 95% Credible Interval further support­
+ing this notion (i.e., −6.04/3.32). However, the direction of this effect was driven by a larger
+cost in the younger than in the older group.
+
+Oculomotor measurements
+Fixation duration
+When Fixation Duration entered the Mixed Model, the lack of two-way interaction (Group
+× Condition) and three-way interaction (Group × Condition × Set Size) reported for
+behavioral data were also observed (see Supplementary Material). Fixation Duration
+increased from Set Size 2 to 3 (significant main effect of Set Size) and was longer in
+
+Test of Premorbid Functioning, UK. 2 Mini-Mental State Examination.
+*p < .05, **p < .0, ***p < .001.
+
+1
+
+2
+
+Set Size
+2
+
+3
+
+28.76
+(.97)
+
+MMSE2
+–
+
+Older
+
+14 (3.30)**
+
+TOPF
+IQ1
+112.14
+(24.08)
+116.38
+(9.56)
+3
+
+72 (6.10)
+
+Older (n = 25)
+
+Education
+(Years)
+17 (1.00)
+
+Younger
+
+Age
+23 (1.70)
+
+Age
+Group
+Younger (n = 25)
+
+Demographics
+
+BC
+UC
+BC
+UC
+
+BC UC
+
+Condition
+BC UC
+
+Saccade Amplitude
+2.44 (0.52)
+2.67 (.41)
+2.69 (1.11)
+2.99 (1.12)
+2.55 (0.37)
+2.63 (.48)
+3.01 (1.27)
+3.13 (.93)
+
+Pupil Dilation
+3.58 (0.51)
+3.49 (.48)
+2.89 (.67)
+2.88 (.67)
+3.67 (.51)
+3.61 (.49)
+2.84 (0.75)
+2.90 (.69)
+
+Oculomotor Measurements
+Fixation Duration
+7.07 (.16)
+7.10 (.17)
+7.10 (.23)
+7.13 (.20)
+7.27 (.17)
+7.21 (.16)
+7.22 (.45)
+7.15 (.32)
+
+Table 1. Mean, standard deviations of demographic, oculomotor, and behavioral measurements across Group, Set Size, and Condition.
+
+Accuracy (%)
+95.02 (5.90)
+96.01 (3.88)
+92.14 (5.50)
+92.01 (8.38)
+80.75 (7.95)
+86.13 (6.87)
+73.50 (11.01)
+78.00 (9.31)
+
+Behavioral Measurement
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+773
+
+774
+
+M. A. PARRA ET AL.
+
+Table 2. Bayesian independent-group analysis using the binding cost for behavioral and oculomotor
+variables.
+Binding Cost Variables
+Behavioral Accuracy
+Fixation Duration
+Saccade Amplitude
+Pupil Dilation
+a
+
+Mean (SD) a
+Mean Difference
+Young: 3.37 (6.51)
+−1.36
+Older: 2.01 (9.34)
+Young: −0.48 (3.09)
+0.20
+Older: −0.27 (3.54)
+Young: 5.41 (9.86)
+1.77
+Older: 7.18 (14.09)
+Young: −1.94 (1.59)
+2.57
+Older: 0.63 (8.47)
+
+BF b t (df = 48) p-value 95% Credible Interval
+4.04
+−0.60
+0.553
+(−6.0/3.3)
+4.64
+
+0.22
+
+0.829
+
+(−1.7/2.1)
+
+4.21
+
+0.52
+
+0.608
+
+(−5.3/8.8)
+
+1.77
+
+1.49
+
+0.142
+
+(−0.9/6.1)
+
+Means of the Binding Cost (see text for the interpretation of these measures); b BF: Bayes factor, null versus alternative
+hypothesis (BF01).
+
+the BC than in UC condition in Set Size 3 but not in Set Size 2 (a significant Condition × Set
+Size Interaction). However, all these effects were independent of age.
+The Bayes Factor confirmed that we are 4.64 times more likely to find an age-related
+effect of the Binding Cost on Fixation Duration as large as the one observed under the null
+(i.e., moderate evidence for H0) than the alternative hypothesis (95% Credible Interval =
+−1.73/2.14).
+
+Saccade amplitude
+When the Saccade Amplitude entered the Mixed Model, the lack of two-way interaction
+(Group × Condition) and three-way interaction (Group × Condition × Set Size) were also
+observed (see Supplementary Material). The BC condition led to lower saccadic amplitude
+than the UC condition, but again, such a discrepancy did not differ across groups. The
+Bayes Factor confirmed that we are 4.21 times more likely to find an age-related effect of
+the Binding Cost on the Saccade Amplitude as large as the one observed under the null
+(i.e., moderate evidence for H0) than under the alternative hypothesis (95% Credible
+Interval = −5.30/8.85).
+
+Pupil dilation
+As for Behavioral Accuracy, Pupil Dilation also proved sensitive to normal aging. Such
+sensitivity was independent of the other investigated factors and did not lead to any
+significant interaction between them. The Bayes Factor confirmed that we are 1.77 times
+more likely to find an age-related effect of the Binding Cost on Pupil Dilation as large as
+the one observed under the null (i.e., anecdotal evidence for H0) than the alternative
+hypothesis (95% Credible Interval = −0.98/6.13). These results suggest that although Pupil
+Dilation as an index of cognitive load declines with age, its variations are not specific to
+binding functions in VSTM.
+
+Predicting VSTMB accuracy via oculomotor behaviors
+Bayesian regression analyses were conducted with mean Behavioral Accuracy as the
+dependent variable and mean Fixation Duration, Saccade Amplitude, and Pupil Dilation
+as predictors (Table 3). The model, including Fixation Duration, showed 0.173 times more
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+
+775
+
+Table 3. Summary of the Bayesian regression analysis for oculomotor behaviors predicting VSTM
+accuracy.
+Variable
+Fixation Duration
+Saccade Amplitude
+Pupil Dilation
+a
+
+BF a
+0.137
+1.104
+8.801
+
+R
+0.096
+0.305
+0.411
+
+R2
+0.009
+0.093
+0.169
+
+F
+0.443
+4.91
+9.78
+
+p-value
+0.509
+0.031
+0.003
+
+95%
+Credible Interval
+−11.48/5.77
+−4.68/-0.23
+1.31/6.04
+
+BF: Bayes Factor, alternative versus null hypothesis (BF10).
+
+support in the data for H1 (i.e., no evidence for H1), which led to a non-significant effect
+and a 95% Credible Interval including 0. The model, including the Saccade Amplitude,
+showed 1.104 times more support in the data for H1 (i.e., anecdotal evidence for H1),
+which led to significant results. Finally, the model, including Pupil Dilation, showed 8.801
+times more support in the data for H1 (i.e., moderate evidence for H1), which led to
+significant results. The traditional stepwise regression model’s results aligned with these
+outcomes (see Supplementary Material S2).
+
+Discussion
+The present study set out to investigate the hypothesis that a general age-related decline
+would be observed on both behavioral and ET metrics drawn from the VSTMBT, but this
+would not be specific to feature binding. This hypothesis was tested for behavioral and ET
+metrics using Bayesian and traditional (see Supplementary Material) analysis. For the
+former, we implemented, for the first time, the calculation of the Binding Cost for
+Behavioral and Oculomotor variables. Comparing the Binding Cost across groups is an
+additional and more informative way of investigating potential interactions. Our results
+show that healthy older and younger adults exhibited high performance across all tasks at
+both set sizes. In addition, both age groups had similar Saccade Amplitudes and Fixation
+Durations, whereas younger adults had larger Pupil Dilation, independently of Set Size
+and Condition. Both age groups showed a lower accuracy for BC than for UC, as denoted
+by a positive Binding Cost, which corresponded with shorter Saccade Amplitude and
+longer Fixation Duration. We discuss these findings in turn.
+The VSTMBT used in this study evaluates the ability to integrate color information
+within unified representations (BC) and compares this with the ability to process single
+colors (baseline UC) (Parra et al., 2009). This has consistently demonstrated that
+processing BC is more resource-demanding than processing UC, a cost that is indepen­
+dent of age or brain health status (i.e., patients with or at risk of Alzheimer’s disease
+dementia (ADD) show a much larger cost, Parra et al., 2011). Older adults showed high
+accuracy on UC and BC, similar to that of younger adults, further supporting the notion
+that, behaviorally, binding within-dimension features in VSTM was found to be preserved
+in healthy aging (in line with Parra et al., 2009). Both age groups performed similarly on
+the UC and BC conditions at a set size 2. A slight, although significant, decrease in
+performance was shown for older adults at set size 3, implying younger adults out­
+performed older adults when memory load increased, as previously reported (Yassuda
+et al., 2019). These differences might arise from the marked decrease in VSTM capacity
+with age; VSTM has been shown to peak in the early twenties and then decline, with
+
+776
+
+M. A. PARRA ET AL.
+
+a sharp decrease in capacity (Brockmole & Logie, 2013). Previous studies using change
+detection or reconstruction tasks showed a lack of effect of aging on the cost of feature
+binding (Brockmole et al., 2008; Killin et al., 2017; Parra et al., 2009), even for features of
+everyday objects (Hoefeijzers et al., 2017). Of note, older participants in this study
+remembered fewer objects, but that was true regardless of the task condition (i.e., UC
+or BC). Although memory load amplifies the effects of age due to reduced storage and
+processing capabilities within VSTM and Working Memory, the ability to process the
+binding between colors within unified representations was found to be preserved in
+healthy older adults. In fact, a larger Binding Cost was observed for the younger than the
+older group, leading to moderate evidence for H0 in our Bayesian analysis.
+Evaluation of Fixation Duration and Saccade Amplitude has proved effective not only
+in discriminating between controls and patients with MCI but also in accurately predicting
+those who will convert to ADD (Parra et al., 2022b). We showed here that saccades were
+smaller in the BC than in the UC condition, an effect that was more pronounced in the
+younger group (as indicated by the Binding Cost). This discrepancy yielded moderate
+evidence for H0, suggesting that, relative to older adults, younger adults, on average,
+visually scanned BC more than UC. Together with the behavioral outcomes, these results
+suggest that such an amount of visual scanning was sufficient for older adults to process
+the binding between colors, hence resulting in a smaller behavioral cost relative to that
+seen in the younger group.
+Saccadic movements are influenced by a range of cognitive processes, notably those
+concerning attention and working memory, and provide a tool to analyze the function­
+ality of the saccade-generating circuit in the brainstem (Sparks, 2002). A previous study by
+Parra et al. (2022b) showed that MCI patients at risk of ADD present with an increased
+Saccade Amplitude relative to controls, thus suggesting that as older adults depart from
+the typical aging trajectory, meeting the taxing nature of the VSTMBT becomes more
+challenging. The VSTMBT engages regions within the ventral visual stream, which is
+responsible for object identification and recognition, while the dorsal stream relates to
+object spatial location and is instrumental in saccade generation (Parra et al., 2014; Irwin
+et al., 2004). Both visual streams appear to be preserved in healthy aging but are damaged
+in AD (Irwin et al., 2004; Deng et al., 2016). Our results are consistent with the proposal
+that saccadic eye movements at the service of VSTMB performance are resilient to the
+effects of normal aging. The information encoded in VSTM informs target selection before
+saccade initiation (Van der Stigchel and Hollingworth, 2018). Using the VTSMBT, we have
+previously demonstrated that encoding is the memory phase most affected by ADD
+(Fernández & Parra, 2021). The fact that such memory processes appear to be spared by
+healthy aging grants this tool reliability as a marker to aid the detection of ADD. This
+represents a significant step forward in the neurocognitive assessment of dementia, as
+most available assessment tools need to control for the effect of this demographic factor
+(Parra, 2022), a statistical procedure that has proven prone to interpretation errors
+(Mungas et al., 2009, 2010).
+Fixation Duration is sensitive to both memory load and processing load, as it increases
+with the number of targets and task difficulty (Meghanatan et al., 2015. The scarce
+evidence available suggests that older subjects display longer fixation durations in
+a visual search task (Porter et al., 2010). We observed that Fixation Duration was similar
+in older and younger adults, with both age groups showing longer fixation durations with
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+
+777
+
+increased set size. The Cost of Binding on Fixation Duration showed that, on average
+(across set sizes), younger adults fixated more on BC than on UC, relative to older adults,
+leading to moderate evidence for H0. Although this discrepancy across groups was small
+(as suggested by frequentist analysis), they suggest that, when compared to the younger
+group, the older group did not find the BC more challenging than the UC. Hence, whereas
+we confirmed the sensitivity of Fixation Duration to memory load, we failed to prove its
+sensitivity to the effects of normal aging. That does not seem to be the case for abnormal
+aging variants such as ADD. Such patients consistently present with shorter fixation
+durations in the BC condition when compared to healthy older adults (Fernandez et al.,
+2018). Therefore, as for Saccade Amplitude, the evaluation of Fixation Duration provides
+an additional oculomotor biomarker to reliably discriminate between ADD and healthy
+aging. We have observed that as cognitive demand increases, fixation durations tend to
+increase, and saccades become smaller, thus suggesting that more cognitive processing is
+required per fixation before moving on to the next visual target.
+Intriguingly, Pupil Dilation was the only oculomotor behavior that showed age effects.
+Younger adults had larger pupil diameters than older adults, but that was true in both task
+conditions. In fact, Pupil Dilation was the oculomotor behavior that provided the stron­
+gest evidence for H0 (i.e., for Binding Cost), and the only covariate retained by a regression
+model aimed at predicting Behavioral Accuracy (see Supplementary Material S2). Pupil
+size correlates with task difficulty, attentional focus and mental effort (Hess and Polt, 1964;
+Eckstein et al., 2017) and has been linked to better performance (Goldinger et al., 2012;
+Alnaes et al., 2014). Younger adults in our study seem to follow this pattern. Although the
+differences are non-significant, they showed subtly larger values for BC than for UC, and
+these values increased slightly with increasing set size, changes consistent with higher
+cognitive demand. In contrast, the older group had very similar pupil sizes in both
+conditions, implying the ability to adjust to higher cognitive demands might fluctuate
+with age. Nevertheless, this was not specific to feature binding in VSTM. Pupillary
+responses reflect the processing load and are underpinned by subjects using strategies
+that reduce this load (Meghanatan et al., 2014). This may explain the observation of similar
+Pupil Dilation across task Conditions and Set Sizes, particularly in the older group. It is
+worth noting that participants in this study, particularly those from the older group, were
+recruited from a volunteer panel. Parra et al. (2022a) highlighted the potential influences
+of such selective samples on the data (see also Ganguli et al., 1998). Older adults involved
+in such panels are regularly engaged in research and frequently undergo cognitive
+testing, which grants them familiarity with testing procedures and additional cognitive
+reserves and resilience (Infurna et al., 2016), thus representing a somewhat biased subsample of the relevant population.
+An alternative explanation linked to theories from cognitive psychology (i.e., cost-free vs
+costly feature binding, Luck & Vogel, 1997; Vogel et al., 2001; Wheeler & Treisman, 2002) is
+that although behaviorally binding colors in VSTM have a cost, such a cost may not reflect
+significantly different neurobiological demands. Using fMRI, Parra et al. (2014), observed in
+healthy young adults who performed a shape-color VSTMBT that increasing memory load
+(i.e., from set size 2 to 4) did not lead to a significant discrepancy in neural recruitment and
+both set sizes activated the same brain regions known to be relevant for VSTMB. As long as
+the memory load remains within capacity (i.e., 4 items, Cowan, 2001), the neural resources
+needed to reach a high level of performance might not vary dramatically, pointing toward
+
+778
+
+M. A. PARRA ET AL.
+
+a brain economy process which might reduce the cost of feature integration in VSTMB
+(Luck & Vogel, 1997, 2013; Oberauer & Eichenberger, 2013; Vogel et al., 2001) and tackles
+the binding problem of the human brain (Treisman, 1996). This, together with the observa­
+tion of the sensitivity of this function to ADD, suggests that Pupil Dilation may be a suitable
+marker for identifying subtle fluctuations in cognitive processing (i.e., even at low levels of
+memory load) as one departs from the normal aging trajectory (Fernández & Parra, 2021).
+A further advantage of the VSTMBT is that it has proved insensitive to the cultural back­
+ground of those assessed, as the level of education does not affect performance during
+binding tasks (Calia & Parra, 2024; Martínez-Flórez et al., 2024, Parra et al., 2011; Yassuda et
+al., 2019). This further endorses the psychometric robustness of this task as a detection tool
+for ADD cross-culturally (Della Sala et al., 2016).
+Why are the ET metrics here investigated following the same behavioral pattern
+previously reported for the VSTMB, despite a large and consistent literature suggesting
+that all such metrics are age-sensitive? To answer this question, we referred to the
+work recently published by Hodgson et al. (2019). The authors proposed an updated
+model for oculomotor behaviors during neuropsychological tasks. Their second
+update, which is relevant to our findings, is what the authors called a “trigger func­
+tion.” They suggest that when task-critical information faces challenges entering
+memory (i.e., encoding) or is degraded, the oculomotor system is triggered to fixate
+the to-be-remembered objects further. That is, VSTM and WM can draw support from
+the eye movement system to address additional needs. The fact that behavioral
+studies have consistently shown that VSTMB abilities remain preserved in older age
+can suggest that by calling up such support mechanisms, older adults may compen­
+sate for the age-related decline, bringing performance to a level comparable to that of
+younger adults (see for example Grady, 1998; Grady & Craik, 2000). The literature
+supporting the presence of compensatory mechanisms mitigating the impact of
+cognitive aging has grown significantly over the last decades (Cabeza et al., 2018;
+Reuter-Lorenz & Park, 2014; Stern, 2021). We have confirmed that the sensory input
+stage (perceptual binding) is intact in these participants and have shown that their
+memory and oculomotor behavior are also preserved. It follows that normal aging
+spares the complex sensorimotor transformations underpinning these neurocognitive
+systems and the resources needed to support them. Hodgson et al. (2019) acknowl­
+edged that a shortcoming of eye movement testing in the context of neuropsycholo­
+gical assessments and diagnosis of neurological and psychiatric diseases is the low
+specificity for particular disorders. The results from the present study provide further
+evidence which supports why this new method that combines age-insensitive cogni­
+tive and ET measures has consistently achieved high levels of sensitivity and specificity
+for AAD (Fernandez et al., 2022; Fernández et al., 2019; Fernández et al., 2019, 2021;
+Parra & Fernandez, 2023; Parra et al., 2022b). Nevertheless, it is worth noting that our
+current findings need to be interpreted in the context of ET measures drawn from
+a VSTMBT that relies on the whole-display Change Detection Paradigm (Rhodes, et al.,
+2015; Wheeler & Treisman, 2002). Age-related working memory binding deficits have
+been reported using other tasks which may tap into different neurocognitive pro­
+cesses (e.g., recall rather than recognition, familiar instead of unfamiliar items, and
+different attention loads, Brown & Brockmole, 2010; Manga et al., 2021). Future work
+will be needed to demonstrate whether this age-insensitive memory ability is task-
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+
+779
+
+invariant. An additional limitation is the nature of the sample collected for this study,
+which was recruited from a volunteer panel. Future studies should explore the oculo­
+motor behaviors during VSTMB, which are investigated here in more diverse samples
+drawn from the general population.
+In conclusion, the present study goes beyond previous investigations by cou­
+pling the analysis of oculomotor measurements to the VSMBT, thus providing
+further insight into age-related changes in a healthy population. Our results suggest
+that a decline in oculomotor behaviors such as fixation duration, saccade amplitude,
+and pupil dilation during VSTMB are not generalizable characteristics of age-related
+memory decline. Since these behaviors are impaired early during ADD progression,
+their analysis might provide a sensitive tool for early detection of this disease.
+
+Abbreviations
+AD:
+BC:
+MCI:
+MMSE:
+SCD:
+TOPF,
+UC:
+VWM:
+VSTM:
+VSTMB:
+WM:
+
+Alzheimer´s disease;
+bound condition;
+mild cognitive impairment;
+Mini Mental State Examination;
+subjective cognitive decline;
+Test of Premorbid Functioning;
+unbound condition;
+visual working memory;
+visual short term memory;
+visual short term memory binding;
+working memory.
+
+Acknowledgments
+We acknowledge ViewMind’s support, which included the technology, ET expertise, and analytical
+tools needed to carry out the study. For the purpose of open access, the authors have applied
+a Creative Commons Attribution (CC BY) licence to any Author Accepted Manuscript version arising
+from this submission.
+
+Disclosure statement
+GF is currently the CSO of ViewMind. MAP is currently a consultant for ViewMind as a Neuroscientific
+Officer. NV is the Chief Medical Officer and Chief Operating Officer.
+
+Funding
+The author(s) reported there is no funding associated with the work featured in this article.
+
+Author contributions
+MAP and GF conceived the study and developed the protocol. GM collected the data and ran the
+analysis under the supervision of MAP and GF. All the authors contributed to drafting the manuscript.
+
+780
+
+M. A. PARRA ET AL.
+
+Data availability statement
+The data used to generate the outcomes reported here could be available partially or complete on
+requests made to the corresponding author.
+
+Ethical statement and consent
+The authors assert that all procedures contributing to this work comply with the ethical
+standards of the relevant national and institutional committees on human experimentation
+and to the principles of the Declaration of Helsinki. The Ethics Committee from the School of
+Psychological Sciences and Health of the University of Strathclyde reviewed and approved this
+study [37/07/11/18/A]. All participants provided written informed consent following a detailed
+description of the study.
+
+References
+Abel, L. A., Troost, B. T., & Dell’osso, L. F. (1983). The effects of age on normal saccadic characteristics
+and their variability. Vision Research, 23(1), 33–37. https://doi.org/10.1016/0042-6989(83)90038-X
+Alnæs, D., Sneve, M. H., Espeseth, T., Endestad, T., van de Pavert, S. H., & Laeng, B. (2014). Pupil size
+signals mental effort deployed during multiple object tracking and predicts brain activity in the
+dorsal attention network and the locus coeruleus. Journal of Vision, 14(4). https://doi.org/10.1167/
+14.4.1
+Arning, N., Fryer, H. R., & Wilson, D. J. (2024). Identifying direct risk factors in UK biobank with
+simultaneous bayesian-frequentist model-averaged hypothesis testing using doublethink.
+medRxiv, doi: 10.1101/2024.01.01.24300687 (preprint)ViewMind Inc., New York, USA.
+Baddeley, A. D., Allen, R. J., & Hitch, G. J. (2011). Binding in visual working memory: The role of the
+episodic buffer. Neuropsychologia, 49(6), 1393–1400. https://doi.org/10.1016/j.neuropsychologia.
+2010.12.042
+Bastin, C. (2017). Differential age-related effects on conjunctive and relational visual short-term
+memory binding. Memory, 26(9), 1–10. https://doi.org/10.1080/09658211.2017.1421228
+Bastin, C., Besson, G., Simon, J., Delhaye, E., Geurten, M., Willems, S., & Salmon, E. (2019). An
+integrative Memory model of recollection and familiarity to understand memory deficits.
+Behavioral and Brain Sciences, 42, 1–66. https://doi.org/10.1017/S0140525X19000621
+Bos, I., Vos, S. J. B., Jansen, W. J., Vandenberghe, R., Gabel, S., Estanga, A., Visser, P. J., Tomassen, J.,
+den Braber, A., Lleó, A., Sala, I., Wallin, A., Kettunen, P., Molinuevo, J. L., Rami, L., Chetelat, G., de la
+Sayette, V., Tsolaki, M. . . . Verhey, F. R. (2018). Amyloid-β, Tau, and cognition in cognitively normal
+older individuals: Examining the necessity to adjust for biomarker status in normative data.
+Frontiers in Aging Neuroscience, 10, 193–193. https://doi.org/10.3389/fnagi.2018.00193
+Brockmole, J. R., & Logie, R. H. (2013). Age-related change in visual working memory: A study of 55,
+753 participants aged 8 to 75. Frontiers in Psychology, 4. https://doi.org/10.3389/fpsyg.2013.00012
+Brockmole, J. R., Parra, M. A., Della Sala, S., & Logie, R. (2008). Do binding deficits account for
+age-related decline in visual working memory? Psychonomic Bulletin & Review, 15(3), 543–547.
+https://doi.org/10.3758/PBR.15.3.543
+Brown, L. A. (2016). Spatial-sequential working Memory in Younger and older adults: Age predicts
+backward recall performance within both age groups. Frontiers in Psychology, 7. https://doi.org/
+10.3389/fpsyg.2016.01514
+Brown, L. A., & Brockmole, J. R. (2010). The role of attention in binding visual features in working
+memory: Evidence from cognitive ageing. Quarterly Journal of Experimental Psychology
+(Colchester), 10, 2067-79. doi: 10.1080/17470211003721675.
+Cabeza, R., Albert, M., Belleville, S., Craik, F. I. M., Duarte, A., Grady, C. L., Rajah, M. N., Nyberg, L.,
+Park, D. C., Reuter-Lorenz, P. A., Rugg, M. D., Steffener, J., & Rajah, M. N. (2018). Maintenance,
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+
+781
+
+reserve and compensation: The cognitive neuroscience of healthy ageing. Nature Reviews
+Neuroscience, 19(11), 701–710. https://doi.org/10.1038/s41583-018-0068-2
+Calia, C., & Parra, M. A. (2024). Screening tools for dementia assessment in UK based ethnic
+minorities. Exploration of Medicine, 5(3), 401–415. https://doi.org/10.37349/emed.2024.00227
+Chalfonte, B. L., & Johnson, M. K. (1996). Feature memory and binding in young and older adults.
+Memory & Cognition, 24(4), 403–416. https://doi.org/10.3758/BF03200930
+Craik, F. I. M. (2000). Age-related changes in human memory. In D. C. Park & N. Schwarz (Eds.),
+Cognitive aging: A primer (pp. 75–92). Psychology Press.
+de Jager, C. A., Milwain, E., & Budge, M. (2002). Early detection of isolated memory deficits in the
+elderly: The need for more sensitive neuropsychological tests. Psychological Medicine, 32(3),
+483–491. https://doi.org/10.1017/S003329170200524X
+Della Sala, S., Kozlova, I., Stamate, A., & Parra, M. A. (2016). A transcultural cognitive marker of
+Alzheimer’s disease. International Journal of Geriatric Psychiatry, 33(6), 849–856. https://doi.org/
+10.1002/gps.4610
+Deng, Y., Shi, L., Lei, Y., Liang, P., Li, K., Chu, W. C. W., Wang, D., for the Alzheimer’s Disease
+Neuroimaging Initiative. (2016). Mapping the “what” and “where. Visual Cortices and Their
+Atrophy in Alzheimer’s Disease: Combined Activation Likelihood Estimation with voxel-Based
+Morphometry. Frontiers in Human Neuroscience, 10.
+Didic, M., Barbeau, E. J., Felician, O., Tramoni, E., Guedj, E., Poncet, M., & Ceccaldi, M. (2011). Which
+memory system is impaired first in Alzheimer’s disease? Journal of Alzheimer’s Disease: JAD, 27(1),
+11–22. https://doi.org/10.3233/JAD-2011-110557
+Duchowski, A. T. (2017). Eye tracking methodology: Theory and practice. Springer Publishing
+Company, Incorporated.
+Dunn, M. J., Alexander, R. G., Amiebenomo, O. M., Arblaster, G., Atan, D., Erichsen, J. T., & Sprenger, A.
+(2023). Minimal reporting guideline for research involving eye tracking (2023 ed.). Behav Res
+Methods. https://doi.org/10.3758/s13428-023-02187-1
+Eckstein, M. K., Guerra-Carrillo, B., Miller Singley, A. T., & Bunge, S. A. (2017). Beyond eye gaze: What
+else can eyetracking reveal about cognition and cognitive development? Developmental cogni­
+tive neuroscience, 25, 69–91.
+Fernández, A. J., García, E., Parra, M. A., & Guinea, S. F. (2019). Clustering executive functions yields
+mci profiles that significantly predict conversion to Alzheimer’s disease dementia. Alzheimer’s &
+Dementia: The Journal of the Alzheimer’s Association, 15(7), P797–P798. https://doi.org/10.1016/j.
+jalz.2019.06.2878
+Fernandez, G., Mendez, L., Lopera, F., & Parra-Rodriguez, M. A. (2022). The eye as a biomarker for
+Alzheimer’s disease: Oculomotor behaviours yield a novel digital biomarker for preclinical risk
+detection. Alzheimer’s & Dementia, 18(S5), e066784. https://doi.org/10.1002/alz.066784
+Fernandez, G., Orozco, D., Agamennoni, O., Schumacher, M., Sanudo, S., Biondi, J., & Parra, M. A.
+(2018). Visual processing during Short-Term Memory binding in mild Alzheimer’s disease. Journal
+of Alzheimer’s Disease: JAD, 63(1), 185–194. https://doi.org/10.3233/jad-170728
+Fernández, G., Orozco, D., Sgrilli, G., Echeverria, G., Linares, R., Schumacher, M., & Parra, M. A. (2019).
+Oculomotor responses linked to cognitive markers for Alzheimer’s disease can enhance risk
+profiling in patients with mild cognitive impairment. Alzheimer’s & Dementia: The Journal of the
+Alzheimer’s Association, 15(7), P684. https://doi.org/10.1016/j.jalz.2019.06.2666
+Fernández, G., & Parra, M. A. (2021). Oculomotor behaviors and integrative memory functions in the
+Alzheimer’s clinical syndrome. Journal of Alzheimer’s Disease, 82(3), 1033–1044. https://doi.org/10.
+3233/JAD-201189
+Fernández, G., Schumacher, M., Orozco, D., Sgrilli, G., Echeverria, G., Linares, R., & Parra, M. A. (2021).
+A novel digital cognitive biomarker for mild cognitive impairment and Alzheimer’s disease.
+Alzheimer’s & Dementia, 17(S5), e055018. https://doi.org/10.1002/alz.055018
+Folstein, M. F., Folstein, S. E., & McHugh, P. R. (1975). “Mini-mental state”. A practical method for
+grading the cognitive state of patients for the clinician. Journal of Psychiatric Research, 12(3),
+189–198. https://doi.org/10.1016/0022-3956(75)90026-6
+Forno, G., Parra, M. A., Thumala, D., Villagra, R., Cerda, M., Zitko, P., Slachevsky, A., Lillo, P., &
+Slachevsky, A. (2022). The “when” matters: Evidence from memory markers in the clinical
+
+782
+
+M. A. PARRA ET AL.
+
+continuum of Alzheimer’s disease. Neuropsychology, 37(7), 753–768. https://doi.org/10.1037/
+neu0000891
+Fryer, H. R., Arning, N., & Wilson, D. J. (2023). Doublethink: Simultaneous bayesian-frequentist
+model-averaged hypothesis testing. arXiv, (last revised 9 May 2025, version 3), https://doi.org/
+10.48550/arXiv.2312.17566. (preprint).
+Ganguli, M., Lytle, M. E., Reynolds, M. D., & Dodge, H. H. (1998). Random versus volunteer selection
+for a community-based study. Journals of Gerontology: Series A, 53A(1), M39–M46. https://doi.org/
+10.1093/gerona/53A.1.M39
+Goldinger, S. D., & Papesh, M. H. (2012). Pupil dilation reflects the creation and retrieval of memories.
+The Current Directions in Psychological Science, 21(2), 90–95. https://doi.org/10.1177/
+0963721412436811
+Grady, C. L. (1998). Brain imaging and age-related changes in cognition. Experimental Gerontology,
+33(7–8), 661–673. https://doi.org/10.1016/S0531-5565(98)00022-9
+Grady, C. L., & Craik, F. I. (2000). Changes in memory processing with age. Current Opinion in
+Neurobiology, 10(2), 224–231. https://doi.org/10.1016/S0959-4388(00)00073-8
+Hess, E. H., & Polt, J. M. (1964). Pupil size in relation to mental activity during simple problem-solving.
+Science, 143(3611), 1190–1192. https://doi.org/10.1126/science.143.3611.1190
+Hodgson, T. L., Ezard, G., & Hermens, F. (2019). Eye movements in neuropsychological tasks. In:
+Hodgson, T. (eds) Processes of Visuospatial Attention and Working Memory. Current Topics in
+Behavioral Neurosciences, vol 41. Springer, Cham. (pp. 393–418). https://doi.org/10.1007/7854_
+2019_98
+Hoefeijzers, S., Gonzalez, H. A., Magnolia, R. A., & Parra, M. A. (2017). Feature binding of common
+everyday items is not affected by age. Frontiers in Aging Neuroscience, 9, 122. https://doi.org/10.
+3389/fnagi.2017.00122
+IBM-Corp. (2021). IBM SPSS statistics for windows (version 28.0.) [Computer software]. IBM Corp.
+Infurna, F. J., Okun, M. A., & Grimm, K. J. (2016). Volunteering is associated with lower risk of cognitive
+impairment. Journal of the American Geriatrics Society, 64(11), 2263–2269. https://doi.org/10.
+1111/jgs.14398
+Insausti, R., Juottonen, K., Soininen, H., Insausti, A. M., Partanen, K., Vainio, P., & Pitkanen, A. (1998).
+Volumes of the entorhinal and perirhinal cortices in Alzheimer’s disease. Neurobiology of Aging, 19
+(1), 659–671. https://doi.org/10.1016/S0197-4580(98)00007-4
+Irving, E. L., Steinbach, M. J., Lillakas, L., Babu, R. J., & Hutchings, N. (2006). Horizontal saccade
+dynamics across the human life span. Investigative Ophthalmology & Visual Science, 47(6),
+2478–2484. https://doi.org/10.1167/iovs.05-1311
+Irwin, D. E., & Brockmole, J. R. (2004). Suppressing where but not what: The effect of Saccades on
+dorsal- and ventral-stream visual processing. Psychological Science, 15(7), 467–473. https://doi.
+org/10.1111/j.0956-7976.2004.00703.x
+Juottonen, K., Laakso, M. P., Insausti, R., Lehtovirta, M., Pitkanen, A., Partanen, K., & Soininen, H.
+(1998). Volumes of the entorhinal and perirhinal cortices in Alzheimer’s disease. Neurobiology of
+Aging, 19(1), 15–22. https://doi.org/10.1016/S0197-4580(98)00007-4
+Killin, L., Abrahams, S., Parra, M. A., & Della Sala, S. (2017). The effect of age on the FCSRT-IR and
+temporary visual memory binding. International Psychogeriatrics, 30(3), 331–340. https://doi.org/
+10.1017/S104161021700165X
+Koppara, A., Frommann, I., Polcher, A., Parra, M. A., Maier, W., Jessen, F., Klockgether, T., Wagner, M.
+(2015). Feature binding deficits in subjective cognitive decline and in mild cognitive impairment.
+Journal of Alzheimer’s Disease : JAD, 48(1), S161–S170. https://doi.org/JAD150105
+Law, E., Connelly, P. J., Randall, E., McNeill, C., Fox, H. C., Parra, M. A.Starr, J. M. (2012). Does the
+Addenbrooke’s cognitive examination-revised add to the mini-mental state examination in
+established alzheimer disease? Results from a national dementia research register. International
+Journal of Geriatric Psychiatry, 28(4), 351–355.
+Leigh, R. J., & Zee, D. S. (2015). The neurology of eye movements. Oxford University Press.
+Lim, J. K. H., Li, Q.-X., He, Z., Vingrys, A. J., Wong, V. H. Y., Currier, N., Nguyen, C. T. O., Bui, B. V., &
+Nguyen, C. T. O. (2016). The eye as a biomarker for Alzheimer’s disease [review]. Frontiers in
+Neuroscience, 10(536). https://doi.org/10.3389/fnins.2016.00536
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+
+783
+
+Logie, R. H., Parra, M. A., & Della Sala, S. (2015). From cognitive science to dementia assessment.
+Policy Insights from the Behavioral and Brain Sciences, 2(1), 81–91. https://doi.org/10.1177/
+2372732215601370
+Luck, S. J., & Vogel, E. K. (1997). The capacity of visual working memory for features and conjunctions.
+Nature, 390(6657), 279–281. https://doi.org/10.1038/36846
+Luck, S. J., & Vogel, E. K. (2013). Visual working memory capacity: From psychophysics and neuro­
+biology to individual differences. Trends in Cognitive Sciences, 17(8), 391–400. https://doi.org/10.
+1016/j.tics.2013.06.006
+Manga, A., Madurka, P., Vakli, P., Kirwan, C. B., & Vidnyánszky, Z. (2021). Investigation of the
+relationship between visual feature binding in short- and long-term memory in healthy aging.
+Learning & Memory, 28(4), 109–113. https://doi.org/10.1101/lm.052548.120
+Marandi, R. Z., & Gazerani, P. (2019). Aging and eye tracking: In the quest for objective biomarkers.
+Future Neurology, 14(4), FNL33. https://doi.org/10.2217/fnl-2019-0012
+Martínez-Flórez, J. F., Belalcázar, M., Alvarez, A., Erazo, O., Sevilla, S., & Parra, M. A. (2024). Short-term
+memory binding is insensitive to the socioeconomic status of older adults with and without mild
+cognitive impairment. The Clinical Neuropsychologist, 38(8), 1–20. https://doi.org/10.1080/
+13854046.2024.2343159
+Mayes, A., Montaldi, D., & Migo, E. (2007). Associative memory and the medial temporal lobes. Trends
+in Cognitive Sciences, 11(3), 126–135. https://doi.org/10.1016/j.tics.2006.12.003
+McCarley, J. S., Yamani, Y., Kramer, A. F., & Mounts, J. R. W. (2012). Age, clutter, and competitive
+selection. Psychology and Aging, 27(3), 616–626. https://doi.org/10.1037/a0026705
+Meghanathan, R. N., van Leeuwen, C., & Nikolaev, A. R. (2015). Fixation duration surpasses pupil size
+as a measure of memory load in free viewing. Frontiers in Human Neuroscience, 8. https://doi.org/
+10.3389/fnhum.2014.01063
+Mitchell, K. J., Johnson, M. K., Raye, C. L., Mather, M., & D’Esposito, M. (2000). Aging and reflective
+processes of working memory: Binding and test load deficits. Psychology and Aging, 15(3),
+527–541. https://doi.org/10.1037/0882-7974.15.3.527
+Moschner, C., & Baloh, R. W. (1994). Age-related changes in visual tracking. Journal of Gerontology, 49
+(5), M235–M238. https://doi.org/10.1093/geronj/49.5.M235
+Moses, S. N., & Ryan, J. D. (2006). A comparison and evaluation of the predictions of relational and
+conjunctive accounts of hippocampal function. Hippocampus, 16(1), 43–65. https://doi.org/10.
+1002/hipo.20131
+Mungas, D., Beckett, L., Harvey, D., Farias, S. T., Reed, B., Carmichael, O., DeCarli, C., Miller, J., &
+DeCarli, C. (2010). Heterogeneity of cognitive trajectories in diverse older persons. Psychology and
+Aging, 25(3), 606–619. https://doi.org/10.1037/a0019502
+Mungas, D., Reed, B. R., Farias, S. T., & DeCarli, C. (2009). Age and education effects on relationships of
+cognitive test scores with brain structure in demographically diverse older persons. Psychology
+and Aging, 24(1), 116–128. https://doi.org/10.1037/a0013421
+Naveh-Benjamin, M. (2000). Adult age differences in memory performance: Tests of an associative
+deficit hypothesis. Journal of Experimental Psychology: Learning, Memory & Cognition, 26(5),
+1170–1187. https://doi.org/10.1037/0278-7393.26.5.1170
+Naveh-Benjamin, M., Brav, T. K., & Levy, O. (2007). The associative memory deficit of older adults: The
+role of strategy utilization. Psychology and Aging, 22(1), 202–208. https://doi.org/10.1037/08827974.22.1.202
+Naveh-Benjamin, M., & Cowan, N. (2023). The roles of attention, executive function and knowledge
+in cognitive ageing of working memory. Nature Reviews Psychology, 2(3), 151–165. https://doi.
+org/10.1038/s44159-023-00149-0
+Naveh-Benjamin, M., Guez, J., Kilb, A., & Reedy, S. (2004). The associative memory deficit of older
+adults: Further su pport using face-name associations. Psychology and Aging, 19(3), 541–546.
+https://doi.org/10.1037/0882-7974.19.3.541
+Naveh-Benjamin, M., Guez, J., & Shulman, S. (2004). Older adults’ associative deficit in episodic
+memory: Assessing the role of decline in attentional resources. Psychonomic Bulletin & Review, 11
+(6), 1067–1073. https://doi.org/10.3758/BF03196738
+
+784
+
+M. A. PARRA ET AL.
+
+Naveh-Benjamin, M., Hussain, Z., Guez, J., & Bar-On, M. (2003). Adult age differences in episodic
+memory: Further s upport for an associative-deficit hypothesis. Journal of Experimental
+Psychology: Learning, Memory & Cognition, 29(5), 826–837. https://doi.org/10.1037/0278-7393.
+29.5.826
+Oberauer, K., & Eichenberger, S. (2013). Visual working memory declines when more features must
+be remembered for each object. Memory & Cognition, 41(8), 1212–1227. https://doi.org/10.3758/
+s13421-013-0333-6
+Old, S. R., & Naveh-Benjamin, M. (2008). Differential effects of age on item and associative measures
+of memory: A meta-analysis. Psychology and Aging, 23(1), 104–118. https://doi.org/10.1037/08827974.23.1.104
+Olson, I. R., & Jiang, Y. (2002). Is visual short-term memory object based? Rejection of the “strongobject” hypothesis. Perception & Psychophysics, 64(7), 1055–1067. https://doi.org/10.3758/
+BF03194756
+Parra, M. A., (2022). Barriers to effective memory assessments for Alzheimer’s disease. Journal of
+Alzheimer’s Disease: JAD, 90(3), 981–988. https://doi.org/10.3233/jad-215445
+Parra, M. A., Abrahams, S., Logie, R., & Della Sala, S. (2009). Age and binding within-dimension
+features in visual short term memory. Neuroscience Letters, 449(1), 1–5. https://doi.org/10.1016/j.
+neulet.2008.10.069
+Parra, M. A., Abrahams, S., Logie, R. H., & Della Sala, S. (2010b). Visual short-term memory binding in
+Alzheimer’s disease and depression. Journal of Neurology, 257(7), 1160–1169. https://doi.org/10.
+1007/s00415-010-5484-9
+Parra, M. A., Abrahams, S., Logie, R. H., Mendez, L. G., Lopera, F., & Della Sala, S. (2010a). Visual shortterm memory binding deficits in familial Alzheimer’s disease. Brain, 133(9), 2702–2713. https://
+doi.org/10.1093/brain/awq148
+Parra, M. A., Calia, C., Pattan, V., & Della Sala, S. (2022a). Memory markers in the continuum of the
+Alzheimer’s clinical syndrome. Alzheimer’s Research & Therapy, 14(1), 142. https://doi.org/10.1186/
+s13195-022-01082-9
+Parra, M. A., Della Sala, S., Abrahams, S., Logie, R. H., Mendez, L. G., & Lopera, F. (2011). Specific deficit
+of colour–colour short-term memory binding in sporadic and familial Alzheimer’s disease.
+Neuropsychologia, 49(7), 1943–1952. https://doi.org/10.1016/j.neuropsychologia.2011.03.022
+Parra, M. A., Della Sala, S., Logie, R. H., & Morcom, A. M. (2014). Neural correlates of shape–color
+binding in visual working memory. Neuropsychologia, 52, 27–36. https://doi.org/10.1016/j.neurop
+sychologia.2013.09.036
+Parra, M. A., & Fernandez, G. (2023). Different correlates of memory decline in Alzheimer’s diseases
+and frontotemporal dementia: Evidence from a novel digital biomarker. Alzheimer’s & Dementia:
+The Journal of the Alzheimer’s Association, 19(S18), Article e078681. https://doi.org/10.1002/alz.
+078681
+Parra, M. A., Gazes, Y., Habeck, C., & Stern, Y. (2024). Exploring the association between amyloid-β
+and memory markers for Alzheimer’s disease in cognitively unimpaired older adults. The Journal
+of Prevention of Alzheimer’s Disease, 11(2), 339–347. https://doi.org/10.14283/jpad.2024.11
+Parra, M. A., Granada, J., & Fernández, G. (2022b). Memory-driven eye movements prospectively
+predict dementia in people at risk of Alzheimer’s disease. Alzheimer’s & Dementia: Diagnosis,
+Assessment & Disease Monitoring, 14(1), e12386. https://doi.org/10.1002/dad2.12386
+Pashler, H. (1988). Familiarity and visual change detection. Perception & Psychophysics, 44(4),
+369–378. https://doi.org/10.3758/BF03210419
+Peterson, D. J., & Naveh-Benjamin, M. (2016). The role of aging in intra-item and item-context
+binding processes in visual working memory. Journal of Experimental Psychology: Learning,
+Memory & Cognition, 42(11), 1713–1730. https://doi.org/10.1037/xlm0000275
+Porter, G., Tales, A., Troscianko, T., Wilcock, G., Haworth, J., & Leonards, U. (2010). New insights into
+feature and conjunction search: I. Evidence from pupil size, eye movements and ageing. Cortex, a
+Journal Devoted to the Study of the Nervous System and Behavior, 46(5), 621–636. https://doi.org/
+10.1016/j.cortex.2009.04.013
+
+AGING, NEUROPSYCHOLOGY, AND COGNITION
+
+785
+
+Reuter-Lorenz, P. A., & Park, D. C. (2014). How does it STAC up? Revisiting the scaffolding theory of
+aging and cognition. Neuropsychology Review, 24(3), 355–370. https://doi.org/10.1007/s11065014-9270-9
+Rhodes, S., Cowan, N., Parra, M. A., & Logie, R. H. (2015). Binding in short-term visual memory:
+Reassessing whole display interference. PsyArXiv Preprints, version 1. https://doi.org/10.31234/
+osf.io/rng4a
+Rhodes, S., Parra, M. A., & Logie, R. H. (2015). Ageing and feature binding in visual working memory:
+The role of presentation time. Quarterly Journal of Experimental Psychology (Hove), 1–15. https://
+doi.org/10.1080/17470218.2015.1038571
+Sparks, D. L. (2022). The brainstem control of saccadic eye movements. Nature Reviews Neuroscience,
+3(12), 952–964. https://doi.org/10.1038/nrn986. PMID: 12461552.
+Stern, Y. (2021). How can cognitive reserve promote cognitive and neurobehavioral health? Archives
+of Clinical Neuropsychology, 36(7), 1291–1295. https://doi.org/10.1093/arclin/acab049
+Treisman, A. (1996). The binding problem. Current Opinion in Neurobiology, 6(2), 171–178. https://
+doi.org/10.1016/S0959-4388(96)80070-5
+Treisman, A., Humphreys, G. W., Duncan, J., & Treisman, A. (1998). Feature binding, attention and
+object perception. Philosophical Transactions of the Royal Society of London Series B: Biological
+Sciences, 353(1373), 1295–1306. https://doi.org/10.1098/rstb.1998.0284
+Tulving, E. (2002). Episodic memory: From mind to brain. Annual Review of Psychology, 53(1), 1–25.
+https://doi.org/10.1146/annurev.psych.53.100901.135114
+Van der Stigchel, S., & Hollingworth, A. (2018). Visuospatial working memory as a fundamental
+component of the eye movement system. The Current Directions in Psychological Science, 27(2),
+136–143. https://doi.org/10.1177/0963721417741710
+van Geldorp, B., Parra, M. A., & Kessels, R. P. (2014). Cognitive and neuropsychological underpinnings
+of relational and conjunctive working memory binding across age. Memory, 23(8), 1–11. https://
+doi.org/10.1080/09658211.2014.953959
+Vogel, E. K., Woodman, G. F., & Luck, S. J. (2001). Storage of features, conjunctions, and objects in
+visual working memory. Journal of Experimental Psychology Human Perception and Performance,
+27(1), 92–114. https://doi.org/10.1037/0096-1523.27.1.92
+Wechsler, D. (2011). Test of premorbid functioning. UK version. Pearson Assessment.
+Wheeler, M. E., & Treisman, A. M. (2002). Binding in short-term visual memory. Journal of
+Experimental Psychology General, 131(1), 48–64. https://doi.org/10.1037/0096-3445.131.1.48
+Winn, B., Whitaker, D., Elliott, D. B., & Phillips, N. J. (1994). Factors affecting light-adapted pupil size in
+normal human subjects. Investigative Ophthalmology & Visual Science, 35(3), 1132–1137.
+Wolk, D. A., Signoff, E. D., & DeKosky, S. T. (2008). Recollection and familiarity in amnestic mild
+cognitive impairment: A global decline in recognition memory. Neuropsychologia, 46(7),
+1965–1978. https://doi.org/10.1016/j.neuropsychologia.2008.01.017
+Yang, Q., & Kapoula, Z. (2006). The control of vertical saccades in aged subjects. Experimental Brain
+Research, 171(1), 67–77. https://doi.org/10.1007/s00221-005-0249-x
+Yassuda, M. S., Carthery-Goulart, M. T., Cecchini, M. A., Cassimiro, L., Fernandes, K. D., Baradel, R. R.,
+Parra, M. A., Nitrini, R., Della Sala, S., & Parra, M. A. (2019). Free recall of bound information held in
+short-term memory is unimpaired by age and education. Archives of Clinical Neuropsychology, 35
+(2), 165–175. https://doi.org/10.1093/arclin/acz015
+
+

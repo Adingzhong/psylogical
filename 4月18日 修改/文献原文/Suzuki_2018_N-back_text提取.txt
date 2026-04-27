@@ -1,0 +1,2124 @@
+ORIGINAL RESEARCH
+published: 06 November 2018
+doi: 10.3389/fnagi.2018.00358
+
+Neural Correlates of Working
+Memory Maintenance in Advanced
+Aging: Evidence From fMRI
+Maki Suzuki 1,2* , Toshikazu Kawagoe 3 , Shu Nishiguchi 4 , Nobuhito Abe 5 , Yuki Otsuka 5 ,
+Ryusuke Nakai 5 , Kohei Asano 5 , Minoru Yamada 4 , Sakiko Yoshikawa 5 and
+Kaoru Sekiyama 1,6
+1
+
+Division of Cognitive Psychology, Faculty of Letters, Kumamoto University, Kumamoto, Japan, 2 Department of Behavioral
+Neurology and Neuropsychiatry, United Graduate School of Child Development, Osaka University, Suita, Japan, 3 Division
+of Human and Social Sciences, Graduate School of Social and Cultural Sciences, Kumamoto University, Kumamoto, Japan,
+4
+Department of Human Health Sciences, Graduate School of Medicine, Kyoto University, Kyoto, Japan, 5 Kokoro Research
+Center, Kyoto University, Kyoto, Japan, 6 Graduate School of Advanced Integrated Studies in Human Survivability, Kyoto
+University, Kyoto, Japan
+
+Edited by:
+Ashok Kumar,
+University of Florida, United States
+Reviewed by:
+Marcelo Febo,
+University of Florida, United States
+Natasha Sigala,
+University of Sussex, United Kingdom
+Thomas Zoëga Ramsøy,
+Neurons Inc., Denmark
+*Correspondence:
+Maki Suzuki
+msuzuki@psy.med.osaka-u.ac.jp
+Received: 03 August 2017
+Accepted: 19 October 2018
+Published: 06 November 2018
+Citation:
+Suzuki M, Kawagoe T,
+Nishiguchi S, Abe N, Otsuka Y,
+Nakai R, Asano K, Yamada M,
+Yoshikawa S and Sekiyama K (2018)
+Neural Correlates of Working Memory
+Maintenance in Advanced Aging:
+Evidence From fMRI.
+Front. Aging Neurosci. 10:358.
+doi: 10.3389/fnagi.2018.00358
+
+Working memory (WM)-related brain activity is known to be modulated by aging;
+particularly, older adults demonstrate greater activity than young adults. However, it is
+still unclear whether the activity increase in older adults is also observed in advanced
+aging. The present functional magnetic resonance imaging (fMRI) study was designed to
+clarify the neural correlates of WM in advanced aging. Further, we set out to investigate
+in the case that adults of advanced age do show age-related increase in WM-related
+activity, what the functional significance of this over-recruitment might be. Two groups of
+older adults – “young–old” (61–70 years, n = 17) and “old–old” (77–82 years, n = 16) –
+were scanned while performing a visual WM task (the n-back task: 0-back and 1-back).
+WM effects (1-back > 0-back) common to both age groups were identified in several
+regions, including the bilateral dorsolateral prefrontal cortex (DLPFC), the inferior parietal
+cortex, and the insula. Greater WM effects in the old–old than in the young–old group
+were identified in the right caudal DLPFC. These results were replicated when we
+performed a separate analysis between two age groups with the same level of WM
+performance (the young–old vs. a “high-performing” subset of the old–old group). There
+were no regions where WM effects were greater in the young–old group than in the
+old–old group. Importantly, the magnitude of the over-recruitment WM effects positively
+correlated with WM performance in the old–old group, but not in the young–old group.
+The present findings suggest that cortical over-recruitment occurs in advanced old
+age, and that increased activity may serve a compensatory function in mediating WM
+performance.
+Keywords: aging, fMRI, over-recruitment, compensation, working memory, maintenance, prefrontal
+
+INTRODUCTION
+As they get older, many older adults become aware that their memory is not as good as it used to
+be. There is considerable evidence, however, that not all types of memory are equally vulnerable
+to aging. Episodic memory and working memory (WM) show relative decline with increasing age,
+while other types of memory (such as semantic memory, procedural memory, and priming) are
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+1
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+the groups, firstly because 77 years was the upper age limit
+of the young–old group in Wang et al. (2009), and secondly
+because the prevalence of mild cognitive impairment (MCI) or
+dementia increases non-linearly from some point between 75 and
+79 years in Japan (Asada, 2013), suggesting that people at this age
+become more heterogeneous as a group and more susceptible to
+age-related decline. The young–old group was similar, in terms of
+its age population, to older adults employed in prior fMRI studies
+of aging (cf. Spreng et al., 2010).
+Working memory represents a cognitive system that allows us
+to temporarily maintain and manipulate information (Baddeley,
+1986). This function is required for a wide range of cognitive
+abilities, such as planning, problem solving, or reasoning. There
+is emerging consensus that WM maintenance is implemented
+by allocating attention to internal representations of an item
+(Cowan, 1995; Oberauer, 2002; Fuster, 2009; D’Esposito and
+Postle, 2015; Eriksson et al., 2015). More specifically, it is assumed
+that when task-relevant representations are in the focus of
+attention, an active maintenance process ensures maintenance
+through top-down signals from fronto-parietal networks to
+posterior regions specifically related to the current content
+of WM (Fuster, 2009; D’Esposito and Postle, 2015; Eriksson
+et al., 2015). Directly supporting this notion, neurophysiological
+studies in monkeys (Funahashi et al., 1989; Miller et al., 1996; see
+also Curtis and D’Esposito, 2003) and, more recently, functional
+neuroimaging studies in young human adults (Courtney et al.,
+1997; Leung et al., 2002; see Curtis and D’Esposito, 2003; Owen
+et al., 2005; Rottschy et al., 2012 for reviews) have demonstrated
+activity in fronto-parietal networks including the dorsolateral
+prefrontal cortex (DLPFC) and the lateral parietal cortex during
+WM maintenance (the “core” WM network; Rottschy et al.,
+2012).
+As documented in a meta-analysis by Spreng et al. (2010; see
+also Rajah and D’Esposito, 2005; Reuter-Lorenz and Sylvester,
+2005), relative to younger adults, older adults show either
+increased or decreased WM-related activity in the DLPFC
+and the lateral parietal cortex. Several studies have reported
+age-related over-recruitment of the DLPFC during low WM
+load tasks (e.g., maintenance tasks). In contrast, age-related
+under-recruitment of the DLFPC has been reported during high
+WM load tasks (e.g., manipulation tasks). Decreased activity in
+older adults compared to younger adults is usually characterized
+as neurocognitive decline (Grady, 2008; Grady, 2012). However,
+the functional meaning of age-related increases in neural activity
+(“over-recruitment”) is unclear.
+Two patterns of age-related over-recruitment have been
+interpreted as reflecting compensatory mechanisms that support
+cognitive performance despite age-related decline in neural
+functions. First, older adults tend to recruit PFC regions
+contralateral to those most active in younger adults, leading to a
+more bilateral activation pattern (e.g., Reuter-Lorenz et al., 2000;
+Piefke et al., 2012; hemispheric asymmetry reduction in older
+adults, HAROLD; Cabeza, 2002). Second, age-related increase
+in PFC activity is coupled with decreased activity in posterior
+brain regions involved in perceptual processing (e.g., Dennis
+et al., 2008; Pfeifer et al., 2016; posterior–anterior shift in aging,
+PASA; Davis et al., 2008). However, alternative view proposed
+
+relatively spared (Hultsch et al., 1992; Park et al., 2002; Nyberg
+et al., 2012). The age-related decline of episodic and WM seems
+to be gradual, but the decline accelerates after 70 years of age
+(e.g., Park et al., 2002). Although many functional neuroimaging
+studies have investigated the age-related change in brain activity
+that underlie decline in memory performance, the majority of
+these studies compared participants with a mean age of 25 with
+those in their mid-sixties (e.g., Daselaar et al., 2003; Sun et al.,
+2005; Grady et al., 2008; Nyberg et al., 2009; Duarte et al., 2010;
+Heinzel et al., 2017; see also Spreng et al., 2010). Hence there is
+less evidence regarding the neural correlates of episodic and WM
+in individuals aged around 80 years and older.
+There are several reasons for focusing on participants aged
+around 80 years and older. First, given the fact that the
+proportion and number of individuals in this age class have
+been growing rapidly in the global population (World Population
+Prospects: The 2017 Revision1 ), clarifying the neural correlates
+of age-related memory decline in these elderly people is of
+significant importance. Second, as mentioned earlier, the decline
+of memory functions accelerates with increasing age (e.g., Park
+et al., 2002). For example, relative to individuals in their
+mid-sixties, 80-year-old individuals typically decline markedly
+in their cognitive abilities, the difference being similar to
+that between people in their mid-twenties and those in their
+mid-sixties. Contrasting brain activity of two groups of older
+adults (mid-sixties vs. 80-year-old adults) allows us to identify
+whether the results follow a similar pattern to that shown in
+prior studies comparing brain activity between young and older
+adults (see below for details). Finally, individual differences in
+cognitive decline become more pronounced with advanced age
+(de Frias et al., 2007; Habib et al., 2007; see also Morrison
+and Baxter, 2012; Nyberg et al., 2012). Findings from studies
+employing participants at a very old age reveal the neural
+mechanisms underlying the phenomenon that some older adults
+exhibit relatively stable cognitive performance that is comparable
+to that of younger adults, while others show a marked and more
+apparent decline.
+With regard to episodic memory, Wang et al. (2009) compared
+retrieval-related activity between two groups of older adults
+(“young–old,” 63–77 years, and “old–old,” 84–96 years) using a
+yes/no recognition memory task to identify effects of advanced
+aging. They reported old > new effects (i.e., activity enhanced
+for correctly judged old items compared to correctly judged new
+items) common to both groups in the parietal and prefrontal
+cortex. No clusters were identified with greater effects in the
+old–old group, while the medial parietal region showed greater
+effects in the young–old group. Within a similar framework,
+in the present functional magnetic resonance imaging (fMRI)
+study, we focused on WM and contrasted its neural correlates in
+young–old and old–old adults using a visual WM task. On the
+basis of prior findings that WM performance declines markedly
+after 70 years of age (e.g., Park et al., 2002), we analyzed the
+data from two separate groups: individuals aged between 61 and
+70 years for the young–old group, and those aged 77 years and
+older for the old–old group. We set a 7-year age gap between
+1
+
+http://esa.un.org/unpd/wpp
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+2
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+The n-back task is the most commonly used experimental
+paradigm for functional neuroimaging of WM (e.g., Grady et al.,
+2008; Nyberg et al., 2009; Stanley et al., 2015; Heinzel et al., 2017;
+see Owen et al., 2005; Rottschy et al., 2012 for reviews); during
+this task, participants are asked to monitor a series of stimuli
+and to judge whether the currently presented stimulus is the
+same as the one presented n trials before. This paradigm allows
+manipulation of WM load by increasing or decreasing n. We only
+used a 1-back task, which is widely considered a maintenance task
+with low WM load, for two reasons. Firstly, because we wanted
+to focus on age-related increases in WM-related activity (see
+above), and, secondly, because data from a previous behavioral
+study by our group (Kawagoe and Sekiyama, 2014) revealed
+that 2-back tasks for face and location may be too cognitively
+demanding for old–old adults [the mean percentage of correct
+responses was 50% (chance level), collapsing across face and
+location conditions].
+
+that age-related PFC over-recruitment reflects a reduction in
+neural specificity or efficiency with aging, and that, hence,
+over-recruitment reflects age-related changes in neural functions
+that have a negative impact on cognitive performance (e.g., Logan
+et al., 2002; Li et al., 2006; Morcom and Henson, 2018).
+The compensatory view is often applied when, for instance,
+enhanced WM-related activity (such as in the DLPFC and the
+lateral parietal cortex) is observed in older compared to younger
+adults, even when performance levels on WM tasks are matched
+(e.g., Cabeza et al., 2004; Mattay et al., 2006). Alternatively, it
+is applied when WM-related activity in over-recruited regions
+positively correlates with better WM performance in older but
+not in younger adults (e.g., Reuter-Lorenz et al., 2000; Sun
+et al., 2005; Nyberg et al., 2014). Both cases indicate that
+over-recruitment reflects the engagement of processes beneficial
+to performance. Thus, to interpret the functional significance
+of age-related over-recruitment, it is crucial to examine the
+relationship between brain activity and task performance (Grady,
+2008; Grady, 2012).
+Only few studies have investigated neural correlates of WM
+including older groups of participants consisting of individuals
+around the age of 80. In one study, Nyberg et al. (2014)
+investigated age-related changes in brain activation among four
+age groups (25–50, 55–60, 65–70, and 75–80 years) using
+verbal WM tasks. In this study, participants maintained four
+target letters in memory and then compared them to a probe
+letter during a maintenance task, or generated letters following
+two target letters in the alphabet, and kept those in memory,
+during a manipulation task. The authors found age-related linear
+decreases in activity in the bilateral DLPFC and the lateral
+parietal cortex during the manipulation task (high WM load),
+and a linear increase in the left DLPFC during the maintenance
+task (low WM load). In addition, within the oldest group
+(75–80 years), higher left DLPFC recruitment was associated
+with better performance. There was no such tendency in the
+youngest group (25–50 years). However, this study did not
+directly compare the oldest group (75–80 years) with the other
+older groups of participants. In addition, since this study only
+used verbal material as stimuli, the neural correlates of visual
+WM in individuals around the age of 80 are still unknown. Given
+the fact that visual WM abilities are more vulnerable to aging
+than verbal WM (Reuter-Lorenz and Sylvester, 2005), the use
+of visual material may reveal the effect of advanced aging more
+clearly.
+The purpose of the present fMRI study was twofold. First,
+we investigated whether old–old adults demonstrate increased
+WM-related activity relative to young–old adults, that is, a similar
+pattern of “age-related over-recruitment” when comparing
+activity of older to that of younger adults. Second, we set out to
+investigate, in the case that old–old adults do show age-related
+increases in neural activity, what the functional significance of
+this over-recruitment might be. Thus, two groups of older adults
+(young–old and old–old) were scanned while performing a visual
+WM task (the n-back task: 0-back and 1-back). We contrasted
+the neural correlates of WM between the two age groups, and
+then further investigated the relationship between WM-related
+activity and task performance.
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+MATERIALS AND METHODS
+Participants
+The present results are originally based on the data from
+18 young–old adults (11 female; age range = 61–70 years;
+mean age = 66.2 years) and 24 old–old adults (10 female;
+age range = 77–91 years; mean age = 79.8 years), recruited
+via the Kyoto-city Silver Human Resources Center, Japan. All
+participants were right-handed, had normal or corrected-to
+normal vision, no history of neurological, cardio-vascular, or
+psychiatric illness, and no contraindications for MR imaging.
+Informed consent was obtained from all participants in
+accordance with the requirements of the Ethical Committee
+of Kumamoto University, which approved the study. Nine
+participants were excluded from the analyses. Four old–old adults
+were excluded because of abnormalities in their anatomical scan,
+and the remaining five (four old–old adults and one young–old
+adult) were excluded because they scored below 24 on the
+Mini-Mental State Examination (MMSE), and/or more than 1.5
+standard deviations (SD) below their age-appropriate mean on
+the Wechsler Memory Scale-Revised (WMS-R) Logical Memory
+II. Because the Japanese version of the WMS-R manual does
+not provide standardized means for participants above the age
+of 75, age means were obtained from Kawano (2012). Thus,
+data from 17 young–old (10 female; age range = 61–70 years;
+mean age = 66.1 years) and 16 old–old (seven female; age
+range = 77–82 years; mean age = 79.4 years) are reported here.
+
+Neuropsychological Testing
+A battery of standardized neuropsychological tests was
+administered to all participants in a session separate from
+the fMRI scanning. The MMSE and the WMS-R Logical Memory
+were utilized as a screening measure for cognitive impairments.
+The MMSE is a 30-question assessment of global cognitive
+status (Folstein et al., 1975), with a cut-off score of 24 out of 30.
+The WMS-R Logical Memory is a standardized assessment of
+narrative episodic memory (Wechsler, 1987). A short story is
+orally presented, and the examinee is required to recall the story
+
+3
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+immediately (Logical Memory I) and again 30 min later (Logical
+Memory II). Additionally, the Trail Making Test (TMT) A and
+B was used to evaluate executive function (Reitan, 1986). TMT
+contains two parts: part A is a numbered connect-the-dots task,
+and part B is a more complex connect-the-dots task that includes
+alternating letters and numbers.
+
+Procedure
+Instructions and practice for the n-back tasks (0-back and 1-back
+task) were given prior to the scanning, outside the scanner. In
+the face 0-back task, participants were asked to judge whether
+or not the face stimulus was female. In the location 0-back task,
+participants were asked to judge whether or not the dot was
+located in the center of the screen. In the 1-back task, participants
+were asked to judge whether or not the test item was identical to
+the one immediately preceding it (i.e., the face or the location
+of the dot presented in the last trial). There was thus no WM
+required for the 0-back task, while the 1-back task required
+maintenance of information in WM for a short period of time.
+During rest, participants were instructed to relax and keep their
+attention on the central fixation. All responses were made with
+the index (“yes”) and middle (“no”) finger of the right hand
+using an MRI-compatible keypad. Participants were instructed to
+respond as quickly as possible without sacrificing accuracy.
+
+Materials
+Examples of stimuli and the procedure are depicted in Figure 1.
+Two types of stimuli were used: faces and locations. Face stimuli
+were 52 colored photographs of faces with neutral expressions
+seen from a frontal viewpoint (26 females and 26 males). Location
+stimuli consisted of a black dot presented in one of various
+locations on the screen. Each face and each dot location was
+only presented once, except for the immediate repetitions to be
+detected in the face and location 1-back WM tasks, and the
+centered dot in the location 0-back WM task (see below for
+details).
+Stimuli were projected onto a screen viewed by the subject
+via a mirror mounted on the scanner head coil. Each item (the
+face or the dot) appeared for 2000 ms, with a stimulus onset
+asynchrony (SOA) of 4000 ms. A black central fixation cross (+)
+was presented throughout the inter-item interval for 2000 ms.
+The WM tasks for face and location were conducted during
+separate fMRI runs. Each of the two runs contained eight task
+blocks (four blocks each for the 0-back and 1-back tasks) and four
+rest blocks. Each block lasted 32 s, and each task block consisted
+of eight trials (three possible correct “yes” responses per block; see
+below). The order of the blocks within a run was counterbalanced
+across participants.
+
+fMRI Scanning
+Scanning was performed in a 3T Siemens Verio MR scanner
+(Siemens, Erlangen, Germany). Functional images were acquired
+with a T2∗ -weighted axial echo-planer image (EPI) (TR, 2000 ms;
+TE, 25 ms; flip angle, 75◦ ; FOV, 224 × 224; matrix size,
+64 × 64). Each EPI volume was acquired in interleaved order
+and consisted of 39 axial slices (3.5 thick; in-plane resolution,
+3.5 mm × 3.5 mm). fMRI data were acquired in two runs
+(197 volumes per run). The first five volumes of each run were
+discarded to allow for T1 equilibration. After the two functional
+runs, a whole-brain anatomical image was acquired using an
+axial T1-weighted, 3D magnetization-prepared rapid gradient
+echo (MP-RAGE) pulse sequence (FOV, 256 × 256; matrix size,
+256 × 256; voxel size, 1 mm × 1 mm × 1 mm; 208 slices; axial
+acquisition).
+
+fMRI Data Analysis
+Functional data preprocessing and statistical analyses were
+performed with Statistical Parametric Mapping (SPM12,
+Wellcome Department of Cognitive Neurology, London2 )
+implemented in MATLAB R2012a (The Mathworks Inc.,
+United States). Functional data were spatially realigned to the
+first volume of the series and then to the across-run mean
+volume, after which they were coregistered with the anatomical
+data. The anatomical data were normalized to MNI space using a
+unified segmentation procedure (Ashburner and Friston, 2005).
+The resulting deformation parameters were also applied to the
+functional data. The functional data were then resampled into
+3 mm × 3 mm × 3 mm voxels and smoothed with an 8-mm
+full-width half-maximum (FWHM) Gaussian kernel.
+Statistical analyses were performed in two stages of a
+mixed effects model. In the first stage, neural activity was
+modeled by a box-car function representing activity sustained
+throughout task blocks. These functions were then convolved
+with a canonical hemodynamic response function (HRF) to
+yield regressors in a general linear model that modeled the
+BOLD response for each task. We conducted two first-level
+
+FIGURE 1 | Example of stimuli and experimental design of the working
+memory (WM) tasks (n-back). In the face 0-back task, participants were asked
+to judge whether or not the face stimulus was female. In the location 0-back
+task, participants were asked to judge whether or not the dot was located in
+the center of the screen. In the 1-back task, participants were asked to judge
+whether or not the test item was identical to the one immediately preceding it
+(i.e., the face or the location of the dot presented in the last trial). Written
+consent was obtained from the individuals for the publication of their face
+images.
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+2
+
+4
+
+http://www.fil.ion.ucl.ac.uk/spm
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+analyses. In one analysis, four conditions were modeled: face
+0-back, face 1-back, location 0-back, and location 1-back tasks.
+In the other analysis, two conditions were modeled: 0-back
+and 1-back tasks, each combining face and location WM
+tasks to maximize statistical power. Six regressors modeling
+movement-related variance (three rigid-body translations and
+three rotations determined from the realignment stage) and
+session-specific constant terms modeling the mean over scans
+were also used in the design matrix. Parameter estimates for
+events of interest were estimated using a general linear model.
+Non-sphericity of the error covariance was accommodated by
+an AR(1) model in which the temporal autocorrelation was
+estimated by pooling over suprathreshold voxels (Friston et al.,
+2002). Effects of interest were tested using linear contrasts of the
+parameter estimates. These contrasts were carried forward to a
+second stage of analysis treating subjects as a random effect. Two
+analyses of variance (ANOVA) were modeled: (1) a 2 × 2 × 2
+mixed-design ANOVA with the factors age group (young–old
+and old–old adults), stimulus type (face and location), and task
+(0-back and 1-back tasks), and (2) a 2 × 2 mixed-design ANOVA
+with the factors age group (young–old and old–old adults) and
+task (0-back and 1-back tasks). Pair-wise contrasts derived from
+the ANOVA model were thresholded at P < 0.001, uncorrected,
+with an 18-voxel extent threshold. This cluster extent threshold
+was determined by a Monte Carlo simulation implemented
+in AlphaSim (Ward, 2000) to yield a corrected whole-brain
+cluster-wise significance level of P < 0.05. Regions demonstrating
+WM effects common to the two age groups were identified by a
+conjunction analysis. WM effects that differed according to age
+were identified by testing the interaction between age groups and
+WM effects. All coordinates are reported in MNI space.
+In addition, using the MarsBaR toolbox (Brett et al., 2002),
+subject-specific parameter estimates for events of interest were
+extracted from a cluster that exceeded the statistical threshold
+mentioned above. The parameter estimates were averaged across
+voxels to yield a mean value for each cluster.
+
+TABLE 1 | Demographic and neuropsychological data (mean, SD) for the two age
+groups.
+Old–old
+(n = 16)
+
+Age∗∗
+
+66.1 (3.3)
+
+79.4 (2.1)
+
+Years of education
+
+13.7 (1.9)
+
+12.5 (2.4)
+
+Mini Mental State Examination
+
+28.0 (1.8)
+
+27.4 (2.0)
+
+Trail Making Test A∗∗
+
+55.1 (12.2)
+
+82.5 (20.3)
+
+Trail Making Test B∗∗
+
+92.8 (36.0)
+
+131.8 (27.8)
+
+WMS-R1 Logical Memory I composite score2
+
+21.0 (6.1)
+
+17.8 (4.6)
+
+WMS-R1 Logical Memory II composite score2
+
+16.6 (6.3)
+
+13.5 (4.5)
+
+1 Wechsler Memory Scale Revised. ∗∗ P < 0.01. 2 Group means (SD) provided in
+
+Kawano (2012), corresponding to the mean age of young–old and old–old groups,
+were as follows: young–old, Logical Memory I = 21.3 (7.1); II = 16.3 (6.8) and
+old–old, I = 17.0 (6.0); II = 11.9 (6.6).
+TABLE 2 | Mean (SD) proportion of correct responses (accuracy) and reaction
+times (RTs) of working memory tasks for the two age groups.
+Accuracy
+
+RTs (ms)
+
+Young–old
+
+Old–old
+
+Young–old
+
+Old–old
+
+0-back
+
+0.99 (0.02)
+
+0.96 (0.03)
+
+1069.6 (92.9)
+
+1113.0 (127.1)
+
+1-back
+
+0.94 (0.06)
+
+0.86 (0.09)
+
+1188.2 (163.6)
+
+1344.4 (232.2)
+
+0-back
+
+0.98 (0.02)
+
+0.97 (0.04)
+
+1124.4 (136.6)
+
+1110.1 (189.9)
+
+1-back
+
+0.99 (0.02)
+
+0.91 (0.09)
+
+1144.4 (148.7)
+
+1273.1 (248.8)
+
+Face
+
+Location
+
+Collapsing across face and location
+0-back
+
+0.98 (0.01)
+
+0.97 (0.03)
+
+1097.0 (104.4)
+
+1111.6 (143.9)
+
+1-back
+
+0.96 (0.03)
+
+0.88 (0.08)
+
+1166.3 (134.0)
+
+1308.8 (227.5)
+
+indicates that accuracy differed between the two groups in the
+1-back task (P < 0.001) but not in the 0-back task, and that 0-back
+and 1-back accuracy differed in the old–old group (P < 0.001) but
+not in the young–old group. The latter interaction reflects that
+the face condition was more difficult than the location condition
+in the 1-back task (P < 0.001), but not in the 0-back task.
+A 2 × 2 × 2 ANOVA on RTs gave rise to a significant main
+effect of Task [F(1,31) = 40.19, P < 0.001], and interactions
+between Group and Task [F(1,31) = 9.27, P < 0.005] and between
+Stimulus type and Task [F(1,31) = 11.25, P < 0.005]. The former
+interaction indicates that RTs differed between the two groups
+in the 1-back task (P < 0.05) but not in the 0-back task. The
+latter interaction reflects that responses in the face condition
+were slower than in the location condition in the 1-back task
+(P < 0.05), but not in the 0-back task.
+
+RESULTS
+Neuropsychological Performance
+Demographic and neuropsychological data for the two age
+groups are summarized in Table 1. As is evident from the table,
+the old–old adults demonstrated lower performance on the TMT
+A and B.
+
+Behavioral Performance
+Table 2 shows the mean proportion of correct responses
+(accuracy) and the mean reaction times (RTs) of the young–old
+and old–old groups. A 2 × 2 × 2 ANOVA with the factors
+Group (young–old/old–old), Stimulus type (face/location) and
+Task (0-back/1-back) on proportion data revealed significant
+main effects of Group [F(1,31) = 19.85, P < 0.001], Stimulus
+type [F(1,31) = 11.48, P < 0.005] and Task [F(1,31) = 23.26,
+P < 0.001], along with significant interactions between Group
+and Task [F(1,31) = 8.54, P < 0.01] and between Stimulus type
+and Task [F(1,31) = 9.89, P < 0.005]. The former interaction
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+Young–old
+(n = 17)
+
+fMRI Findings
+Stimulus Effects for Face and Location
+Regions selectively responsible for processing face
+(face > location) and location (location > face) stimuli
+common to the two age groups were identified in the right
+fusiform gyrus and the left lingual gyrus extending into the
+fusiform gyrus for face effects, and in the right lateral parietal
+cortex and the precuneus for location effects (see Figure 2A and
+
+5
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+location common to the two groups. This null result may be in
+part due to the fact that the proportion of correct responses was
+higher in location 1-back than in face 1-back tasks. However,
+this result does not necessarily indicate that the location 1-back
+task is not cognitively demanding. At a more liberal threshold
+(P < 0.005, uncorrected), there was an age-invariant WM effect
+for location in the bilateral insula (left: x = −30, y = 26, z = 2;
+right: x = 30, y = 26, z = 2) and in the right inferior parietal
+cortex (x = 51, y = −46, z = 50), overlapping regions identified
+in age-invariant face WM effects.
+
+Age-related differences in WM effects
+Brain regions where WM effects differed according to age,
+separately for face and location stimuli, are summarized in
+Table 5. Greater WM effects in the old–old than in the young–old
+group were identified in the right caudal DLPFC (superior frontal
+gyrus), both for face and location conditions. There were no
+regions where face or location WM effects were greater in the
+young–old than in the old–old group.
+
+Working Memory Effects Collapsed Across Stimulus
+Types
+Our primary interest was to investigate the age-related differences
+in WM effects associated with WM maintenance in general,
+independent of stimulus type. Since the age-related enhancement
+in WM effects was found in almost identical regions for face
+and location conditions, we collapsed across the two conditions
+within the respective task, to maximize statistical power.
+
+FIGURE 2 | (A) Regions demonstrating selective stimulus effects for face and
+location common to the young–old and old–old groups. (B) Parameter
+estimates of the cluster for face and location WM tasks (0-back and 1-back
+tasks) in each group.
+
+Age-invariant WM effects
+
+Table 3). Mean parameter estimates, separated according to age
+group, are shown in Figure 2B. There were no regions where
+either stimulus effect differed between the groups.
+
+WM effects common to the two age groups were identified in
+several regions, including the bilateral DLPFC (middle frontal
+gyrus), the inferior parietal cortex, and the insula. These results
+are summarized in Figure 3A and Table 6. Mean parameter
+estimates for each region, separated according to age group, are
+shown in Figure 3B.
+
+Working Memory Effects for Face and Location
+Age-invariant WM effects
+As is summarized in Table 4, WM effects for face common to
+the two age groups were identified in several regions, including
+the bilateral DLPFC (middle frontal gyrus), the inferior parietal
+cortex, the insula, the left ventrolateral prefrontal cortex (VLPFC;
+inferior frontal gyrus), the right medial frontal cortex, and the
+middle temporal gyrus. We failed to identify WM effects for
+
+Age-related differences in WM effects
+Brain regions where WM effects differed according to age group
+are summarized in Figure 4A and Table 7. Greater WM effects
+in the old–old than in the young–old group were identified in a
+single cluster, the right caudal DLPFC (superior frontal gyrus).
+
+TABLE 3 | Brain regions showing stimulus effects for face and location common to the two age groups.
+Coordinates
+Brain region
+
+L/R
+
+BA
+
+Number of
+voxels
+
+x
+
+y
+
+z
+
+Z-score
+
+Young–old = Old–old
+Face effects
+Lingual gyrus
+
+L
+
+18
+
+329
+
+−9
+
+−73
+
+−4
+
+4.50
+
+Fusiform gyrus
+
+R
+
+37
+
+666
+
+42
+
+−73
+
+−10
+
+5.75
+
+Inferior parietal cortex
+
+R
+
+39
+
+27
+
+42
+
+−76
+
+26
+
+4.38
+
+Precuneus
+
+R
+
+7
+
+31
+
+18
+
+−70
+
+50
+
+3.87
+
+Location effects
+
+Z-values refer to the peak of the activated cluster. L, left; R, right; BA, Brodmann’s area.
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+6
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+TABLE 4 | Brain regions showing working memory effects for face and location common to the two age groups.
+Coordinates
+Brain region
+
+L/R
+
+BA
+
+Number of
+voxels
+
+x
+
+y
+
+z
+
+Z-score
+
+4.07
+
+Young–old = Old–old
+Face WM effects
+DLPFC
+
+L
+
+44
+
+52
+
+−45
+
+26
+
+32
+
+DLPFC
+
+R
+
+46
+
+135
+
+36
+
+23
+
+35
+
+4.14
+
+VLPFC
+
+L
+
+47
+
+44
+
+−36
+
+47
+
+−4
+
+3.77
+
+Medial frontal cortex
+
+R
+
+20
+
+20
+
+9
+
+26
+
+41
+
+3.92
+
+Insula
+
+L
+
+13
+
+58
+
+−30
+
+26
+
+2
+
+5.15
+
+Insula
+
+R
+
+13
+
+67
+
+30
+
+29
+
+−1
+
+4.54
+
+Middle temporal gyrus
+
+R
+
+21
+
+20
+
+66
+
+−28
+
+−10
+
+3.98
+
+Inferior parietal cortex
+
+L
+
+40
+
+31
+
+−39
+
+−55
+
+47
+
+3.35
+
+Inferior parietal cortex
+
+R
+
+39/40
+
+186
+
+42
+
+−61
+
+41
+
+4.11
+
+Location WM effects
+No suprathreshold clusters
+Z-values refer to the peak of the activated cluster. L, left; R, right; BA, Brodmann’s area; DLPFC, dorsolateral prefrontal cortex; VLPFC, ventrolateral prefrontal cortex.
+TABLE 5 | Age-related differences (young–old vs. old–old) in working memory effects for face and location.
+Coordinates
+Brain region
+
+L/R
+
+BA
+
+Number of
+voxels
+
+x
+
+y
+
+z
+
+Z-score
+
+27
+
+23
+
+56
+
+3.66
+
+Young–old > Old–old
+Face WM effects
+No suprathreshold clusters
+Location WM effects
+No suprathreshold clusters
+Old–old > Young–old
+Face WM effects
+Caudal DLPFC
+
+R
+
+8/9
+
+21
+
+Caudal DLPFC
+
+R
+
+8/9
+
+28
+
+27
+
+23
+
+56
+
+4.00
+
+Inferior parietal cortex
+
+L
+
+40
+
+44
+
+−33
+
+−58
+
+41
+
+3.51
+
+Location WM effects
+
+Z-values refer to the peak of the activated cluster. L, left; R, right; BA, Brodmann’s area; DLPFC, dorsolateral prefrontal cortex.
+
+as a compensatory mechanism for age-related decline in
+WM performance (Cabeza, 2002; Davis et al., 2008; see also
+Reuter-Lorenz and Cappell, 2008). We therefore computed
+across-participants correlations between the magnitudes of overrecruitment in the right caudal DLPFC identified in the foregoing
+analysis (see section “Age-Related Differences in WM Effects”
+and Table 7) and WM performance (accuracy in the 1-back task),
+separately for each group. Significant positive correlations were
+evident in the old–old group (r = 0.65, P < 0.01) but not in the
+young–old group (r = −0.16, P = 0.54). There were no outlying
+participants who showed WM effects 2 SDs above/below the
+group mean. We found one old–old adult who performed 2 SDs
+below the group mean in the 1-back task; however, the significant
+correlation was still evident when this participant was omitted
+(r = 0.63, P < 0.05). Figure 5 illustrates the relationship between
+the participants’ WM effects (1-back > 0-back) and accuracy in
+the 1-back task for the two groups.
+
+Mean parameter estimates, separated according to age group, are
+shown in Figure 4B. There were no regions where WM effects
+were greater in the young–old group than in the old–old group.
+Performance accuracy and RTs for the 1-back task significantly
+differed between the two groups. These results raise the question
+whether group differences in right DLPFC activity might simply
+be related to age differences in task performance. We therefore
+repeated the interaction analyses using ANOVA with accuracy
+and RTs as covariates to test whether the group differences in WM
+effects would persist. Again, we identified the right caudal DLPFC
+where WM effects were greater in the old–old group (x, y, z = 27,
+23, 56; Z = 3.67; 18 voxels).
+
+Relationship Between Over-Recruitment in Working
+Memory Effects and Performance
+As is noted in the Section “Introduction,” it has been debated
+whether the age-related over-recruitment in WM effects serves
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+7
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+Greater WM effects in the high-performing old–old than in
+the young–old group were identified in the right caudal DLPFC
+(superior frontal gyrus), the DLPFC (middle frontal gyrus),
+the left medial frontal cortex, and the precuneus (Table 8 and
+Figure 6). We identified an overlapping region in the right
+caudal DLPFC between the current (high-performing old–old
+vs. young–old) and the foregoing results (old–old vs. young–old;
+section “Age-Related Differences in WM Effects”) (x, y, z = 33, 26,
+56; Z = 4.62; 29 voxels; P < 0.05, small-volume corrected). Again,
+there were no brain regions where WM effects were greater for
+the young–old than for the high-performing old–old group.
+
+DISCUSSION
+The primary interest was to evaluate whether an age-related
+increase in WM effects is observed in advanced old age.
+Consistent with prior studies that reported increased WM
+effects when contrasting older and younger adults (Rajah and
+D’Esposito, 2005; Reuter-Lorenz and Sylvester, 2005; Spreng
+et al., 2010), we identified age-related over-recruitment in
+the right caudal DLPFC. Our secondary interest was to
+investigate whether this over-recruitment reflects the engagement
+of compensatory responses to maintain performance. We found
+that over-recruitment effects in the right caudal DLPFC were
+positively correlated with performance in old–old adults but not
+in young–old adults. In the following, we discuss the implications
+of these findings and their possible links to previous studies of
+age-related differences in WM.
+
+FIGURE 3 | (A) Regions demonstrating working memory effects common to
+both the young–old and old–old group. (B) Parameter estimates of the
+clusters for the 0-back and 1-back task in each group.
+
+Age-Related Differences in Working Memory Effects
+Between the Young–Old and High-Performing
+Old–Old Groups
+In light of the argument that the interpretation of age-related
+differences in brain activity is often confounded with age-related
+differences in task performance (see Rugg and Morcom, 2005 for
+details), we performed an additional analysis comparing two age
+groups with the same level of WM performance. We separated
+the participants in the old–old group into two subgroups (high
+and low performers) based on a median split of their accuracy in
+the 1-back task, and contrasted the WM effects of the young–old
+(n = 17) and a “high-performing” old–old group (n = 8) (resulting
+mean of 1-back accuracy/RTs: young–old = 0.96/1166.3 ms;
+high-performing old–old = 0.94/1195.4 ms; no significant group
+differences, P > 0.1). The aim of this analysis was to investigate
+whether the age-related right caudal DLPFC over-recruitment
+identified above (see section “Age-Related Differences in WM
+Effects”) can also be detected when WM performance is matched
+between the two age groups.
+
+Behavioral Findings
+There were significant group differences in proportions of
+correct responses and RTs for the 1-back task, but performance
+measures for the 0-backs task did not significantly differ. These
+results are consistent with previous studies suggesting that
+WM maintenance abilities are markedly declined in individuals
+around the age of 80 (Park et al., 2002). A more important
+finding is that old–old adults showed a higher variability in
+WM performance. The accuracy ranges for the 1-back task was
+0.66–0.98 for the old–old group and 0.86–1.0 for the young–old
+group. In general, individual differences in cognitive decline
+
+TABLE 6 | Brain regions showing working memory effects common to the two age groups.
+Coordinates
+Brain region
+
+L/R
+
+BA
+
+Number of
+voxels
+
+x
+
+y
+
+z
+
+Z-score
+
+3.95
+
+Young–old = Old–old
+DLPFC
+
+L
+
+44
+
+26
+
+−48
+
+26
+
+35
+
+DLPFC
+
+R
+
+46
+
+26
+
+36
+
+23
+
+38
+
+3.64
+
+Insula
+
+L
+
+13
+
+47
+
+−30
+
+26
+
+2
+
+4.91
+
+Insula
+
+R
+
+13
+
+40
+
+30
+
+29
+
+2
+
+4.29
+
+Inferior parietal cortex
+
+L
+
+40
+
+18
+
+−48
+
+−49
+
+47
+
+3.52
+
+Inferior parietal cortex
+
+R
+
+40
+
+195
+
+54
+
+−46
+
+44
+
+4.18
+
+Z-values refer to the peak of the activated cluster. L, left; R, right; BA, Brodmann’s area; DLPFC, dorsolateral prefrontal cortex.
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+8
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+visual areas) during visual processing (Ross et al., 1997; Dennis
+and Cabeza, 2008). Thus, the present findings indicate that
+neural activity associated with visual processing of face and
+location representations is not affected by advanced aging.
+Supporting evidence comes from the finding that behavioral
+measures (accuracy and RTs) for face and location 0-back tasks
+are equivalent between the two groups.
+
+Working Memory Effects Common to the Young–Old
+and Old–Old Groups
+Age-invariant WM effects were identified in the bilateral DLPFC
+(middle frontal gyrus) and the inferior parietal cortex. These
+regions are widely known to be critical for WM (e.g., Owen
+et al., 2005; Rottschy et al., 2012) and form part of the “core”
+WM network (Rottschy et al., 2012). One of the most intriguing
+findings is that both the young–old and the old–old group
+showed WM effects in these regions bilaterally. When comparing
+younger and older adults, older adults tend to recruit PFC regions
+contralateral to those most active in younger adults, yielding
+a more bilateral pattern of PFC activation (cf. the HAROLD;
+Cabeza, 2002). For example, Reuter-Lorenz et al. (2000) used a
+task in which participants maintained four letters or dot locations
+in WM and then compared those to a probe item. Younger
+adults showed activity in the left PFC during a verbal WM task
+and in the right PFC during a non-verbal WM task, whereas
+older adults showed bilateral PFC recruitment during both WM
+tasks. In the same line of study, Reuter-Lorenz et al. (2001)
+identified a similar pattern of bilateralization of parietal activity
+in older adults, and left lateralization in younger adults during
+a verbal WM maintenance task. Considering this evidence,
+bilateral recruitment of the DLPFC and the parietal regions in
+our two older groups is an expected finding, resulting from the
+bilateralization tendency of brain activation in older adults.
+Age-invariant WM effects were also evident in the bilateral
+anterior insula. A meta-analysis found that this region is often
+reported in WM studies (e.g., Owen et al., 2005; Rottschy et al.,
+2012). The anterior part of the insula is a component of the
+“salience network,” which is thought to be particularly involved in
+detecting novel salient events and in initiating control signals to
+engage brain regions mediating attention, WM, and higher order
+cognitive processes, such as the fronto-parietal network (Seeley
+et al., 2007; Menon and Uddin, 2010). WM effects in this region
+might thus reflect the allocation of processing resources to the
+detection of salient aspects of events (e.g., novel features of an
+
+FIGURE 4 | (A) Right caudal DLPFC, where WM effects were greater for the
+old–old than for the young–old group. (B) Parameter estimates of the clusters
+for the 0-back and 1-back task in each group.
+
+become more pronounced with advanced age (de Frias et al.,
+2007; Habib et al., 2007; see also Morrison and Baxter, 2012;
+Nyberg et al., 2012). This variability allowed us to examine direct
+relationships between WM cortical activity and performance,
+and also to perform separate analyses that compare young–old
+and high-performing old–old adults (see section “Results”) with
+equivalent WM performance. Thus, although WM performance
+significantly differed between the young–old and the old–old
+group, we were able to examine whether group differences in WM
+effects reflect age-related differences in the recruitment of neural
+networks during WM tasks.
+
+fMRI Findings
+Stimulus Effects for Face and Location Common to
+the Young–Old and Old–Old Groups
+Age-invariant stimulus effects for face were identified in the
+bilateral fusiform gyrus, while those for location were identified
+in the right inferior parietal cortex and the precuneus. Numerous
+previous studies have reported selective responses associated
+with visual processing of face information in the fusiform gyrus
+(Kanwisher et al., 1997; Haxby et al., 2000) and of location
+information (especially for egocentric spatial information) in
+the lateral parietal cortex (Andersen et al., 1985; Stark et al.,
+1996). More importantly, no clusters were identified where
+selective responses for face or location differed between the
+two groups. These results were inconsistent with prior findings
+from studies comparing younger and older adults that identified
+age-related reduction in activity in posterior regions (such as
+
+TABLE 7 | Age-related differences (young–old vs. old–old) in working memory effects.
+Coordinates
+Brain region
+
+L/R
+
+BA
+
+Number of
+voxels
+
+x
+
+y
+
+z
+
+Z-score
+
+27
+
+23
+
+56
+
+3.79
+
+Young–old > Old–old
+No suprathreshold clusters
+Old–old > Young–old
+Caudal DLPFC
+
+R
+
+8/9
+
+29
+
+Z-values refer to the peak of the activated cluster. L, left; R, right; BA, Brodmann’s area; DLPFC, dorsolateral prefrontal cortex.
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+9
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+compared to young–old adults, since we employed a visual WM
+task. In contrast, however, we found age-related over-recruitment
+in the right PFC. In addition, the caudal DLPFC over-recruitment
+found here did not couple with an age-related reduction in the
+recruitment of posterior regions involved in perceptual processes
+(cf. the PASA; Davis et al., 2008). There were no clusters where
+selective responses for face or location differed between the two
+groups. These results suggest that the tendency to shift the load
+of cognitive processing from unilateral to bilateral PFC, and from
+posterior to PFC in older adults might reach a plateau around
+the age of mid-sixties (i.e., in our young–old group and in older
+adults in other WM studies).
+Over-recruitment in the caudal DLPFC reflects that old–old
+adults rely on additional cognitive processes mediated by this
+region to a greater extent than do young–old adults for WM
+maintenance. Converging evidence suggests that the caudal
+DLPFC is implicated in updating the focus of attention toward
+representations in WM (Roth et al., 2006; Bledowski et al., 2009;
+see Wager and Smith, 2003; Bledowski et al., 2010 for reviews).
+As is briefly explained in the Introduction, the focus of attention
+contributes to holding task-relevant information in WM that can
+be used in ongoing cognitive tasks (Cowan, 1995; Oberauer, 2002;
+Fuster, 2009; D’Esposito and Postle, 2015; Eriksson et al., 2015).
+In a 1-back task, items are continuously presented, and each
+presentation evokes related internal representations; the items are
+actively maintained via focusing sustained attention and updated
+when the information is no longer needed to achieve the task
+requirements. Old–old adults may assign more neurocognitive
+resources to the shift in attention that enables them to effectively
+update representations in WM from old, no longer task-relevant
+information to newer, more relevant information, which may
+reflect the increased caudal DLPFC activation in old–old adults
+we observed here.
+In terms of the effect of advanced aging, Wang et al. (2009)
+focused on episodic memory and compared retrieval-related
+activity between young–old and old–old groups using a yes/no
+recognition memory task. In this study, participants studied
+a series of pictures, and later indicated whether each picture
+was old or new during the scanning. Recognition performance
+was matched between groups by modifying the number of
+
+FIGURE 5 | Scatterplots illustrating the relationship between WM effects in the
+right caudal DLPFC and proportion of correct responses in the 1-back task in
+each group. One outlying old–old adult is indicated by a green arrow (see text).
+
+item), and, once a salient event is detected, to the facilitation of
+access to core WM resources to guide appropriate responses.
+
+Age-Related Over-Recruitment in Working Memory
+Effects
+Compared to the young–old group, the old–old group showed
+increased WM effects in the right caudal DLPFC (superior
+frontal gyrus). This result is in part consistent with prior
+studies that reported age-related prefrontal over-recruitment
+when comparing older and younger adults. As mentioned above,
+however, older adults tend to additionally recruit PFC regions
+contralateral to those most active in younger adults (Cabeza,
+2002). Based on this evidence, we would have expected to
+detect left instead of right prefrontal over-recruitment in old–old
+
+TABLE 8 | Age-related differences (young–old vs. high-performing old–old) in working memory effects.
+Coordinates
+Brain region
+
+L/R
+
+BA
+
+Number of
+voxels
+
+x
+
+y
+
+z
+
+Z-score
+
+4.53
+
+Young–old > High-performing old–old
+No suprathreshold clusters
+High-performing old–old > Young–old
+Caudal DLPFC
+
+R
+
+8/9
+
+219
+
+33
+
+26
+
+56
+
+DLPFC
+
+R
+
+46
+
+63
+
+24
+
+47
+
+29
+
+3.80
+
+Medial frontal cortex
+
+L
+
+9/32
+
+52
+
+−3
+
+32
+
+35
+
+3.90
+
+Medial frontal cortex
+
+L
+
+8
+
+23
+
+−9
+
+32
+
+53
+
+3.71
+
+Precuneus
+
+L
+
+7
+
+41
+
+−12
+
+−46
+
+62
+
+3.45
+
+Z-values refer to the peak of the activated cluster. L, left; R, right; BA, Brodmann’s area; DLPFC, dorsolateral prefrontal cortex.
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+10
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+to target items (Grady et al., 2008). In this study, enhanced PFC
+activation for older compared to younger adults was identified
+during sustained but not during transient activity. However,
+as age-related over recruitment of each memory effect has also
+been identified in event-related fMRI studies (e.g., Daselaar et al.,
+2003; Cabeza et al., 2004; Morcom et al., 2007; Cappell et al.,
+2010; Duarte et al., 2010), the effect of experimental design on
+neural correlates of advanced aging needs to be further examined.
+An alternative explanation for the differing results is that
+Wang et al.’s (2009) study employed much older old–old adults
+(84–96 years old) than we did in the current study (77–82 years
+old). As Wang et al. (2009) also pointed out, older persons
+aged ≥85 years might reach the limit of their ability to recruit
+additional neural resources as compensatory responses against a
+continuing cognitive decline. Since there is currently not enough
+evidence to support or dismiss this hypothesis, future studies will
+be required.
+
+FIGURE 6 | Regions where WM effects were greater for the high-performing
+old–old than for the young–old group. These two groups were equivalent in
+terms of WM performance.
+
+presentations in the study phase (once or twice). The authors
+found age-invariant old > new effects in the parietal and
+prefrontal cortex where such effects have been reported in prior
+studies in younger and older adults (e.g., Daselaar et al., 2003;
+Morcom et al., 2007; Duarte et al., 2010). No clusters were
+identified with greater effects in the old–old group, while the
+medial parietal region showed greater effects in the young–old
+group.
+Currently, there is no plausible explanation for why
+Wang et al.’s (2009) and our results differ in terms of
+age-related over-recruitment in brain activation in advanced
+aging. Performance accuracy in old–old adults is high in both
+studies [Wang et al.’s (2009) recognition task, old items: 88.9%;
+our 1-back task: 88.4%], indicating that both tasks imposed
+a relatively low level of cognitive demand on participants. If
+tasks with low cognitive demand always induced greater brain
+activation in older than in younger adults with matched task
+performance (e.g., Cabeza et al., 2004; Mattay et al., 2006; see also
+Grady, 2008; Grady, 2012), a dissociation of findings between the
+two studies would not be observed. One possible explanation for
+this dissociation is the difference in cognitive processes required
+for each task. Compared to the recognition task, as discussed
+previously, the 1-back task requires continuous attention toward
+the items and their representations until the task is finished. The
+processes involved in this kind of continuous attention are highly
+mediated by the DLPFC, which is the region where age-related
+over-recruitment is most prominently observed (c.f. Rajah and
+D’Esposito, 2005; Reuter-Lorenz and Sylvester, 2005; Spreng
+et al., 2010). Combining findings from both studies indicates that,
+at least in the case of advanced aging, whether age-related cortical
+over-recruitment occurs depends on the cognitive processes that
+are necessary for task execution.
+Another possible explanation is the use of different
+experimental fMRI designs [Wang et al.’s (2009) study:
+event-related vs. our study: blocked design]. Consistent with
+this possibility, most prior studies of episodic and WM in young
+and older adults that identified age-related over-recruitment
+in brain activity employed a blocked design (e.g., Rypma et al.,
+2001; Nyberg et al., 2014). It is noteworthy that one mixed
+event-related block-design fMRI study using a 1-back WM
+task found differences in age-related over-recruitment between
+sustained activity during task blocks and transient activity related
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+Age-Related Over-Recruitment in WM Effects and
+Compensation
+Age-related over-recruitment in WM effects in the caudal DLPFC
+showed a positive correlation with WM performance, but only
+in the old–old group. In addition, the group differences in WM
+effects in this region remained after covariate adjustment of
+performance accuracy and RTs in the 1-back task. Moreover,
+this region showed greater activity when we compared WM
+effects between two age groups with matched performance (i.e.,
+high-performing old–old > young–old group). Thus, although
+the argument has been put forward that the interpretation of
+age-related differences in brain activity is often confounded with
+age-related differences in task performance (Rugg and Morcom,
+2005), the present results clearly confirm that over-recruitment
+in the caudal DLPFC reflects age-related changes in WM effects
+and serves as a compensatory mechanism for maintaining
+WM performance in old–old adults. As discussed in the
+Introduction, individual differences in cognitive decline become
+more pronounced with advanced age. The present results further
+indicate that such a variation may occur as a result of individual
+differences in the ability to utilize additional PFC resources
+(e.g., the caudal DLPFC in the present study) that permit some
+older adults to maintain higher performance than others, to
+compensate for a continuing decline in neural efficiency. We
+note, however, that our results are correlational, preventing
+us from drawing firm conclusions concerning brain-behavior
+causality. An intervention study of WM training would be
+necessary to provide better understanding of a causal relationship
+between WM performance and reorganization of PFC activity
+in advanced aging (e.g., Brehmer et al., 2011; Nishiguchi et al.,
+2015; Adnan et al., 2017; Vermeij et al., 2017; Iordan et al.,
+2018).
+Another piece of evidence supporting the idea that caudal
+DLPFC over-recruitment plays a role as part of a compensatory
+network comes from a meta-analysis of WM studies in healthy
+adolescents (10–17 years) and young adults (18–30 years) (Andre
+et al., 2016). Regions where WM-related activity increased with
+age were identified in a part of the core WM network (the
+DLPFC and the lateral parietal cortex), while regions where
+activity decreased with age were evident in the caudal DLPFC
+11
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+along with the post central and cingulate gyrus. The authors
+raised the possibility that regions showing activity reduction with
+age form part of a compensatory network that supports the still
+maturing core WM network. Thus, while the direction of the
+effects this study reports seems to be opposite to our findings,
+a dynamic relationship between aging/development of the core
+WM network and engagement of the caudal DLPFC in WM can
+be assumed. That is, in individuals around 80 years of age (i.e.,
+our old–old group), higher engagement of the caudal DLPFC
+might be required, due to the neurocognitive decline of the core
+WM network, whereas in adolescence, involvement of the caudal
+DLPFC might be less essential as the core WM network matures.
+
+Rugg, 2016 for details). This possibility can only be ruled out by
+using a longitudinal experimental design.
+Finally, there is a possibility that the age-related difference in
+DLPFC activity shown in the present study is confounded by
+age-related alterations in cerebrovascular dynamics (e.g., reduced
+vascular reactivity or pathology), which are known to affect the
+BOLD signal (cf. D’Esposito et al., 2003). However, a study that
+compared memory-encoding fMRI responses between younger
+and older adults found that age-related enhancement in frontal
+activity was still observed after removing the influence of changes
+in vascular reactivity (Liu et al., 2013).
+
+Study Limitations
+
+CONCLUSION
+
+The results of this study should be interpreted in the context
+of several limitations. The first limitation concerns the use of
+a blocked design, which did not allow us to further separate
+each trial into different component processes, such as encoding,
+maintenance, or retrieval from WM. Although we speculate that
+the over-recruitment in the caudal DLPFC might reflect the
+greater reliance of old–old adults on updating focused attention
+toward representations in WM, this hypothesis can only be
+confirmed by the use of an event-related design.
+Secondly, as is mentioned in the Introduction, previous
+functional imaging studies have often reported enhanced PFC
+activity at low WM loads in older adults, while older adults tend
+to show reduced PFC activity compared to younger adults at
+high WM loads (e.g., 2-back task; Mattay et al., 2006; Nyberg
+et al., 2009; Heinzel et al., 2017). We did not include a 2-back
+task, because data from a previous behavioral study by our group
+(Kawagoe and Sekiyama, 2014) revealed that 2-back tasks for
+face and location may be too cognitively demanding for old–old
+adults. The use of a task with higher WM load would allow us
+to investigate the relationship between the over-recruitment of
+PFC activity and behavioral performance in a more direct way (cf.
+compensation-related utilization of neural circuits hypothesis,
+CRUNCH; Reuter-Lorenz and Cappell, 2008). Conclusions
+drawn from the present results should therefore be restricted to
+tasks with low WM load.
+Thirdly, the sample size was relatively small (17 young–old
+and 16 old–old adults), and a greater number of participants in
+each group would lead to higher statistical power.
+Fourthly, this study is limited by the shortcomings of
+cross-sectional experimental designs, namely cohort effects. The
+proportion of the elderly population with MCI or dementia
+markedly differs in groups of elderly people in their 60s and 80s
+in Japan (11.3 and 44.7%, respectively; Asada, 2013). We can
+thus not rule out the possibility that the age-related differences
+observed here reflect the consequences of contrasting two groups
+with different traits of resistance to cognitive impairment (see
+
+The present fMRI study suggests that an age-related increase
+in PFC activity associated with WM effects occurs in advanced
+old age, similar to earlier findings on WM effects from studies
+comparing younger and older adults. Moreover, although the
+functional significance of the age-related over-recruitment still
+remains under debate, our findings provide strong evidence
+that this over-recruitment serves a compensatory function in
+mediating WM performance in adults of advanced age. Our
+results support the compensation account of cognitive aging
+(stating that the recruitment of additional PFC regions is
+beneficial to performance) and indicate that this theory can also
+be applied to adults of advanced age.
+
+AUTHOR CONTRIBUTIONS
+MS, TK, SN, NA, YO, RN, MY, SY, and KS study conception and
+design. MS, TK, SN, NA, YO, RN, and KA data acquisition. MS
+data analysis and interpretation, and drafting of the manuscript.
+TK, SN, NA, YO, RN, KA, MY, SY, and KS critical revision of the
+manuscript.
+
+FUNDING
+This research was supported by JSPS Grant Numbers 25245068
+and 16H06325 awarded to KS and by JSPS Grant Number
+15K00206 awarded to MS.
+
+ACKNOWLEDGMENTS
+We thank Dr. Mamoru Hashimoto for visual inspection
+of abnormalities in anatomical brain MRI. This study was
+conducted using the MRI scanner and related facilities of the
+Kokoro Research Center, Kyoto University.
+
+REFERENCES
+
+Andersen, R. A., Essick, G. K., and Siegel, R. M. (1985). Encoding of spatial
+location by posterior parietal neurons. Science 230, 456–458. doi: 10.1126/
+science.4048942
+Andre, J., Picchioni, M., Zhang, R., and Toulopoulou, T. (2016). Working memory
+circuit as a function of increasing age in healthy adolescence: a systematic
+
+Adnan, A., Chen, A. J. W., Novakovic-Agopian, T., D’Esposito, M., and Turner,
+G. R. (2017). Brain changes following executive control training in older adults.
+Neurorehabil. Neural. Repair. 31, 910–922. doi: 10.1177/1545968317728580
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+12
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+review and meta-analyses. Neuroimage Clin. 12, 940–948. doi: 10.1016/j.nicl.
+2015.12.002
+Asada, T. (2013). The Prevalence of Dementia in Urban Areas and Support for
+Impairment of Daily Functioning from Dementia. Health, Labor, and Welfare
+Scientific Research Grants Comprehensive Research Report. Tokyo: Ministry of
+Health, Labour and Welfare.
+Ashburner, J., and Friston, K. J. (2005). Unified segmentation. Neuroimage 26,
+839–851. doi: 10.1016/j.neuroimage.2005.02.018
+Baddeley, A. (1986). Working Memory. New York, NY: Oxford University Press.
+Bledowski, C., Kaiser, J., and Rahm, B. (2010). Basic operations in working
+memory: contributions from functional imaging studies. Behav. Brain Res. 214,
+172–179. doi: 10.1016/j.bbr.2010.05.041
+Bledowski, C., Rahm, B., and Rowe, J. B. (2009). What “works” in working
+memory? Separate systems for selection and updating of critical information.
+J. Neurosci. 29, 13735–13741. doi: 10.1523/JNEUROSCI.2547-09.2009
+Brehmer, Y., Rieckmann, A., Bellander, M., Westerberg, H., Fischer, H., and
+Bäckman, L. (2011). Neural correlates of training-related working-memory
+gains in old age. Neuroimage 58, 1110–1120. doi: 10.1016/j.neuroimage.2011.
+06.079
+Brett, M., Anton, J. L., Valabregue, R., and Poline, B. P. (2002). Region of interest
+analysis using an SPM toolbox. Abstract retrieved from CD-ROM. Neuroimage
+16:S497.
+Cabeza, R. (2002). Hemispheric asymmetry reduction in old adults: the HAROLD
+model. Psychol. Aging 17, 85–100. doi: 10.1037//0882-7974.17.1.85
+Cabeza, R., Daselaar, S. M., Dolcos, F., Prince, S. E., Budde, M., and Nyberg, L.
+(2004). Task-independent and task-specific age effects on brain activity during
+working memory, visual attention and episodic retrieval. Cereb. Cortex 14,
+364–375. doi: 10.1093/cercor/bhg133
+Cappell, K. A., Gmeindl, L., and Reuter-Lorenz, P. A. (2010). Age differences in
+prefrontal recruitment during verbal working memory maintenance depend on
+memory load. Cortex 46, 462–473. doi: 10.1016/j.cortex.2009.11.009
+Courtney, S. M., Ungerleider, L. G., Keil, K., and Haxby, J. V. (1997). Transient and
+sustained activity in a distributed neural system for human working memory.
+Nature 386, 608–611. doi: 10.1038/386608a0
+Cowan, N. (1995). Attention and Memory: An Integrated Framework. New York,
+NY: Oxford University Press.
+Curtis, C. E., and D’Esposito, M. (2003). Persistent activity in the prefrontal cortex
+during working memory. Trends Cogn. Sci. 7, 415–423. doi: 10.1016/S13646613(03)00197-9
+Daselaar, S. M., Veltman, D. J., Rombouts, S. A., Raaijmakers, J. G., and Jonker, C.
+(2003). Neuroanatomical correlates of episodic encoding and retrieval in young
+and elderly subjects. Brain 126, 43–56. doi: 10.1093/brain/awg005
+Davis, S. W., Dennis, N. A., Daselaar, S. M., Fleck, M. S., and Cabeza, R. (2008).
+Que PASA? The posterior-anterior shift in aging. Cereb. Cortex 18, 1201–1209.
+doi: 10.1093/cercor/bhm155
+de Frias, C., Lövdén, M., Lindenberger, U., and Nilsson, L. G. (2007). Revisiting the
+dedifferentiation hypothesis with longitudinal multicohort data. Intelligence 35,
+381–392. doi: 10.1016/j.intell.2006.07.011
+Dennis, N. A., and Cabeza, R. (2008). “Neuroimaging of healthy cognitive aging,”
+in The Handbook of Aging and Cognition, 3rd Edn, eds F. I. M. Craik and T. A.
+Salthouse (Mahwah, NJ: Erlbaum), 1–54.
+Dennis, N. A., Hayes, S. M., Prince, S. E., Madden, D. J., Huettel, S. A., and
+Cabeza, R. (2008). Effects of aging on the neural correlates of successful item
+and source memory encoding. J. Exp. Psychol. Learn. Mem. Cogn. 34, 791–808.
+doi: 10.1037/0278-7393.34.4.791
+D’Esposito, M., Deouell, L. Y., and Gazzaley, A. (2003). Alterations in the BOLD
+fMRI signal with ageing and disease: a challenge for neuroimaging. Nat. Rev.
+Neurosci. 4, 863–872. doi: 10.1038/nrn1246
+D’Esposito, M., and Postle, B. R. (2015). The cognitive neuroscience of working
+memory. Annu. Rev. Psychol. 66, 115–142. doi: 10.1146/annurev-psych010814-015031
+Duarte, A., Graham, K. S., and Henson, R. N. (2010). Age-related changes in
+neural activity associated with familiarity, recollection and false recognition.
+Neurobiol. Aging 31, 1814–1830. doi: 10.1016/j.neurobiolaging.2008.
+09.014
+Eriksson, J., Vogel, E. K., Lansner, A., Bergström, F., and Nyberg, L. (2015).
+Neurocognitive architecture of working memory. Neuron 88, 33–46. doi: 10.
+1016/j.neuron.2015.09.020
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+Folstein, M. F., Folstein, S. E., and McHugh, P. R. (1975). Mini-mental state".
+A practical method for grading the cognitive state of patients for the clinician.
+J. Psychiatr. Res. 12, 189–198. doi: 10.1016/0022-3956(75)90026-6
+Friston, K. J., Glaser, D. E., Henson, R. N., Kiebel, S., Phillips, C., and
+Ashburner, J. (2002). Classical and Bayesian inference in neuroimaging:
+applications. Neuroimage 16, 484–512. doi: 10.1006/nimg.2002.1091
+Funahashi, S., Bruce, C. J., and Goldman-Rakic, P. S. (1989). Mnemonic coding of
+visual space in the monkey’s dorsolateral prefrontal cortex. J. Neurophysiol. 61,
+331–349. doi: 10.1152/jn.1989.61.2.331
+Fuster, J. M. (2009). Cortex and memory: emergence of a new paradigm. J. Cogn.
+Neurosci. 21, 2047–2072. doi: 10.1162/jocn.2009.21280
+Grady, C. L. (2008). Cognitive neuroscience of aging. Ann. N. Y. Acad. Sci. 1124,
+127–144. doi: 10.1196/annals.1440.009
+Grady, C. L. (2012). Trends in neurocognitive aging. Nat. Rev. Neurosci. 13,
+491–505. doi: 10.1038/nrn3256
+Grady, C. L., Yu, H., and Alain, C. (2008). Age-related differences in brain activity
+underlying working memory for spatial and nonspatial auditory information.
+Cereb. Cortex 18, 189–199. doi: 10.1093/cercor/bhm045
+Habib, R., Nyberg, L., and Nilsson, L. G. (2007). Cognitive and non-cognitive
+factors contributing to the longitudinal identification of successful older adults
+in the Betula study. Aging Neuropsychol. Cogn. 14, 257–273. doi: 10.1080/
+13825580600582412
+Haxby, J. V., Hoffman, E. A., and Gobbini, M. I. (2000). The distributed human
+neural system for face perception. Trends Cogn. Sci. 4, 223–233. doi: 10.1016/
+S1364-6613(00)01482-0
+Heinzel, S., Lorenz, R. C., Duong, Q. L., Rapp, M. A., and Deserno, L. (2017).
+Prefrontal-parietal effective connectivity during working memory in older
+adults. Neurobiol. Aging 57, 18–27. doi: 10.1016/j.neurobiolaging.2017.05.005
+Hultsch, D. F., Hertzog, C., Small, B. J., McDonald-Miszczak, L., and Dixon, R. A.
+(1992). Short-term longitudinal change in cognitive performance in later life.
+Psychol. Aging 7, 571–584. doi: 10.1037/0882-7974.7.4.571
+Iordan, A. D., Cookem, K. A., Moored, K. D., Katz, B., Buschkuehl, M., Jaeggi,
+S. M., et al. (2018). Aging and network properties: stability over time and links
+with learning during working memory training. Front. Aging Neurosci. 9:419.
+doi: 10.3389/fnagi.2017.00419
+Kanwisher, N., McDermott, J., and Chun, M. M. (1997). The fusiform face area: a
+module in human extrastriate cortex specialized for face perception. J. Neurosci.
+17, 4302–4311. doi: 10.1523/JNEUROSCI.17-11-04302.1997
+Kawagoe, T., and Sekiyama, K. (2014). Visually encoded working memory is
+closely associated with mobility in older adults. Exp. Brain Res. 232, 2035–2043.
+doi: 10.1007/s00221-014-3893-1
+Kawano, N. (2012). A pilot study of standardization of WMS-R Logical Memory for
+Japanese old-old people: differences between the story A and story B. Otsuma J.
+Soc. Inf. Stud. 20, 223–231.
+Leung, H. C., Gore, J. C., and Goldman-Rakic, P. S. (2002). Sustained mnemonic
+response in the human middle frontal gyrus during on-line storage of spatial
+memoranda. J. Cogn. Neurosci. 14, 659–671. doi: 10.1162/08989290260045882
+Li, S. C., Brehmer, Y., Shing, Y. L., Werkle-Bergner, M., and Lindenberger, U.
+(2006). Neuromodulation of associative and organizational plasticity across
+the life span: empirical evidence and neurocomputational modeling. Neurosci.
+Biobehav. Rev. 30, 775–790. doi: 10.1016/j.neubiorev.2006.06.004
+Liu, P., Hebrank, A. C., Rodrigue, K. M., Kennedy, K. M., Section, J., Park, D. C.,
+et al. (2013). Age-related differences in memory-encoding fMRI responses
+after accounting for decline in vascular reactivity. Neuroimage 78, 415–425.
+doi: 10.1016/j.neuroimage.2013.04.053
+Logan, J. M., Sanders, A. L., Snyder, A. Z., Morris, J. C., and Buckner, R. L.
+(2002). Underrecruitment and nonselective recruitment: dissociable neural
+mechanisms associated with aging. Neuron 33, 827–840. doi: 10.1016/S08966273(02)00612-8
+Mattay, V. S., Fera, F., Tessitore, A., Hariri, A. R., Berman, K. F., Das, S.,
+et al. (2006). Neurophysiological correlates of age-related changes in working
+memory capacity. Neurosci. Lett. 392, 32–37. doi: 10.1016/j.neulet.2005.09.025
+Menon, V., and Uddin, L. Q. (2010). Saliency, switching, attention and control:
+a network model of insula function. Brain Struct. Funct. 214, 655–667.
+doi: 10.1007/s00429-010-0262-0
+Miller, E. K., Erickson, C. A., and Desimone, R. (1996). Neural mechanisms of
+visual working memory in prefrontal cortex of the macaque. J. Neurosci. 16,
+5154–5167. doi: 10.1523/JNEUROSCI.16-16-05154.1996
+
+13
+
+November 2018 | Volume 10 | Article 358
+
+Suzuki et al.
+
+Working Memory in Advanced Aging
+
+Morcom, A. M., and Henson, R. N. A. (2018). Increased prefrontal activity
+with aging reflects nonspecific neural responses rather than compensation.
+J. Neurosci. 38, 7303–7313. doi: 10.1523/JNEUROSCI.1701-17.2018
+Morcom, A. M., Li, J., and Rugg, M. D. (2007). Age effects on the neural correlates
+of episodic retrieval: increased cortical recruitment with matched performance.
+Cereb. Cortex 17, 2491–2506. doi: 10.1093/cercor/bhl155
+Morrison, J. H., and Baxter, M. G. (2012). The ageing cortical synapse: hallmarks
+and implications for cognitive decline. Nat. Rev. Neurosci. 13, 240–250.
+doi: 10.1038/nrn3200
+Nishiguchi, S., Yamada, M., Tanigawa, T., Sekiyama, K., Kawagoe, T., Suzuki, M.,
+et al. (2015). A 12-week physical and cognitive exercise program can improve
+cognitive function and neural efficiency in community-dwelling older adults: a
+randomized controlled trial. J. Am. Geriatr. Soc. 63, 1355–1363. doi: 10.1111/
+jgs.13481
+Nyberg, L., Andersson, M., Kauppi, K., Lundquist, A., Persson, J., Pudas, S., et al.
+(2014). Age-related and genetic modulation of frontal cortex efficiency. J. Cogn.
+Neurosci. 26, 746–754. doi: 10.1162/jocn_a_00521
+Nyberg, L., Dahlin, E., Stigsdotter Neely, A., and Bäckman, L. (2009). Neural
+correlates of variable working memory load across adult age and skill:
+dissociative patterns within the fronto-parietal network. Scand. J. Psychol. 50,
+41–46. doi: 10.1111/j.1467-9450.2008.00678.x
+Nyberg, L., Lövdén, M., Riklund, K., Lindenberger, U., and Bäckman, L. (2012).
+Memory aging and brain maintenance. Trends Cogn. Sci. 16, 292–305.
+doi: 10.1016/j.tics.2012.04.005
+Oberauer, K. (2002). Access to information in working memory: exploring the
+focus of attention. J. Exp. Psychol. Learn. Mem. Cogn. 28, 411–421. doi: 10.1037/
+/0278-7393.28.3.411
+Owen, A. M., McMillan, K. M., Laird, A. R., and Bullmore, E. (2005).
+N-back working memory paradigm: a meta-analysis of normative functional
+neuroimaging studies. Hum. Brain Mapp. 25, 46–59. doi: 10.1002/hbm.20131
+Park, D. C., Lautenschlager, G., Hedden, T., Davidson, N. S., Smith, A. D., and
+Smith, P. K. (2002). Models of visuospatial and verbal memory across the adult
+life span. Psychol. Aging 17, 299–320. doi: 10.1037/0882-7974.17.2.299
+Pfeifer, G., Ward, J., Chan, D., and Sigala, N. (2016). Representational account of
+memory: insights from aging and synesthesia. J. Cogn. Neurosci. 28, 1987–2002.
+doi: 10.1162/jocn_a_01014
+Piefke, M., Onur, Ö. A., and Fink, G. R. (2012). Aging-related changes of neural
+mechanisms underlying visual-spatial working memory. Neurobiol. Aging 33,
+1284–1297. doi: 10.1016/j.neurobiolaging.2010.10.014
+Rajah, M. N., and D’Esposito, M. (2005). Region-specific changes in prefrontal
+function with age: a review of PET and fMRI studies on working and episodic
+memory. Brain 128, 1964–1983. doi: 10.1093/brain/awh608
+Reitan, R. M. (1986). Trail Making Test: Manual for Administration and Scoring.
+South Tucson, AZ: Reitan Neuropsychology Laboratory.
+Reuter-Lorenz, P. A., and Cappell, K. (2008). Neurocognitive aging and the
+compensation hypothesis. Curr. Dir. Psychol. Sci. 17, 177–182. doi: 10.1111/j.
+1467-8721.2008.00570.x
+Reuter-Lorenz, P. A., Jonides, J., Smith, E. S., Hartley, A., Miller, A., Marshuetz, C.,
+et al. (2000). Age differences in the frontal lateralization of verbal and spatial
+working memory revealed by PET. J. Cogn. Neurosci. 12, 174–187. doi: 10.1162/
+089892900561814
+Reuter-Lorenz, P. A., Marshuetz, C., Jonides, J., Smith, E. S., Hartley, A., and
+Koeppe, R. A. (2001). Neurocognitive ageing of storage and executive processes.
+Eur. J. Cogn. Psychol. 13, 257–278. doi: 10.1080/09541440125972
+Reuter-Lorenz, P. A., and Sylvester, C. C. (2005). “The cognitive neuroscience
+of working memory and aging,” in Cognitive Neuroscience of Aging: Linking
+Cognitive and Cerebral Aging, eds R. Cabeza, L. Nyberg, and D. Park (New York,
+NY: Oxford University Press), 186–217.
+Ross, M. H., Yurgelun-Todd, D. A., Renshaw, P. F., Maas, L. C., Mendelson, J. H.,
+Mello, N. K., et al. (1997). Age-related reduction in functional MRI response to
+photic stimulation. Neurology 48, 173–176. doi: 10.1212/WNL.48.1.173
+
+Frontiers in Aging Neuroscience | www.frontiersin.org
+
+Roth, J. K., Serences, J. T., and Courtney, S. M. (2006). Neural system for
+controlling the contents of object working memory in humans. Cereb. Cortex
+16, 1595–1603. doi: 10.1093/cercor/bhj096
+Rottschy, C., Langner, R., Dogan, I., Reetz, K., Laird, A. R., Schulz, J. B., et al.
+(2012). Modelling neural correlates of working memory: a coordinate-based
+meta-analysis. Neuroimage 60, 830–846. doi: 10.1016/j.neuroimage.2011.11.050
+Rugg, M. D. (2016). “Interpreting age-related differences in memory-related neural
+activity,” in Cognitive Neuroscience of Aging: Linking Cognitive and Cerebral
+Aging, 2nd Edn, eds R. Cabeza, L. Nyberg, and D. Park (New York, NY: Oxford
+University Press), 183–203. doi: 10.1093/acprof:oso/9780199372935.003.0008
+Rugg, M. D., and Morcom, A. M. (2005). “The relationship between brain
+activity, cognitive performance and aging: the case of memory,” in Cognitive
+Neuroscience of Aging: Linking Cognitive and Cerebral Aging, eds R. Cabeza, L.
+Nyberg, and D. Park (New York, NY: Oxford University Press), 132–154.
+Rypma, B., Prabhakaran, V., Desmond, J. E., and Gabrieli, J. D. (2001). Age
+differences in prefrontal cortical activity in working memory. Psychol. Aging 16,
+371–384. doi: 10.1037//0882-7974.16.3.371
+Seeley, W. W., Menon, V., Schatzberg, A. F., Keller, J., Glover, G. H., Kenna, H.,
+et al. (2007). Dissociable intrinsic connectivity networks for salience processing
+and executive control. J. Neurosci. 27, 2349–2356. doi: 10.1523/JNEUROSCI.
+5587-06.2007
+Spreng, R. N., Wojtowicz, M., and Grady, C. L. (2010). Reliable differences in
+brain activity between young and old adults: a quantitative meta-analysis across
+multiple cognitive domains. Neurosci. Biobehav. Rev. 34, 1178–1194. doi: 10.
+1016/j.neubiorev.2010.01.009
+Stanley, M. L., Simpson, S. L., Dagenbach, D., Lyday, R. G., Burdette, J. H.,
+and Laurienti, P. J. (2015). Changes in brain network efficiency and working
+memory performance in aging. PLoS One 10:e0123950. doi: 10.1371/journal.
+pone.0123950
+Stark, M., Coslett, H., and Saffran, E. M. (1996). Impairment of an egocentric map
+of locations: implications for perception and action. Cogn. Neuropsychol. 13,
+481–523. doi: 10.1080/026432996381908
+Sun, X., Zhang, X., Chen, X., Zhang, P., Bao, M., Zhang, D., et al. (2005). Agedependent brain activation during forward and backward digit recall revealed
+by fMRI. Neuroimage 26, 36–47. doi: 10.1016/j.neuroimage.2005.01.022
+Vermeij, A., Kessels, R. P. C., Heskamp, L., Simons, E. M. F., Dautzenberg, P. L. J.,
+and Claassen, J. A. H. R. (2017). Prefrontal activation may predict workingmemory training gain in normal aging and mild cognitive impairment. Brain
+Imaging Behav. 11, 141–154. doi: 10.1007/s11682-016-9508-7
+Wager, T. D., and Smith, E. E. (2003). Neuroimaging studies of working memory:
+a meta-analysis. Cogn. Affect. Behav. Neurosci. 3, 255–274. doi: 10.3758/CABN.
+3.4.255
+Wang, T. H., Kruggel, F., and Rugg, M. D. (2009). Effects of advanced aging on
+the neural correlates of successful recognition memory. Neuropsychologia 47,
+1352–1361. doi: 10.1016/j.neuropsychologia.2009.01.030
+Ward, B. D. (2000). Simultaneous Inference for fMRI Data. Available online at:
+http://afni.nimh.nih.gov/pub/dist/doc/manual/AlphaSim.pdf
+Wechsler, D. (1987). WMS-R: Wechsler Memory Scale–Revised. San Antonio, TX:
+Psychological Corporation.
+Conflict of Interest Statement: The authors declare that the research was
+conducted in the absence of any commercial or financial relationships that could
+be construed as a potential conflict of interest.
+Copyright © 2018 Suzuki, Kawagoe, Nishiguchi, Abe, Otsuka, Nakai, Asano, Yamada,
+Yoshikawa and Sekiyama. This is an open-access article distributed under the terms
+of the Creative Commons Attribution License (CC BY). The use, distribution or
+reproduction in other forums is permitted, provided the original author(s) and the
+copyright owner(s) are credited and that the original publication in this journal
+is cited, in accordance with accepted academic practice. No use, distribution or
+reproduction is permitted which does not comply with these terms.
+
+14
+
+November 2018 | Volume 10 | Article 358
+
+

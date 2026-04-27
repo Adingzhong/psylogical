@@ -23,6 +23,8 @@ data/gaze_video/*.mp4
 眼动多模态/_参考资料（不需要发送）/
 伦理审查/
 *.pdf
+!开发文档/*.pdf
+!4月18日 修改/文献原文/*.pdf
 
 # web-battery 不需要推送的内容
 web-battery/node_modules/
