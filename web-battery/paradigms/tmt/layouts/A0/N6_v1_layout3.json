@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "task_type": "A0",
+    "layout_version": "N6_v1",
+    "layout_id": 3,
+    "n_nodes": 6,
+    "seed": 2025121903,
+    "created_at": "2025-12-23T16:32:08",
+    "validation": {
+      "min_pairwise": 222.8793,
+      "min_required": 217.8,
+      "min_node_to_seg": 101.3894,
+      "avoid_required": 90.75,
+      "bbox_area": 0.4222,
+      "corr_ix": -0.5993,
+      "corr_iy": 0.4989,
+      "straightness": 0.2488,
+      "turn_mean": 2.1852,
+      "dx_changes": 3,
+      "dy_changes": 3,
+      "turn_changes": 2,
+      "score": 5.4158
+    }
+  },
+  "canvas": {
+    "coord_system": "norm_0_1"
+  },
+  "node_size_px": 165,
+  "render_hints": {
+    "node_radius_norm": 0.07161458333333333,
+    "node_radius_norm_x": 0.0537109375,
+    "node_radius_norm_y": 0.07161458333333333,
+    "node_radius_px": 82.5
+  },
+  "nodes": [
+    {
+      "node_id": "n01",
+      "label": "1",
+      "x_norm": 0.914803065169958,
+      "y_norm": 0.38508667161991983,
+      "shape": "circle",
+      "category": "digit"
+    },
+    {
+      "node_id": "n02",
+      "label": "2",
+      "x_norm": 0.4292858106936868,
+      "y_norm": 0.2384208275379337,
+      "shape": "circle",
+      "category": "digit"
+    },
+    {
+      "node_id": "n03",
+      "label": "3",
+      "x_norm": 0.82830783612713,
+      "y_norm": 0.5597570289598396,
+      "shape": "circle",
+      "category": "digit"
+    },
+    {
+      "node_id": "n04",
+      "label": "4",
+      "x_norm": 0.8256368128120898,
+      "y_norm": 0.7531959053373725,
+      "shape": "circle",
+      "category": "digit"
+    },
+    {
+      "node_id": "n05",
+      "label": "5",
+      "x_norm": 0.0946849977233772,
+      "y_norm": 0.3726252388786926,
+      "shape": "circle",
+      "category": "digit"
+    },
+    {
+      "node_id": "n06",
+      "label": "6",
+      "x_norm": 0.3861076511800463,
+      "y_norm": 0.6188384399313287,
+      "shape": "circle",
+      "category": "digit"
+    }
+  ],
+  "sequence": [
+    "n01",
+    "n02",
+    "n03",
+    "n04",
+    "n05",
+    "n06"
+  ]
+}

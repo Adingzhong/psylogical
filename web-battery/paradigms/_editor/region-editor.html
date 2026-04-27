@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>范式指导语 · 红框区域统一编辑器</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'PingFang SC', sans-serif; background: #1a1a2e; color: #fff; }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(26,26,46,0.97); padding: 8px 16px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    border-bottom: 1px solid #333;
+  }
+  .toolbar select, .toolbar button, .toolbar input {
+    font-size: 14px; padding: 5px 12px; border-radius: 6px; border: 1px solid #555;
+    background: #2a2a4a; color: #fff; cursor: pointer;
+    font-family: 'PingFang SC', sans-serif;
+  }
+  .toolbar button:hover { background: #3a3a6a; }
+  .toolbar button.danger { border-color: #E53935; color: #E53935; }
+  .toolbar button.danger:hover { background: #E53935; color: #fff; }
+  .toolbar .sep { color: #555; padding: 0 2px; }
+  .toolbar .title { font-weight: bold; color: #4FC3F7; padding-right: 6px; font-size: 13px; }
+
+  .side-panel {
+    position: fixed; top: 44px; left: 0; bottom: 160px; width: 340px; z-index: 100;
+    background: rgba(26,26,46,0.95); overflow-y: auto;
+    border-right: 1px solid #333; padding: 8px;
+  }
+  .step-card {
+    padding: 8px 10px; margin-bottom: 6px; border-radius: 8px;
+    background: #2a2a4a; border: 2px solid transparent; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .step-card.selected { border-color: #E53935; background: #3a2a3a; }
+  .step-card .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .step-card .step-num { font-size: 13px; font-weight: bold; color: #E53935; }
+  .step-card.selected .step-num { color: #ff6659; }
+  .step-card .step-coords { font-size: 11px; color: #888; font-family: monospace; }
+  .step-card textarea {
+    width: 100%; font-size: 13px; padding: 4px 6px; border-radius: 4px;
+    border: 1px solid #444; background: #1a1a2e; color: #ddd; resize: vertical;
+    min-height: 36px; font-family: 'PingFang SC', sans-serif;
+  }
+
+  .canvas-area {
+    margin-left: 340px; margin-top: 44px; margin-bottom: 160px;
+    display: flex; justify-content: center; align-items: center;
+    height: calc(100vh - 204px); background: #F0F2F5;
+  }
+  .img-container { position: relative; display: inline-block; }
+  .img-container img {
+    max-width: calc(100vw - 380px); max-height: calc(100vh - 220px);
+    object-fit: contain; border-radius: 8px;
+    user-select: none; -webkit-user-drag: none;
+  }
+
+  .region-box {
+    position: absolute; border: 3px solid #E53935; border-radius: 6px;
+    cursor: move; background: rgba(229,57,53,0.06);
+    box-shadow: 0 0 0 3px rgba(229,57,53,0.15);
+  }
+  .region-box.inactive { border-color: rgba(100,100,100,0.5); background: rgba(100,100,100,0.04); box-shadow: none; border-width: 2px; }
+  .region-box .label {
+    position: absolute; top: -20px; left: 2px;
+    font-size: 11px; color: #fff; font-weight: bold;
+    background: #E53935; padding: 1px 6px; border-radius: 3px;
+  }
+  .region-box.inactive .label { background: #555; }
+  .region-box .handle {
+    position: absolute; width: 12px; height: 12px;
+    background: #E53935; border: 2px solid #fff; border-radius: 2px;
+  }
+  .region-box.inactive .handle { display: none; }
+  .handle.tl { top: -6px; left: -6px; cursor: nw-resize; }
+  .handle.tr { top: -6px; right: -6px; cursor: ne-resize; }
+  .handle.bl { bottom: -6px; left: -6px; cursor: sw-resize; }
+  .handle.br { bottom: -6px; right: -6px; cursor: se-resize; }
+
+  .btn-overlay {
+    position: absolute; border: 3px dashed #4FC3F7; border-radius: 8px;
+    cursor: move; background: rgba(79,195,247,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: #4FC3F7; font-weight: bold;
+  }
+  .btn-overlay .handle {
+    position: absolute; width: 10px; height: 10px;
+    background: #4FC3F7; border: 2px solid #fff; border-radius: 2px;
+  }
+  .btn-overlay .handle.br { bottom: -5px; right: -5px; cursor: se-resize; }
+
+  .output-panel {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(26,26,46,0.97); padding: 10px 16px;
+    border-top: 1px solid #333;
+  }
+  .output-panel pre {
+    font-size: 12px; color: #4FC3F7; font-family: 'SF Mono', monospace;
+    white-space: pre-wrap; max-height: 130px; overflow-y: auto;
+  }
+  .output-panel .actions { position: absolute; top: 8px; right: 16px; display: flex; gap: 8px; }
+  .output-panel button {
+    font-size: 13px; padding: 4px 14px; border-radius: 6px;
+    background: #4FC3F7; color: #000; border: none; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="title">范式</span>
+  <select id="paradigmSelect"></select>
+  <span class="sep">/</span>
+  <select id="guideSelect"></select>
+  <span class="sep">|</span>
+  <button onclick="addStepAbove()">上方插入</button>
+  <button onclick="addStepBelow()">下方插入</button>
+  <button onclick="addStep()">末尾追加</button>
+  <button class="danger" onclick="deleteStep()">删除选中</button>
+  <button class="danger" onclick="resetCurrentGuide()" title="清除本地缓存,从 guides-data.json 重新加载当前 guide">重置当前</button>
+  <input type="text" id="editNote" placeholder="这次改了啥（可选，保存时一起发）"
+         style="flex:1;min-width:220px;">
+  <button onclick="saveToServer()" style="background:#1565C0;border-color:#1976D2;">保存</button>
+  <span id="saveStatus" style="font-size:11px;color:#888;margin-left:4px;min-width:220px;"></span>
+</div>
+
+<div class="side-panel" id="sidePanel"></div>
+
+<div class="canvas-area">
+  <div class="img-container" id="container">
+    <img id="mainImg" draggable="false">
+  </div>
+</div>
+
+<div class="output-panel">
+  <div class="actions">
+    <button onclick="copyOutput()">复制代码</button>
+    <button onclick="copyVoiceText()">复制语音文本</button>
+  </div>
+  <pre id="output"></pre>
+</div>
+
+<script>
+/* ---------- 配置 ---------- */
+const TTS_SCRIPTS = {
+  tmt:          'audio/tmt/generate_tmt_audio.py',
+  nback:        'audio/nback/generate_nback_audio.py',
+  rmet:         'audio/rmet/generate_rmet_audio.py',
+  visuospatial: 'audio/visuospatial/generate_visuospatial_audio.py',
+};
+
+const REGENERATE_CMD = (paradigm) => {
+  const script = TTS_SCRIPTS[paradigm];
+  if (!script) return `（${paradigm} 目前还没有自动化 TTS 脚本，需要手动改 audio/${paradigm}/ 下的 mp3）`;
+  return `python3 ${script} && for w in audio/${paradigm}/*.wav; do ffmpeg -y -loglevel error -i "$w" -codec:a libmp3lame -b:a 128k -ar 44100 -ac 1 "\${w%.wav}.mp3"; done`;
+};
+
+const LABEL_OVERRIDES = {
+  tmt: {
+    'rules':  'rules (通用操作规则)',
+    'block1': 'A0 (数字顺序)',
+    'block2': 'B2 (方形圆形交替)',
+    'block3': 'B1 (数字汉字交替)',
+    'block4': 'A1 (水果数字基线)',
+    'block5': 'B3 (苹果柠檬交替)',
+    'block6': 'B4 (柠檬苹果交替)',
+  },
+  vstmb: {
+    'block1': 'Object (形状)',
+    'block2': 'Color (颜色)',
+    'block3': 'Binding (形状+颜色)',
+  },
+  nback: {
+    'block1': 'B1 (0-back)',
+    'block2': 'B2 (1-back 序列)',
+    'block3': 'B3 (1-back 选图)',
+    'block4': 'B4 (2-back)',
+  },
+  visuospatial: {
+    'practice_intro': 'practice_intro (练习介绍)',
+    'rules':          'rules (正式规则)',
+  },
+};
+
+/* ---------- 全局状态 ---------- */
+let GUIDES = null;            // 从 guides-data.json 加载
+let currentParadigm = null;
+let currentGuideIdx = 0;
+let steps = [];
+let btnOverlay = { x: 80.1, y: 4.9, w: 15, h: 8.2 };
+let currentStep = 0;
+let dragging = null;
+
+// 每个指导语都存在 allStates,key = "paradigm::guideIdx"
+let allStates = {};
+let activeKey = null;  // 当前正在显示的 key — snapshotCurrent 写入这个,不是 currentParadigm/Idx
+const STORAGE_KEY = 'region-editor-universal-v1';
+let saveTimer = null;
+
+const container = document.getElementById('container');
+const mainImg   = document.getElementById('mainImg');
+const outputEl  = document.getElementById('output');
+
+/* ---------- 工具函数 ---------- */
+function stateKey(paradigm, idx) { return `${paradigm}::${idx}`; }
+
+function humanLabel(paradigm, guide) {
+  const override = (LABEL_OVERRIDES[paradigm] || {})[guide.label];
+  return override || guide.label;
+}
+
+function imageURL(paradigm, imagePath) {
+  // ?t=now 强制绕过 SW/浏览器缓存,编辑时永远看到磁盘最新图片
+  return `../${paradigm}/${imagePath}?t=${Date.now()}`;
+}
+
+function getCurrentGuide() {
+  if (!GUIDES || !currentParadigm) return null;
+  const list = GUIDES[currentParadigm] || [];
+  return list[currentGuideIdx] || null;
+}
+
+function snapshotCurrent() {
+  // 写入 activeKey,而不是 currentParadigm/Idx
+  // 这样切换 paradigm 时,旧 paradigm 的状态被正确存回旧 key
+  if (!activeKey) return;
+  if (!steps || steps.length === 0) return;
+  allStates[activeKey] = {
+    steps: JSON.parse(JSON.stringify(steps)),
+    btnOverlay: JSON.parse(JSON.stringify(btnOverlay)),
+  };
+}
+
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) allStates = JSON.parse(raw);
+  } catch (e) { console.warn('load failed:', e); }
+}
+
+function saveToStorage() {
+  snapshotCurrent();
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(allStates));
+      const s = document.getElementById('saveStatus');
+      if (s) { s.textContent = '本地 ✓ ' + new Date().toTimeString().slice(0,8); s.style.color = '#888'; }
+    } catch (e) { console.warn('save failed:', e); }
+  }, 300);
+}
+
+/* ---------- 初始化 ---------- */
+async function init() {
+  loadFromStorage();
+  try {
+    const resp = await fetch('guides-data.json', { cache: 'no-store' });
+    GUIDES = await resp.json();
+  } catch (e) {
+    outputEl.textContent = '加载 guides-data.json 失败：' + e.message;
+    return;
+  }
+
+  const psel = document.getElementById('paradigmSelect');
+  Object.keys(GUIDES).forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p;
+    opt.textContent = p;
+    psel.appendChild(opt);
+  });
+  psel.addEventListener('change', () => {
+    currentParadigm = psel.value;
+    rebuildGuideList();
+    loadGuide(0);
+  });
+
+  document.getElementById('guideSelect').addEventListener('change', (e) => {
+    loadGuide(parseInt(e.target.value, 10));
+  });
+
+  currentParadigm = psel.value;
+  rebuildGuideList();
+  loadGuide(0);
+}
+
+function rebuildGuideList() {
+  const gsel = document.getElementById('guideSelect');
+  gsel.innerHTML = '';
+  const list = (GUIDES[currentParadigm] || []);
+  list.forEach((g, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = humanLabel(currentParadigm, g);
+    gsel.appendChild(opt);
+  });
+}
+
+function loadGuide(idx) {
+  snapshotCurrent();  // 把正在显示的(activeKey 对应的)先存回
+  currentGuideIdx = idx;
+  document.getElementById('guideSelect').value = idx;
+
+  const guide = getCurrentGuide();
+  if (!guide) return;
+  mainImg.src = imageURL(currentParadigm, guide.image);
+
+  const key = stateKey(currentParadigm, idx);
+  if (allStates[key]) {
+    steps = JSON.parse(JSON.stringify(allStates[key].steps));
+    btnOverlay = JSON.parse(JSON.stringify(allStates[key].btnOverlay));
+    // 补全 extras 字段(老 localStorage 数据没有这个字段)
+    steps.forEach(s => { if (!Array.isArray(s.extras)) s.extras = []; });
+  } else {
+    // 从 guides-data.json 读默认 — 支持 regions 数组(多红框)
+    steps = (guide.steps || []).map(s => {
+      const all = Array.isArray(s.regions) && s.regions.length ? s.regions : [s.region];
+      const primary = all[0];
+      return {
+        x: primary.x, y: primary.y, w: primary.w, h: primary.h,
+        subtitle: s.subtitle || '',
+        extras: all.slice(1).map(r => ({ x: r.x, y: r.y, w: r.w, h: r.h })),
+      };
+    });
+    btnOverlay = guide.btnRegion
+      ? { x: guide.btnRegion.x, y: guide.btnRegion.y, w: guide.btnRegion.w, h: guide.btnRegion.h }
+      : { x: 80.1, y: 4.9, w: 15, h: 8.2 };
+  }
+  activeKey = key;  // 现在 steps/btnOverlay 已经换成 idx 的了,更新 activeKey
+  currentStep = 0;
+  renderAll();
+}
+
+/* ---------- 差异检测 ---------- */
+function getDefaultStepsFor(paradigm, idx) {
+  const list = GUIDES[paradigm] || [];
+  const g = list[idx];
+  if (!g) return [];
+  return (g.steps || []).map(s => {
+    const all = Array.isArray(s.regions) && s.regions.length ? s.regions : [s.region];
+    const primary = all[0];
+    return {
+      x: primary.x, y: primary.y, w: primary.w, h: primary.h,
+      subtitle: s.subtitle || '',
+      extras: all.slice(1).map(r => ({ x: r.x, y: r.y, w: r.w, h: r.h })),
+    };
+  });
+}
+
+function detectChangesForParadigm(paradigm) {
+  const changes = [];
+  Object.keys(allStates).forEach(key => {
+    const [p, idxStr] = key.split('::');
+    if (p !== paradigm) return;
+    const idx = parseInt(idxStr, 10);
+    const curr = allStates[key];
+    const defs = getDefaultStepsFor(paradigm, idx);
+    if (!defs || !curr || !curr.steps) return;
+    const guide = (GUIDES[paradigm] || [])[idx];
+    if (!guide) return;
+    const taskKey = humanLabel(paradigm, guide);
+    const audioPrefix = guide.label.toLowerCase();
+
+    const linesOf = (s) => (s.subtitle || '').split('\n').map(l => l.trim()).filter(Boolean);
+
+    if (curr.steps.length === defs.length) {
+      // 步数一致 → 按 step 逐行比较文字
+      for (let si = 0; si < defs.length; si++) {
+        const cLines = linesOf(curr.steps[si]);
+        const dLines = linesOf(defs[si]);
+        const maxL = Math.max(cLines.length, dLines.length);
+        for (let li = 0; li < maxL; li++) {
+          const c = cLines[li];
+          const d = dLines[li];
+          const audioKey = `${audioPrefix}_s${String(si + 1).padStart(2, '0')}_L${li + 1}`;
+          if (c != null && d != null) {
+            if (c !== d) {
+              changes.push({
+                task: taskKey, audio_key: audioKey, type: 'text_changed',
+                step: si + 1, line: li + 1, old: d, new: c,
+                action_required: `step ${si + 1} 第 ${li + 1} 句文本改了 → 改 ${TTS_SCRIPTS[paradigm] || '(手动 audio/'+paradigm+')'} 对应条目,重跑 TTS 生成 wav+mp3`,
+              });
+            }
+          } else if (c != null && d == null) {
+            changes.push({
+              task: taskKey, audio_key: audioKey, type: 'text_added',
+              step: si + 1, line: li + 1, new: c,
+              action_required: `step ${si + 1} 新增了第 ${li + 1} 句 → 给 ${TTS_SCRIPTS[paradigm] || '(手动)'} 增加条目,跑 TTS 生成 wav+mp3`,
+            });
+          } else if (c == null && d != null) {
+            changes.push({
+              task: taskKey, type: 'text_removed_in_step',
+              step: si + 1, line: li + 1, old: d,
+              action_required: `step ${si + 1} 删了第 ${li + 1} 句(step 仍在) → 该音频没人引用了(磁盘保留 mp3),从 ${paradigm}.js 删掉对应 audio 条目即可,不用重录`,
+            });
+          }
+        }
+      }
+    } else {
+      // 步数改变 → 只报结构性变动,不做行对齐(对齐会误判)
+      changes.push({
+        task: taskKey, type: 'step_count_changed',
+        old_count: defs.length, new_count: curr.steps.length,
+        action_required: curr.steps.length > defs.length
+          ? `新增了 ${curr.steps.length - defs.length} 个 step → 在 ${paradigm}.js 里插入对应 { region, lines } 条目,并给新增的行录音频`
+          : `删了 ${defs.length - curr.steps.length} 个 step → 从 ${paradigm}.js 里移除对应条目(对应 mp3 留磁盘,不用重录)`,
+      });
+    }
+
+    // 坐标变化(只在步数一致时看得出)
+    if (curr.steps.length === defs.length) {
+      for (let i = 0; i < defs.length; i++) {
+        const c = curr.steps[i], d = defs[i];
+        if (c.x !== d.x || c.y !== d.y || c.w !== d.w || c.h !== d.h) {
+          changes.push({
+            task: taskKey, type: 'region_moved', step: i + 1,
+            old: `${d.x},${d.y} ${d.w}×${d.h}`,
+            new: `${c.x},${c.y} ${c.w}×${c.h}`,
+            action_required: '只改 ' + paradigm + '.js 里该 step 的 region,不用碰音频',
+          });
+        }
+      }
+    }
+  });
+  return changes;
+}
+
+async function saveToServer() {
+  snapshotCurrent();
+  const note = document.getElementById('editNote').value.trim();
+  const changes = detectChangesForParadigm(currentParadigm);
+  const regenCount   = changes.filter(c => c.type === 'text_changed' || c.type === 'text_added').length;
+  const removeInStepCount = changes.filter(c => c.type === 'text_removed_in_step').length;
+  const regionCount  = changes.filter(c => c.type === 'region_moved').length;
+  const structCount  = changes.filter(c => c.type === 'step_count_changed').length;
+
+  let autoNote;
+  if (regenCount > 0) {
+    autoNote = `检测到 ${regenCount} 条文字改动(新增/修改,step 仍在) → 需要同步改 ${TTS_SCRIPTS[currentParadigm] || 'audio/'+currentParadigm+'/'} 并重跑 TTS,再 ffmpeg 转 mp3(128k/44.1k/mono),最后 bump ${currentParadigm}.js?v=`;
+  } else if (removeInStepCount > 0 && structCount === 0) {
+    autoNote = `删了 ${removeInStepCount} 条字幕(step 仍在),对应 mp3 留磁盘,不需要重跑 TTS,只要在 ${currentParadigm}.js 里删掉引用`;
+  } else if (structCount > 0) {
+    autoNote = `step 数改了 → 请手动在 ${currentParadigm}.js 里对齐 step 结构;整个 step 被删的话对应 mp3 留磁盘,不用重录;新增 step 需要录新音频`;
+  } else if (regionCount > 0) {
+    autoNote = `只动了 ${regionCount} 处区域坐标,不需要重跑音频`;
+  } else {
+    autoNote = '无任何改动';
+  }
+
+  const paradigmStates = {};
+  Object.keys(allStates).forEach(k => {
+    if (k.startsWith(currentParadigm + '::')) paradigmStates[k] = allStates[k];
+  });
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    paradigm: currentParadigm,
+    user_note: note || null,
+    auto_note: autoNote,
+    tts_script_path: TTS_SCRIPTS[currentParadigm] || null,
+    regenerate_command: REGENERATE_CMD(currentParadigm),
+    changes: changes,
+    states: paradigmStates,
+    guides_index: (GUIDES[currentParadigm] || []).map((g, i) => ({
+      idx: i, image: g.image, label: humanLabel(currentParadigm, g),
+    })),
+  };
+
+  const s = document.getElementById('saveStatus');
+  s.textContent = '保存中...'; s.style.color = '#FFC107';
+  try {
+    const resp = await fetch('/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        paradigm: '_tool',
+        subject_id: currentParadigm + '-editor',
+        filename: 'region-edits.json',
+        content: JSON.stringify(payload, null, 2),
+      }),
+    });
+    if (resp.ok) {
+      let summary;
+      let color;
+      if (regenCount > 0) {
+        summary = `✓ 已收 ${currentParadigm},${regenCount} 句要重录`;
+        color = '#FFC107';
+      } else if (structCount > 0) {
+        summary = `✓ 已收 ${currentParadigm},step 结构改了(手动对齐)`;
+        color = '#81D4FA';
+      } else if (removeInStepCount > 0) {
+        summary = `✓ 已收 ${currentParadigm},删了 ${removeInStepCount} 句(不需重录)`;
+        color = '#81D4FA';
+      } else if (regionCount > 0) {
+        summary = `✓ 已收 ${currentParadigm},${regionCount} 处坐标`;
+        color = '#4CAF50';
+      } else {
+        summary = `✓ 已收 ${currentParadigm} (无改动)`;
+        color = '#4CAF50';
+      }
+      s.textContent = summary + ' ' + new Date().toTimeString().slice(0,8);
+      s.style.color = color;
+    } else {
+      throw new Error('HTTP ' + resp.status);
+    }
+  } catch (e) {
+    s.textContent = '✗ 服务器失败: ' + e.message;
+    s.style.color = '#F44336';
+  }
+}
+
+/* ---------- step 操作 ---------- */
+function selectStep(idx) { currentStep = idx; renderAll(); }
+
+function _newStep() {
+  return { x: 20, y: 20, w: 30, h: 20, subtitle: '', extras: [] };
+}
+
+function addStep() {
+  steps.push(_newStep());
+  currentStep = steps.length - 1;
+  renderAll();
+}
+
+function addStepAbove() {
+  const idx = Math.max(0, currentStep);
+  steps.splice(idx, 0, _newStep());
+  renderAll();
+}
+
+function addStepBelow() {
+  const idx = currentStep + 1;
+  steps.splice(idx, 0, _newStep());
+  currentStep = idx;
+  renderAll();
+}
+
+function deleteStep() {
+  if (steps.length <= 1) return;
+  steps.splice(currentStep, 1);
+  if (currentStep >= steps.length) currentStep = steps.length - 1;
+  renderAll();
+}
+
+/* ---------- 重置当前 guide(清缓存重读 guides-data.json) ---------- */
+function resetCurrentGuide() {
+  if (!confirm('清除当前 guide 的本地缓存,从 guides-data.json 重新加载?\n(其他 guide 的拖拽状态不受影响)')) return;
+  const key = stateKey(currentParadigm, currentGuideIdx);
+  delete allStates[key];
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(allStates)); } catch (e) {}
+  activeKey = null;  // 防止 snapshotCurrent 立刻又写回旧数据
+  loadGuide(currentGuideIdx);
+}
+
+/* ---------- 多红框操作 ---------- */
+function addRegionToStep() {
+  const s = steps[currentStep];
+  if (!s) return;
+  if (!Array.isArray(s.extras)) s.extras = [];
+  // 默认位置:主红框右边偏一点,方便一眼看到
+  s.extras.push({
+    x: Math.min(80, s.x + 5),
+    y: Math.min(80, s.y + 5),
+    w: Math.min(30, s.w),
+    h: Math.min(20, s.h),
+  });
+  renderAll();
+}
+
+function removeLastRegionFromStep() {
+  const s = steps[currentStep];
+  if (!s || !Array.isArray(s.extras) || s.extras.length === 0) return;
+  s.extras.pop();
+  renderAll();
+}
+
+/* ---------- 渲染 ---------- */
+function renderAll() {
+  renderSidePanel();
+  renderBoxes();
+  renderBtnOverlay();
+  updateOutput();
+}
+
+function renderSidePanel() {
+  const panel = document.getElementById('sidePanel');
+  panel.innerHTML = '';
+  steps.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'step-card' + (i === currentStep ? ' selected' : '');
+    const extrasCount = (s.extras || []).length;
+    const totalRegions = 1 + extrasCount;
+    const regionLabel = totalRegions > 1
+      ? `<span style="background:#E53935;color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px;">${totalRegions} 红框</span>`
+      : '';
+    // 多红框操作(仅选中的 step 显示)
+    const multiBtns = (i === currentStep) ? `
+      <div style="margin-top:4px;display:flex;gap:4px;">
+        <button data-act="add-region" style="font-size:10px;padding:2px 6px;border-radius:4px;border:1px solid #555;background:#2a4a2a;color:#8fd68f;cursor:pointer;">+ 加红框</button>
+        ${extrasCount > 0 ? '<button data-act="rm-region" style="font-size:10px;padding:2px 6px;border-radius:4px;border:1px solid #E53935;background:#3a2a2a;color:#ff8080;cursor:pointer;">× 删最后红框</button>' : ''}
+      </div>
+    ` : '';
+    card.innerHTML = `
+      <div class="step-header">
+        <span class="step-num">Step ${i + 1}${regionLabel}</span>
+        <span class="step-coords">${s.x}%, ${s.y}% | ${s.w}×${s.h}%</span>
+      </div>
+      <textarea data-idx="${i}" placeholder="字幕文字（每行一句，同一个红框内播放多句）">${s.subtitle}</textarea>
+      <div style="font-size:10px;color:#666;margin-top:2px;">每行 = 一句音频，多行共享同一个/多个红框</div>
+      ${multiBtns}
+    `;
+    card.addEventListener('click', (e) => {
+      if (e.target.tagName === 'TEXTAREA') return;
+      if (e.target.tagName === 'BUTTON') {
+        const act = e.target.dataset.act;
+        if (act === 'add-region') { addRegionToStep(); return; }
+        if (act === 'rm-region') { removeLastRegionFromStep(); return; }
+      }
+      selectStep(i);
+    });
+    card.querySelector('textarea').addEventListener('input', (e) => {
+      steps[+e.target.dataset.idx].subtitle = e.target.value;
+      updateOutput();
+    });
+    panel.appendChild(card);
+  });
+
+  const btnCard = document.createElement('div');
+  btnCard.className = 'step-card';
+  btnCard.style.borderColor = '#4FC3F7';
+  btnCard.style.background = '#1a2a3a';
+  btnCard.innerHTML = `
+    <div class="step-header">
+      <span class="step-num" style="color:#4FC3F7;">"继续"按钮位置</span>
+      <span class="step-coords">${btnOverlay.x}%, ${btnOverlay.y}% | ${btnOverlay.w}×${btnOverlay.h}%</span>
+    </div>
+    <div style="font-size:11px;color:#888;margin-top:4px;">蓝色虚线框 — 拖拽调整覆盖按钮位置</div>
+  `;
+  panel.appendChild(btnCard);
+}
+
+function renderBoxes() {
+  container.querySelectorAll('.region-box').forEach(el => el.remove());
+  steps.forEach((s, i) => {
+    const isActive = i === currentStep;
+
+    // 1. 主红框
+    const box = document.createElement('div');
+    box.className = 'region-box' + (isActive ? '' : ' inactive');
+    box.style.left = s.x + '%'; box.style.top = s.y + '%';
+    box.style.width = s.w + '%'; box.style.height = s.h + '%';
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = i + 1;
+    box.appendChild(label);
+    ['tl', 'tr', 'bl', 'br'].forEach(h => {
+      const handle = document.createElement('div');
+      handle.className = 'handle ' + h;
+      handle.dataset.handle = h;
+      box.appendChild(handle);
+    });
+    box.addEventListener('pointerdown', (e) => startDrag(e, i, 'step'));
+    container.appendChild(box);
+
+    // 2. 副红框(extras)
+    (s.extras || []).forEach((r, k) => {
+      const ebox = document.createElement('div');
+      ebox.className = 'region-box' + (isActive ? '' : ' inactive');
+      ebox.style.left = r.x + '%'; ebox.style.top = r.y + '%';
+      ebox.style.width = r.w + '%'; ebox.style.height = r.h + '%';
+      const elab = document.createElement('div');
+      elab.className = 'label';
+      elab.textContent = (i + 1) + '·' + (k + 2);  // 比如 "3·2" = step 3 的第 2 个红框
+      ebox.appendChild(elab);
+      ['tl', 'tr', 'bl', 'br'].forEach(h => {
+        const handle = document.createElement('div');
+        handle.className = 'handle ' + h;
+        handle.dataset.handle = h;
+        ebox.appendChild(handle);
+      });
+      ebox.addEventListener('pointerdown', (e) => startDrag(e, i, 'extra', k));
+      container.appendChild(ebox);
+    });
+  });
+}
+
+function renderBtnOverlay() {
+  container.querySelectorAll('.btn-overlay').forEach(el => el.remove());
+  const el = document.createElement('div');
+  el.className = 'btn-overlay';
+  el.style.left = btnOverlay.x + '%'; el.style.top = btnOverlay.y + '%';
+  el.style.width = btnOverlay.w + '%'; el.style.height = btnOverlay.h + '%';
+  el.textContent = '继续';
+  const handle = document.createElement('div');
+  handle.className = 'handle br';
+  handle.dataset.handle = 'br';
+  el.appendChild(handle);
+  el.addEventListener('pointerdown', (e) => startDrag(e, -1, 'btn'));
+  container.appendChild(el);
+}
+
+/* ---------- 拖拽 ---------- */
+function _dragTarget(kind, idx, extraIdx) {
+  if (kind === 'btn') return btnOverlay;
+  if (kind === 'extra') return steps[idx].extras[extraIdx];
+  return steps[idx];
+}
+
+function startDrag(e, idx, kind, extraIdx) {
+  e.preventDefault(); e.stopPropagation();
+  if ((kind === 'step' || kind === 'extra') && idx !== currentStep) { selectStep(idx); return; }
+  const obj = _dragTarget(kind, idx, extraIdx);
+  const imgRect = mainImg.getBoundingClientRect();
+  const handle = e.target.dataset.handle;
+  dragging = {
+    kind, idx, extraIdx, handle,
+    type: handle ? 'resize' : 'move',
+    startX: e.clientX, startY: e.clientY,
+    origX: obj.x, origY: obj.y, origW: obj.w, origH: obj.h,
+    imgW: imgRect.width, imgH: imgRect.height,
+  };
+  document.addEventListener('pointermove', onDragMove);
+  document.addEventListener('pointerup', onDragEnd);
+}
+
+function onDragMove(e) {
+  if (!dragging) return;
+  const d = dragging;
+  const dx = (e.clientX - d.startX) / d.imgW * 100;
+  const dy = (e.clientY - d.startY) / d.imgH * 100;
+  const obj = _dragTarget(d.kind, d.idx, d.extraIdx);
+  if (d.type === 'move') {
+    obj.x = Math.round(Math.max(0, Math.min(100 - obj.w, d.origX + dx)) * 10) / 10;
+    obj.y = Math.round(Math.max(0, Math.min(100 - obj.h, d.origY + dy)) * 10) / 10;
+  } else {
+    const h = d.handle;
+    if (h.includes('l')) { obj.x = Math.round((d.origX + dx) * 10) / 10; obj.w = Math.max(3, Math.round((d.origW - dx) * 10) / 10); }
+    if (h.includes('r')) { obj.w = Math.max(3, Math.round((d.origW + dx) * 10) / 10); }
+    if (h.includes('t')) { obj.y = Math.round((d.origY + dy) * 10) / 10; obj.h = Math.max(3, Math.round((d.origH - dy) * 10) / 10); }
+    if (h.includes('b')) { obj.h = Math.max(3, Math.round((d.origH + dy) * 10) / 10); }
+  }
+  if (d.kind === 'btn') { renderBtnOverlay(); } else { renderBoxes(); }
+  renderSidePanel(); updateOutput();
+}
+
+function onDragEnd() {
+  dragging = null;
+  document.removeEventListener('pointermove', onDragMove);
+  document.removeEventListener('pointerup', onDragEnd);
+}
+
+/* ---------- 输出 ---------- */
+function _regionStr(r) {
+  return `{ x: '${r.x}%', y: '${r.y}%', w: '${r.w}%', h: '${r.h}%' }`;
+}
+
+function updateOutput() {
+  const guide = getCurrentGuide();
+  const label = guide ? humanLabel(currentParadigm, guide) : '?';
+  const parts = steps.map(s => {
+    const subs = s.subtitle.split('\n').filter(l => l.trim());
+    const linesStr = subs.length <= 1
+      ? `['${subs[0] || ''}']`
+      : `[${subs.map(l => `'${l.trim()}'`).join(', ')}]`;
+    // 单红框 → region: {...} ;多红框 → regions: [{...}, {...}]
+    const extras = s.extras || [];
+    if (extras.length === 0) {
+      return `  { region: ${_regionStr(s)}, lines: ${linesStr} },`;
+    } else {
+      const allRegions = [_regionStr(s), ...extras.map(_regionStr)].join(', ');
+      return `  { regions: [${allRegions}], lines: ${linesStr} },`;
+    }
+  });
+  const btnLine = `\nbtnRegion: { x: '${btnOverlay.x}%', y: '${btnOverlay.y}%', w: '${btnOverlay.w}%', h: '${btnOverlay.h}%' }`;
+  outputEl.textContent = `${currentParadigm} / ${label}: [\n${parts.join('\n')}\n]${btnLine}`;
+  saveToStorage();
+}
+
+function copyOutput() {
+  navigator.clipboard.writeText(outputEl.textContent);
+  event.target.textContent = '已复制';
+  setTimeout(() => event.target.textContent = '复制代码', 1500);
+}
+
+function copyVoiceText() {
+  let n = 1;
+  const guide = getCurrentGuide();
+  const label = guide ? humanLabel(currentParadigm, guide) : '?';
+  const text = `=== ${currentParadigm} / ${label} ===\n` + steps.flatMap(s => s.subtitle.split('\n').filter(l => l.trim())).map(l => `${n++}. ${l.trim()}`).join('\n');
+  navigator.clipboard.writeText(text);
+  event.target.textContent = '已复制';
+  setTimeout(() => event.target.textContent = '复制语音文本', 1500);
+}
+
+init();
+</script>
+</body>
+</html>

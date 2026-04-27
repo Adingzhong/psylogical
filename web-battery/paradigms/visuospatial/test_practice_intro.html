@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>[TEST] 空间导航 练习前指导语</title>
+  <link rel="stylesheet" href="../../css/common.css">
+</head>
+<body>
+  <script src="../../lib/voice-guide.js"></script>
+  <script>
+    const AUDIO_BASE_P = '../../audio/visuospatial';
+    VoiceGuide.show({
+      image: 'img/practice_intro.png',
+      btnRegion: { x: '80.3%', y: '4.9%', w: '15%', h: '8%' },
+      buttonText: '开始练习',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '6.1%', y: '14.8%', w: '27.3%', h: '59.8%' }, lines: [
+          { audio: `${AUDIO_BASE_P}/practice_s01.wav`, subtitle: '练习时视野会变小，移动时只能看到箭头附近一小块' },
+          { audio: `${AUDIO_BASE_P}/practice_s02.wav`, subtitle: '请您跟着箭头一起走' },
+          { audio: `${AUDIO_BASE_P}/practice_s03.wav`, subtitle: '根据背景变化感受一下它走了多远、往哪边拐了弯' },
+        ] },
+        { region: { x: '36.5%', y: '15.2%', w: '27.2%', h: '59.4%' }, lines: [
+          { audio: `${AUDIO_BASE_P}/practice_s04.wav`, subtitle: '箭头最后会走到地图正中间，也就是那个黑色圆点' },
+          { audio: `${AUDIO_BASE_P}/practice_s05.wav`, subtitle: '这时候您又会看到整张大地图' },
+        ] },
+        { region: { x: '67.1%', y: '15.4%', w: '27%', h: '59.2%' }, lines: [
+          { audio: `${AUDIO_BASE_P}/practice_s06.wav`, subtitle: '请根据您刚才记住的路线，在地图上点出箭头出发的位置' },
+          { audio: `${AUDIO_BASE_P}/practice_s07.wav`, subtitle: '点击后蓝色圆点就是您选的起点' },
+        ] },
+        { region: { x: '4.4%', y: '78%', w: '91.2%', h: '16.6%' }, lines: [
+          { audio: `${AUDIO_BASE_P}/practice_s08.wav`, subtitle: '练习阶段会显示正确答案，正式阶段不会' },
+        ] },
+        { region: { x: '78.8%', y: '3.7%', w: '18%', h: '10%' }, lines: [
+          { audio: `${AUDIO_BASE_P}/practice_s09.wav`, subtitle: '明白了就点击开始练习' },
+        ] },
+      ],
+    }).then(() => {
+      document.body.innerHTML = '<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-size:48px;color:#666;font-family:PingFang SC,sans-serif;">✓ 指导语播放完毕</div>';
+    });
+  </script>
+</body>
+</html>

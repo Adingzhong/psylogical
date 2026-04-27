@@ -1,0 +1,45 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.zip
+*.tar.gz
+*.key
+*.pem
+*.crt
+.~*
+.venv/
+venv/
+.claude/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.log
+.Rhistory
+data/*.csv
+data/*.json
+data/gaze_video/*.mp4
+眼动多模态/_参考资料（不需要发送）/
+伦理审查/
+*.pdf
+
+# web-battery 不需要推送的内容
+web-battery/node_modules/
+web-battery/.pw-browsers/
+web-battery/server/data/
+web-battery/server/logs/
+web-battery-https-certs/*.key
+web-battery-https-certs/*.pem
+web-battery/audio/*/_backup_old_*/
+web-battery/audio/*/_backup_old_*
+web-battery/paradigms/tmt/layouts/B4/_backup_*/
+4月19日 修改/hospital_query/data/
+4月19日 修改/hospital_query/.Rhistory
+web-battery/test-*.js
+web-battery/test-results/
+web-battery/test-downloads/
+web-battery/test-downloads-e2e/
+web-battery/package.json
+web-battery/package-lock.json
+web-battery/start.bat

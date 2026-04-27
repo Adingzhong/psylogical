@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TMT 连线测试 - 认知评估</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    /* TMT-specific styles */
+    body { overflow: hidden; background: #FFFFFF; }
+
+    #tmt-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #tmt-canvas {
+      touch-action: none;
+      display: block;
+    }
+
+    #tmt-hud {
+      position: fixed;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 22px;
+      color: #555;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    #tmt-message {
+      position: fixed;
+      bottom: 60px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 28px;
+      color: #333;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+      max-width: 80vw;
+    }
+
+    /* 施测员跳过按钮 — 仅在连续卡住 ≥2 次 (20s+) 后显现,放在右上角完全避开节点布局 (节点 x_norm ≤ 0.935, y_norm ≥ 0.091) */
+    #tmt-skip-btn {
+      position: fixed;
+      top: 8px; right: 12px;
+      width: 68px; height: 36px;
+      padding: 0;
+      font-size: 14px;
+      color: #666;
+      background: rgba(220, 220, 220, 0.55);
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      z-index: 20;
+      cursor: pointer;
+      display: none;
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    #tmt-skip-btn:active {
+      background: rgba(180, 180, 180, 0.8);
+    }
+
+    .tmt-instruction-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 24px 40px;
+      box-sizing: border-box;
+      text-align: center;
+      overflow-y: auto;
+    }
+
+    .tmt-instruction-overlay h2 {
+      font-size: 44px;
+      color: var(--text);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .tmt-instruction-overlay p {
+      font-size: 30px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 800px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    .tmt-instruction-overlay .hint {
+      font-size: 22px;
+      color: #999;
+      margin-top: 8px;
+    }
+
+    /* Diagram area for rich instructions */
+    .tmt-diagram-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 12px 0 8px;
+      min-height: 40px;
+      flex-shrink: 1;
+    }
+
+    .tmt-diagram-area svg {
+      max-width: 85vw;
+      max-height: 42vh;
+      width: 70vw;
+      height: auto;
+    }
+
+    .tmt-caption {
+      font-size: 30px;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.5;
+      max-width: 800px;
+      text-align: center;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="tmt-container">
+    <canvas id="tmt-canvas"></canvas>
+    <div id="tmt-hud"></div>
+    <div id="tmt-message"></div>
+    <button id="tmt-skip-btn" type="button">跳过</button>
+  </div>
+  <script src="../../lib/jspsych.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-button-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/call-function.js?v=20260410e"></script>
+  <script src="../../lib/paradigm-camera.js?v=20260419f"></script>
+  <script src="../../lib/jszip.min.js?v=20260410b"></script>
+  <script src="../../lib/end-screen.js?v=20260419g"></script>
+  <script src="../../lib/safe-fetch.js?v=20260418a"></script>
+  <script src="../../lib/attention-probe.js?v=20260410e"></script>
+  <script src="../../lib/progress.js?v=20260419a"></script>
+  <script src="../../lib/touch-hardening.js?v=20260419c"></script>
+  <script src="../../lib/voice-guide.js?v=20260423j"></script>
+  <script type="module" src="tmt.js?v=20260423a"></script>
+</body>
+</html>

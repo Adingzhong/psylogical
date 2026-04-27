@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>主试登录 | 认知功能评估</title>
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #003D7A 0%, #1565C0 40%, #1E88E5 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 48px 56px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.20);
+      max-width: 520px;
+      width: 100%;
+    }
+    .brand {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      margin-bottom: 28px;
+    }
+    .brand img { width: 48px; height: 48px; border-radius: 50%; }
+    .brand .org { text-align: left; }
+    .brand .org .univ { font-size: 15px; color: #1565C0; letter-spacing: 2px; font-weight: 500; }
+    .brand .org .dept { font-size: 12px; color: #999; margin-top: 2px; }
+
+    h1 {
+      font-size: 28px; font-weight: 700; color: #1A1A2E;
+      letter-spacing: 4px; text-align: center; margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 14px; color: #888; text-align: center; margin-bottom: 36px;
+      letter-spacing: 1px;
+    }
+
+    .field { margin-bottom: 22px; }
+    .field label {
+      display: block; font-size: 14px; color: #555;
+      margin-bottom: 8px; font-weight: 500;
+    }
+    .field label .required { color: #E53935; margin-left: 4px; }
+    .field label .optional { color: #BBB; font-size: 12px; margin-left: 6px; font-weight: 400; }
+    .field input {
+      width: 100%; font-family: var(--font); font-size: 20px;
+      padding: 14px 16px; border: 2px solid #E0E0E0; border-radius: 10px;
+      transition: border-color 0.2s; box-sizing: border-box;
+    }
+    .field input:focus { border-color: #1E88E5; outline: none; }
+
+    .submit-btn {
+      width: 100%; padding: 16px; font-size: 20px; font-weight: 600;
+      background: #1E88E5; color: white; border: none; border-radius: 10px;
+      cursor: pointer; font-family: var(--font);
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover { background: #1565C0; }
+    .submit-btn:active { background: #0D47A1; }
+    .submit-btn:disabled { background: #BDBDBD; cursor: not-allowed; }
+
+    /* 模式选择 */
+    .mode-group { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .mode-option {
+      display: block; cursor: pointer; padding: 14px 16px;
+      border: 2px solid #E0E0E0; border-radius: 10px;
+      transition: all 0.15s; background: white;
+    }
+    .mode-option:hover { border-color: #90CAF9; background: #F5FAFF; }
+    .mode-option input { display: none; }
+    .mode-option .mode-title { font-size: 17px; font-weight: 600; color: #1A1A2E; }
+    .mode-option .mode-desc { font-size: 13px; color: #888; margin-top: 3px; }
+    .mode-option input:checked + .mode-title { color: #1565C0; }
+    .mode-option.selected { border-color: #1E88E5; background: #E3F2FD; }
+    .mode-option.selected .mode-title { color: #1565C0; }
+
+    .current-examiner {
+      margin-top: 24px; padding: 12px 16px;
+      background: #F1F8E9; border: 1px solid #C8E6C9; border-radius: 10px;
+      font-size: 14px; color: #2E7D32; text-align: center;
+      display: none;
+    }
+    .current-examiner.visible { display: block; }
+    .current-examiner a { color: #1565C0; margin-left: 8px; }
+
+    .hint {
+      margin-top: 20px; font-size: 13px; color: #999;
+      text-align: center; line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="brand">
+      <img src="stimuli/zju-logo.webp" alt="浙江大学">
+      <div class="org">
+        <div class="univ">浙江大学</div>
+        <div class="dept">心理与行为科学系</div>
+      </div>
+    </div>
+
+    <h1>主试登录</h1>
+    <p class="subtitle">请输入主试信息后进入评估台</p>
+
+    <form id="examinerForm" onsubmit="return submitExaminer(event)">
+      <div class="field">
+        <label>姓名<span class="required">*</span></label>
+        <input type="text" id="name" placeholder="请输入主试姓名" autofocus required>
+      </div>
+      <div class="field">
+        <label>工号 / 编号<span class="optional">（可选）</span></label>
+        <input type="text" id="staffId" placeholder="如 ZU001（没有可不填）">
+      </div>
+      <div class="field">
+        <label>本次施测范围<span class="required">*</span></label>
+        <div class="mode-group" id="modeGroup">
+          <label class="mode-option" data-mode="all">
+            <input type="radio" name="mode" value="all">
+            <div class="mode-title">全部 9 项</div>
+            <div class="mode-desc">一次性做完所有范式 · 适合年轻被试或集中施测</div>
+          </label>
+          <label class="mode-option" data-mode="group1">
+            <input type="radio" name="mode" value="group1">
+            <div class="mode-title">仅第一组（8 项）</div>
+            <div class="mode-desc">空间导航 · 看眼读心 · 箭头判断 · 图片记忆 · 数字注意 · 视觉记忆 · 连线测试 · 画钟测试</div>
+          </label>
+          <label class="mode-option" data-mode="group2">
+            <input type="radio" name="mode" value="group2">
+            <div class="mode-title">仅语音（1 项）</div>
+            <div class="mode-desc">语音测评 · 独立语音岗</div>
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">进入评估台</button>
+    </form>
+
+    <p class="hint">
+      主试信息仅保存在本机浏览器,用于数据溯源。<br>
+      被试不会看到主试姓名。
+    </p>
+  </div>
+
+<script>
+// 预填表单(如果是从 app 点"切换主试/模式"回来的,保留旧值让主试一眼看清)
+// + 模式单选高亮同步
+(function init() {
+  const name = localStorage.getItem('examiner_name');
+  const staffId = localStorage.getItem('examiner_id');
+  const mode = localStorage.getItem('examiner_mode') || 'all';
+
+  if (name) document.getElementById('name').value = name;
+  if (staffId) document.getElementById('staffId').value = staffId;
+
+  // 选中当前模式 radio
+  const radio = document.querySelector(`input[name="mode"][value="${mode}"]`);
+  if (radio) {
+    radio.checked = true;
+    radio.closest('.mode-option').classList.add('selected');
+  } else {
+    // 默认 all
+    const def = document.querySelector('input[name="mode"][value="all"]');
+    if (def) { def.checked = true; def.closest('.mode-option').classList.add('selected'); }
+  }
+
+  // 点击任意 mode-option 切换选中样式
+  document.querySelectorAll('.mode-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.mode-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      opt.querySelector('input').checked = true;
+    });
+  });
+
+})();
+
+function submitExaminer(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const staffId = document.getElementById('staffId').value.trim();
+  const modeInput = document.querySelector('input[name="mode"]:checked');
+  const mode = modeInput ? modeInput.value : 'all';
+  if (!name) {
+    alert('请输入主试姓名');
+    return false;
+  }
+  localStorage.setItem('examiner_name', name);
+  localStorage.setItem('examiner_mode', mode);
+  if (staffId) {
+    localStorage.setItem('examiner_id', staffId);
+  } else {
+    localStorage.removeItem('examiner_id');
+  }
+  window.location.href = '/app';
+  return false;
+}
+</script>
+</body>
+</html>

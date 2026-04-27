@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>画钟测试 - 认知评估</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    /* ===== Clock Drawing Specific Styles ===== */
+    .clock-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      padding: 10px 20px 0;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .clock-instruction {
+      font-size: 28px;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .clock-canvas-wrapper {
+      position: relative;
+      border: 3px solid var(--border);
+      border-radius: 8px;
+      background: #FFFFFF;
+      touch-action: none;
+    }
+
+    .clock-canvas-wrapper canvas {
+      display: block;
+      touch-action: none;
+    }
+
+    .clock-btn-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+      padding-bottom: 8px;
+    }
+
+    .clock-btn {
+      font-family: var(--font);
+      font-size: 42px;
+      min-height: 131px;
+      min-width: 240px;
+      padding: 20px 56px;
+      border: 2px solid #707070;
+      border-radius: 12px;
+      background: #B0B0B0;
+      color: #1A1A1A;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .clock-btn:active {
+      background: #8C8C8C;
+    }
+
+    /* 居中弹窗提示 */
+    .clock-toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-size: 40px;
+      padding: 28px 56px;
+      border-radius: 16px;
+      z-index: 999;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+    .clock-toast.fade-out {
+      opacity: 0;
+    }
+
+    .clock-btn.clear-btn {
+      background: #FFF3E0;
+      border-color: #FFB74D;
+      color: #E65100;
+    }
+
+    .clock-btn.undo-btn {
+      background: #E3F2FD;
+      border-color: #64B5F6;
+      color: #1565C0;
+    }
+
+    .clock-btn.done-btn {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      font-weight: bold;
+    }
+
+    .clock-btn.done-btn:active {
+      background: var(--primary-press);
+    }
+
+    .clock-status {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      min-height: 24px;
+      text-align: center;
+    }
+
+    /* jsPsych display override for clock drawing */
+    .jspsych-display-element {
+      overflow: hidden !important;
+    }
+
+    /* Eliminate jsPsych content padding on drawing page to maximize canvas space */
+    .jspsych-content:has(.clock-container) {
+      padding: 0 !important;
+    }
+
+    .jspsych-content-wrapper:has(.clock-container) {
+      min-height: auto !important;
+      align-items: stretch;
+    }
+  </style>
+</head>
+<body>
+  <div id="jspsych-target"></div>
+  <script src="../../lib/jspsych.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-button-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/call-function.js?v=20260410e"></script>
+  <script src="../../lib/plugins/preload.js?v=20260410e"></script>
+  <script src="../../lib/paradigm-camera.js?v=20260419f"></script>
+  <script src="../../lib/jszip.min.js?v=20260410b"></script>
+  <script src="../../lib/end-screen.js?v=20260419g"></script>
+  <script src="../../lib/safe-fetch.js?v=20260418a"></script>
+  <script src="../../lib/attention-probe.js?v=20260410e"></script>
+  <script src="../../lib/touch-hardening.js?v=20260419c"></script>
+  <script src="../../lib/voice-guide.js?v=20260423j"></script>
+  <script src="clock.js?v=20260419c"></script>
+</body>
+</html>

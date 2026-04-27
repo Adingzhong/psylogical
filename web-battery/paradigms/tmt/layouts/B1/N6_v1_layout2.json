@@ -1,0 +1,141 @@
+{
+  "task": "B1",
+  "version": "v1",
+  "N": 6,
+  "M": 11,
+  "layout_id": 2,
+  "node_size_px": 165,
+  "y_norm_origin": "top",
+  "sequence": [
+    "1",
+    "一",
+    "2",
+    "二",
+    "3",
+    "三",
+    "4",
+    "四",
+    "5",
+    "五",
+    "6"
+  ],
+  "nodes": [
+    {
+      "node_id": "B1_01",
+      "k": 1,
+      "label": "1",
+      "value": 1,
+      "kind": "digit",
+      "x_norm": 0.874993,
+      "y_norm": 0.807341
+    },
+    {
+      "node_id": "B1_02",
+      "k": 2,
+      "label": "一",
+      "value": 1,
+      "kind": "han",
+      "x_norm": 0.509137,
+      "y_norm": 0.743317
+    },
+    {
+      "node_id": "B1_03",
+      "k": 3,
+      "label": "2",
+      "value": 2,
+      "kind": "digit",
+      "x_norm": 0.900703,
+      "y_norm": 0.511707
+    },
+    {
+      "node_id": "B1_04",
+      "k": 4,
+      "label": "二",
+      "value": 2,
+      "kind": "han",
+      "x_norm": 0.231619,
+      "y_norm": 0.516714
+    },
+    {
+      "node_id": "B1_05",
+      "k": 5,
+      "label": "3",
+      "value": 3,
+      "kind": "digit",
+      "x_norm": 0.723043,
+      "y_norm": 0.399964
+    },
+    {
+      "node_id": "B1_06",
+      "k": 6,
+      "label": "三",
+      "value": 3,
+      "kind": "han",
+      "x_norm": 0.400794,
+      "y_norm": 0.300499
+    },
+    {
+      "node_id": "B1_07",
+      "k": 7,
+      "label": "4",
+      "value": 4,
+      "kind": "digit",
+      "x_norm": 0.899189,
+      "y_norm": 0.146835
+    },
+    {
+      "node_id": "B1_08",
+      "k": 8,
+      "label": "四",
+      "value": 4,
+      "kind": "han",
+      "x_norm": 0.102428,
+      "y_norm": 0.146364
+    },
+    {
+      "node_id": "B1_09",
+      "k": 9,
+      "label": "5",
+      "value": 5,
+      "kind": "digit",
+      "x_norm": 0.137246,
+      "y_norm": 0.832528
+    },
+    {
+      "node_id": "B1_10",
+      "k": 10,
+      "label": "五",
+      "value": 5,
+      "kind": "han",
+      "x_norm": 0.686378,
+      "y_norm": 0.876516
+    },
+    {
+      "node_id": "B1_11",
+      "k": 11,
+      "label": "6",
+      "value": 6,
+      "kind": "digit",
+      "x_norm": 0.324102,
+      "y_norm": 0.771365
+    }
+  ],
+  "gen_constraints_used": {
+    "min_center_dist_px": 173.25,
+    "avoid_line_to_node_px": 72.6,
+    "avoid_line_factor": 0.88,
+    "layout_tries": 16,
+    "point_sampler": "farthest_point",
+    "path_solver": "backtracking_hamiltonian_long_step",
+    "path_backtrack_limit": 320000,
+    "span_x_min_px": 1105.92,
+    "span_y_min_px": 691.1999999999999,
+    "min_step_len_px": 320,
+    "near_neighbor_k": 2,
+    "note": "强制相邻序列点不挨着：最短步长 + 互不为前K近邻；并保持不自交/线避点/不规律。"
+  },
+  "preview_canvas_px": [
+    1536,
+    1152
+  ]
+}

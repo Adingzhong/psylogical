@@ -1,0 +1,329 @@
+/* ===== 认知评估平台 — 统一样式 ===== */
+
+:root {
+  --primary: #1565C0;
+  --primary-hover: #1976D2;
+  --primary-press: #0D47A1;
+  --bg: #FFFFFF;
+  --surface: #F8F9FA;
+  --text: #1A1A2E;
+  --text-secondary: #666666;
+  --success: #4CAF50;
+  --error: #F44336;
+  --border: #E0E0E0;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --font: "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--font);
+  font-size: 18px;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  user-select: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ===== jsPsych 样式覆盖 ===== */
+.jspsych-display-element {
+  font-family: var(--font) !important;
+  font-size: 32px;
+  min-height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.jspsych-content {
+  max-width: 100% !important;
+  width: 100%;
+  font-family: var(--font) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 32px;
+}
+
+.jspsych-content-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  align-items: flex-start;
+}
+
+/* Center jsPsych button group below instruction content */
+.jspsych-btn-group-flex,
+.jspsych-btn-group-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 16px 0 24px;
+}
+
+/* 按钮统一样式 — 老年友好 (指导语/继续/开始按钮) */
+/* 与响应按钮同高(158px)，宽度稍窄(240px)，统一灰色让老人认"这种框能按" */
+.jspsych-btn,
+.btn-primary {
+  font-family: var(--font) !important;
+  font-size: 42px !important;
+  min-height: 131px;
+  min-width: 240px;
+  padding: 20px 56px;
+  border: 2px solid #707070;
+  border-radius: 12px;
+  background: #B0B0B0;
+  color: #1A1A1A;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.jspsych-btn:hover, .btn-primary:hover {
+  background: #C0C0C0;
+}
+
+.jspsych-btn:active, .btn-primary:active {
+  background: #8C8C8C;
+}
+
+/* 练习反馈 — 非惩罚性、统一样式 */
+.practice-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  font-size: 72px;
+  font-weight: bold;
+  font-family: var(--font);
+}
+.practice-feedback.correct { color: #66BB6A; }
+.practice-feedback.incorrect { color: #E57373; }
+.practice-feedback .detail {
+  font-size: 44px;
+  font-weight: normal;
+  margin-top: 20px;
+  color: #AAAAAA;
+}
+
+/* 注意力探针评分按钮 — 统一1-9量表 */
+.attn-probe-btn {
+  width: 96px;
+  height: 96px;
+  font-size: 40px;
+  font-weight: bold;
+  border: 2px solid #707070;
+  border-radius: 12px;
+  background: #B0B0B0;
+  color: #1A1A1A;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.15s;
+  font-family: var(--font);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.attn-probe-btn:active, .attn-probe-btn.selected {
+  background: #1565C0;
+  color: white;
+  border-color: #1565C0;
+}
+
+/* 响应按钮对（相同/不同, 左/右）— 左右两侧布局, 适合平板横屏 */
+.response-btn-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: fixed;
+  bottom: 40px;
+  left: 8%; right: 8%;
+}
+
+.response-btn {
+  font-family: var(--font);
+  font-size: 40px;
+  min-height: 96px;
+  min-width: 240px;
+  padding: 20px 60px;
+  border: 3px solid var(--border);
+  border-radius: var(--radius);
+  background: #F0F0F0;
+  color: var(--text);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.15s;
+}
+
+.response-btn:active {
+  background: #D0D0D0;
+  transform: scale(0.96);
+}
+
+/* 指导语页面 — leave room for button below */
+.instruction-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  max-height: none;
+  padding: 32px 40px 24px;
+  text-align: center;
+}
+
+.instruction-title {
+  font-size: 52px;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.instruction-body {
+  font-size: 36px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 900px;
+}
+
+.instruction-image {
+  max-height: 50vh;
+  max-width: 80vw;
+  object-fit: contain;
+  margin: 24px 0;
+  border-radius: 8px;
+}
+
+/* 注视点 */
+.fixation {
+  font-size: 80px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* 进度条 */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 4px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+  z-index: 999;
+}
+
+/* 卡片 */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+
+/* ===== 启动器样式 ===== */
+.launcher-header {
+  text-align: center;
+  padding: 28px 20px 16px;
+}
+
+.launcher-header h1 {
+  font-size: 42px;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.launcher-header p {
+  font-size: 20px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.subject-form {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.subject-form label {
+  font-size: 24px;
+  color: var(--text-secondary);
+}
+
+.subject-form input {
+  font-family: var(--font);
+  font-size: 28px;
+  padding: 12px 20px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+}
+
+.paradigm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.paradigm-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid transparent;
+}
+
+.paradigm-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+}
+
+.paradigm-card.done {
+  border-color: var(--success);
+}
+
+.paradigm-card .name {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.paradigm-card .desc {
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.paradigm-card .status {
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+.paradigm-card .status.done { color: var(--success); }
+.paradigm-card .status.pending { color: var(--text-secondary); }
+
+.action-bar {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px;
+}

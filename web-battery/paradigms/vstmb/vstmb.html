@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>VSTMB - 视觉短时记忆绑定</title>
+  <link rel="stylesheet" href="../../lib/jspsych.css?v=20260410e">
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    /* Full-viewport wrapper for centering grid above buttons */
+    .vstmb-trial-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      /* 使用 --vh 修正 iOS/平板浏览器 100vh 包含地址栏的问题 */
+      height: calc(var(--vh, 1vh) * 100 - 260px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      pointer-events: none;
+    }
+    /* VSTMB-specific grid and button styles */
+    .vstmb-grid-container {
+      position: relative;
+      width: 476px;   /* 2*190+96, overridden inline by JS */
+      height: 476px;
+      pointer-events: auto;
+    }
+    .vstmb-grid-cell {
+      position: absolute;
+      width: 96px;    /* matches original config object_size */
+      height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .vstmb-grid-cell img {
+      max-width: 96px;
+      max-height: 96px;
+      object-fit: contain;
+      background: transparent !important;  /* 确保透明背景融入灰色底 */
+    }
+    /* Persistent response buttons at bottom */
+    .vstmb-response-bar {
+      position: fixed;
+      bottom: 40px;
+      left: 8%; right: 8%;
+      display: flex;
+      justify-content: space-between;
+      z-index: 100;
+      pointer-events: none;
+    }
+    .vstmb-response-bar.active {
+      pointer-events: auto;
+    }
+    /* 按钮: 圆角矩形统一规范 */
+    .vstmb-btn {
+      min-width: 300px;
+      min-height: 131px;
+      padding: 20px 56px;
+      border-radius: 12px;
+      background: #B0B0B0;
+      border: 2px solid #707070;
+      color: #1A1A1A;
+      font-size: 42px;
+      font-weight: 600;
+      font-family: var(--font);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: background 0.12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* 原版 btn_press_color=[0.55]*3=#8C8C8C */
+    .vstmb-btn:active {
+      background: #8C8C8C;
+    }
+    .vstmb-btn.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .vstmb-feedback {
+      font-size: 56px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30vh;
+    }
+    .vstmb-feedback.correct { color: var(--success); }
+    .vstmb-feedback.incorrect { color: var(--error); }
+    .vstmb-feedback-detail {
+      font-size: 30px;
+      color: #000000;
+      text-align: center;
+      margin-top: 24px;
+      line-height: 1.6;
+    }
+    /* Collapse jsPsych button group when buttons are hidden (probe trials) */
+    .jspsych-btn-group-flex:has(button[style*="display:none"]),
+    .jspsych-btn-group-grid:has(button[style*="display:none"]) {
+      height: 0; overflow: hidden; margin: 0; padding: 0;
+    }
+
+    /* ===== Instruction Flow Diagram ===== */
+    .instr-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 12px auto;
+      flex-wrap: nowrap;
+    }
+    .instr-flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .instr-flow-label {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .instr-flow-box {
+      width: 200px;
+      height: 190px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .instr-flow-blank {
+      background: #f0f0f0;
+      border-style: dashed;
+    }
+    .instr-flow-grid {
+      display: grid;
+      grid-template: 1fr 1fr / 1fr 1fr 1fr;
+      gap: 2px;
+      padding: 8px;
+      width: 100%;
+      height: 100%;
+    }
+    .instr-flow-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .instr-flow-arrow {
+      width: 40px;
+      height: 3px;
+      background: #bbb;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .instr-flow-arrow::after {
+      content: '';
+      position: absolute;
+      right: -2px;
+      top: -5px;
+      border: 6px solid transparent;
+      border-left: 8px solid #bbb;
+    }
+    .instr-flow-judge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 12px;
+    }
+    .instr-mini-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: #C8C8C8;
+      color: #1A1A2E;
+      font-size: 26px;
+      font-weight: bold;
+      font-family: var(--font);
+      border: 2px solid #999;
+      flex-shrink: 0;
+    }
+
+    /* ===== Button Mapping Section ===== */
+    .instr-mapping-row {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 40px;
+      margin: 16px auto;
+    }
+    .instr-mapping-case {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 32px 48px;
+      background: var(--surface);
+      border-radius: 16px;
+      border: 2px solid var(--border);
+      min-width: 300px;
+    }
+    .instr-mapping-title {
+      font-size: 40px;
+      font-weight: bold;
+    }
+    .instr-mapping-pair {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 32px;
+    }
+    .instr-eq {
+      font-size: 44px;
+      font-weight: bold;
+      color: var(--success);
+    }
+    .instr-neq {
+      font-size: 44px;
+      font-weight: bold;
+      color: var(--error);
+    }
+    .instr-mapping-arrow-down {
+      width: 3px;
+      height: 24px;
+      background: #bbb;
+      position: relative;
+    }
+    .instr-mapping-arrow-down::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -5px;
+      border: 6px solid transparent;
+      border-top: 8px solid #bbb;
+    }
+    .instr-mapping-divider {
+      width: 2px;
+      background: var(--border);
+      align-self: stretch;
+    }
+    .instr-btn-highlight {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    /* ===== Per-Condition Instruction Page ===== */
+    .instr-block-header {
+      text-align: center;
+      font-size: 24px;
+      color: var(--text-secondary);
+      padding-top: 20px;
+      letter-spacing: 2px;
+    }
+    .instr-condition-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 20px 0;
+    }
+    .instr-condition-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .instr-condition-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      padding: 6px 28px;
+      border-radius: 24px;
+      margin-bottom: 12px;
+      letter-spacing: 4px;
+    }
+    .instr-condition-title {
+      font-size: 40px;
+      font-weight: bold;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .instr-condition-desc {
+      font-size: 28px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Same/Different Example Cards ===== */
+    .instr-example-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .instr-example-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 24px 20px 24px;
+      min-width: 360px;
+      max-width: 580px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .instr-same-card {
+      border: 2px solid #a5d6a7;
+    }
+    .instr-diff-card {
+      border: 2px solid #ef9a9a;
+    }
+    .instr-example-label {
+      font-size: 32px;
+      font-weight: bold;
+    }
+    .instr-example-compare {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .instr-example-phase {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .instr-phase-label {
+      font-size: 24px;
+      color: var(--text-secondary);
+    }
+    .instr-phase-items {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px;
+      background: white;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .instr-example-arrow {
+      width: 28px;
+      height: 3px;
+      background: #bbb;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .instr-example-arrow::after {
+      content: '';
+      position: absolute;
+      right: -2px;
+      top: -5px;
+      border: 6px solid transparent;
+      border-left: 8px solid #bbb;
+    }
+    .instr-example-verdict {
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* 确保指导语内容区域不撑破视口，jsPsych 按钮不被推出屏幕 */
+    #jspsych-target .jspsych-display-element {
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+    .instruction-page {
+      max-height: calc(var(--vh, 1vh) * 100 - 140px);
+      overflow-y: auto;
+      justify-content: flex-start;
+      padding-bottom: 16px;
+    }
+    /* jsPsych 按钮组固定在底部，背景用灰色（匹配VSTMB全程#808080底色） */
+    #jspsych-html-button-response-btngroup {
+      position: sticky;
+      bottom: 0;
+      background: rgba(128, 128, 128, 0.97);
+      padding: 12px 0 16px;
+      z-index: 200;
+    }
+
+    /* Probe 试次：原生 jsPsych 按钮样式为圆形，固定在屏幕底部两侧 */
+    .vstmb-probe #jspsych-html-button-response-btngroup {
+      position: fixed;
+      bottom: 40px;
+      left: 8%;
+      right: 8%;
+      display: flex;
+      justify-content: space-between;
+      background: transparent;
+      padding: 0;
+      z-index: 100;
+    }
+    .vstmb-probe .jspsych-btn {
+      min-width: 300px;
+      min-height: 131px;
+      padding: 20px 56px;
+      border-radius: 12px;
+      background: #B0B0B0;
+      border: 2px solid #707070;
+      color: #1A1A1A;
+      font-size: 42px;
+      font-weight: 600;
+      font-family: var(--font);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      touch-action: none;
+      transition: background 0.12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .vstmb-probe .jspsych-btn:active {
+      background: #8C8C8C;
+    }
+  </style>
+</head>
+<body>
+  <div id="jspsych-target"></div>
+  <script src="../../lib/jspsych.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-button-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/canvas-button-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/call-function.js?v=20260410e"></script>
+  <script src="../../lib/plugins/preload.js?v=20260410e"></script>
+  <script src="../../lib/paradigm-camera.js?v=20260419f"></script>
+  <script src="../../lib/jszip.min.js?v=20260410b"></script>
+  <script src="../../lib/end-screen.js?v=20260419g"></script>
+  <script src="../../lib/safe-fetch.js?v=20260418a"></script>
+  <script src="../../lib/attention-probe.js?v=20260410e"></script>
+  <script src="../../lib/progress.js?v=20260419a"></script>
+  <script src="../../lib/touch-hardening.js?v=20260419c"></script>
+  <script src="../../lib/voice-guide.js?v=20260423j"></script>
+  <script src="vstmb.js?v=20260419g"></script>
+</body>
+</html>

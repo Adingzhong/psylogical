@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>设备适配检查</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { touch-action: none; overscroll-behavior: none; }
+    body { background: #000; overflow: hidden; width: 100vw; height: 100vh; position: relative; }
+
+    /* === Instruction overlay === */
+    .instruction-overlay {
+      position: fixed; inset: 0; background: #F5F6FA; z-index: 100;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .instruction-overlay h1 { font-size: 48px; color: #1A1A2E; margin-bottom: 24px; }
+    .instruction-overlay p {
+      font-size: 28px; color: #555; max-width: 700px; text-align: center;
+      line-height: 1.6; margin-bottom: 40px;
+    }
+    /* start-btn 继承 common.css .jspsych-btn，不额外写样式 */
+    .instruction-overlay .phase-label {
+      font-size: 20px; color: #999; margin-bottom: 12px; letter-spacing: 2px;
+    }
+
+    /* === Touch target === */
+    .touch-target {
+      position: absolute; width: 120px; height: 120px; border-radius: 50%;
+      background: #1E88E5; box-shadow: 0 0 40px rgba(30,136,229,0.5);
+      display: none; cursor: pointer; z-index: 10;
+    }
+    .touch-target.success {
+      background: #66BB6A; box-shadow: 0 0 40px rgba(102,187,106,0.5);
+    }
+    .touch-target.miss {
+      background: #555; box-shadow: none; opacity: 0.3;
+    }
+
+    /* === Touch counter (top-right, like paradigm trial counter) === */
+    .touch-counter {
+      position: fixed; top: 16px; right: 24px; font-size: 20px;
+      color: rgba(255,255,255,0.5); z-index: 15;
+    }
+
+    /* === Smooth pursuit dot === */
+    .pursuit-dot {
+      position: absolute; width: 40px; height: 40px; border-radius: 50%;
+      background: #FFD600; box-shadow: 0 0 24px rgba(255,214,0,0.6);
+      display: none; z-index: 10;
+      transform: translate(-50%, -50%);
+    }
+
+    /* === Progress bar === */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 4px; background: #1E88E5;
+      z-index: 50; transition: width 0.3s;
+    }
+
+    /* === Completion screen (participant sees) === */
+    .complete-overlay {
+      position: fixed; inset: 0; background: #F5F6FA; z-index: 100;
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      padding: 40px;
+    }
+    .complete-overlay h1 { font-size: 52px; color: #43A047; margin-bottom: 16px; }
+    .complete-overlay .msg {
+      font-size: 28px; color: #555; text-align: center; line-height: 1.6;
+      margin-bottom: 48px;
+    }
+    /* Researcher controls: small, bottom area */
+    .researcher-panel {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #F0F0F0; border-top: 1px solid #DDD;
+      padding: 12px 24px; display: flex; align-items: center;
+      justify-content: space-between; z-index: 101;
+    }
+    .researcher-panel .stats {
+      font-size: 13px; color: #999; font-family: monospace;
+    }
+    .researcher-panel .stats .warn { color: #FF9800; font-weight: 600; }
+    .researcher-panel .stats .bad { color: #EF5350; font-weight: 600; }
+    .researcher-panel .btns { display: flex; gap: 12px; }
+    .researcher-panel .btns button {
+      padding: 10px 28px; font-size: 18px; border: 2px solid #707070; border-radius: 10px;
+      cursor: pointer; font-family: var(--font); font-weight: 600;
+      min-height: 52px; touch-action: manipulation;
+    }
+    .btn-retry { background: #FFB74D; color: #1A1A1A; }
+    .btn-retry:active { background: #FF9800; }
+    .btn-proceed { background: #81C784; color: #1A1A1A; }
+    .btn-proceed:active { background: #43A047; }
+
+    /* === Camera preview (small) === */
+    .cam-preview {
+      position: fixed; bottom: 60px; right: 16px; width: 140px; height: 105px;
+      border-radius: 8px; overflow: hidden; z-index: 20; opacity: 0.4;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .cam-preview video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar" style="width:0%"></div>
+  <div class="touch-counter" id="touchCounter" style="display:none"></div>
+
+  <!-- Phase 1 Instruction -->
+  <div class="instruction-overlay" id="touchInstruction">
+    <div class="phase-label">第 1 步 / 共 2 步</div>
+    <h1>触屏练习</h1>
+    <p>屏幕上会出现蓝色圆点<br>请用手指点一下它</p>
+    <button class="jspsych-btn" id="startTouchBtn">播放</button>
+    <button class="jspsych-btn" id="retryTouchBtn" style="display:none;margin-top:20px;">再听一遍</button>
+    <button id="skipTouchBtn" style="display:none;position:fixed;top:12px;right:12px;padding:6px 14px;min-height:28px;font-size:13px;font-family:'PingFang SC',sans-serif;background:rgba(60,60,60,0.55);color:#fff;border:none;border-radius:6px;cursor:pointer;touch-action:manipulation;z-index:10000;">跳过 (Esc)</button>
+  </div>
+
+  <!-- Phase 2 Instruction -->
+  <div class="instruction-overlay" id="pursuitInstruction" style="display:none">
+    <div class="phase-label">第 2 步 / 共 2 步</div>
+    <h1>看小圆点</h1>
+    <p>屏幕上会出现一个黄色小圆点<br>请用眼睛跟着它看，不需要点击</p>
+    <button class="jspsych-btn" id="startPursuitBtn">播放</button>
+    <button class="jspsych-btn" id="retryPursuitBtn" style="display:none;margin-top:20px;">再听一遍</button>
+    <button id="skipPursuitBtn" style="display:none;position:fixed;top:12px;right:12px;padding:6px 14px;min-height:28px;font-size:13px;font-family:'PingFang SC',sans-serif;background:rgba(60,60,60,0.55);color:#fff;border:none;border-radius:6px;cursor:pointer;touch-action:manipulation;z-index:10000;">跳过 (Esc)</button>
+  </div>
+
+  <!-- Touch target -->
+  <div class="touch-target" id="touchTarget"></div>
+
+  <!-- Pursuit dot -->
+  <div class="pursuit-dot" id="pursuitDot"></div>
+
+  <!-- Camera preview -->
+  <div class="cam-preview" id="camPreview" style="display:none">
+    <video id="camVideo" autoplay playsinline muted></video>
+  </div>
+
+  <!-- Completion (participant sees this) -->
+  <div class="complete-overlay" id="completeOverlay">
+    <h1>做得很好！</h1>
+    <p class="msg" id="completeMsg">准备工作已完成<br>接下来我们开始正式的评估</p>
+    <!-- Researcher panel at bottom -->
+    <div class="researcher-panel" id="researcherPanel">
+      <div class="stats" id="researcherStats"></div>
+      <div class="btns">
+        <button class="btn-retry" onclick="retryTouch()">重试触屏</button>
+        <button class="btn-proceed" onclick="proceed()">通过，开始评估</button>
+      </div>
+    </div>
+  </div>
+
+<script src="../../lib/safe-fetch.js?v=20260418a"></script>
+<script src="../../lib/jszip.min.js?v=20260410b"></script>
+<script src="../../lib/paradigm-camera.js?v=20260419f"></script>
+<script src="../../lib/end-screen.js?v=20260419g"></script>
+<script src="../../lib/touch-hardening.js?v=20260419c"></script>
+<script>
+// ============ CONFIG ============
+const TOUCH_TARGETS = 10;
+const TOUCH_TIMEOUT_MS = 5000;
+const TOUCH_TARGET_SIZE = 120; // px
+const PURSUIT_DURATION_MS = 25000; // 25 seconds
+
+// Smooth pursuit path: normalized (0-1), Neurotrack-inspired
+const PURSUIT_PATH = [
+  [0.5, 0.5],   // center
+  [0.15, 0.15], // top-left
+  [0.85, 0.15], // top-right
+  [0.85, 0.85], // bottom-right
+  [0.15, 0.85], // bottom-left
+  [0.5, 0.5],   // center
+  [0.15, 0.5],  // left
+  [0.85, 0.5],  // right
+  [0.5, 0.15],  // top
+  [0.5, 0.85],  // bottom
+  [0.5, 0.5],   // center (end)
+];
+
+// ============ STATE ============
+const sid = new URLSearchParams(location.search).get('sid') || 'unknown';
+let touchResults = [];
+let cameraStream = null;
+let mediaRecorder = null;
+let videoChunks = [];
+let pursuitTimestamps = [];
+
+// ============ CAMERA ============
+async function startCamera() {
+  try {
+    // 先获取摄像头权限（验证设备可用）
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } },
+      audio: false
+    });
+    const video = document.getElementById('camVideo');
+    video.srcObject = cameraStream;
+    document.getElementById('camPreview').style.display = 'block';
+
+    // 必须先设camera_enabled，ParadigmCamera.init()会检查这个flag
+    localStorage.setItem('camera_enabled', 'true');
+
+    // 再初始化ParadigmCamera（面孔对齐+全程录制）
+    if (typeof ParadigmCamera !== 'undefined') {
+      await ParadigmCamera.init('precheck', sid);
+    }
+  } catch (e) {
+    console.warn('Camera not available:', e);
+    localStorage.setItem('camera_enabled', 'false');
+  }
+}
+
+function startRecording() {
+  if (!cameraStream) return;
+  videoChunks = [];
+  try {
+    mediaRecorder = new MediaRecorder(cameraStream, { mimeType: 'video/webm;codecs=vp9' });
+  } catch {
+    mediaRecorder = new MediaRecorder(cameraStream);
+  }
+  mediaRecorder.ondataavailable = e => { if (e.data.size > 0) videoChunks.push(e.data); };
+  mediaRecorder.start(1000);
+}
+
+function stopRecording() {
+  return new Promise(resolve => {
+    if (!mediaRecorder || mediaRecorder.state === 'inactive') { resolve(null); return; }
+    mediaRecorder.onstop = () => resolve(new Blob(videoChunks, { type: 'video/webm' }));
+    mediaRecorder.stop();
+  });
+}
+
+// ============ TOUCH CHECK ============
+function randomPosition(margin = 100) {
+  const w = window.innerWidth, h = window.innerHeight;
+  return {
+    x: margin + Math.random() * (w - 2 * margin),
+    y: margin + Math.random() * (h - 2 * margin)
+  };
+}
+
+function runTouchCheck() {
+  return new Promise(resolve => {
+    touchResults = [];
+    let idx = 0;
+    const target = document.getElementById('touchTarget');
+    const progress = document.getElementById('progressBar');
+    const counter = document.getElementById('touchCounter');
+    counter.style.display = 'block';
+
+    function showNext() {
+      if (idx >= TOUCH_TARGETS) {
+        target.style.display = 'none';
+        counter.style.display = 'none';
+        resolve(touchResults);
+        return;
+      }
+
+      counter.textContent = `${idx + 1} / ${TOUCH_TARGETS}`;
+      const pos = randomPosition();
+      target.style.left = (pos.x - TOUCH_TARGET_SIZE / 2) + 'px';
+      target.style.top = (pos.y - TOUCH_TARGET_SIZE / 2) + 'px';
+      target.className = 'touch-target';
+      target.style.display = 'block';
+      progress.style.width = ((idx / TOUCH_TARGETS) * 50) + '%';
+
+      const showTime = performance.now();
+      let responded = false;
+
+      const timeout = setTimeout(() => {
+        if (!responded) {
+          responded = true;
+          touchResults.push({
+            idx, success: false, rt: null, miss: true,
+            drift_max: null, drift_path: null, drift_end: null,
+            hold: null, input_type: null,
+            x: Math.round(pos.x), y: Math.round(pos.y)
+          });
+          target.className = 'touch-target miss';
+          setTimeout(() => { idx++; showNext(); }, 500);
+        }
+      }, TOUCH_TIMEOUT_MS);
+
+      // 完整触屏追踪：pointerdown→pointermove→pointerup，记录hold+drift
+      let _downTime = 0, _downX = 0, _downY = 0;
+      let _driftMax = 0, _driftPath = 0, _lastMX = 0, _lastMY = 0;
+      let _pointerId = null;
+
+      function onDown(e) {
+        if (responded || !e.isPrimary) return;
+        _downTime = performance.now();
+        _downX = e.clientX; _downY = e.clientY;
+        _lastMX = e.clientX; _lastMY = e.clientY;
+        _driftMax = 0; _driftPath = 0;
+        _pointerId = e.pointerId;
+        try { target.setPointerCapture(e.pointerId); } catch(err) {}
+        target.addEventListener('pointermove', onMove);
+        target.addEventListener('pointerup', onUp, { once: true });
+      }
+
+      function onMove(e) {
+        if (e.pointerId !== _pointerId) return;
+        const dx = e.clientX - _downX, dy = e.clientY - _downY;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist > _driftMax) _driftMax = dist;
+        _driftPath += Math.sqrt(Math.pow(e.clientX-_lastMX,2) + Math.pow(e.clientY-_lastMY,2));
+        _lastMX = e.clientX; _lastMY = e.clientY;
+      }
+
+      function onUp(e) {
+        if (responded) return;
+        responded = true;
+        clearTimeout(timeout);
+        target.removeEventListener('pointermove', onMove);
+        target.removeEventListener('pointerdown', onDown);
+
+        const rt = _downTime - showTime; // RT = pointerdown时刻（认知决策时间）
+        const hold = performance.now() - _downTime; // hold = down→up
+        const driftEnd = Math.sqrt(Math.pow(e.clientX-_downX,2) + Math.pow(e.clientY-_downY,2));
+
+        touchResults.push({
+          idx, success: true, rt: Math.round(rt), miss: false,
+          drift_max: Math.round(_driftMax),
+          drift_path: Math.round(_driftPath),
+          drift_end: Math.round(driftEnd),
+          hold: Math.round(hold),
+          input_type: e.pointerType || 'unknown',
+          x: Math.round(pos.x), y: Math.round(pos.y)
+        });
+        target.className = 'touch-target success';
+        setTimeout(() => { idx++; showNext(); }, 300);
+      }
+
+      target.addEventListener('pointerdown', onDown, { once: true });
+    }
+
+    showNext();
+  });
+}
+
+// ============ SMOOTH PURSUIT ============
+function runSmoothPursuit() {
+  return new Promise(resolve => {
+    const dot = document.getElementById('pursuitDot');
+    const progress = document.getElementById('progressBar');
+    const w = window.innerWidth, h = window.innerHeight;
+
+    startRecording();
+    dot.style.display = 'block';
+    pursuitTimestamps = [];
+
+    const totalSegments = PURSUIT_PATH.length - 1;
+    const segmentDuration = PURSUIT_DURATION_MS / totalSegments;
+    const startTime = performance.now();
+
+    pursuitTimestamps.push({
+      time_ms: 0, event: 'pursuit_start', screen_w: w, screen_h: h
+    });
+
+    let lastLoggedSeg = -1;
+
+    function animate() {
+      const elapsed = performance.now() - startTime;
+      if (elapsed >= PURSUIT_DURATION_MS) {
+        dot.style.display = 'none';
+        pursuitTimestamps.push({ time_ms: Math.round(elapsed), event: 'pursuit_end' });
+        resolve();
+        return;
+      }
+
+      const segIdx = Math.min(Math.floor(elapsed / segmentDuration), totalSegments - 1);
+      const segProgress = (elapsed - segIdx * segmentDuration) / segmentDuration;
+      // Ease in-out
+      const t = segProgress < 0.5
+        ? 2 * segProgress * segProgress
+        : 1 - Math.pow(-2 * segProgress + 2, 2) / 2;
+
+      const from = PURSUIT_PATH[segIdx];
+      const to = PURSUIT_PATH[segIdx + 1];
+      const x = from[0] + (to[0] - from[0]) * t;
+      const y = from[1] + (to[1] - from[1]) * t;
+
+      dot.style.left = (x * w) + 'px';
+      dot.style.top = (y * h) + 'px';
+
+      // Log at segment start
+      if (segIdx !== lastLoggedSeg) {
+        lastLoggedSeg = segIdx;
+        pursuitTimestamps.push({
+          time_ms: Math.round(elapsed),
+          event: `segment_${segIdx}_to`,
+          from_x: Math.round(from[0] * w), from_y: Math.round(from[1] * h),
+          to_x: Math.round(to[0] * w), to_y: Math.round(to[1] * h)
+        });
+      }
+
+      progress.style.width = (50 + (elapsed / PURSUIT_DURATION_MS) * 50) + '%';
+      requestAnimationFrame(animate);
+    }
+
+    // Place at start, wait 1s, then go
+    dot.style.left = (PURSUIT_PATH[0][0] * w) + 'px';
+    dot.style.top = (PURSUIT_PATH[0][1] * h) + 'px';
+    setTimeout(() => requestAnimationFrame(animate), 1000);
+  });
+}
+
+// ============ ANALYSIS ============
+function analyzeTouch(results) {
+  const successes = results.filter(r => r.success);
+  const successRate = successes.length / results.length;
+  const avgRT = successes.length > 0
+    ? successes.reduce((s, r) => s + r.rt, 0) / successes.length : null;
+  const missCount = results.filter(r => r.miss).length;
+  const avgDriftMax = successes.length > 0
+    ? successes.reduce((s, r) => s + (r.drift_max || 0), 0) / successes.length : null;
+  const avgHold = successes.length > 0
+    ? successes.reduce((s, r) => s + (r.hold || 0), 0) / successes.length : null;
+  return { successRate, avgRT, missCount, avgDrift: avgDriftMax, avgHold };
+}
+
+// ============ COMPLETION SCREEN ============
+function showCompletion(touchAnalysis) {
+  const { successRate, avgRT, missCount, avgDrift, avgHold } = touchAnalysis;
+
+  // Participant sees only encouragement
+  const overlay = document.getElementById('completeOverlay');
+  const msg = document.getElementById('completeMsg');
+
+  if (successRate >= 0.8) {
+    msg.innerHTML = '准备工作已完成<br>接下来我们开始正式的评估';
+  } else {
+    msg.innerHTML = '练习完成了！<br>请稍等一下';
+  }
+  overlay.style.display = 'flex';
+
+  // Researcher sees stats at bottom
+  const stats = document.getElementById('researcherStats');
+  const srLabel = successRate >= 0.8 ? '' : successRate >= 0.6 ? 'warn' : 'bad';
+  const rtLabel = avgRT && avgRT > 3000 ? 'warn' : '';
+  const missLabel = missCount > 2 ? 'warn' : '';
+
+  let alert = '';
+  if (successRate < 0.8) alert = ' | <span class="bad">建议涂护手霜后重试</span>';
+  else if (avgRT > 3000) alert = ' | <span class="warn">操作较慢，建议引导练习</span>';
+
+  stats.innerHTML =
+    `成功 <span class="${srLabel}">${Math.round(successRate*100)}%</span>` +
+    ` | RT <span class="${rtLabel}">${avgRT ? Math.round(avgRT)+'ms' : '—'}</span>` +
+    ` | 漏点 <span class="${missLabel}">${missCount}</span>` +
+    ` | 漂移 ${avgDrift ? Math.round(avgDrift)+'px' : '—'}` +
+    ` | 按住 ${avgHold ? Math.round(avgHold)+'ms' : '—'}` +
+    alert;
+}
+
+// ============ DATA SAVE ============
+let _precheckSaved = false;
+async function saveData(touchAnalysis, videoBlob, isRetry) {
+  // 重试时允许再次保存（isRetry=true），否则防重复
+  if (_precheckSaved && !isRetry) return;
+  _precheckSaved = true;
+  const ts = new Date().toISOString().slice(0, 19).replace(/[:-]/g, '');
+
+  const csvHeader = 'trial,success,rt_ms,miss,drift_max_px,drift_path_px,drift_end_px,hold_ms,input_type,target_x,target_y\n';
+  const csvRows = touchResults.map(r =>
+    [r.idx, r.success, r.rt || '',
+     r.miss, r.drift_max || '', r.drift_path || '', r.drift_end || '',
+     r.hold || '', r.input_type || '',
+     r.x, r.y].join(',')
+  ).join('\n');
+
+  const pursuitCsv = 'time_ms,event,from_x,from_y,to_x,to_y,screen_w,screen_h\n' +
+    pursuitTimestamps.map(p =>
+      [p.time_ms, p.event, p.from_x||'', p.from_y||'', p.to_x||'', p.to_y||'',
+       p.screen_w||'', p.screen_h||''].join(',')
+    ).join('\n');
+
+  const summary = {
+    subject_id: sid,
+    timestamp: new Date().toISOString(),
+    screen: { width: window.innerWidth, height: window.innerHeight },
+    touch: touchAnalysis,
+    pursuit: { duration_ms: PURSUIT_DURATION_MS, path_points: PURSUIT_PATH.length }
+  };
+
+  const formData = new FormData();
+  formData.append('subject_id', sid);
+  formData.append('paradigm', 'precheck');
+  formData.append(`precheck_touch_${ts}.csv`,
+    new Blob(['\uFEFF' + csvHeader + csvRows], { type: 'text/csv' }));
+  formData.append(`precheck_pursuit_${ts}.csv`,
+    new Blob(['\uFEFF' + pursuitCsv], { type: 'text/csv' }));
+  formData.append(`precheck_summary_${ts}.json`,
+    new Blob([JSON.stringify(summary, null, 2)], { type: 'application/json' }));
+  // 追踪视频不进 FormData：ParadigmCamera 已录全程，pursuit 视频冗余
+  // 与其他范式一致：视频统一由 ParadigmCamera.stopAndSave() 处理
+
+  // LocalPack注册（ZIP备份）
+  if (typeof LocalPack !== 'undefined') {
+    LocalPack.add(`precheck_touch_${ts}.csv`, '\uFEFF' + csvHeader + csvRows);
+    LocalPack.add(`precheck_pursuit_${ts}.csv`, '\uFEFF' + pursuitCsv);
+    LocalPack.add(`precheck_summary_${ts}.json`, JSON.stringify(summary, null, 2));
+  }
+
+  // await safeFetch：只有 CSV/JSON（几KB），与其他范式一致
+  try {
+    var _pFetch = typeof safeFetch === 'function' ? safeFetch : fetch;
+    var resp = await _pFetch('/api/save-multi', { method: 'POST', body: formData });
+    if (!resp.ok) throw new Error('server ' + resp.status);
+  } catch (e) {
+    console.warn('[precheck] Server save failed, LocalPack has backup:', e);
+    localStorage.setItem('precheck_' + sid + '_' + ts, JSON.stringify(summary));
+  }
+}
+
+// ============ MAIN FLOW ============
+let _lastTouchAnalysis = null;
+
+// 播放→播放中→开始 的统一流程(支持"再听一遍"+ 主试模式"跳过")
+function playThenStart(btnId, audioSrc, retryBtnId, skipBtnId) {
+  return new Promise(function(resolve) {
+    var btn = document.getElementById(btnId);
+    var retryBtn = retryBtnId ? document.getElementById(retryBtnId) : null;
+    var skipBtn = skipBtnId ? document.getElementById(skipBtnId) : null;
+    var currentAudio = null;
+    var escHandler = null;
+
+    // 学生模式: 跳过音频,按钮直接显示"开始",点一下就走
+    var studentMode = false;
+    try { studentMode = localStorage.getItem('student_mode') === '1'; } catch(e){}
+    if (!studentMode) {
+      try { studentMode = new URLSearchParams(location.search).get('student') === '1'; } catch(e){}
+    }
+
+    // 重入支持(retryTouch 会再次调用 playThenStart)
+    btn.textContent = studentMode ? '开始' : '播放';
+    btn.style.opacity = '1';
+    btn.removeAttribute('disabled');
+    if (retryBtn) retryBtn.style.display = 'none';
+    if (skipBtn) skipBtn.style.display = 'none';
+
+    function cleanup() {
+      if (escHandler) { document.removeEventListener('keydown', escHandler); escHandler = null; }
+      try { if (currentAudio) currentAudio.pause(); } catch(e){}
+      if (skipBtn) skipBtn.style.display = 'none';
+    }
+
+    function doSkip() {
+      cleanup();
+      resolve();
+    }
+
+    function playAudio() {
+      btn.textContent = '播放中...';
+      btn.style.opacity = '0.5';
+      btn.setAttribute('disabled', 'disabled');
+      if (retryBtn) retryBtn.style.display = 'none';
+      currentAudio = new Audio(audioSrc);
+      function enableStart() {
+        btn.textContent = '开始';
+        btn.style.opacity = '1';
+        btn.removeAttribute('disabled');
+        if (retryBtn) retryBtn.style.display = '';
+        btn.addEventListener('pointerdown', onStartClick, { once: true });
+        if (retryBtn) retryBtn.addEventListener('pointerdown', onRetryClick, { once: true });
+      }
+      currentAudio.onended = enableStart;
+      currentAudio.onerror = enableStart;
+      currentAudio.play().catch(enableStart);
+    }
+
+    function onStartClick() {
+      if (retryBtn) {
+        retryBtn.removeEventListener('pointerdown', onRetryClick);
+        retryBtn.style.display = 'none';
+      }
+      cleanup();
+      resolve();
+    }
+
+    function onRetryClick() {
+      btn.removeEventListener('pointerdown', onStartClick);
+      playAudio();
+    }
+
+    btn.addEventListener('pointerdown', function firstClick() {
+      if (studentMode) {
+        // 学生模式: 不播音频,点一下直接进入下一步
+        cleanup();
+        resolve();
+      } else {
+        playAudio();
+      }
+    }, { once: true });
+
+    // 主试模式:显示跳过按钮 + Esc
+    var testerMode = false;
+    try { testerMode = localStorage.getItem('tester_mode') === '1'; } catch(e){}
+    if (testerMode && skipBtn) {
+      skipBtn.style.display = 'block';
+      skipBtn.addEventListener('pointerdown', doSkip, { once: true });
+      escHandler = function(e) { if (e.key === 'Escape') doSkip(); };
+      document.addEventListener('keydown', escHandler);
+    }
+  });
+}
+
+async function main() {
+  await startCamera();
+
+  // Phase 1: Touch — 播放语音，播完后才能点开始
+  await playThenStart('startTouchBtn', '../../audio/precheck/s01.mp3', 'retryTouchBtn', 'skipTouchBtn');
+  document.getElementById('touchInstruction').style.display = 'none';
+
+  const touchData = await runTouchCheck();
+  _lastTouchAnalysis = analyzeTouch(touchData);
+
+  // Phase 2: Pursuit — 同样播完才能开始
+  document.getElementById('pursuitInstruction').style.display = 'flex';
+  await playThenStart('startPursuitBtn', '../../audio/precheck/s02.mp3', 'retryPursuitBtn', 'skipPursuitBtn');
+  document.getElementById('pursuitInstruction').style.display = 'none';
+
+  await runSmoothPursuit();
+  const videoBlob = await stopRecording();
+
+  // 黑→白平滑过渡（防闪眼）
+  await new Promise(r => {
+    document.body.style.transition = 'background 1.5s ease';
+    document.body.style.background = '#F5F6FA';
+    setTimeout(r, 1500);
+  });
+
+  // stopAndSave：merge chunk + LocalPack注册
+  if (typeof ParadigmCamera !== 'undefined') {
+    try { await ParadigmCamera.stopAndSave(); } catch(e) { console.warn('ParadigmCamera:', e); }
+  }
+
+  // CSV/JSON保存 + LocalPack注册
+  await saveData(_lastTouchAnalysis, videoBlob);
+
+  // 提前生成ZIP（STORE模式 < 100ms），这样proceed()里不需要await，
+  // a.click()可以留在用户手势调用栈内，不被浏览器拦截
+  await _prepareZip();
+
+  // 全部本地数据就绪，显示结果页
+  document.getElementById('progressBar').style.width = '100%';
+  showCompletion(_lastTouchAnalysis);
+}
+
+// ============ ZIP PRE-GENERATION ============
+var _precheckZipUrl = null;
+var _precheckZipName = '';
+var _precheckVideoUrls = []; // [{url, name}] 大视频单独下载
+
+async function _prepareZip() {
+  if (_precheckZipUrl) { URL.revokeObjectURL(_precheckZipUrl); _precheckZipUrl = null; }
+  _precheckVideoUrls.forEach(function(v) { URL.revokeObjectURL(v.url); });
+  _precheckVideoUrls = [];
+
+  if (typeof LocalPack === 'undefined' || typeof JSZip === 'undefined') return;
+  var files = LocalPack.getAll();
+  if (files.length === 0) return;
+  try {
+    var zip = new JSZip();
+    for (var i = 0; i < files.length; i++) {
+      var f = files[i];
+      // 大Blob（>2MB）不进ZIP，单独下载
+      if (f.data instanceof Blob && f.data.size > 2 * 1024 * 1024) {
+        _precheckVideoUrls.push({ url: URL.createObjectURL(f.data), name: f.name });
+        continue;
+      }
+      // 小Blob用STORE（已压缩，DEFLATE无意义），文本用默认DEFLATE
+      var opts = (f.data instanceof Blob) ? { compression: 'STORE' } : {};
+      zip.file(f.name, f.data, opts);
+    }
+    var blob = await zip.generateAsync({
+      type: 'blob',
+      compression: 'DEFLATE',
+      compressionOptions: { level: 1 }
+    });
+    _precheckZipUrl = URL.createObjectURL(blob);
+    _precheckZipName = sid + '_precheck_' + new Date().toISOString().slice(0,19).replace(/[:-]/g,'') + '.zip';
+    console.log('[precheck] ZIP pre-generated:', _precheckZipName, (blob.size/1024).toFixed(0) + 'KB, videos separate:', _precheckVideoUrls.length);
+  } catch(e) { console.warn('[precheck] ZIP pre-gen failed:', e); }
+}
+
+window.retryTouch = async function() {
+  document.getElementById('completeOverlay').style.display = 'none';
+  document.getElementById('progressBar').style.width = '0%';
+
+  document.getElementById('touchInstruction').style.display = 'flex';
+  document.getElementById('touchInstruction').querySelector('h1').textContent = '再试一次';
+  document.getElementById('touchInstruction').querySelector('p').innerHTML =
+    '我们再练习一下<br>请点击蓝色圆点';
+  document.getElementById('startTouchBtn').textContent = '播放';
+
+  await playThenStart('startTouchBtn', '../../audio/precheck/s01.mp3', 'retryTouchBtn', 'skipTouchBtn');
+  document.getElementById('touchInstruction').style.display = 'none';
+
+  const touchData = await runTouchCheck();
+  _lastTouchAnalysis = analyzeTouch(touchData);
+
+  // Re-save + 重新生成ZIP
+  await saveData(_lastTouchAnalysis, null, true);
+  await _prepareZip();
+  showCompletion(_lastTouchAnalysis);
+};
+
+// proceed()是同步的！没有await！
+// 由按钮onclick触发 → a.click()在同一个用户手势调用栈 → 不被拦截
+window.proceed = function() {
+  // 只触发 ZIP 下载（一次 a.click，Edge 允许）
+  if (_precheckZipUrl) {
+    var a = document.createElement('a');
+    a.href = _precheckZipUrl;
+    a.download = _precheckZipName;
+    document.body.appendChild(a);
+    a.click();
+    console.log('[precheck] ZIP download triggered');
+  }
+  // 大视频不自动下载（Edge 会拦截第二次 a.click），通过 showEndScreen 的手动按钮下载
+  LocalPack.clear();
+  localStorage.setItem(`done_${sid}_precheck`, Date.now());
+  if (window.opener) {
+    window.opener.postMessage({ paradigm: 'precheck', status: 'done' }, '*');
+  }
+  // 如果有视频需要手动下载，不自动关窗口——改用 showEndScreen
+  if (_precheckVideoUrls.length > 0 || (typeof ParadigmCamera !== 'undefined' && ParadigmCamera._lastVideoUrl)) {
+    showEndScreen('precheck', sid);
+  } else {
+    setTimeout(function() { window.close(); }, 3000);
+  }
+};
+
+main();
+</script>
+</body>
+</html>

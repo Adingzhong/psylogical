@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMT 红框区域编辑器</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'PingFang SC', sans-serif; background: #1a1a2e; color: #fff; }
+
+  /* ---- Top toolbar ---- */
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(26,26,46,0.97); padding: 8px 16px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    border-bottom: 1px solid #333;
+  }
+  .toolbar select, .toolbar button {
+    font-size: 14px; padding: 5px 12px; border-radius: 6px; border: 1px solid #555;
+    background: #2a2a4a; color: #fff; cursor: pointer;
+  }
+  .toolbar button:hover { background: #3a3a6a; }
+  .toolbar button.danger { border-color: #E53935; color: #E53935; }
+  .toolbar button.danger:hover { background: #E53935; color: #fff; }
+
+  /* ---- Left: step list panel ---- */
+  .side-panel {
+    position: fixed; top: 44px; left: 0; bottom: 160px; width: 340px; z-index: 100;
+    background: rgba(26,26,46,0.95); overflow-y: auto;
+    border-right: 1px solid #333; padding: 8px;
+  }
+  .step-card {
+    padding: 8px 10px; margin-bottom: 6px; border-radius: 8px;
+    background: #2a2a4a; border: 2px solid transparent; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .step-card.selected { border-color: #E53935; background: #3a2a3a; }
+  .step-card .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .step-card .step-num { font-size: 13px; font-weight: bold; color: #E53935; }
+  .step-card.selected .step-num { color: #ff6659; }
+  .step-card .step-coords { font-size: 11px; color: #888; font-family: monospace; }
+  .step-card textarea {
+    width: 100%; font-size: 13px; padding: 4px 6px; border-radius: 4px;
+    border: 1px solid #444; background: #1a1a2e; color: #ddd; resize: vertical;
+    min-height: 36px; font-family: 'PingFang SC', sans-serif;
+  }
+
+  /* ---- Center: image area ---- */
+  .canvas-area {
+    margin-left: 340px; margin-top: 44px; margin-bottom: 160px;
+    display: flex; justify-content: center; align-items: center;
+    height: calc(100vh - 204px); background: #F0F2F5;
+  }
+  .img-container { position: relative; display: inline-block; }
+  .img-container img {
+    max-width: calc(100vw - 380px); max-height: calc(100vh - 220px);
+    object-fit: contain; border-radius: 8px;
+    user-select: none; -webkit-user-drag: none;
+  }
+
+  /* Region boxes */
+  .region-box {
+    position: absolute; border: 3px solid #E53935; border-radius: 6px;
+    cursor: move; background: rgba(229,57,53,0.06);
+    box-shadow: 0 0 0 3px rgba(229,57,53,0.15);
+  }
+  .region-box.inactive { border-color: rgba(100,100,100,0.5); background: rgba(100,100,100,0.04); box-shadow: none; border-width: 2px; }
+  .region-box .label {
+    position: absolute; top: -20px; left: 2px;
+    font-size: 11px; color: #fff; font-weight: bold;
+    background: #E53935; padding: 1px 6px; border-radius: 3px;
+  }
+  .region-box.inactive .label { background: #555; }
+  .region-box .handle {
+    position: absolute; width: 12px; height: 12px;
+    background: #E53935; border: 2px solid #fff; border-radius: 2px;
+  }
+  .region-box.inactive .handle { display: none; }
+  .handle.tl { top: -6px; left: -6px; cursor: nw-resize; }
+  .handle.tr { top: -6px; right: -6px; cursor: ne-resize; }
+  .handle.bl { bottom: -6px; left: -6px; cursor: sw-resize; }
+  .handle.br { bottom: -6px; right: -6px; cursor: se-resize; }
+
+  /* "继续" button overlay */
+  .btn-overlay {
+    position: absolute; border: 3px dashed #4FC3F7; border-radius: 8px;
+    cursor: move; background: rgba(79,195,247,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: #4FC3F7; font-weight: bold;
+  }
+  .btn-overlay .handle {
+    position: absolute; width: 10px; height: 10px;
+    background: #4FC3F7; border: 2px solid #fff; border-radius: 2px;
+  }
+  .btn-overlay .handle.br { bottom: -5px; right: -5px; cursor: se-resize; }
+
+  /* ---- Bottom: output ---- */
+  .output-panel {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(26,26,46,0.97); padding: 10px 16px;
+    border-top: 1px solid #333;
+  }
+  .output-panel pre {
+    font-size: 12px; color: #4FC3F7; font-family: 'SF Mono', monospace;
+    white-space: pre-wrap; max-height: 130px; overflow-y: auto;
+  }
+  .output-panel .actions { position: absolute; top: 8px; right: 16px; display: flex; gap: 8px; }
+  .output-panel button {
+    font-size: 13px; padding: 4px 14px; border-radius: 6px;
+    background: #4FC3F7; color: #000; border: none; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <select id="imageSelect">
+    <option value="img/rules.png">rules - 通用操作规则</option>
+    <option value="img/block1.png">A0 - 数字顺序</option>
+    <option value="img/block2.png">B2 - 方形圆形交替</option>
+    <option value="img/block3.png">B1 - 数字汉字交替</option>
+    <option value="img/block4.png">A1 - 水果数字基线</option>
+    <option value="img/block5.png">B3 - 苹果柠檬交替</option>
+    <option value="img/block6.png">B4 - 柠檬苹果交替</option>
+  </select>
+  <button onclick="addStep()">+ 添加步骤</button>
+  <button class="danger" onclick="deleteStep()">× 删除选中</button>
+</div>
+
+<div class="side-panel" id="sidePanel"></div>
+
+<div class="canvas-area">
+  <div class="img-container" id="container">
+    <img id="mainImg" src="img/rules.png" draggable="false">
+  </div>
+</div>
+
+<div class="output-panel">
+  <div class="actions">
+    <button onclick="copyOutput()">📋 复制代码</button>
+    <button onclick="copyVoiceText()">📝 复制语音文本</button>
+  </div>
+  <pre id="output"></pre>
+</div>
+
+<script>
+const defaultStepsMap = {
+  'img/rules.png': [
+    { x: 3.5, y: 10, w: 44, h: 40, subtitle: '屏幕上散布着一些带数字的圆点\n请先找到数字一' },
+    { x: 3.5, y: 52, w: 44, h: 40, subtitle: '手指按住数字一，划线连到下一个\n按顺序依次连过去' },
+    { x: 51, y: 10, w: 46, h: 40, subtitle: '尽量不抬手，一笔连完' },
+    { x: 51, y: 10, w: 46, h: 40, subtitle: '松开了也没关系，从上一个连好的点继续' },
+    { x: 51, y: 52, w: 46, h: 40, subtitle: '尽量不要让线条交叉\n避免不了也没关系，按规则继续' },
+    { x: 80, y: 3, w: 15, h: 8, subtitle: '明白了就点击开始练习\n有不清楚的可以问工作人员' },
+  ],
+  'img/block1.png': [
+    { x: 3.5, y: 10, w: 44, h: 40, subtitle: '按数字顺序连线' },
+    { x: 3.5, y: 52, w: 44, h: 40, subtitle: '从一开始，一直连到最后一个' },
+    { x: 80, y: 3, w: 15, h: 8, subtitle: '准备好了就点击开始' },
+  ],
+  'img/block2.png': [
+    { x: 3.5, y: 15, w: 44, h: 30, subtitle: '这次规则不一样了\n屏幕上有两种形状' },
+    { x: 12, y: 40, w: 10, h: 15, subtitle: '这是方形' },
+    { x: 30, y: 35, w: 10, h: 15, subtitle: '这是圆形' },
+    { x: 3.5, y: 55, w: 44, h: 35, subtitle: '先找到方形里的数字一' },
+    { x: 51, y: 15, w: 46, h: 50, subtitle: '方形和圆形要轮流连' },
+    { x: 51, y: 68, w: 46, h: 25, subtitle: '方形一，圆形二，方形三，圆形四，轮流连下去' },
+    { x: 80, y: 3, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+  'img/block3.png': [
+    { x: 3.5, y: 15, w: 44, h: 30, subtitle: '这次规则与上一个任务有所不同\n屏幕上有两种数字' },
+    { x: 8, y: 45, w: 8, h: 12, subtitle: '这是阿拉伯数字' },
+    { x: 20, y: 38, w: 8, h: 12, subtitle: '这是汉字数字' },
+    { x: 3.5, y: 55, w: 44, h: 35, subtitle: '先找到阿拉伯数字一' },
+    { x: 51, y: 15, w: 46, h: 50, subtitle: '数字和汉字要轮流连' },
+    { x: 51, y: 68, w: 46, h: 25, subtitle: '数字一，汉字一，数字二，汉字二，轮流连下去' },
+    { x: 80, y: 3, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+  'img/block4.png': [
+    { x: 3.5, y: 15, w: 44, h: 30, subtitle: '接下来屏幕上会出现不同的水果\n每个水果上面有一个数字' },
+    { x: 10, y: 45, w: 10, h: 15, subtitle: '比如这是苹果' },
+    { x: 28, y: 38, w: 10, h: 15, subtitle: '这是柠檬' },
+    { x: 3.5, y: 55, w: 44, h: 35, subtitle: '不用管是什么水果' },
+    { x: 51, y: 15, w: 46, h: 50, subtitle: '只看上面的数字，按顺序从一连到最后' },
+    { x: 80, y: 3, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+  'img/block5.png': [
+    { x: 3.5, y: 15, w: 44, h: 30, subtitle: '这次规则又不一样了\n屏幕上有两种水果' },
+    { x: 10, y: 45, w: 10, h: 15, subtitle: '这是苹果' },
+    { x: 28, y: 38, w: 10, h: 15, subtitle: '这是柠檬' },
+    { x: 3.5, y: 55, w: 44, h: 35, subtitle: '先找到苹果上的数字一' },
+    { x: 51, y: 15, w: 46, h: 50, subtitle: '两种水果要轮流连' },
+    { x: 51, y: 68, w: 46, h: 25, subtitle: '苹果一，柠檬一，苹果二，柠檬二，轮流连下去' },
+    { x: 80, y: 3, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+  'img/block6.png': [
+    { x: 3.5, y: 15, w: 44, h: 30, subtitle: '最后一个任务\n这次从柠檬开始' },
+    { x: 10, y: 45, w: 10, h: 15, subtitle: '这是柠檬' },
+    { x: 28, y: 38, w: 10, h: 15, subtitle: '这是苹果' },
+    { x: 3.5, y: 55, w: 44, h: 35, subtitle: '先找到柠檬上的数字一' },
+    { x: 51, y: 15, w: 46, h: 50, subtitle: '柠檬和苹果轮流连' },
+    { x: 51, y: 68, w: 46, h: 25, subtitle: '柠檬一，苹果一，柠檬二，苹果二，轮流连下去' },
+    { x: 80, y: 3, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+};
+
+const imageLabels = {
+  'img/rules.png': 'rules',
+  'img/block1.png': 'A0',
+  'img/block2.png': 'B2',
+  'img/block3.png': 'B1',
+  'img/block4.png': 'A1',
+  'img/block5.png': 'B3',
+  'img/block6.png': 'B4',
+};
+
+// "继续" button overlay position (percentage of image)
+let btnOverlay = { x: 80, y: 3, w: 15, h: 8 };
+
+let steps = [];
+let currentStep = 0;
+let currentImage = 'img/rules.png';
+let dragging = null;
+
+const container = document.getElementById('container');
+const mainImg = document.getElementById('mainImg');
+const outputEl = document.getElementById('output');
+
+function loadImage(src) {
+  currentImage = src;
+  mainImg.src = src;
+  steps = JSON.parse(JSON.stringify(defaultStepsMap[src] || []));
+  currentStep = 0;
+  renderAll();
+}
+
+document.getElementById('imageSelect').addEventListener('change', (e) => loadImage(e.target.value));
+
+function selectStep(idx) {
+  currentStep = idx;
+  renderAll();
+}
+
+function addStep() {
+  steps.push({ x: 20, y: 20, w: 30, h: 20, subtitle: '' });
+  currentStep = steps.length - 1;
+  renderAll();
+}
+
+function deleteStep() {
+  if (steps.length <= 1) return;
+  steps.splice(currentStep, 1);
+  if (currentStep >= steps.length) currentStep = steps.length - 1;
+  renderAll();
+}
+
+function renderAll() {
+  renderSidePanel();
+  renderBoxes();
+  renderBtnOverlay();
+  updateOutput();
+}
+
+// ---- Side panel ----
+function renderSidePanel() {
+  const panel = document.getElementById('sidePanel');
+  panel.innerHTML = '';
+  steps.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'step-card' + (i === currentStep ? ' selected' : '');
+    card.innerHTML = `
+      <div class="step-header">
+        <span class="step-num">Step ${i + 1}</span>
+        <span class="step-coords">${s.x}%, ${s.y}% | ${s.w}×${s.h}%</span>
+      </div>
+      <textarea data-idx="${i}" placeholder="字幕文字（每行一句，同一个红框内播放多句）">${s.subtitle}</textarea>
+      <div style="font-size:10px;color:#666;margin-top:2px;">每行 = 一句音频，多行共享同一个红框</div>
+    `;
+    card.addEventListener('click', (e) => {
+      if (e.target.tagName === 'TEXTAREA') return;
+      selectStep(i);
+    });
+    card.querySelector('textarea').addEventListener('input', (e) => {
+      steps[+e.target.dataset.idx].subtitle = e.target.value;
+      updateOutput();
+    });
+    panel.appendChild(card);
+  });
+
+  // "继续" button position card
+  const btnCard = document.createElement('div');
+  btnCard.className = 'step-card';
+  btnCard.style.borderColor = '#4FC3F7';
+  btnCard.style.background = '#1a2a3a';
+  btnCard.innerHTML = `
+    <div class="step-header">
+      <span class="step-num" style="color:#4FC3F7;">📌 "继续"按钮位置</span>
+      <span class="step-coords">${btnOverlay.x}%, ${btnOverlay.y}% | ${btnOverlay.w}×${btnOverlay.h}%</span>
+    </div>
+    <div style="font-size:11px;color:#888;margin-top:4px;">蓝色虚线框 — 拖拽调整覆盖按钮位置</div>
+  `;
+  panel.appendChild(btnCard);
+}
+
+// ---- Region boxes ----
+function renderBoxes() {
+  container.querySelectorAll('.region-box').forEach(el => el.remove());
+  steps.forEach((s, i) => {
+    const box = document.createElement('div');
+    box.className = 'region-box' + (i === currentStep ? '' : ' inactive');
+    box.style.left = s.x + '%'; box.style.top = s.y + '%';
+    box.style.width = s.w + '%'; box.style.height = s.h + '%';
+
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = i + 1;
+    box.appendChild(label);
+
+    ['tl', 'tr', 'bl', 'br'].forEach(h => {
+      const handle = document.createElement('div');
+      handle.className = 'handle ' + h;
+      handle.dataset.handle = h;
+      box.appendChild(handle);
+    });
+
+    box.addEventListener('pointerdown', (e) => startDrag(e, i, 'step'));
+    container.appendChild(box);
+  });
+}
+
+// ---- "继续" button overlay ----
+function renderBtnOverlay() {
+  container.querySelectorAll('.btn-overlay').forEach(el => el.remove());
+  const el = document.createElement('div');
+  el.className = 'btn-overlay';
+  el.style.left = btnOverlay.x + '%'; el.style.top = btnOverlay.y + '%';
+  el.style.width = btnOverlay.w + '%'; el.style.height = btnOverlay.h + '%';
+  el.textContent = '继续';
+  const handle = document.createElement('div');
+  handle.className = 'handle br';
+  handle.dataset.handle = 'br';
+  el.appendChild(handle);
+  el.addEventListener('pointerdown', (e) => startDrag(e, -1, 'btn'));
+  container.appendChild(el);
+}
+
+// ---- Drag logic ----
+function startDrag(e, idx, kind) {
+  e.preventDefault();
+  e.stopPropagation();
+  if (kind === 'step' && idx !== currentStep) { selectStep(idx); return; }
+
+  const obj = kind === 'btn' ? btnOverlay : steps[idx];
+  const imgRect = mainImg.getBoundingClientRect();
+  const handle = e.target.dataset.handle;
+
+  dragging = {
+    kind, idx, handle,
+    type: handle ? 'resize' : 'move',
+    startX: e.clientX, startY: e.clientY,
+    origX: obj.x, origY: obj.y, origW: obj.w, origH: obj.h,
+    imgW: imgRect.width, imgH: imgRect.height,
+  };
+  document.addEventListener('pointermove', onDragMove);
+  document.addEventListener('pointerup', onDragEnd);
+}
+
+function onDragMove(e) {
+  if (!dragging) return;
+  const d = dragging;
+  const dx = (e.clientX - d.startX) / d.imgW * 100;
+  const dy = (e.clientY - d.startY) / d.imgH * 100;
+  const obj = d.kind === 'btn' ? btnOverlay : steps[d.idx];
+
+  if (d.type === 'move') {
+    obj.x = Math.round(Math.max(0, Math.min(100 - obj.w, d.origX + dx)) * 10) / 10;
+    obj.y = Math.round(Math.max(0, Math.min(100 - obj.h, d.origY + dy)) * 10) / 10;
+  } else {
+    const h = d.handle;
+    if (h.includes('l')) { obj.x = Math.round((d.origX + dx) * 10) / 10; obj.w = Math.max(3, Math.round((d.origW - dx) * 10) / 10); }
+    if (h.includes('r')) { obj.w = Math.max(3, Math.round((d.origW + dx) * 10) / 10); }
+    if (h.includes('t')) { obj.y = Math.round((d.origY + dy) * 10) / 10; obj.h = Math.max(3, Math.round((d.origH - dy) * 10) / 10); }
+    if (h.includes('b')) { obj.h = Math.max(3, Math.round((d.origH + dy) * 10) / 10); }
+  }
+
+  if (d.kind === 'btn') { renderBtnOverlay(); }
+  else { renderBoxes(); }
+  renderSidePanel();
+  updateOutput();
+}
+
+function onDragEnd() {
+  dragging = null;
+  document.removeEventListener('pointermove', onDragMove);
+  document.removeEventListener('pointerup', onDragEnd);
+}
+
+// ---- Output ----
+function updateOutput() {
+  const label = imageLabels[currentImage] || 'unknown';
+  const parts = steps.map(s => {
+    const subs = s.subtitle.split('\n').filter(l => l.trim());
+    const region = `{ x: '${s.x}%', y: '${s.y}%', w: '${s.w}%', h: '${s.h}%' }`;
+    if (subs.length <= 1) {
+      return `  { region: ${region}, lines: ['${subs[0] || ''}'] },`;
+    } else {
+      const linesStr = subs.map(l => `'${l.trim()}'`).join(', ');
+      return `  { region: ${region}, lines: [${linesStr}] },`;
+    }
+  });
+  const btnLine = `\nbtnOverlay: { x: '${btnOverlay.x}%', y: '${btnOverlay.y}%', w: '${btnOverlay.w}%', h: '${btnOverlay.h}%' }`;
+  outputEl.textContent = `${label}: [\n${parts.join('\n')}\n]${btnLine}`;
+}
+
+function copyOutput() {
+  navigator.clipboard.writeText(outputEl.textContent);
+  event.target.textContent = '✓ 已复制';
+  setTimeout(() => event.target.textContent = '📋 复制代码', 1500);
+}
+
+function copyVoiceText() {
+  let n = 1;
+  const label = imageLabels[currentImage] || 'unknown';
+  const text = `=== ${label} ===\n` + steps.flatMap(s => s.subtitle.split('\n').filter(l => l.trim())).map(l => `${n++}. ${l.trim()}`).join('\n');
+  navigator.clipboard.writeText(text);
+  event.target.textContent = '✓ 已复制';
+  setTimeout(() => event.target.textContent = '📝 复制语音文本', 1500);
+}
+
+loadImage('img/rules.png');
+</script>
+</body>
+</html>

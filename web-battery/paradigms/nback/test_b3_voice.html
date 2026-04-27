@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>[TEST] N-back B3 指导语</title>
+<link rel="stylesheet" href="../../css/common.css">
+<script src="../../lib/voice-guide.js"></script>
+</head>
+<body style="margin:0;">
+<script>
+const A = '../../audio/nback';
+(async () => {
+  await VoiceGuide.show({
+    image: 'img/block3.png',
+    btnRegion: { x: '80.1%', y: '4.9%', w: '15%', h: '8.2%' },
+    buttonText: '开始练习',
+    pauseBetween: 500,
+    steps: [
+      { region: { x: '5.2%', y: '14.5%', w: '15.9%', h: '52.5%' }, lines: [
+        { audio: `${A}/b3_s01.wav`, subtitle: '先看这张带橙色边框、写着"提示"的图，这就是提示图' },
+      ] },
+      { region: { x: '25.8%', y: '30.3%', w: '39.4%', h: '23.6%' }, lines: [
+        { audio: `${A}/b3_s02.wav`, subtitle: '后面图片会一张一张出现，前面先只看，不用按按钮' },
+      ] },
+      { region: { x: '65.3%', y: '29.7%', w: '16.2%', h: '24.4%' }, lines: [
+        { audio: `${A}/b3_s03.wav`, subtitle: '当提示图一出现，请马上想一想，它前面那一张是什么' },
+      ] },
+      { region: { x: '46.8%', y: '55.9%', w: '49.1%', h: '27.8%' }, lines: [
+        { audio: `${A}/b3_s04.wav`, subtitle: '这时屏幕会出现三张小图，请从里面选出提示图前一张' },
+      ] },
+      { region: { x: '51.7%', y: '33.8%', w: '13.8%', h: '18.3%' }, lines: [
+        { audio: `${A}/b3_s05.wav`, subtitle: '注意，不是选提示图本身，也不是选更早的图，只选它前面那一张' },
+      ] },
+      { region: { x: '50.2%', y: '64.5%', w: '42.2%', h: '24.7%' }, lines: [
+        { audio: `${A}/b3_s06.wav`, subtitle: '想一想再选，选你觉得最像的那一张' },
+      ] },
+      { region: { x: '79.6%', y: '4.1%', w: '16%', h: '9.8%' }, lines: [
+        { audio: `${A}/b3_s07.wav`, subtitle: '明白了就点击开始练习' },
+        { audio: `${A}/b3_s08.wav`, subtitle: '有不清楚的可以问工作人员' },
+      ] },
+    ],
+  });
+  document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;font-size:48px;color:#666;font-family:PingFang SC,sans-serif;">✓ B3 指导语播放完毕</div>';
+})();
+</script>
+</body>
+</html>

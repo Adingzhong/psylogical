@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N-back B3 测试 (直接跳转)</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    body { margin: 0; background: #000; color: #fff; font-family: 'PingFang SC', sans-serif; }
+    .nback-stim-container { text-align: center; padding-top: 4vh; }
+    .nback-stim-img { max-height: 60vh; max-width: 80vw; object-fit: contain; }
+    .nback-probe-options { display: flex; justify-content: space-between; padding: 0 4%; margin-top: 24px; }
+    .nback-probe-opt { cursor: pointer; border: 4px solid transparent; border-radius: 12px; transition: border-color 0.15s, transform 0.1s; }
+    .nback-probe-opt img { max-height: 32vh; max-width: 26vw; object-fit: contain; border-radius: 8px; }
+    .nback-probe-opt:active { transform: scale(0.96); }
+    .nback-probe-opt.selected { border-color: #1565C0; }
+    .fixation { font-size: 80px; color: #fff; display: flex; justify-content: center; align-items: center; height: 80vh; }
+    .info { position: fixed; top: 10px; left: 10px; font-size: 14px; color: #888; z-index: 999; }
+    .start-panel { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 24px; }
+    .start-panel h1 { font-size: 36px; }
+    .start-panel p { font-size: 24px; color: #aaa; max-width: 600px; text-align: center; line-height: 1.8; }
+    .start-btn { font-size: 28px; padding: 16px 48px; border: none; border-radius: 12px; background: #1565C0; color: #fff; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="info" id="info"></div>
+  <div id="app">
+    <div class="start-panel">
+      <h1>N-back B3 直接测试</h1>
+      <p>跳过 B1/B2，直接进入 B3（提示图选上一张）。<br>练习2次probe + 正式5次probe。</p>
+      <button class="start-btn" onclick="startB3()">开始 B3</button>
+    </div>
+  </div>
+
+  <script>
+    const STIMULI_BASE = '../../stimuli/nback';
+
+    // Practice sequence: 4 stim → probe → 3 stim → probe
+    const practiceSeq = [
+      { type: 'stim', image: 'B3/Practice/B3_Prac_P1_Bathroom.png', dur: 1500 },
+      { type: 'stim', image: 'B3/Practice/B3_Prac_P2_DiningRoom.png', dur: 1500 },
+      { type: 'stim', image: 'B3/Practice/B3_Prac_P3_LivingRoom.png', dur: 1500 },
+      { type: 'stim', image: 'B3/Practice/B3_Prac_P4_Study.png', dur: 1500 },
+      { type: 'probe', image: 'B3/ListA/cue.png', cueDur: 800,
+        opts: ['B3/Practice/B3_Prac_P4_Study.png', 'B3/Practice/B3_Prac_P1_Bathroom.png', 'B3/Practice/B3_Prac_P5_Kitchen.png'],
+        correct: 0, prev: 'Study' },
+      { type: 'stim', image: 'B3/Practice/B3_Prac_P5_Kitchen.png', dur: 1500 },
+      { type: 'stim', image: 'B3/Practice/B3_Prac_P2_DiningRoom.png', dur: 1500 },
+      { type: 'stim', image: 'B3/Practice/B3_Prac_P1_Bathroom.png', dur: 1500 },
+      { type: 'probe', image: 'B3/ListA/cue.png', cueDur: 800,
+        opts: ['B3/Practice/B3_Prac_P5_Kitchen.png', 'B3/Practice/B3_Prac_P1_Bathroom.png', 'B3/Practice/B3_Prac_P3_LivingRoom.png'],
+        correct: 1, prev: 'Bathroom' },
+    ];
+
+    const app = document.getElementById('app');
+    const info = document.getElementById('info');
+    let trialIdx = 0;
+    let currentSeq = [];
+
+    function imgUrl(path) { return `${STIMULI_BASE}/${path}`; }
+
+    function showFixation(dur) {
+      return new Promise(resolve => {
+        app.innerHTML = '<div class="fixation">+</div>';
+        setTimeout(resolve, dur);
+      });
+    }
+
+    function showStim(item) {
+      return new Promise(resolve => {
+        info.textContent = `Trial ${trialIdx + 1} / ${currentSeq.length} — 只看`;
+        app.innerHTML = `<div class="nback-stim-container">
+          <img src="${imgUrl(item.image)}" class="nback-stim-img">
+        </div>`;
+        setTimeout(resolve, item.dur);
+      });
+    }
+
+    function showCue(item) {
+      return new Promise(resolve => {
+        info.textContent = `Trial ${trialIdx + 1} / ${currentSeq.length} — 提示图出现！`;
+        app.innerHTML = `<div class="nback-stim-container">
+          <p style="font-size:36px;color:#FFA500;margin-bottom:12px;">提示</p>
+          <img src="${imgUrl(item.image)}" class="nback-stim-img" style="border:4px solid #FFA500;">
+        </div>`;
+        setTimeout(resolve, item.cueDur);
+      });
+    }
+
+    function showOptions(item) {
+      return new Promise(resolve => {
+        info.textContent = `选出提示图前面那一张（正确答案：第${item.correct + 1}个 — ${item.prev}）`;
+        app.innerHTML = `<div class="nback-stim-container" style="min-height:55vh;">
+          <p style="font-size:32px;margin-bottom:12px;">上一张图片是哪个？</p>
+          <div class="nback-probe-options">
+            ${item.opts.map((o, i) => `<div class="nback-probe-opt" data-idx="${i}"><img src="${imgUrl(o)}"></div>`).join('')}
+          </div>
+        </div>`;
+
+        document.querySelectorAll('.nback-probe-opt').forEach(el => {
+          el.addEventListener('click', () => {
+            const idx = parseInt(el.dataset.idx);
+            el.classList.add('selected');
+            const correct = idx === item.correct;
+            setTimeout(() => {
+              app.innerHTML = `<div class="fixation" style="font-size:48px;">${correct ? '✓ 对了' : '没关系，再看仔细'}</div>`;
+              setTimeout(resolve, 1500);
+            }, 500);
+          });
+        });
+      });
+    }
+
+    async function runSequence(seq, label) {
+      currentSeq = seq;
+      app.innerHTML = `<div class="fixation" style="font-size:36px;">${label}</div>`;
+      await new Promise(r => setTimeout(r, 2000));
+
+      for (trialIdx = 0; trialIdx < seq.length; trialIdx++) {
+        const item = seq[trialIdx];
+        await showFixation(450);
+
+        if (item.type === 'stim') {
+          await showStim(item);
+        } else if (item.type === 'probe') {
+          await showCue(item);
+          await showOptions(item);
+        }
+      }
+    }
+
+    async function startB3() {
+      // Instruction
+      app.innerHTML = `<div class="start-panel">
+        <h1>第 3/3 关</h1>
+        <p>看到提示图，回忆上一张<br><br>
+        图片一张张出现，只看，记住顺序。<br>
+        看到提示图时，从3张图中选出：上一张是哪张？</p>
+        <button class="start-btn" onclick="runPractice()">开始练习</button>
+      </div>`;
+    }
+
+    window.runPractice = async function() {
+      await runSequence(practiceSeq, '练习开始');
+      app.innerHTML = `<div class="start-panel">
+        <h1>练习结束</h1>
+        <p>规则明白了吗？<br>正式任务中不会再提示对错。</p>
+        <button class="start-btn" onclick="location.reload()">重新开始</button>
+      </div>`;
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>N-back B3 完整体验</title>
+<link rel="stylesheet" href="../../css/common.css">
+<style>
+  body { margin:0; background:#000; color:#fff; font-family:'PingFang SC',sans-serif; }
+  .nback-stim-container { text-align:center; padding-top:4vh; }
+  .nback-stim-img { max-height:60vh; max-width:80vw; object-fit:contain; }
+  .nback-probe-options { display:flex; justify-content:space-between; padding:0 4%; margin-top:24px; }
+  .nback-probe-opt { cursor:pointer; border:4px solid transparent; border-radius:12px; transition:border-color .15s,transform .1s; }
+  .nback-probe-opt img { max-height:32vh; max-width:26vw; object-fit:contain; border-radius:8px; }
+  .nback-probe-opt:active { transform:scale(0.96); }
+  .nback-probe-opt.selected { border-color:#1565C0; }
+  .fixation { font-size:80px; color:#fff; display:flex; justify-content:center; align-items:center; height:80vh; }
+  .info { position:fixed; top:10px; left:10px; font-size:14px; color:#888; z-index:999; }
+  .fb { display:flex; justify-content:center; align-items:center; height:80vh; font-size:48px; }
+  .start { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:24px; }
+  .start h1 { font-size:36px; }
+  .start p { font-size:22px; color:#aaa; max-width:650px; text-align:center; line-height:1.8; }
+  .btn { font-size:28px; padding:16px 48px; border:none; border-radius:12px; background:#1565C0; color:#fff; cursor:pointer; }
+</style>
+</head>
+<body>
+<div class="info" id="info"></div>
+<div id="app">
+  <div class="start">
+    <h1>N-back B3 完整体验</h1>
+    <p>练习：4张→提示图→选 → 3张→提示图→选<br>正式：完整序列（5次提示图）</p>
+    <button class="btn" onclick="runPractice()">开始练习</button>
+    <button class="btn" style="background:#666" onclick="runFormal()">跳过练习，直接正式</button>
+  </div>
+</div>
+<script>
+const BASE = '../../stimuli/nback';
+const app = document.getElementById('app');
+const info = document.getElementById('info');
+
+const practiceSeq = [
+  { type:'stim', image:'B3/ListA/B3_P1_Staircase.png', name:'楼梯间' },
+  { type:'stim', image:'B3/ListA/B3_P2_Closet.png', name:'衣帽间' },
+  { type:'stim', image:'B3/ListA/B3_P3_Pantry.png', name:'储藏室' },
+  { type:'stim', image:'B3/ListA/B3_P5_SunroomBalcony.png', name:'阳台' },
+  { type:'probe', image:'B3/ListA/cue.png',
+    opts:['B3/ListA/B3_P5_SunroomBalcony.png','B3/ListA/B3_P2_Closet.png','B3/ListA/B3_P7_HomeGym.png'],
+    correct:0, answer:'阳台' },
+  { type:'stim', image:'B3/ListA/B3_P6_MusicRoom.png', name:'音乐室' },
+  { type:'stim', image:'B3/ListA/B3_P4_GarageCorner.png', name:'车库' },
+  { type:'stim', image:'B3/ListA/B3_P7_HomeGym.png', name:'健身房' },
+  { type:'probe', image:'B3/ListA/cue.png',
+    opts:['B3/ListA/B3_P6_MusicRoom.png','B3/ListA/B3_P7_HomeGym.png','B3/ListA/B3_P3_Pantry.png'],
+    correct:1, answer:'健身房' },
+];
+
+const formalSeq = [
+  { type:'stim', image:'B3/ListA/B3_P4_GarageCorner.png', name:'车库' },
+  { type:'stim', image:'B3/ListA/B3_P5_SunroomBalcony.png', name:'阳台' },
+  { type:'stim', image:'B3/ListA/B3_P1_Staircase.png', name:'楼梯间' },
+  { type:'stim', image:'B3/ListA/B3_P6_MusicRoom.png', name:'音乐室' },
+  { type:'probe', image:'B3/ListA/cue.png',
+    opts:['B3/ListA/B3_P1_Staircase.png','B3/ListA/B3_P6_MusicRoom.png','B3/ListA/B3_P4_GarageCorner.png'],
+    correct:1, answer:'音乐室' },
+  { type:'stim', image:'B3/ListA/B3_P2_Closet.png', name:'衣帽间' },
+  { type:'stim', image:'B3/ListA/B3_P7_HomeGym.png', name:'健身房' },
+  { type:'stim', image:'B3/ListA/B3_P3_Pantry.png', name:'储藏室' },
+  { type:'probe', image:'B3/ListA/cue.png',
+    opts:['B3/ListA/B3_P3_Pantry.png','B3/ListA/B3_P5_SunroomBalcony.png','B3/ListA/B3_P7_HomeGym.png'],
+    correct:0, answer:'储藏室' },
+  { type:'stim', image:'B3/ListA/B3_P5_SunroomBalcony.png', name:'阳台' },
+  { type:'stim', image:'B3/ListA/B3_P6_MusicRoom.png', name:'音乐室' },
+  { type:'stim', image:'B3/ListA/B3_P1_Staircase.png', name:'楼梯间' },
+  { type:'stim', image:'B3/ListA/B3_P4_GarageCorner.png', name:'车库' },
+  { type:'stim', image:'B3/ListA/B3_P2_Closet.png', name:'衣帽间' },
+  { type:'probe', image:'B3/ListA/cue.png',
+    opts:['B3/ListA/B3_P6_MusicRoom.png','B3/ListA/B3_P1_Staircase.png','B3/ListA/B3_P2_Closet.png'],
+    correct:2, answer:'衣帽间' },
+  { type:'stim', image:'B3/ListA/B3_P7_HomeGym.png', name:'健身房' },
+  { type:'stim', image:'B3/ListA/B3_P3_Pantry.png', name:'储藏室' },
+  { type:'stim', image:'B3/ListA/B3_P6_MusicRoom.png', name:'音乐室' },
+  { type:'probe', image:'B3/ListA/cue.png',
+    opts:['B3/ListA/B3_P4_GarageCorner.png','B3/ListA/B3_P7_HomeGym.png','B3/ListA/B3_P6_MusicRoom.png'],
+    correct:2, answer:'音乐室' },
+  { type:'stim', image:'B3/ListA/B3_P1_Staircase.png', name:'楼梯间' },
+  { type:'stim', image:'B3/ListA/B3_P5_SunroomBalcony.png', name:'阳台' },
+  { type:'stim', image:'B3/ListA/B3_P4_GarageCorner.png', name:'车库' },
+  { type:'stim', image:'B3/ListA/B3_P7_HomeGym.png', name:'健身房' },
+  { type:'probe', image:'B3/ListA/cue.png',
+    opts:['B3/ListA/B3_P7_HomeGym.png','B3/ListA/B3_P2_Closet.png','B3/ListA/B3_P5_SunroomBalcony.png'],
+    correct:0, answer:'健身房' },
+];
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function showFix(ms) {
+  app.innerHTML = '<div class="fixation">+</div>';
+  await sleep(ms);
+}
+
+async function showStim(item, idx, total) {
+  info.textContent = `${idx+1}/${total} — 只看 (${item.name})`;
+  app.innerHTML = `<div class="nback-stim-container"><img src="${BASE}/${item.image}" class="nback-stim-img"></div>`;
+  await sleep(1500);
+}
+
+async function showCue(item, idx, total) {
+  info.textContent = `${idx+1}/${total} — ⚠️ 提示图出现！`;
+  app.innerHTML = `<div class="nback-stim-container">
+    <p style="font-size:36px;color:#FFA500;margin-bottom:12px;">提示</p>
+    <img src="${BASE}/${item.image}" class="nback-stim-img" style="border:4px solid #FFA500;">
+  </div>`;
+  await sleep(800);
+}
+
+function showOptions(item, idx, total) {
+  return new Promise(resolve => {
+    info.textContent = `${idx+1}/${total} — 选出提示图前面那张 (正确=${item.answer})`;
+    app.innerHTML = `<div class="nback-stim-container" style="min-height:55vh;">
+      <p style="font-size:32px;margin-bottom:12px;">上一张图片是哪个？</p>
+      <div class="nback-probe-options">
+        ${item.opts.map((o,i) => `<div class="nback-probe-opt" data-idx="${i}"><img src="${BASE}/${o}"></div>`).join('')}
+      </div>
+    </div>`;
+    document.querySelectorAll('.nback-probe-opt').forEach(el => {
+      el.addEventListener('click', () => {
+        const picked = +el.dataset.idx;
+        el.classList.add('selected');
+        const ok = picked === item.correct;
+        setTimeout(() => {
+          app.innerHTML = `<div class="fb" style="color:${ok?'#66BB6A':'#E57373'}">${ok?'✓ 对了':'没关系，正确答案是'+item.answer}</div>`;
+          setTimeout(resolve, 1500);
+        }, 500);
+      });
+    });
+  });
+}
+
+async function run(seq, label) {
+  app.innerHTML = `<div class="fb" style="font-size:36px">${label}</div>`;
+  await sleep(2000);
+  for (let i = 0; i < seq.length; i++) {
+    await showFix(450);
+    if (seq[i].type === 'stim') await showStim(seq[i], i, seq.length);
+    else { await showCue(seq[i], i, seq.length); await showOptions(seq[i], i, seq.length); }
+  }
+  app.innerHTML = `<div class="fb" style="font-size:36px">完成 ✓</div>`;
+}
+
+window.runPractice = () => run(practiceSeq, '练习开始（有反馈）');
+window.runFormal = () => run(formalSeq, '正式开始（无反馈）');
+</script>
+</body>
+</html>

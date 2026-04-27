@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
+<title>TMT 指导语独立预览</title>
+<link rel="stylesheet" href="../../css/common.css?v=20260414g">
+<style>
+  body { font-family:'PingFang SC','Microsoft YaHei',sans-serif; background:#F5F7FA; }
+  .home { max-width:720px; margin:40px auto; padding:40px; background:#fff; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+  .home h1 { font-size:28px; color:#1A1A2E; margin-bottom:8px; font-weight:700; }
+  .home .sub { font-size:14px; color:#888; margin-bottom:28px; }
+  .link-list { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .link-list a {
+    display:block; padding:20px 24px; background:#F5F6FA; border:2px solid transparent;
+    border-radius:12px; text-decoration:none; color:#1A1A2E;
+    transition:background .15s,border-color .15s;
+  }
+  .link-list a:hover { background:#E8F0FE; border-color:#1565C0; }
+  .link-list .task { font-size:20px; font-weight:600; color:#1565C0; }
+  .link-list .desc { font-size:13px; color:#666; margin-top:6px; }
+  .tip { margin-top:20px; padding:12px 16px; background:#FFF8E1; border-left:3px solid #FFC107;
+         border-radius:6px; font-size:13px; color:#856404; line-height:1.6; }
+  #jspsych-target { width:100vw; height:100vh; }
+</style>
+</head>
+<body>
+
+<div id="jspsych-target"></div>
+
+<script src="../../lib/touch-hardening.js?v=20260414g"></script>
+<script src="../../lib/voice-guide.js?v=20260414g"></script>
+<script>
+
+/* =========================================================================
+   预览数据 — 每个子任务独立的 VoiceGuide 配置(和 tmt.js 同步,2026-04-14 版本)
+   ========================================================================= */
+const AUDIO_BASE = '../../audio/tmt';
+
+const GUIDES = {
+  rules: {
+    title: '通用规则',
+    desc: '开场练习前的操作说明',
+    config: {
+      image: 'img/rules.webp',
+      btnRegion: { x: '79.8%', y: '5.3%', w: '15.5%', h: '8.1%' },
+      buttonText: '开始练习',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '5.1%', y: '14.2%', w: '47.8%', h: '38.6%' }, lines: [
+          { audio: `${AUDIO_BASE}/rules_s01.mp3`, subtitle: '屏幕上有着一些带数字的圆点，请先找到数字1' },
+        ] },
+        { region: { x: '5.4%', y: '54.9%', w: '47.5%', h: '39.1%' }, lines: [
+          { audio: `${AUDIO_BASE}/rules_s02.mp3`, subtitle: '手指按住数字1，从1开始，依次连到2、3、4……' },
+        ] },
+        { region: { x: '54.1%', y: '14.3%', w: '40.7%', h: '79.2%' }, lines: [
+          { audio: `${AUDIO_BASE}/rules_s03.mp3`, subtitle: '按顺序连就可以' },
+        ] },
+        { region: { x: '54.5%', y: '27.9%', w: '39.4%', h: '30.9%' }, lines: [
+          { audio: `${AUDIO_BASE}/rules_s04.mp3`, subtitle: '中途松开没关系，接着连' },
+        ] },
+        { region: { x: '54.2%', y: '58.5%', w: '41%', h: '34.9%' }, lines: [
+          { audio: `${AUDIO_BASE}/rules_s05.mp3`, subtitle: '线条交叉也没关系，继续按顺序连' },
+        ] },
+        { region: { x: '79.3%', y: '4.2%', w: '16.8%', h: '9.4%' }, lines: [
+          { audio: `${AUDIO_BASE}/rules_s06.mp3`, subtitle: '明白了就点击开始练习' },
+          { audio: `${AUDIO_BASE}/rules_s07.mp3`, subtitle: '有不清楚的可以问工作人员' },
+        ] },
+      ],
+    }
+  },
+  A0: {
+    title: 'A0 数字顺序',
+    desc: '按 1→2→3 顺序连线(最简单的 baseline)',
+    config: {
+      image: 'img/block1.webp',
+      btnRegion: { x: '80.1%', y: '5.1%', w: '14.6%', h: '7.8%' },
+      buttonText: '开始',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '5.6%', y: '14%', w: '47.4%', h: '38.1%' }, lines: [
+          { audio: `${AUDIO_BASE}/a0_s01.mp3`, subtitle: '先找到数字 1' },
+        ] },
+        { region: { x: '5.6%', y: '55%', w: '47.3%', h: '39.5%' }, lines: [
+          { audio: `${AUDIO_BASE}/a0_s02.mp3`, subtitle: '从 1 开始，按顺序一直连到最后一个数字' },
+        ] },
+        { region: { x: '54.7%', y: '13.8%', w: '40.2%', h: '79.6%' }, lines: [
+          { audio: `${AUDIO_BASE}/a0_s03.mp3`, subtitle: '中途松开了也没关系，接着连就可以' },
+        ] },
+        { region: { x: '79.3%', y: '4%', w: '16.5%', h: '9.9%' }, lines: [
+          { audio: `${AUDIO_BASE}/a0_s04.mp3`, subtitle: '准备好了就点击开始' },
+        ] },
+      ],
+    }
+  },
+  B2: {
+    title: 'B2 方圆轮流',
+    desc: '方形和圆形交替按数字顺序连线',
+    config: {
+      image: 'img/block2.webp',
+      btnRegion: { x: '80.3%', y: '5%', w: '14.6%', h: '7.8%' },
+      buttonText: '开始',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '5.1%', y: '14.6%', w: '32.2%', h: '54.4%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s01.mp3`, subtitle: '这次除了看数字，还要看图形。方的是方形，圆的是圆形' },
+        ] },
+        { region: { x: '11.2%', y: '45.2%', w: '5.4%', h: '7.8%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s02.mp3`, subtitle: '先找到方形里的数字 1' },
+        ] },
+        { region: { x: '40%', y: '17.1%', w: '55%', h: '44%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s03.mp3`, subtitle: '然后按数字顺序，方形和圆形轮流连' },
+        ] },
+        { region: { x: '41.7%', y: '32.7%', w: '48.8%', h: '44.1%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s04.mp3`, subtitle: '也就是：方形 1，圆形 2，方形 3，圆形 4，一直这样轮流连下去' },
+        ] },
+        { region: { x: '79.4%', y: '4.1%', w: '16.3%', h: '9.8%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s05.mp3`, subtitle: '明白了就点击开始' },
+        ] },
+      ],
+    }
+  },
+  B1: {
+    title: 'B1 数字汉字',
+    desc: '阿拉伯数字和汉字数字交替连线',
+    config: {
+      image: 'img/block3.webp',
+      btnRegion: { x: '80.3%', y: '5%', w: '14.6%', h: '7.8%' },
+      buttonText: '开始',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '5.4%', y: '14.1%', w: '32.2%', h: '79.3%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s01.mp3`, subtitle: '这次除了看数字，还要分清两种写法。屏幕上有数字，也有汉字' },
+        ] },
+        { region: { x: '9%', y: '36.4%', w: '25.2%', h: '19.4%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s02.mp3`, subtitle: '像 1、2、3 这样的是数字，像一、二、三这样的是汉字' },
+        ] },
+        { region: { x: '10.6%', y: '44.1%', w: '6.5%', h: '9.2%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s03.mp3`, subtitle: '先找到数字 1' },
+        ] },
+        { region: { x: '39.2%', y: '14.2%', w: '55.8%', h: '64.4%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s04.mp3`, subtitle: '然后按顺序，数字和汉字轮流连' },
+        ] },
+        { region: { x: '43.3%', y: '58.7%', w: '48%', h: '19.1%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s05.mp3`, subtitle: '也就是：数字 1，汉字一，数字 2，汉字二，一直这样轮流连下去' },
+        ] },
+        { region: { x: '79.6%', y: '3.9%', w: '16.4%', h: '10.1%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s06.mp3`, subtitle: '明白了就点击开始' },
+        ] },
+      ],
+    }
+  },
+  A1: {
+    title: 'A1 水果数字',
+    desc: '只看水果上的数字，按顺序连线',
+    config: {
+      image: 'img/block4.webp',
+      btnRegion: { x: '80.3%', y: '5%', w: '14.6%', h: '7.8%' },
+      buttonText: '开始',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '8.2%', y: '36.1%', w: '25.9%', h: '19.7%' }, lines: [
+          { audio: `${AUDIO_BASE}/a1_s01.mp3`, subtitle: '屏幕上会出现不同的水果，每个水果上都有一个数字' },
+        ] },
+        { region: { x: '15.5%', y: '36.5%', w: '6.8%', h: '10%' }, lines: [
+          { audio: `${AUDIO_BASE}/a1_s02.mp3`, subtitle: '不管是什么水果，都只看上面的数字' },
+        ] },
+        { region: { x: '10.6%', y: '44.5%', w: '5.7%', h: '8.7%' }, lines: [
+          { audio: `${AUDIO_BASE}/a1_s03.mp3`, subtitle: '先找到数字 1' },
+        ] },
+        { region: { x: '39.7%', y: '58.6%', w: '55.1%', h: '23.7%' }, lines: [
+          { audio: `${AUDIO_BASE}/a1_s04.mp3`, subtitle: '从 1 开始，按顺序一直连到最后一个数字' },
+        ] },
+        { region: { x: '79.5%', y: '4.2%', w: '16.4%', h: '9.7%' }, lines: [
+          { audio: `${AUDIO_BASE}/a1_s05.mp3`, subtitle: '明白了就点击开始' },
+        ] },
+      ],
+    }
+  },
+  B3: {
+    title: 'B3 苹果柠檬',
+    desc: '苹果和柠檬交替,从苹果 1 开始',
+    config: {
+      image: 'img/block5.webp',
+      btnRegion: { x: '80.3%', y: '5%', w: '14.6%', h: '7.8%' },
+      buttonText: '开始',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '15.8%', y: '36.5%', w: '19.2%', h: '9.4%' }, lines: [
+          { audio: `${AUDIO_BASE}/b3_s01.mp3`, subtitle: '这次要在苹果和柠檬之间轮流连。屏幕上有苹果，也有柠檬' },
+        ] },
+        { region: { x: '10.2%', y: '43.8%', w: '7.7%', h: '10.8%' }, lines: [
+          { audio: `${AUDIO_BASE}/b3_s02.mp3`, subtitle: '先找到苹果里的数字 1' },
+        ] },
+        { region: { x: '54%', y: '36.8%', w: '25.6%', h: '19%' }, lines: [
+          { audio: `${AUDIO_BASE}/b3_s03.mp3`, subtitle: '先连苹果，再连柠檬，两个水果轮流连' },
+        ] },
+        { region: { x: '47.3%', y: '34.5%', w: '38.5%', h: '45.7%' }, lines: [
+          { audio: `${AUDIO_BASE}/b3_s04.mp3`, subtitle: '也就是：苹果 1，柠檬 1，苹果 2，柠檬 2，一直这样轮流连下去' },
+        ] },
+        { region: { x: '79.5%', y: '4.1%', w: '16.5%', h: '10%' }, lines: [
+          { audio: `${AUDIO_BASE}/b3_s05.mp3`, subtitle: '明白了就点击开始' },
+        ] },
+      ],
+    }
+  },
+  B4: {
+    title: 'B4 柠檬苹果',
+    desc: '最后一个任务,从柠檬 1 开始',
+    config: {
+      image: 'img/block6.webp',
+      btnRegion: { x: '80.3%', y: '5%', w: '14.6%', h: '7.8%' },
+      buttonText: '开始',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '7.8%', y: '35.8%', w: '26.9%', h: '22.6%' }, lines: [
+          { audio: `${AUDIO_BASE}/b4_s01.mp3`, subtitle: '最后一个任务。这次要从柠檬开始，在柠檬和苹果之间轮流连' },
+        ] },
+        { region: { x: '10.7%', y: '43.9%', w: '6.2%', h: '9.8%' }, lines: [
+          { audio: `${AUDIO_BASE}/b4_s02.mp3`, subtitle: '先找到柠檬里的数字 1' },
+        ] },
+        { region: { x: '53.7%', y: '36.5%', w: '26.1%', h: '19.3%' }, lines: [
+          { audio: `${AUDIO_BASE}/b4_s03.mp3`, subtitle: '先连柠檬，再连苹果，两个水果轮流连' },
+        ] },
+        { region: { x: '45.5%', y: '56.2%', w: '44%', h: '35%' }, lines: [
+          { audio: `${AUDIO_BASE}/b4_s04.mp3`, subtitle: '也就是：柠檬 1，苹果 1，柠檬 2，苹果 2，一直这样轮流连下去' },
+        ] },
+        { region: { x: '79.2%', y: '4%', w: '16.7%', h: '10.1%' }, lines: [
+          { audio: `${AUDIO_BASE}/b4_s05.mp3`, subtitle: '明白了就点击开始' },
+        ] },
+      ],
+    }
+  },
+};
+
+/* =========================================================================
+   路由
+   ========================================================================= */
+const params = new URLSearchParams(location.search);
+const taskKey = params.get('task');
+
+if (taskKey && GUIDES[taskKey]) {
+  // 直接播放该子任务的 VoiceGuide
+  const guide = GUIDES[taskKey];
+  VoiceGuide.show(guide.config).then(() => {
+    document.body.innerHTML = `
+      <div class="home">
+        <h1>${guide.title} 已结束</h1>
+        <p class="sub">你看到的就是跑正式任务前这一屏。</p>
+        <div class="link-list">
+          <a href="preview-guide.html">&laquo; 返回所有指导语</a>
+          <a href="preview-guide.html?task=${taskKey}">再看一遍这一屏</a>
+        </div>
+      </div>`;
+  });
+} else {
+  // 首页:列 7 个链接
+  const target = document.getElementById('jspsych-target');
+  const order = ['rules','A0','B2','B1','A1','B3','B4'];
+  let html = `
+    <div class="home">
+      <h1>TMT 指导语独立预览</h1>
+      <div class="sub">点击任一链接直接打开对应的 VoiceGuide 指导语页面,不会进入正式实验。</div>
+      <div class="link-list">`;
+  for (const k of order) {
+    const g = GUIDES[k];
+    html += `<a href="preview-guide.html?task=${k}">
+      <div class="task">${g.title}</div>
+      <div class="desc">${g.desc}</div>
+    </a>`;
+  }
+  html += `</div>
+      <div class="tip">
+        <b>提示:</b>每个链接打开后,跟正式跑实验时看到的指导语完全一样(相同图片、相同音频、相同红框、相同按钮)。
+        点指导语里的"开始"或按 Esc(主试模式下)会结束该屏,不会进入画板试次。
+      </div>
+    </div>`;
+  target.innerHTML = html;
+}
+</script>
+</body>
+</html>

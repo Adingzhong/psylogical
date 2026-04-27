@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>[TEST] N-back B1 指导语</title>
+  <link rel="stylesheet" href="../../css/common.css">
+</head>
+<body>
+  <script src="../../lib/voice-guide.js"></script>
+  <script>
+    const AUDIO_BASE = '../../audio/nback';
+    VoiceGuide.show({
+      image: 'img/block1.png',
+      btnRegion: { x: '80.1%', y: '4.9%', w: '15%', h: '8.2%' },
+      buttonText: '开始练习',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '5.2%', y: '38.4%', w: '19.8%', h: '36.5%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s01.wav`, subtitle: '先看这张目标图，记住它的样子' },
+        ] },
+        { region: { x: '27.7%', y: '14.3%', w: '66.1%', h: '31.1%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s02.wav`, subtitle: '后面会一张一张出现新的图片' },
+        ] },
+        { region: { x: '51.7%', y: '21.3%', w: '19%', h: '23.7%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s03.wav`, subtitle: '每出现一张，都请和刚才的目标图比一比' },
+        ] },
+        { region: { x: '29.8%', y: '52.9%', w: '19.2%', h: '37.2%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s04.wav`, subtitle: '如果和目标图一模一样，就点"一样"' },
+        ] },
+        { region: { x: '52.8%', y: '52.5%', w: '18.3%', h: '37.2%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s05.wav`, subtitle: '如果还是同一张图，只是有一点小变化，就点"很像"' },
+        ] },
+        { region: { x: '73.2%', y: '52.1%', w: '18.9%', h: '37.4%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s06.wav`, subtitle: '如果已经不一样了，就点"不一样"' },
+        ] },
+        { region: { x: '27.4%', y: '48.2%', w: '67.9%', h: '43.4%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s07.wav`, subtitle: '按你的第一感觉来选，不用着急' },
+        ] },
+        { region: { x: '79.6%', y: '4.1%', w: '16%', h: '9.8%' }, lines: [
+          { audio: `${AUDIO_BASE}/b1_s08.wav`, subtitle: '明白了就点击开始练习' },
+        ] },
+      ],
+    }).then(() => {
+      document.body.innerHTML = '<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-size:48px;color:#666;font-family:PingFang SC,sans-serif;">✓ B1 指导语播放完毕</div>';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>[TEST] N-back B2 指导语</title>
+  <link rel="stylesheet" href="../../css/common.css">
+</head>
+<body>
+  <script src="../../lib/voice-guide.js"></script>
+  <script>
+    const AUDIO_BASE = '../../audio/nback';
+    VoiceGuide.show({
+      image: 'img/block2.png',
+      btnRegion: { x: '80.1%', y: '4.9%', w: '15%', h: '8.2%' },
+      buttonText: '开始练习',
+      pauseBetween: 500,
+      steps: [
+        { region: { x: '5.1%', y: '14.3%', w: '22.8%', h: '80.1%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s01.wav`, subtitle: '这次没有固定的目标图，图片会一张一张出现' },
+        ] },
+        { region: { x: '7.8%', y: '27.8%', w: '17%', h: '32%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s02.wav`, subtitle: '第一张图出来的时候，先记住它' },
+        ] },
+        { region: { x: '30.3%', y: '16%', w: '61.2%', h: '40.5%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s03.wav`, subtitle: '从第二张开始，每出来一张，都和前面那一张比一比' },
+        ] },
+        { region: { x: '33.2%', y: '29.1%', w: '36.7%', h: '26.6%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s04.wav`, subtitle: '比如第二张和第一张比' },
+        ] },
+        { region: { x: '53.1%', y: '29%', w: '37%', h: '26.7%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s05.wav`, subtitle: '第三张和第二张比' },
+        ] },
+        { region: { x: '36.5%', y: '66.9%', w: '51.1%', h: '6%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s06.wav`, subtitle: '如果和前一张一模一样，就点"一样"' },
+        ] },
+        { region: { x: '36.7%', y: '73.8%', w: '50.8%', h: '6.3%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s07.wav`, subtitle: '如果还是很像，只是有一点变化，就点"很像"' },
+        ] },
+        { region: { x: '36.8%', y: '80.6%', w: '51%', h: '6.4%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s08.wav`, subtitle: '如果已经不一样了，就点"不一样"' },
+        ] },
+        { region: { x: '32%', y: '27.6%', w: '58.8%', h: '34.1%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s09.wav`, subtitle: '每次只和紧挨着前面的那一张比，不用去想更早的图片' },
+        ] },
+        { region: { x: '34.5%', y: '59.2%', w: '56.5%', h: '31.9%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s10.wav`, subtitle: '按你的第一感觉来选，不用着急' },
+        ] },
+        { region: { x: '79.6%', y: '4.1%', w: '16%', h: '9.8%' }, lines: [
+          { audio: `${AUDIO_BASE}/b2_s11.wav`, subtitle: '明白了就点击开始练习' },
+          { audio: `${AUDIO_BASE}/b2_s12.wav`, subtitle: '有不清楚的可以问工作人员' },
+        ] },
+      ],
+    }).then(() => {
+      document.body.innerHTML = '<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-size:48px;color:#666;font-family:PingFang SC,sans-serif;">✓ B2 指导语播放完毕</div>';
+    });
+  </script>
+</body>
+</html>

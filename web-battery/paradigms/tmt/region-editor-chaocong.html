@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMT 红框区域编辑器</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'PingFang SC', sans-serif; background: #1a1a2e; color: #fff; }
+
+  /* ---- Top toolbar ---- */
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(26,26,46,0.97); padding: 8px 16px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    border-bottom: 1px solid #333;
+  }
+  .toolbar select, .toolbar button {
+    font-size: 14px; padding: 5px 12px; border-radius: 6px; border: 1px solid #555;
+    background: #2a2a4a; color: #fff; cursor: pointer;
+  }
+  .toolbar button:hover { background: #3a3a6a; }
+  .toolbar button.danger { border-color: #E53935; color: #E53935; }
+  .toolbar button.danger:hover { background: #E53935; color: #fff; }
+
+  /* ---- Left: step list panel ---- */
+  .side-panel {
+    position: fixed; top: 44px; left: 0; bottom: 160px; width: 340px; z-index: 100;
+    background: rgba(26,26,46,0.95); overflow-y: auto;
+    border-right: 1px solid #333; padding: 8px;
+  }
+  .step-card {
+    padding: 8px 10px; margin-bottom: 6px; border-radius: 8px;
+    background: #2a2a4a; border: 2px solid transparent; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .step-card.selected { border-color: #E53935; background: #3a2a3a; }
+  .step-card .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .step-card .step-num { font-size: 13px; font-weight: bold; color: #E53935; }
+  .step-card.selected .step-num { color: #ff6659; }
+  .step-card .step-coords { font-size: 11px; color: #888; font-family: monospace; }
+  .step-card textarea {
+    width: 100%; font-size: 13px; padding: 4px 6px; border-radius: 4px;
+    border: 1px solid #444; background: #1a1a2e; color: #ddd; resize: vertical;
+    min-height: 36px; font-family: 'PingFang SC', sans-serif;
+  }
+
+  /* ---- Center: image area ---- */
+  .canvas-area {
+    margin-left: 340px; margin-top: 44px; margin-bottom: 160px;
+    display: flex; justify-content: center; align-items: center;
+    height: calc(100vh - 204px); background: #F0F2F5;
+  }
+  .img-container { position: relative; display: inline-block; }
+  .img-container img {
+    max-width: calc(100vw - 380px); max-height: calc(100vh - 220px);
+    object-fit: contain; border-radius: 8px;
+    user-select: none; -webkit-user-drag: none;
+  }
+
+  /* Region boxes */
+  .region-box {
+    position: absolute; border: 3px solid #E53935; border-radius: 6px;
+    cursor: move; background: rgba(229,57,53,0.06);
+    box-shadow: 0 0 0 3px rgba(229,57,53,0.15);
+  }
+  .region-box.inactive { border-color: rgba(100,100,100,0.5); background: rgba(100,100,100,0.04); box-shadow: none; border-width: 2px; }
+  .region-box .label {
+    position: absolute; top: -20px; left: 2px;
+    font-size: 11px; color: #fff; font-weight: bold;
+    background: #E53935; padding: 1px 6px; border-radius: 3px;
+  }
+  .region-box.inactive .label { background: #555; }
+  .region-box .handle {
+    position: absolute; width: 12px; height: 12px;
+    background: #E53935; border: 2px solid #fff; border-radius: 2px;
+  }
+  .region-box.inactive .handle { display: none; }
+  .handle.tl { top: -6px; left: -6px; cursor: nw-resize; }
+  .handle.tr { top: -6px; right: -6px; cursor: ne-resize; }
+  .handle.bl { bottom: -6px; left: -6px; cursor: sw-resize; }
+  .handle.br { bottom: -6px; right: -6px; cursor: se-resize; }
+
+  /* "继续" button overlay */
+  .btn-overlay {
+    position: absolute; border: 3px dashed #4FC3F7; border-radius: 8px;
+    cursor: move; background: rgba(79,195,247,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: #4FC3F7; font-weight: bold;
+  }
+  .btn-overlay .handle {
+    position: absolute; width: 10px; height: 10px;
+    background: #4FC3F7; border: 2px solid #fff; border-radius: 2px;
+  }
+  .btn-overlay .handle.br { bottom: -5px; right: -5px; cursor: se-resize; }
+
+  /* ---- Bottom: output ---- */
+  .output-panel {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(26,26,46,0.97); padding: 10px 16px;
+    border-top: 1px solid #333;
+  }
+  .output-panel pre {
+    font-size: 12px; color: #4FC3F7; font-family: 'SF Mono', monospace;
+    white-space: pre-wrap; max-height: 130px; overflow-y: auto;
+  }
+  .output-panel .actions { position: absolute; top: 8px; right: 16px; display: flex; gap: 8px; }
+  .output-panel button {
+    font-size: 13px; padding: 4px 14px; border-radius: 6px;
+    background: #4FC3F7; color: #000; border: none; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <select id="imageSelect">
+    <option value="img/rules.png">rules - 通用操作规则</option>
+    <option value="img/block1.png">A0 - 数字顺序</option>
+    <option value="img/block2.png">B2 - 方形圆形交替</option>
+    <option value="img/block3.png">B1 - 数字汉字交替</option>
+    <option value="img/block4.png">A1 - 水果数字基线</option>
+    <option value="img/block5.png">B3 - 苹果柠檬交替</option>
+    <option value="img/block6.png">B4 - 柠檬苹果交替</option>
+  </select>
+  <button onclick="addStepAbove()">↑ 上方插入</button>
+  <button onclick="addStepBelow()">↓ 下方插入</button>
+  <button onclick="addStep()">+ 末尾追加</button>
+  <button class="danger" onclick="deleteStep()">× 删除选中</button>
+  <input type="text" id="editNote" placeholder="这次改了啥(可选,保存时一起发)"
+         style="flex:1;min-width:220px;background:#1a1a2e;color:#fff;border:1px solid #555;padding:5px 10px;border-radius:6px;font-size:13px;font-family:'PingFang SC',sans-serif;">
+  <button onclick="saveToServer()" style="background:#1565C0;border-color:#1976D2;">💾 保存</button>
+  <span id="saveStatus" style="font-size:11px;color:#888;margin-left:4px;min-width:180px;"></span>
+</div>
+
+<div class="side-panel" id="sidePanel"></div>
+
+<div class="canvas-area">
+  <div class="img-container" id="container">
+    <img id="mainImg" src="img/rules.png" draggable="false">
+  </div>
+</div>
+
+<div class="output-panel">
+  <div class="actions">
+    <button onclick="copyOutput()">📋 复制代码</button>
+    <button onclick="copyVoiceText()">📝 复制语音文本</button>
+  </div>
+  <pre id="output"></pre>
+</div>
+
+<script>
+// 2026-04-14 默认坐标 = 新版(tmt.js 当前跑的那套 ini)
+const defaultStepsMap = {
+  'img/rules.png': [
+    { x: 5.1, y: 14.2, w: 47.8, h: 38.6, subtitle: '屏幕上有着一些带数字的圆点，请先找到数字1' },
+    { x: 5.4, y: 54.9, w: 47.5, h: 39.1, subtitle: '手指按住数字1，从1开始，依次连到2、3、4……' },
+    { x: 54.1, y: 14.3, w: 40.7, h: 79.2, subtitle: '按顺序连就可以' },
+    { x: 54.5, y: 27.9, w: 39.4, h: 30.9, subtitle: '中途松开没关系，接着连' },
+    { x: 54.2, y: 58.5, w: 41, h: 34.9, subtitle: '线条交叉也没关系，继续按顺序连' },
+    { x: 80.1, y: 5, w: 15, h: 8, subtitle: '明白了就点击开始练习\n有不清楚的可以问工作人员' },
+  ],
+  'img/block1.png': [
+    { x: 5.6, y: 14, w: 47.4, h: 38.1, subtitle: '先找到数字 1' },
+    { x: 5.6, y: 55, w: 47.3, h: 39.5, subtitle: '从 1 开始，按顺序一直连到最后一个数字' },
+    { x: 54.7, y: 13.8, w: 40.2, h: 79.6, subtitle: '中途松开了也没关系，接着连就可以' },
+    { x: 80.2, y: 4.4, w: 14.7, h: 8.4, subtitle: '准备好了就点击开始' },
+  ],
+  'img/block2.png': [
+    { x: 5.1, y: 14.6, w: 32.2, h: 54.4, subtitle: '这次除了看数字，还要看图形。方的是方形，圆的是圆形' },
+    { x: 11.2, y: 45.2, w: 5.4, h: 7.8, subtitle: '先找到方形里的数字 1' },
+    { x: 40, y: 17.1, w: 55, h: 44, subtitle: '然后按数字顺序，方形和圆形轮流连' },
+    { x: 41.7, y: 32.7, w: 48.8, h: 44.1, subtitle: '也就是：方形 1，圆形 2，方形 3，圆形 4，一直这样轮流连下去' },
+    { x: 80.5, y: 4.7, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+  'img/block3.png': [
+    { x: 5.4, y: 14.1, w: 32.2, h: 79.3, subtitle: '这次除了看数字，还要分清两种写法。屏幕上有数字，也有汉字' },
+    { x: 9, y: 36.4, w: 25.2, h: 19.4, subtitle: '像 1、2、3 这样的是数字，像一、二、三这样的是汉字' },
+    { x: 10.6, y: 44.1, w: 6.5, h: 9.2, subtitle: '先找到数字 1' },
+    { x: 39.2, y: 14.2, w: 55.8, h: 64.4, subtitle: '然后按顺序，数字和汉字轮流连' },
+    { x: 43.3, y: 58.7, w: 48, h: 19.1, subtitle: '也就是：数字 1，汉字一，数字 2，汉字二，一直这样轮流连下去' },
+    { x: 80.1, y: 5.1, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+  'img/block4.png': [
+    { x: 8.2, y: 36.1, w: 25.9, h: 19.7, subtitle: '屏幕上会出现不同的水果，每个水果上都有一个数字' },
+    { x: 15.5, y: 36.5, w: 6.8, h: 10, subtitle: '不管是什么水果，都只看上面的数字' },
+    { x: 10.6, y: 44.5, w: 5.7, h: 8.7, subtitle: '先找到数字 1' },
+    { x: 39.7, y: 58.6, w: 55.1, h: 23.7, subtitle: '从 1 开始，按顺序一直连到最后一个数字' },
+    { x: 80, y: 5, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+  'img/block5.png': [
+    { x: 15.8, y: 36.5, w: 19.2, h: 9.4, subtitle: '这次要在苹果和柠檬之间轮流连。屏幕上有苹果，也有柠檬' },
+    { x: 10.2, y: 43.8, w: 7.7, h: 10.8, subtitle: '先找到苹果里的数字 1' },
+    { x: 28, y: 38, w: 10, h: 15, subtitle: '先连苹果，再连柠檬，两个水果轮流连' },
+    { x: 47.8, y: 33.7, w: 38.5, h: 45.7, subtitle: '也就是：苹果 1，柠檬 1，苹果 2，柠檬 2，一直这样轮流连下去' },
+    { x: 80.4, y: 4.9, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+  'img/block6.png': [
+    { x: 7.8, y: 35.8, w: 26.9, h: 22.6, subtitle: '最后一个任务。这次要从柠檬开始，在柠檬和苹果之间轮流连' },
+    { x: 10.7, y: 43.9, w: 6.2, h: 9.8, subtitle: '先找到柠檬里的数字 1' },
+    { x: 53.7, y: 36.5, w: 26.1, h: 19.3, subtitle: '先连柠檬，再连苹果，两个水果轮流连' },
+    { x: 45.5, y: 56.2, w: 44, h: 35, subtitle: '也就是：柠檬 1，苹果 1，柠檬 2，苹果 2，一直这样轮流连下去' },
+    { x: 80, y: 4.6, w: 15, h: 8, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+};
+
+const imageLabels = {
+  'img/rules.png': 'rules',
+  'img/block1.png': 'A0',
+  'img/block2.png': 'B2',
+  'img/block3.png': 'B1',
+  'img/block4.png': 'A1',
+  'img/block5.png': 'B3',
+  'img/block6.png': 'B4',
+};
+
+// "继续" button overlay position (percentage of image)
+// 2026-04-13 全项目统一: 中位数 btnOverlay
+let btnOverlay = { x: 80.1, y: 4.9, w: 15, h: 8.2 };
+
+let steps = [];
+let currentStep = 0;
+let currentImage = null;
+let dragging = null;
+
+const container = document.getElementById('container');
+const mainImg = document.getElementById('mainImg');
+const outputEl = document.getElementById('output');
+
+/* ---- 本地保存 (localStorage + 服务器) ---- */
+const STORAGE_KEY = 'tmt-region-editor-v2';  // v2: 默认坐标换成 2026-04-14 ini 新版
+let allStates = {};  // map image path -> { steps, btnOverlay }
+let saveTimer = null;
+
+function snapshotCurrent() {
+  if (currentImage && steps) {
+    allStates[currentImage] = {
+      steps: JSON.parse(JSON.stringify(steps)),
+      btnOverlay: JSON.parse(JSON.stringify(btnOverlay)),
+    };
+  }
+}
+
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) allStates = JSON.parse(raw);
+  } catch (e) { console.warn('load failed:', e); }
+}
+
+function saveToStorage() {
+  snapshotCurrent();
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(allStates));
+      const s = document.getElementById('saveStatus');
+      if (s) { s.textContent = '本地 ✓ ' + new Date().toTimeString().slice(0,8); s.style.color = '#888'; }
+    } catch (e) { console.warn('save failed:', e); }
+  }, 300);
+}
+
+/**
+ * 对齐当前 steps 和 default steps,按任务逐个找:
+ *  - 字幕文字改动 (text_changed)
+ *  - 新增字幕行 (text_added)
+ *  - 删除字幕行 (text_removed)
+ *  - 区域坐标改动 (region_moved)
+ * 输出结构化 changes 供后端/我读取
+ */
+function detectChanges() {
+  const changes = [];
+  Object.keys(allStates).forEach(imgPath => {
+    const curr = allStates[imgPath];
+    const defs = defaultStepsMap[imgPath];
+    if (!defs || !curr || !curr.steps) return;
+    const taskKey = imageLabels[imgPath] || imgPath;
+    const audioPrefix = taskKey === 'rules' ? 'rules' : taskKey.toLowerCase();
+
+    // 把 steps 展平成扁平的 lines(每个 step 的 subtitle 按 \n 拆)
+    const flatten = (arr) => {
+      const out = [];
+      arr.forEach((s, stepIdx) => {
+        const lines = (s.subtitle || '').split('\n').filter(l => l.trim());
+        lines.forEach((line, lineIdx) => {
+          out.push({ stepIdx, lineIdx, text: line.trim() });
+        });
+      });
+      return out;
+    };
+    const currLines = flatten(curr.steps);
+    const defLines = flatten(defs);
+
+    // 按扁平索引逐个比较(第 N 句)
+    const maxLen = Math.max(currLines.length, defLines.length);
+    for (let i = 0; i < maxLen; i++) {
+      const c = currLines[i];
+      const d = defLines[i];
+      const key = `${audioPrefix}_s${String(i + 1).padStart(2, '0')}`;
+      if (c && d) {
+        if (c.text !== d.text) {
+          changes.push({
+            task: taskKey, audio_key: key, type: 'text_changed',
+            step: c.stepIdx + 1, old: d.text, new: c.text,
+            action_required: '需要改 audio/tmt/generate_tmt_audio.py 里的 ' + key + ',重跑 TTS,再 ffmpeg 转 mp3',
+          });
+        }
+      } else if (c && !d) {
+        changes.push({
+          task: taskKey, audio_key: key, type: 'text_added',
+          step: c.stepIdx + 1, new: c.text,
+          action_required: '需要给 audio/tmt/generate_tmt_audio.py 增加 ' + key + ' 条目,跑 TTS 生成 wav+mp3',
+        });
+      } else if (!c && d) {
+        changes.push({
+          task: taskKey, audio_key: key, type: 'text_removed',
+          old: d.text,
+          action_required: '该音频不再引用(磁盘保留 mp3),从 tmt.js 删掉对应 audio 条目',
+        });
+      }
+    }
+
+    // 坐标改动:step 数一致时按位置比
+    const minSteps = Math.min(curr.steps.length, defs.length);
+    for (let i = 0; i < minSteps; i++) {
+      const c = curr.steps[i], d = defs[i];
+      if (c.x !== d.x || c.y !== d.y || c.w !== d.w || c.h !== d.h) {
+        changes.push({
+          task: taskKey, type: 'region_moved', step: i + 1,
+          old: `${d.x},${d.y} ${d.w}×${d.h}`,
+          new: `${c.x},${c.y} ${c.w}×${c.h}`,
+          action_required: '只改 tmt.js 里该 step 的 region,不用碰音频',
+        });
+      }
+    }
+
+    // 步骤数增减
+    if (curr.steps.length !== defs.length) {
+      changes.push({
+        task: taskKey, type: 'step_count_changed',
+        old_count: defs.length, new_count: curr.steps.length,
+        action_required: curr.steps.length > defs.length
+          ? '新增了 step,需要在 tmt.js 里插入对应的 { region, lines } 条目'
+          : '删掉了 step,需要从 tmt.js 里移除对应条目',
+      });
+    }
+  });
+  return changes;
+}
+
+async function saveToServer() {
+  snapshotCurrent();
+  const note = document.getElementById('editNote').value.trim();
+  const changes = detectChanges();
+  const textChangeCount = changes.filter(c => c.type === 'text_changed' || c.type === 'text_added').length;
+
+  const autoNote = textChangeCount > 0
+    ? `检测到 ${textChangeCount} 条字幕文字改动 → 需要同步改 audio/tmt/generate_tmt_audio.py 并重跑 TTS,再 ffmpeg 转 mp3(128k/44.1k/mono),最后 bump tmt.js?v=`
+    : '没有文字改动(只有区域坐标/步骤结构改动),不需要重跑音频';
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    user_note: note || null,
+    auto_note: autoNote,
+    tts_script_path: 'audio/tmt/generate_tmt_audio.py',
+    regenerate_command: 'python3 audio/tmt/generate_tmt_audio.py && for w in audio/tmt/*.wav; do ffmpeg -y -loglevel error -i "$w" -codec:a libmp3lame -b:a 128k -ar 44100 -ac 1 "${w%.wav}.mp3"; done',
+    changes: changes,
+    states: allStates,
+    imageLabels: imageLabels,
+  };
+
+  const s = document.getElementById('saveStatus');
+  s.textContent = '保存中...'; s.style.color = '#FFC107';
+  try {
+    const resp = await fetch('/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        paradigm: '_tool',
+        subject_id: 'tmt-editor',
+        filename: 'region-edits.json',
+        content: JSON.stringify(payload, null, 2),
+      }),
+    });
+    if (resp.ok) {
+      const summary = textChangeCount > 0
+        ? `✓ 已收,${textChangeCount} 句字幕要重录`
+        : `✓ 已收 (无字幕改动)`;
+      s.textContent = summary + ' ' + new Date().toTimeString().slice(0,8);
+      s.style.color = textChangeCount > 0 ? '#FFC107' : '#4CAF50';
+    } else {
+      throw new Error('HTTP ' + resp.status);
+    }
+  } catch (e) {
+    s.textContent = '✗ 服务器失败: ' + e.message;
+    s.style.color = '#F44336';
+  }
+}
+
+function loadImage(src) {
+  // 切换任务前先把当前状态快照到 allStates
+  snapshotCurrent();
+  currentImage = src;
+  mainImg.src = src;
+  if (allStates[src]) {
+    steps = JSON.parse(JSON.stringify(allStates[src].steps));
+    btnOverlay = JSON.parse(JSON.stringify(allStates[src].btnOverlay));
+  } else {
+    steps = JSON.parse(JSON.stringify(defaultStepsMap[src] || []));
+    // btnOverlay 保持全局默认
+  }
+  currentStep = 0;
+  renderAll();
+}
+
+document.getElementById('imageSelect').addEventListener('change', (e) => loadImage(e.target.value));
+
+function selectStep(idx) {
+  currentStep = idx;
+  renderAll();
+}
+
+function addStep() {
+  steps.push({ x: 20, y: 20, w: 30, h: 20, subtitle: '' });
+  currentStep = steps.length - 1;
+  renderAll();
+}
+
+function addStepAbove() {
+  const idx = Math.max(0, currentStep);
+  steps.splice(idx, 0, { x: 20, y: 20, w: 30, h: 20, subtitle: '' });
+  // currentStep 不变:新插入的就在原位置,原选中项后移一格
+  renderAll();
+}
+
+function addStepBelow() {
+  const idx = currentStep + 1;
+  steps.splice(idx, 0, { x: 20, y: 20, w: 30, h: 20, subtitle: '' });
+  currentStep = idx;
+  renderAll();
+}
+
+function deleteStep() {
+  if (steps.length <= 1) return;
+  steps.splice(currentStep, 1);
+  if (currentStep >= steps.length) currentStep = steps.length - 1;
+  renderAll();
+}
+
+function renderAll() {
+  renderSidePanel();
+  renderBoxes();
+  renderBtnOverlay();
+  updateOutput();
+}
+
+// ---- Side panel ----
+function renderSidePanel() {
+  const panel = document.getElementById('sidePanel');
+  panel.innerHTML = '';
+  steps.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'step-card' + (i === currentStep ? ' selected' : '');
+    card.innerHTML = `
+      <div class="step-header">
+        <span class="step-num">Step ${i + 1}</span>
+        <span class="step-coords">${s.x}%, ${s.y}% | ${s.w}×${s.h}%</span>
+      </div>
+      <textarea data-idx="${i}" placeholder="字幕文字（每行一句，同一个红框内播放多句）">${s.subtitle}</textarea>
+      <div style="font-size:10px;color:#666;margin-top:2px;">每行 = 一句音频，多行共享同一个红框</div>
+    `;
+    card.addEventListener('click', (e) => {
+      if (e.target.tagName === 'TEXTAREA') return;
+      selectStep(i);
+    });
+    card.querySelector('textarea').addEventListener('input', (e) => {
+      steps[+e.target.dataset.idx].subtitle = e.target.value;
+      updateOutput();
+    });
+    panel.appendChild(card);
+  });
+
+  // "继续" button position card
+  const btnCard = document.createElement('div');
+  btnCard.className = 'step-card';
+  btnCard.style.borderColor = '#4FC3F7';
+  btnCard.style.background = '#1a2a3a';
+  btnCard.innerHTML = `
+    <div class="step-header">
+      <span class="step-num" style="color:#4FC3F7;">📌 "继续"按钮位置</span>
+      <span class="step-coords">${btnOverlay.x}%, ${btnOverlay.y}% | ${btnOverlay.w}×${btnOverlay.h}%</span>
+    </div>
+    <div style="font-size:11px;color:#888;margin-top:4px;">蓝色虚线框 — 拖拽调整覆盖按钮位置</div>
+  `;
+  panel.appendChild(btnCard);
+}
+
+// ---- Region boxes ----
+function renderBoxes() {
+  container.querySelectorAll('.region-box').forEach(el => el.remove());
+  steps.forEach((s, i) => {
+    const box = document.createElement('div');
+    box.className = 'region-box' + (i === currentStep ? '' : ' inactive');
+    box.style.left = s.x + '%'; box.style.top = s.y + '%';
+    box.style.width = s.w + '%'; box.style.height = s.h + '%';
+
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = i + 1;
+    box.appendChild(label);
+
+    ['tl', 'tr', 'bl', 'br'].forEach(h => {
+      const handle = document.createElement('div');
+      handle.className = 'handle ' + h;
+      handle.dataset.handle = h;
+      box.appendChild(handle);
+    });
+
+    box.addEventListener('pointerdown', (e) => startDrag(e, i, 'step'));
+    container.appendChild(box);
+  });
+}
+
+// ---- "继续" button overlay ----
+function renderBtnOverlay() {
+  container.querySelectorAll('.btn-overlay').forEach(el => el.remove());
+  const el = document.createElement('div');
+  el.className = 'btn-overlay';
+  el.style.left = btnOverlay.x + '%'; el.style.top = btnOverlay.y + '%';
+  el.style.width = btnOverlay.w + '%'; el.style.height = btnOverlay.h + '%';
+  el.textContent = '继续';
+  const handle = document.createElement('div');
+  handle.className = 'handle br';
+  handle.dataset.handle = 'br';
+  el.appendChild(handle);
+  el.addEventListener('pointerdown', (e) => startDrag(e, -1, 'btn'));
+  container.appendChild(el);
+}
+
+// ---- Drag logic ----
+function startDrag(e, idx, kind) {
+  e.preventDefault();
+  e.stopPropagation();
+  if (kind === 'step' && idx !== currentStep) { selectStep(idx); return; }
+
+  const obj = kind === 'btn' ? btnOverlay : steps[idx];
+  const imgRect = mainImg.getBoundingClientRect();
+  const handle = e.target.dataset.handle;
+
+  dragging = {
+    kind, idx, handle,
+    type: handle ? 'resize' : 'move',
+    startX: e.clientX, startY: e.clientY,
+    origX: obj.x, origY: obj.y, origW: obj.w, origH: obj.h,
+    imgW: imgRect.width, imgH: imgRect.height,
+  };
+  document.addEventListener('pointermove', onDragMove);
+  document.addEventListener('pointerup', onDragEnd);
+}
+
+function onDragMove(e) {
+  if (!dragging) return;
+  const d = dragging;
+  const dx = (e.clientX - d.startX) / d.imgW * 100;
+  const dy = (e.clientY - d.startY) / d.imgH * 100;
+  const obj = d.kind === 'btn' ? btnOverlay : steps[d.idx];
+
+  if (d.type === 'move') {
+    obj.x = Math.round(Math.max(0, Math.min(100 - obj.w, d.origX + dx)) * 10) / 10;
+    obj.y = Math.round(Math.max(0, Math.min(100 - obj.h, d.origY + dy)) * 10) / 10;
+  } else {
+    const h = d.handle;
+    if (h.includes('l')) { obj.x = Math.round((d.origX + dx) * 10) / 10; obj.w = Math.max(3, Math.round((d.origW - dx) * 10) / 10); }
+    if (h.includes('r')) { obj.w = Math.max(3, Math.round((d.origW + dx) * 10) / 10); }
+    if (h.includes('t')) { obj.y = Math.round((d.origY + dy) * 10) / 10; obj.h = Math.max(3, Math.round((d.origH - dy) * 10) / 10); }
+    if (h.includes('b')) { obj.h = Math.max(3, Math.round((d.origH + dy) * 10) / 10); }
+  }
+
+  if (d.kind === 'btn') { renderBtnOverlay(); }
+  else { renderBoxes(); }
+  renderSidePanel();
+  updateOutput();
+}
+
+function onDragEnd() {
+  dragging = null;
+  document.removeEventListener('pointermove', onDragMove);
+  document.removeEventListener('pointerup', onDragEnd);
+}
+
+// ---- Output ----
+function updateOutput() {
+  const label = imageLabels[currentImage] || 'unknown';
+  const parts = steps.map(s => {
+    const subs = s.subtitle.split('\n').filter(l => l.trim());
+    const region = `{ x: '${s.x}%', y: '${s.y}%', w: '${s.w}%', h: '${s.h}%' }`;
+    if (subs.length <= 1) {
+      return `  { region: ${region}, lines: ['${subs[0] || ''}'] },`;
+    } else {
+      const linesStr = subs.map(l => `'${l.trim()}'`).join(', ');
+      return `  { region: ${region}, lines: [${linesStr}] },`;
+    }
+  });
+  const btnLine = `\nbtnOverlay: { x: '${btnOverlay.x}%', y: '${btnOverlay.y}%', w: '${btnOverlay.w}%', h: '${btnOverlay.h}%' }`;
+  outputEl.textContent = `${label}: [\n${parts.join('\n')}\n]${btnLine}`;
+  saveToStorage();
+}
+
+function copyOutput() {
+  navigator.clipboard.writeText(outputEl.textContent);
+  event.target.textContent = '✓ 已复制';
+  setTimeout(() => event.target.textContent = '📋 复制代码', 1500);
+}
+
+function copyVoiceText() {
+  let n = 1;
+  const label = imageLabels[currentImage] || 'unknown';
+  const text = `=== ${label} ===\n` + steps.flatMap(s => s.subtitle.split('\n').filter(l => l.trim())).map(l => `${n++}. ${l.trim()}`).join('\n');
+  navigator.clipboard.writeText(text);
+  event.target.textContent = '✓ 已复制';
+  setTimeout(() => event.target.textContent = '📝 复制语音文本', 1500);
+}
+
+loadFromStorage();
+loadImage('img/rules.png');
+</script>
+</body>
+</html>

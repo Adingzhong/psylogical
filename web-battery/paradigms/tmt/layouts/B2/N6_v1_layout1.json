@@ -1,0 +1,175 @@
+{
+  "task": "B2",
+  "version": "v1",
+  "N": 6,
+  "M": 11,
+  "layout_id": 1,
+  "node_size_px": 165,
+  "y_norm_origin": "top",
+  "start_shape": "square",
+  "main_sequence": [
+    {
+      "value": 1,
+      "shape": "square"
+    },
+    {
+      "value": 2,
+      "shape": "circle"
+    },
+    {
+      "value": 3,
+      "shape": "square"
+    },
+    {
+      "value": 4,
+      "shape": "circle"
+    },
+    {
+      "value": 5,
+      "shape": "square"
+    },
+    {
+      "value": 6,
+      "shape": "circle"
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "B2_main_01",
+      "k": 1,
+      "value": 1,
+      "shape": "square",
+      "role": "main",
+      "x_norm": 0.499337,
+      "y_norm": 0.405697,
+      "x_px": 766.981593790975,
+      "y_px": 467.36251090503896
+    },
+    {
+      "node_id": "B2_main_02",
+      "k": 2,
+      "value": 2,
+      "shape": "circle",
+      "role": "main",
+      "x_norm": 0.896247,
+      "y_norm": 0.872513,
+      "x_px": 1376.635162001438,
+      "y_px": 1005.1353045211926
+    },
+    {
+      "node_id": "B2_main_03",
+      "k": 3,
+      "value": 3,
+      "shape": "square",
+      "role": "main",
+      "x_norm": 0.429525,
+      "y_norm": 0.12318,
+      "x_px": 659.7496858487707,
+      "y_px": 141.90296646852926
+    },
+    {
+      "node_id": "B2_main_04",
+      "k": 4,
+      "value": 4,
+      "shape": "circle",
+      "role": "main",
+      "x_norm": 0.106118,
+      "y_norm": 0.204634,
+      "x_px": 162.99726140746145,
+      "y_px": 235.7382301769045
+    },
+    {
+      "node_id": "B2_main_05",
+      "k": 5,
+      "value": 5,
+      "shape": "square",
+      "role": "main",
+      "x_norm": 0.295432,
+      "y_norm": 0.812537,
+      "x_px": 453.7842272098158,
+      "y_px": 936.0422824097006
+    },
+    {
+      "node_id": "B2_main_06",
+      "k": 6,
+      "value": 6,
+      "shape": "circle",
+      "role": "main",
+      "x_norm": 0.62601,
+      "y_norm": 0.733997,
+      "x_px": 961.5508637132435,
+      "y_px": 845.564919825352
+    },
+    {
+      "node_id": "B2_lure_02_square",
+      "k": null,
+      "value": 2,
+      "shape": "square",
+      "role": "lure",
+      "x_norm": 0.779095,
+      "y_norm": 0.479931,
+      "x_px": 1196.6903923858242,
+      "y_px": 552.8807872564789
+    },
+    {
+      "node_id": "B2_lure_03_circle",
+      "k": null,
+      "value": 3,
+      "shape": "circle",
+      "role": "lure",
+      "x_norm": 0.910178,
+      "y_norm": 0.632377,
+      "x_px": 1398.033123628986,
+      "y_px": 728.498572255768
+    },
+    {
+      "node_id": "B2_lure_04_square",
+      "k": null,
+      "value": 4,
+      "shape": "square",
+      "role": "lure",
+      "x_norm": 0.287116,
+      "y_norm": 0.422739,
+      "x_px": 441.0098234259804,
+      "y_px": 486.99513640800944
+    },
+    {
+      "node_id": "B2_lure_05_circle",
+      "k": null,
+      "value": 5,
+      "shape": "circle",
+      "role": "lure",
+      "x_norm": 0.783733,
+      "y_norm": 0.162523,
+      "x_px": 1203.8143048359907,
+      "y_px": 187.22696317005648
+    },
+    {
+      "node_id": "B2_lure_06_square",
+      "k": null,
+      "value": 6,
+      "shape": "square",
+      "role": "lure",
+      "x_norm": 0.109792,
+      "y_norm": 0.578833,
+      "x_px": 168.63977019419255,
+      "y_px": 666.8158768715347
+    }
+  ],
+  "gen_constraints_used": {
+    "seed": 5201,
+    "attempt_in_seed": 1,
+    "min_center_dist_px": 173.25,
+    "avoid_line_to_node_px": 86.625,
+    "avoid_line_factor": 1.05,
+    "min_step_len_px": 320,
+    "near_neighbor_k": 2,
+    "span_x_min_px": 1105.92,
+    "span_y_min_px": 691.1999999999999,
+    "note": "固定正确序列(1..N形状交替)；选择N个点做main路径，不自交+线避点；相邻不贴近(最短步长+互不为前K近邻)。"
+  },
+  "preview_canvas_px": [
+    1536,
+    1152
+  ]
+}

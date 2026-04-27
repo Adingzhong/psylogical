@@ -1,0 +1,12 @@
+{
+  "name": "浙大认知评估平台",
+  "short_name": "认知评估",
+  "description": "多模态 MCI 早期筛查评估系统",
+  "start_url": "/app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#F5F7FA",
+  "theme_color": "#1565C0",
+  "lang": "zh-CN"
+}

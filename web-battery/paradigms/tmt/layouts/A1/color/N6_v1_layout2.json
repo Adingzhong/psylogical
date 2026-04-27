@@ -1,0 +1,107 @@
+{
+  "task": "A1",
+  "version": "N6_v1",
+  "style": "color",
+  "K": 6,
+  "canvas_px": {
+    "w": 1400,
+    "h": 1000
+  },
+  "node_size_px": 170,
+  "metrics": {
+    "cover_w": 0.9844338893580661,
+    "cover_h": 0.9486437378834273,
+    "long_ratio": 0.8,
+    "quad_switches": 5.0,
+    "corr_x": 0.3142857142857143,
+    "corr_y": 0.5428571428571428,
+    "near_neighbor_ratio": 0.4,
+    "mean_step": 841.185116563213,
+    "cv_step": 0.3864814745964503,
+    "seed_base": 642117,
+    "degraded": true,
+    "score": 17.392086394803012,
+    "node_size_px": 170.0
+  },
+  "nodes": [
+    {
+      "node_id": 1,
+      "k": 1,
+      "fruit": "apple",
+      "style": "bw",
+      "stim_rel": "stimuli/fruits/numbered/bw/apple_bw_1.webp",
+      "x_norm": 0.9292714955693107,
+      "y_norm": 0.6669073011717866,
+      "pos_px": [
+        419.0,
+        193.7501219385918
+      ]
+    },
+    {
+      "node_id": 2,
+      "k": 2,
+      "fruit": "lemon",
+      "style": "bw",
+      "stim_rel": "stimuli/fruits/numbered/bw/lemon_bw_2.webp",
+      "x_norm": 0.07140767770013873,
+      "y_norm": 0.9093256100362638,
+      "pos_px": [
+        -419.0,
+        291.0
+      ]
+    },
+    {
+      "node_id": 3,
+      "k": 3,
+      "fruit": "apple",
+      "style": "bw",
+      "stim_rel": "stimuli/fruits/numbered/bw/apple_bw_3.webp",
+      "x_norm": 0.3925501877395698,
+      "y_norm": 0.4469338826405152,
+      "pos_px": [
+        -57.39390278914027,
+        -26.223296592679674
+      ]
+    },
+    {
+      "node_id": 4,
+      "k": 4,
+      "fruit": "lemon",
+      "style": "bw",
+      "stim_rel": "stimuli/fruits/numbered/bw/lemon_bw_4.webp",
+      "x_norm": 0.9247050059014703,
+      "y_norm": 0.13143774497185343,
+      "pos_px": [
+        419.0,
+        -291.0
+      ]
+    },
+    {
+      "node_id": 5,
+      "k": 5,
+      "fruit": "apple",
+      "style": "bw",
+      "stim_rel": "stimuli/fruits/numbered/bw/apple_bw_5.webp",
+      "x_norm": 0.09029659903945665,
+      "y_norm": 0.17848853031795012,
+      "pos_px": [
+        -419.0,
+        -291.0
+      ]
+    },
+    {
+      "node_id": 6,
+      "k": 6,
+      "fruit": "lemon",
+      "style": "bw",
+      "stim_rel": "stimuli/fruits/numbered/bw/lemon_bw_6.webp",
+      "x_norm": 0.19304402958378797,
+      "y_norm": 0.5058500062608,
+      "pos_px": [
+        -336.7025242072348,
+        32.692827027605176
+      ]
+    }
+  ],
+  "created_at": "2025-12-26 17:45:18"
+}

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SART - 认知评估</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    /* SART-specific: black background */
+    html, body {
+      background: #000000;
+      color: #FFFFFF;
+    }
+    .jspsych-display-element {
+      background: #000000 !important;
+    }
+    .jspsych-content-wrapper {
+      background: #000000 !important;
+    }
+    .sart-digit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 70vh;
+      font-family: "Courier New", monospace;
+      font-size: 20vh;  /* config: font_size_norm=0.2 (屏幕高度20%) */
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+    .sart-blank {
+      height: 100vh;
+      background: #000000;
+    }
+    .sart-btn-area {
+      position: fixed;
+      bottom: 40px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+    }
+    /* Position jsPsych button group at bottom center during SART trials */
+    #jspsych-html-button-response-btngroup {
+      position: fixed !important;
+      bottom: 40px !important;
+      left: 0 !important;
+      right: 0 !important;
+      display: flex !important;
+      justify-content: center !important;
+    }
+    .sart-tap-btn {
+      width: 50vw;
+      min-height: 131px;
+      padding: 20px 56px;
+      border-radius: 12px;
+      background: #B0B0B0;
+      border: 2px solid #707070;
+      color: #1A1A1A;
+      font-size: 42px;
+      font-family: var(--font);
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(255,255,255,0.15);
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .sart-tap-btn:active {
+      background: #8C8C8C;
+    }
+    .sart-feedback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 70vh;
+      font-size: 56px;
+      font-weight: bold;
+    }
+    .sart-feedback.error { color: var(--error); }
+    .sart-feedback.correct { color: var(--success); }
+
+    /* ===== Instruction pages: light theme overlay on black SART bg ===== */
+    .sart-instr-page {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #F5F7FA 0%, #EBF0F6 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 40px 140px;
+      text-align: center;
+      z-index: 60;
+      overflow-y: auto;
+    }
+    /* Ensure jsPsych button group sits above the instruction overlay */
+    .sart-instr-page ~ #jspsych-html-button-response-btngroup,
+    #jspsych-html-button-response-btngroup {
+      z-index: 70;
+    }
+    .sart-instr-title {
+      font-size: 52px;
+      font-weight: 700;
+      color: #1A1A2E;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+    .sart-instr-body {
+      font-size: 36px;
+      color: #333;
+      line-height: 1.8;
+      max-width: 860px;
+    }
+    .sart-instr-hint {
+      margin-top: 28px;
+      font-size: 22px;
+      color: #999;
+    }
+    .sart-instr-btn {
+      font-family: var(--font) !important;
+      font-size: 42px !important;
+      min-height: 131px;
+      min-width: 240px;
+      padding: 20px 56px;
+      border: 2px solid #707070;
+      border-radius: 12px;
+      background: #B0B0B0;
+      color: #1A1A1A;
+      font-weight: 600;
+      cursor: pointer;
+      touch-action: manipulation;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .sart-instr-btn:hover { background: #C0C0C0; }
+    .sart-instr-btn:active { background: #8C8C8C; }
+
+    /* Demo cards for Go/No-Go examples */
+    .sart-demo-row {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin: 20px 0 12px;
+      flex-wrap: wrap;
+    }
+    .sart-demo-card {
+      width: 280px;
+      padding: 20px 20px 18px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    }
+    .sart-demo-card.go-card {
+      background: #F0FAF0;
+      border: 3px solid #4CAF50;
+    }
+    .sart-demo-card.nogo-card {
+      background: #FFF0F0;
+      border: 3px solid #F44336;
+    }
+    .sart-demo-digit {
+      font-family: "Courier New", monospace;
+      font-size: 80px;
+      font-weight: bold;
+      line-height: 1.1;
+    }
+    .sart-demo-card.go-card .sart-demo-digit { color: #333; }
+    .sart-demo-card.nogo-card .sart-demo-digit { color: #F44336; }
+    .sart-demo-label {
+      font-size: 34px;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+    .sart-demo-card.go-card .sart-demo-label { color: #2E7D32; }
+    .sart-demo-card.nogo-card .sart-demo-label { color: #D32F2F; }
+    /* .sart-demo-icon removed — no emoji icons */
+
+    /* Core rule highlight box */
+    .sart-rule-box {
+      margin: 8px auto;
+      padding: 14px 32px;
+      border-radius: 16px;
+      max-width: 700px;
+      font-size: 34px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+    .sart-rule-box.nogo-rule {
+      background: #FFF0F0;
+      border: 2px solid #F44336;
+      color: #D32F2F;
+    }
+    .sart-rule-box.go-rule {
+      background: #F0FAF0;
+      border: 2px solid #4CAF50;
+      color: #2E7D32;
+    }
+
+    /* Big nogo digit display */
+    .sart-nogo-big {
+      font-family: "Courier New", monospace;
+      font-size: 96px;
+      font-weight: bold;
+      color: #F44336;
+      line-height: 1;
+      margin: 4px 0;
+      text-shadow: 0 2px 12px rgba(244,67,54,0.25);
+    }
+    .sart-nogo-badge {
+      display: inline-block;
+      background: #F44336;
+      color: #FFF;
+      font-size: 28px;
+      font-weight: bold;
+      padding: 8px 28px;
+      border-radius: 40px;
+      margin-top: 4px;
+    }
+
+    /* Override buttons for dark theme (trial screens) */
+    .jspsych-btn {
+      background: #B0B0B0 !important;
+      color: #1A1A1A !important;
+      box-shadow: 0 2px 6px rgba(255,255,255,0.15) !important;
+    }
+    .jspsych-btn:hover {
+      background: #C0C0C0 !important;
+    }
+    .jspsych-btn:active {
+      background: #8C8C8C !important;
+    }
+    /* Hide default instruction page styling on instruction screens */
+    .instruction-page {
+      color: #FFFFFF;
+      height: auto;
+      min-height: 0;
+      padding-bottom: 72px;
+    }
+    .instruction-title { color: #FFFFFF; }
+    .instruction-body { color: #CCCCCC; }
+
+    /* Ensure jspsych content fills viewport and centers properly */
+    .jspsych-content-wrapper {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-height: 100vh !important;
+    }
+    .jspsych-content {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      width: 100% !important;
+    }
+    /* Ensure instruction "继续" button is visible at bottom */
+    .jspsych-content > #jspsych-html-button-response-btngroup {
+      margin-top: 24px;
+    }
+
+    /* Rating */
+    .rating-container { text-align: center; }
+    .rating-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .rating-btn {
+      width: 96px;
+      height: 96px;
+      font-size: 40px;
+      font-weight: bold;
+      border: 2px solid #CCC;
+      border-radius: 12px;
+      background: #FFF;
+      color: #333;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: all 0.15s;
+      font-family: var(--font);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .rating-btn:active, .rating-btn.selected {
+      background: #1565C0;
+      color: white;
+      border-color: #1565C0;
+      box-shadow: 0 2px 12px rgba(26,140,255,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div id="jspsych-target"></div>
+  <!-- Persistent SART tap button — never destroyed between trials -->
+  <!-- 2026-04-19: 默认 display:none,仅 SART trial on_load 时显示,on_finish 隐藏 -->
+  <div id="sart-persistent-btn-wrap" style="position:fixed; bottom:40px; left:0; right:0; display:none; justify-content:center; z-index:50;">
+    <button class="sart-tap-btn" id="sart-persistent-btn">点击</button>
+  </div>
+  <script src="../../lib/jspsych.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-button-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-keyboard-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/call-function.js?v=20260410e"></script>
+  <script src="../../lib/plugins/preload.js?v=20260410e"></script>
+  <script src="../../lib/paradigm-camera.js?v=20260419f"></script>
+  <script src="../../lib/jszip.min.js?v=20260410b"></script>
+  <script src="../../lib/end-screen.js?v=20260419g"></script>
+  <script src="../../lib/safe-fetch.js?v=20260418a"></script>
+  <script src="../../lib/attention-probe.js?v=20260410e"></script>
+  <script src="../../lib/touch-hardening.js?v=20260419c"></script>
+  <script src="../../lib/voice-guide.js?v=20260423j"></script>
+  <script src="sart.js?v=20260419i"></script>
+</body>
+</html>

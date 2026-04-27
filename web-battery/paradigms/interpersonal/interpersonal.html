@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>人际距离 - 认知评估</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    /* Interpersonal Distance task specific styles */
+    .task-scene {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #F5F5F0;
+    }
+    .stop-btn-area {
+      position: fixed;
+      bottom: 40px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+    .stop-btn {
+      min-width: 300px;
+      min-height: 131px;
+      padding: 20px 56px;
+      border-radius: 12px;
+      border: 2px solid #707070;
+      background: #B0B0B0;
+      color: #1A1A1A;
+      font-size: 42px;
+      font-weight: 600;
+      font-family: var(--font);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stop-btn:active {
+      background: #8C8C8C;
+    }
+    .fixation-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-size: 80px;
+      color: var(--text);
+    }
+    .trial-counter {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 20px;
+      color: var(--text-secondary);
+      z-index: 50;
+    }
+
+    /* Center jsPsych button grid on instruction pages */
+    #jspsych-html-button-response-btngroup {
+      display: flex !important;
+      justify-content: center !important;
+      padding: 20px 0 40px !important;
+    }
+
+    /* Character figure images */
+    .figure-character {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .figure-img {
+      height: 38vh;
+      max-height: 450px;
+      width: auto;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+    .figure-label {
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 8px;
+      color: var(--text);
+      text-align: center;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="jspsych-target"></div>
+  <script src="../../lib/jspsych.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-button-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-keyboard-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/call-function.js?v=20260410e"></script>
+  <script src="../../lib/paradigm-camera.js?v=20260419f"></script>
+  <script src="../../lib/jszip.min.js?v=20260410b"></script>
+  <script src="../../lib/end-screen.js?v=20260419g"></script>
+  <script src="../../lib/safe-fetch.js?v=20260418a"></script>
+  <script src="../../lib/attention-probe.js?v=20260410e"></script>
+  <script src="../../lib/touch-hardening.js?v=20260419c"></script>
+  <script src="interpersonal.js?v=20260419f"></script>
+</body>
+</html>

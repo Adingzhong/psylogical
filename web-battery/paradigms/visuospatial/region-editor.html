@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>空间导航 红框编辑器</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'PingFang SC', sans-serif; background: #1a1a2e; color: #fff; }
+  .toolbar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(26,26,46,0.97); padding: 8px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #333; }
+  .toolbar button { font-size: 14px; padding: 5px 12px; border-radius: 6px; border: 1px solid #555; background: #2a2a4a; color: #fff; cursor: pointer; }
+  .toolbar button:hover { background: #3a3a6a; }
+  .toolbar button.danger { border-color: #E53935; color: #E53935; }
+  .side-panel { position: fixed; top: 44px; left: 0; bottom: 160px; width: 340px; z-index: 100; background: rgba(26,26,46,0.95); overflow-y: auto; border-right: 1px solid #333; padding: 8px; }
+  .step-card { padding: 8px 10px; margin-bottom: 6px; border-radius: 8px; background: #2a2a4a; border: 2px solid transparent; cursor: pointer; }
+  .step-card.selected { border-color: #E53935; background: #3a2a3a; }
+  .step-card .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .step-card .step-num { font-size: 13px; font-weight: bold; color: #E53935; }
+  .step-card .step-coords { font-size: 11px; color: #888; font-family: monospace; }
+  .step-card textarea { width: 100%; font-size: 13px; padding: 4px 6px; border-radius: 4px; border: 1px solid #444; background: #1a1a2e; color: #ddd; resize: vertical; min-height: 36px; font-family: 'PingFang SC', sans-serif; }
+  .step-card .hint { font-size: 10px; color: #666; margin-top: 2px; }
+  .canvas-area { margin-left: 340px; margin-top: 44px; margin-bottom: 160px; display: flex; justify-content: center; align-items: center; height: calc(100vh - 204px); background: #F0F2F5; }
+  .img-container { position: relative; display: inline-block; }
+  .img-container img { max-width: calc(100vw - 380px); max-height: calc(100vh - 220px); object-fit: contain; border-radius: 8px; user-select: none; -webkit-user-drag: none; }
+  .region-box { position: absolute; border: 3px solid #E53935; border-radius: 6px; cursor: move; background: rgba(229,57,53,0.06); box-shadow: 0 0 0 3px rgba(229,57,53,0.15); }
+  .region-box.inactive { border-color: rgba(100,100,100,0.5); background: rgba(100,100,100,0.04); box-shadow: none; border-width: 2px; }
+  .region-box .label { position: absolute; top: -20px; left: 2px; font-size: 11px; color: #fff; font-weight: bold; background: #E53935; padding: 1px 6px; border-radius: 3px; }
+  .region-box.inactive .label { background: #555; }
+  .region-box .handle { position: absolute; width: 12px; height: 12px; background: #E53935; border: 2px solid #fff; border-radius: 2px; }
+  .region-box.inactive .handle { display: none; }
+  .handle.tl { top: -6px; left: -6px; cursor: nw-resize; }
+  .handle.tr { top: -6px; right: -6px; cursor: ne-resize; }
+  .handle.bl { bottom: -6px; left: -6px; cursor: sw-resize; }
+  .handle.br { bottom: -6px; right: -6px; cursor: se-resize; }
+  .btn-overlay { position: absolute; border: 3px dashed #4FC3F7; border-radius: 8px; cursor: move; background: rgba(79,195,247,0.1); display: flex; align-items: center; justify-content: center; font-size: 14px; color: #4FC3F7; font-weight: bold; }
+  .btn-overlay .handle { position: absolute; width: 10px; height: 10px; background: #4FC3F7; border: 2px solid #fff; border-radius: 2px; }
+  .btn-overlay .handle.br { bottom: -5px; right: -5px; cursor: se-resize; }
+  .output-panel { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: rgba(26,26,46,0.97); padding: 10px 16px; border-top: 1px solid #333; }
+  .output-panel pre { font-size: 12px; color: #4FC3F7; font-family: 'SF Mono', monospace; white-space: pre-wrap; max-height: 130px; overflow-y: auto; }
+  .output-panel .actions { position: absolute; top: 8px; right: 16px; display: flex; gap: 8px; }
+  .output-panel button { font-size: 13px; padding: 4px 14px; border-radius: 6px; background: #4FC3F7; color: #000; border: none; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <select id="imageSelect">
+    <option value="img/rules.png">规则图（演示前）</option>
+    <option value="img/practice_intro.png">练习图（演示后）</option>
+  </select>
+  <button onclick="addStep()">+ 添加步骤</button>
+  <button class="danger" onclick="deleteStep()">× 删除选中</button>
+</div>
+<div class="side-panel" id="sidePanel"></div>
+<div class="canvas-area">
+  <div class="img-container" id="container">
+    <img id="mainImg" src="img/rules.png" draggable="false">
+  </div>
+</div>
+<div class="output-panel">
+  <div class="actions">
+    <button onclick="copyOutput()">📋 复制代码</button>
+    <button onclick="copyVoiceText()">📝 复制语音文本</button>
+  </div>
+  <pre id="output"></pre>
+</div>
+
+<script>
+const defaultStepsMap = {
+  'img/rules.png': [
+    { x: 4, y: 8, w: 28, h: 58, subtitle: '屏幕上会出现一个绿色小箭头' },
+    { x: 34, y: 8, w: 28, h: 58, subtitle: '箭头会沿着一条路线移动，请注意观察\n同时请记住箭头出发时的位置' },
+    { x: 65, y: 8, w: 30, h: 58, subtitle: '箭头停下来之后，请在地图上点出箭头一开始出发的位置' },
+    { x: 4, y: 70, w: 92, h: 22, subtitle: '接下来先看4次演示，从不转向到转3次\n演示中可以看到完整路线，请仔细观察' },
+    { x: 78, y: 3, w: 18, h: 10, subtitle: '明白了就点击开始\n有不清楚的可以问工作人员' },
+  ],
+  'img/practice_intro.png': [
+    { x: 4, y: 8, w: 28, h: 65, subtitle: '练习时视野会变小，只能看到箭头附近一小块\n请根据背景的变化推测箭头走过的路线' },
+    { x: 34, y: 8, w: 28, h: 65, subtitle: '蓝色线条是箭头实际走过的路线\n箭头最后停下的位置就是终点，也就是中心的黑色圆点' },
+    { x: 65, y: 8, w: 30, h: 65, subtitle: '请根据您推测的路线，在地图上点出箭头出发的位置\n点击后蓝色圆点就是您选的起点' },
+    { x: 4, y: 76, w: 92, h: 18, subtitle: '练习阶段会显示正确答案，正式阶段不会\n尽力就好，有不清楚的可以问工作人员' },
+    { x: 78, y: 3, w: 18, h: 10, subtitle: '明白了就点击开始练习\n有不清楚的可以问工作人员' },
+  ],
+};
+
+let btnOverlay = { x: 80, y: 4, w: 15, h: 8 };
+let currentImage = 'img/rules.png';
+let steps = JSON.parse(JSON.stringify(defaultStepsMap[currentImage]));
+let currentStep = 0;
+let dragging = null;
+const container = document.getElementById('container');
+const mainImg = document.getElementById('mainImg');
+const outputEl = document.getElementById('output');
+
+document.getElementById('imageSelect').addEventListener('change', (e) => {
+  currentImage = e.target.value;
+  mainImg.src = currentImage;
+  steps = JSON.parse(JSON.stringify(defaultStepsMap[currentImage] || []));
+  currentStep = 0;
+  renderAll();
+});
+
+function selectStep(idx) { currentStep = idx; renderAll(); }
+function addStep() {
+  steps.push({ x: 20, y: 20, w: 30, h: 20, subtitle: '' });
+  currentStep = steps.length - 1; renderAll();
+}
+function deleteStep() {
+  if (steps.length <= 1) return;
+  steps.splice(currentStep, 1);
+  if (currentStep >= steps.length) currentStep = steps.length - 1;
+  renderAll();
+}
+
+function renderAll() { renderSidePanel(); renderBoxes(); renderBtnOverlay(); updateOutput(); }
+
+function renderSidePanel() {
+  const panel = document.getElementById('sidePanel');
+  panel.innerHTML = '';
+  steps.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'step-card' + (i === currentStep ? ' selected' : '');
+    card.innerHTML = `<div class="step-header"><span class="step-num">Step ${i+1}</span><span class="step-coords">${s.x}%,${s.y}% | ${s.w}×${s.h}%</span></div>
+      <textarea data-idx="${i}" placeholder="字幕（每行一句）">${s.subtitle}</textarea>
+      <div class="hint">每行=一句音频，多行共享同一个红框</div>`;
+    card.addEventListener('click', (e) => { if (e.target.tagName === 'TEXTAREA') return; selectStep(i); });
+    card.querySelector('textarea').addEventListener('input', (e) => { steps[+e.target.dataset.idx].subtitle = e.target.value; updateOutput(); });
+    panel.appendChild(card);
+  });
+  const btnCard = document.createElement('div');
+  btnCard.className = 'step-card'; btnCard.style.borderColor = '#4FC3F7'; btnCard.style.background = '#1a2a3a';
+  btnCard.innerHTML = `<div class="step-header"><span class="step-num" style="color:#4FC3F7">📌 继续按钮</span><span class="step-coords">${btnOverlay.x}%,${btnOverlay.y}% | ${btnOverlay.w}×${btnOverlay.h}%</span></div>`;
+  panel.appendChild(btnCard);
+}
+
+function renderBoxes() {
+  container.querySelectorAll('.region-box').forEach(el => el.remove());
+  steps.forEach((s, i) => {
+    const box = document.createElement('div');
+    box.className = 'region-box' + (i === currentStep ? '' : ' inactive');
+    box.style.left = s.x+'%'; box.style.top = s.y+'%'; box.style.width = s.w+'%'; box.style.height = s.h+'%';
+    const label = document.createElement('div'); label.className = 'label'; label.textContent = i+1; box.appendChild(label);
+    ['tl','tr','bl','br'].forEach(h => { const handle = document.createElement('div'); handle.className = 'handle '+h; handle.dataset.handle = h; box.appendChild(handle); });
+    box.addEventListener('pointerdown', (e) => startDrag(e, i, 'step'));
+    container.appendChild(box);
+  });
+}
+
+function renderBtnOverlay() {
+  container.querySelectorAll('.btn-overlay').forEach(el => el.remove());
+  const el = document.createElement('div'); el.className = 'btn-overlay';
+  el.style.left = btnOverlay.x+'%'; el.style.top = btnOverlay.y+'%'; el.style.width = btnOverlay.w+'%'; el.style.height = btnOverlay.h+'%';
+  el.textContent = '继续';
+  const handle = document.createElement('div'); handle.className = 'handle br'; handle.dataset.handle = 'br'; el.appendChild(handle);
+  el.addEventListener('pointerdown', (e) => startDrag(e, -1, 'btn'));
+  container.appendChild(el);
+}
+
+function startDrag(e, idx, kind) {
+  e.preventDefault(); e.stopPropagation();
+  if (kind === 'step' && idx !== currentStep) { selectStep(idx); return; }
+  const obj = kind === 'btn' ? btnOverlay : steps[idx];
+  const r = mainImg.getBoundingClientRect();
+  dragging = { kind, idx, handle: e.target.dataset.handle, type: e.target.dataset.handle ? 'resize' : 'move',
+    startX: e.clientX, startY: e.clientY, origX: obj.x, origY: obj.y, origW: obj.w, origH: obj.h, imgW: r.width, imgH: r.height };
+  document.addEventListener('pointermove', onDragMove);
+  document.addEventListener('pointerup', onDragEnd);
+}
+function onDragMove(e) {
+  if (!dragging) return;
+  const d = dragging, dx = (e.clientX-d.startX)/d.imgW*100, dy = (e.clientY-d.startY)/d.imgH*100;
+  const obj = d.kind === 'btn' ? btnOverlay : steps[d.idx];
+  if (d.type === 'move') { obj.x = Math.round(Math.max(0,Math.min(100-obj.w,d.origX+dx))*10)/10; obj.y = Math.round(Math.max(0,Math.min(100-obj.h,d.origY+dy))*10)/10; }
+  else { const h = d.handle;
+    if (h.includes('l')) { obj.x = Math.round((d.origX+dx)*10)/10; obj.w = Math.max(3,Math.round((d.origW-dx)*10)/10); }
+    if (h.includes('r')) { obj.w = Math.max(3,Math.round((d.origW+dx)*10)/10); }
+    if (h.includes('t')) { obj.y = Math.round((d.origY+dy)*10)/10; obj.h = Math.max(3,Math.round((d.origH-dy)*10)/10); }
+    if (h.includes('b')) { obj.h = Math.max(3,Math.round((d.origH+dy)*10)/10); }
+  }
+  if (d.kind === 'btn') renderBtnOverlay(); else renderBoxes();
+  renderSidePanel(); updateOutput();
+}
+function onDragEnd() { dragging = null; document.removeEventListener('pointermove', onDragMove); document.removeEventListener('pointerup', onDragEnd); }
+
+function updateOutput() {
+  const parts = steps.map(s => {
+    const subs = s.subtitle.split('\n').filter(l => l.trim());
+    const region = `{ x: '${s.x}%', y: '${s.y}%', w: '${s.w}%', h: '${s.h}%' }`;
+    const linesStr = subs.map(l => `'${l.trim()}'`).join(', ');
+    return `  { region: ${region}, lines: [${linesStr}] },`;
+  });
+  const label = currentImage.includes('practice') ? 'practice_intro' : 'rules';
+  outputEl.textContent = `${label}: [\n${parts.join('\n')}\n]\nbtnOverlay: { x: '${btnOverlay.x}%', y: '${btnOverlay.y}%', w: '${btnOverlay.w}%', h: '${btnOverlay.h}%' }`;
+}
+
+function copyOutput() { navigator.clipboard.writeText(outputEl.textContent); event.target.textContent = '✓'; setTimeout(() => event.target.textContent = '📋 复制代码', 1500); }
+function copyVoiceText() {
+  let n = 1; const text = steps.flatMap(s => s.subtitle.split('\n').filter(l => l.trim())).map(l => `${n++}. ${l.trim()}`).join('\n');
+  navigator.clipboard.writeText(text); event.target.textContent = '✓'; setTimeout(() => event.target.textContent = '📝 复制语音文本', 1500);
+}
+
+renderAll();
+</script>
+</body>
+</html>

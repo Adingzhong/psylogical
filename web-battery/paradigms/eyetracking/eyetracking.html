@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>自然注视范式 - 认知评估</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    /* ===== Eye-tracking specific styles ===== */
+
+    /*
+     * Full-viewport elements use position:fixed to break out of
+     * jsPsych's .jspsych-content wrapper which constrains width.
+     */
+
+    /* Full-screen image display */
+    .et-image-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      background: #808080;
+      overflow: hidden;
+      z-index: 50;
+    }
+
+    .et-image-container img {
+      max-width: 100vw;
+      max-height: 100vh;
+      object-fit: contain;
+    }
+
+    /* Fixation cross */
+    .et-fixation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      background: #808080;
+      font-size: 80px;
+      color: #000000;
+      font-weight: bold;
+      z-index: 50;
+    }
+
+    /* Calibration full-screen grey panel */
+    .et-calibration-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #808080;
+      z-index: 50;
+    }
+
+    /* Calibration dot */
+    .et-calibration-dot {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #FF0000;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+    }
+
+    /* Calibration gap (blank grey) */
+    .et-calibration-gap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #808080;
+      z-index: 50;
+    }
+
+    /* Grey background for ISI and instruction pages */
+    .et-grey-bg {
+      background: #808080;
+    }
+
+    /* Rest screen */
+    .et-rest {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: var(--bg);
+      text-align: center;
+      padding: 40px 40px 140px;
+    }
+
+    /* Progress bar */
+    .et-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+      z-index: 999;
+    }
+
+    /* Camera permission prompt */
+    .camera-prompt {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 40px 140px;
+      text-align: center;
+    }
+
+    .camera-prompt .icon {
+      font-size: 64px;
+      margin-bottom: 24px;
+    }
+
+    .camera-status {
+      font-size: 24px;
+      color: var(--text-secondary);
+      margin-top: 16px;
+    }
+
+    .camera-status.success { color: var(--success); }
+    .camera-status.error { color: var(--error); }
+
+    /* ===== Face Alignment Calibration Page ===== */
+    .et-face-align-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: calc(100vh - 160px);
+      padding: 12px 40px 0;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .et-face-align-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .et-face-align-subtitle {
+      font-size: 24px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .et-face-align-container {
+      position: relative;
+      width: 280px;
+      height: 350px;
+      max-height: 38vh;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #1A1A2E;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      aspect-ratio: 280 / 350;
+    }
+
+    .et-face-align-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(-1); /* mirror for front camera */
+    }
+
+    .et-face-outline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .et-face-align-nofeed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #CCC;
+      font-size: 28px;
+    }
+
+    .et-face-align-hint {
+      margin-top: 8px;
+      font-size: 22px;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div id="jspsych-target"></div>
+  <script src="../../lib/jspsych.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-button-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-keyboard-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/call-function.js?v=20260410e"></script>
+  <script src="../../lib/plugins/preload.js?v=20260410e"></script>
+  <script src="../../lib/jszip.min.js?v=20260410b"></script>
+  <script src="../../lib/end-screen.js?v=20260419g"></script>
+  <script src="../../lib/safe-fetch.js?v=20260418a"></script>
+  <script src="../../lib/attention-probe.js?v=20260410e"></script>
+  <script src="../../lib/progress.js?v=20260419a"></script>
+  <script src="../../lib/touch-hardening.js?v=20260419c"></script>
+  <script src="eyetracking.js?v=20260419g"></script>
+</body>
+</html>

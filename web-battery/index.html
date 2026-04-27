@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>认知功能评估平台 | 浙江大学</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    html, body { margin: 0; padding: 0; }
+    body {
+      overflow-y: auto; background: #F5F6FA;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    /* 把 footer 钉到底部(内容短时不飘在中间) */
+    .footer { margin-top: auto; }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #003D7A 0%, #1565C0 40%, #1E88E5 100%);
+      padding: 36px 40px 32px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+
+    .hero-brand {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 20px;
+    }
+    .hero-logo { width: 60px; height: 60px; border-radius: 50%; background: white; padding: 4px; }
+    .hero-logo img { width: 100%; height: 100%; border-radius: 50%; object-fit: contain; }
+    .hero-org { text-align: left; }
+    .hero-org .univ { font-size: 18px; color: rgba(255,255,255,0.75); font-weight: 400; letter-spacing: 2px; }
+    .hero-org .dept { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    .hero h1 {
+      font-size: 36px; font-weight: 700; color: white;
+      letter-spacing: 6px; margin-bottom: 8px;
+    }
+    .hero .subtitle {
+      font-size: 17px; color: rgba(255,255,255,0.7);
+      font-weight: 300; letter-spacing: 1px;
+    }
+
+    /* ===== Subject Input ===== */
+    .subject-section {
+      width: 100%; max-width: 680px; margin: -24px auto 0; position: relative; z-index: 2;
+      box-sizing: border-box;
+      background: white; border-radius: 16px; padding: 20px 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      display: flex; align-items: center; gap: 20px;
+    }
+    .subject-section .field { flex: 1; }
+    .subject-section label {
+      display: block; font-size: 13px; color: #999;
+      margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .subject-section input {
+      width: 100%; font-family: var(--font); font-size: 26px;
+      padding: 12px 16px; border: 2px solid #E8EAF0; border-radius: 10px;
+      transition: border-color 0.2s; text-align: center;
+    }
+    .subject-section input:focus { border-color: #1E88E5; outline: none; }
+    .subject-section input.confirmed { border-color: #43A047; background: #F1F8E9; }
+    .subject-section .confirm-btn {
+      padding: 14px 36px; font-size: 20px; min-height: 52px;
+      border: none; border-radius: 10px; cursor: pointer;
+      background: #1E88E5; color: white; font-family: var(--font);
+      font-weight: 600; transition: background 0.2s; white-space: nowrap;
+    }
+    .subject-section .confirm-btn:hover { background: #1565C0; }
+    .subject-section .confirm-btn:active { background: #0D47A1; }
+    .confirmed-msg { font-size: 15px; color: #43A047; font-weight: 500; white-space: nowrap; }
+
+    /* ===== Camera Bar ===== */
+    .camera-bar {
+      width: 100%; max-width: 680px; margin: 12px auto;
+      box-sizing: border-box;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      padding: 10px 24px;
+      background: white; border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .cam-indicator {
+      width: 10px; height: 10px; border-radius: 50%; background: #CCC;
+      flex-shrink: 0;
+    }
+    .cam-indicator.on { background: #EF5350; animation: blink 1.4s infinite; }
+    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+    .cam-label { font-size: 15px; color: #888; }
+    .cam-btn {
+      padding: 8px 20px; font-size: 14px; border: 1px solid #E0E0E0;
+      border-radius: 8px; background: #FAFAFA; cursor: pointer;
+      font-family: var(--font); color: #555; transition: all 0.2s;
+    }
+    .cam-btn:hover { background: #F0F0F0; border-color: #CCC; }
+    .cam-btn.stop { border-color: #EF5350; color: #EF5350; }
+
+    /* ===== Paradigm Grid ===== */
+    .section-title {
+      max-width: 1100px; margin: 20px auto 12px; padding: 0 20px;
+      font-size: 16px; color: #999; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px; max-width: 1100px; margin: 0 auto; padding: 0 20px;
+    }
+
+    .card {
+      background: white; border-radius: 14px; padding: 18px 20px;
+      cursor: pointer; border: 2px solid transparent;
+      transition: all 0.25s ease; position: relative;
+      display: flex; flex-direction: column; align-items: center;
+      min-height: 140px; justify-content: center;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); border-color: #E3F2FD; }
+    .card.done { border-color: #C8E6C9; background: #FAFFF9; }
+    /* F4 进行中(2026-04-19):橙色边框 + 角标"进行中 N/M" */
+    .card.partial { border-color: #FFB74D; background: #FFF8E1; }
+    .card .partial-badge {
+      position: absolute; top: 10px; right: 12px;
+      font-size: 13px; color: #E65100; background: #FFE0B2;
+      padding: 2px 10px; border-radius: 10px; font-weight: 600;
+      display: none;
+    }
+    .card.partial .partial-badge { display: inline-block; }
+    .card.partial .check { display: none; }
+    /* 预览态(sid 未填时):灰色不可点,展示有哪些范式 */
+    .card.preview { opacity: 0.58; background: #FAFAFA; cursor: default; }
+    .card.preview:hover { transform: none; box-shadow: none; border-color: transparent; }
+    .card.preview .go-btn { background: #BDBDBD; }
+    .card.preview .order { color: #DDD; }
+
+    .card .order {
+      position: absolute; top: 12px; left: 16px;
+      font-size: 13px; color: #BBB; font-weight: 600;
+    }
+    .card .check {
+      position: absolute; top: 12px; right: 16px;
+      font-size: 18px; color: #43A047; display: none;
+    }
+    .card.done .check { display: block; }
+
+    .card .name { font-size: 22px; font-weight: 600; color: #1A1A2E; margin-bottom: 2px; }
+    .card .eng { font-size: 13px; color: #AAA; margin-bottom: 6px; letter-spacing: 0.5px; }
+    .card .desc { font-size: 14px; color: #888; }
+
+    .card .go-btn {
+      margin-top: 10px; padding: 6px 28px; font-size: 15px;
+      border: none; border-radius: 8px; cursor: pointer;
+      background: #1E88E5; color: white; font-family: var(--font);
+      transition: background 0.2s;
+    }
+    .card .go-btn:hover { background: #1565C0; }
+
+    /* ===== Actions ===== */
+    .actions {
+      display: flex; justify-content: center; gap: 16px;
+      padding: 20px 20px; max-width: 1100px; margin: 0 auto;
+    }
+    .action-btn {
+      padding: 14px 40px; font-size: 18px; border: none;
+      border-radius: 10px; cursor: pointer; font-family: var(--font);
+      font-weight: 500; transition: all 0.2s;
+    }
+    .action-btn.primary { background: #1E88E5; color: white; }
+    .action-btn.primary:hover { background: #1565C0; }
+    .action-btn.success { background: #43A047; color: white; }
+    .action-btn.success:hover { background: #2E7D32; }
+    /* archive 按钮:工具性动作,用 hero 深蓝,和 hero 视觉统一 */
+    .action-btn.archive { background: #1565C0; color: white; }
+    .action-btn.archive:hover { background: #0D47A1; }
+    .action-btn:disabled { background: #BDBDBD !important; cursor: not-allowed; }
+
+    /* ===== Footer ===== */
+    .footer {
+      text-align: center; padding: 16px 20px 20px;
+      color: #BBB; font-size: 13px; letter-spacing: 0.5px;
+    }
+    .footer a { color: #999; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <!-- 主试身份显示(右上角小字,老人不易察觉) -->
+    <div id="examinerBadge" style="position:absolute;top:10px;right:16px;font-size:12px;color:rgba(255,255,255,0.55);z-index:3;display:none;"></div>
+    <div class="hero-content">
+      <div class="hero-brand">
+        <div class="hero-logo"><img src="stimuli/zju-logo.webp" alt="浙江大学"></div>
+        <div class="hero-org">
+          <div class="univ">浙江大学</div>
+          <div class="dept">心理与行为科学系</div>
+        </div>
+      </div>
+      <h1>认知功能评估</h1>
+      <p class="subtitle">轻度认知障碍早期筛查研究平台</p>
+    </div>
+  </div>
+
+  <!-- Subject Input -->
+  <div class="subject-section" id="subjectBar">
+    <div class="field">
+      <label>被试编号</label>
+      <input type="text" id="sid" placeholder="请输入编号" autofocus
+             onkeydown="if(event.key==='Enter'){saveSid();event.preventDefault();}">
+    </div>
+    <button class="confirm-btn" onclick="saveSid()">确认</button>
+  </div>
+
+  <!-- 主试模式警告横幅 -->
+  <div id="testerModeWarning" style="display:none;max-width:680px;margin:8px auto 0;padding:10px 20px;background:#FFF8E1;border:1px solid #FFD54F;border-radius:10px;color:#E65100;font-size:14px;text-align:center;font-weight:500;">
+    【注意】主试模式已开启 — 所有指导语右上角会显示"跳过"按钮(Esc 键同效),<b>正式施测前请关闭</b>
+  </div>
+
+  <!-- Pre-check -->
+  <div class="camera-bar" id="precheckBar">
+    <div class="cam-indicator" id="precheckDot"></div>
+    <span class="cam-label" id="precheckLabel">设备适配检查（触屏 + 注视追踪）</span>
+    <button class="cam-btn" id="precheckBtn" onclick="launchPrecheck()">开始检查</button>
+  </div>
+
+  <!-- Paradigm Grid -->
+  <div id="groupHeader" style="max-width:1100px;margin:20px auto 10px;padding:0 20px;display:none;justify-content:space-between;align-items:baseline;">
+    <div>
+      <span style="font-size:14px;color:#999;letter-spacing:2px;text-transform:uppercase;">评估项目</span>
+      <span id="groupLabel" style="margin-left:14px;font-size:20px;color:#1565C0;font-weight:600;letter-spacing:2px;"></span>
+    </div>
+    <span id="groupProgress" style="font-size:15px;color:#43A047;font-weight:500;"></span>
+  </div>
+  <div class="grid" id="paradigmGrid"></div>
+
+  <!-- 休息页 (组1完成后显示) -->
+  <div id="restScreen" style="display:none;max-width:900px;margin:32px auto;padding:0 20px;">
+    <div style="background:white;border:2px solid #C8E6C9;border-radius:20px;padding:48px 40px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+      <div style="font-size:15px;color:#43A047;letter-spacing:3px;font-weight:500;margin-bottom:10px;">第一组已完成</div>
+      <div style="font-size:32px;color:#1A1A2E;font-weight:600;margin-bottom:16px;">请休息一下</div>
+      <div style="font-size:18px;color:#666;line-height:1.8;margin-bottom:36px;">
+        建议休息 3 到 5 分钟<br>
+        可以喝点水、闭眼放松<br>
+        准备好后由主试点击下方按钮继续
+      </div>
+      <button onclick="window.advanceToGroup2()" style="padding:18px 56px;font-size:22px;font-weight:600;background:#43A047;color:white;border:none;border-radius:12px;cursor:pointer;font-family:var(--font);letter-spacing:4px;transition:background 0.2s;">进入语音测评</button>
+      <div style="margin-top:20px;font-size:13px;color:#BBB;">点击后不能返回前一组</div>
+    </div>
+  </div>
+
+  <!-- 全部完成页 (当前模式下所有项目完成后显示) -->
+  <div id="allDoneScreen" style="display:none;max-width:900px;margin:32px auto;padding:0 20px;">
+    <div style="background:linear-gradient(135deg,#E8F5E9 0%,#C8E6C9 100%);border:2px solid #81C784;border-radius:20px;padding:48px 40px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+      <div style="font-size:15px;color:#2E7D32;letter-spacing:3px;font-weight:500;margin-bottom:10px;">评估完成</div>
+      <div id="allDoneTitle" style="font-size:36px;color:#1B5E20;font-weight:700;margin-bottom:14px;letter-spacing:4px;">全部项目已完成</div>
+      <div style="font-size:17px;color:#33691E;line-height:1.8;margin-bottom:32px;">
+        请主试点击下方按钮归档下载本次评估数据
+      </div>
+      <button onclick="window.archiveBySubjectId()" style="padding:18px 56px;font-size:22px;font-weight:600;background:#2E7D32;color:white;border:none;border-radius:12px;cursor:pointer;font-family:var(--font);letter-spacing:4px;transition:background 0.2s;">归档下载数据</button>
+    </div>
+  </div>
+
+  <!-- Data Status Panel -->
+  <div id="dataPanel" style="max-width:1100px;margin:16px auto 0;padding:0 20px;display:none;">
+    <div style="background:white;border-radius:14px;padding:20px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <span style="font-size:16px;color:#999;font-weight:500;text-transform:uppercase;letter-spacing:2px;">数据保存状态</span>
+        <span id="dataSummary" style="font-size:15px;color:#43A047;font-weight:600;"></span>
+      </div>
+      <div id="dataStatusList" style="display:block;"></div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="action-btn archive" onclick="archiveBySubjectId()">按编号归档下载文件</button>
+  </div>
+
+  <div class="footer">
+    认知功能评估平台 v2.0 &nbsp;|&nbsp; 浙江大学心理与行为科学系 &nbsp;|&nbsp; 2026
+    &nbsp;|&nbsp;
+    <label style="cursor:pointer;user-select:none;">
+      <input type="checkbox" id="testerModeCb" onchange="toggleTesterMode()" style="vertical-align:middle;margin-right:4px;"> 主试模式
+    </label>
+    &nbsp;|&nbsp;
+    <label style="cursor:pointer;user-select:none;">
+      <input type="checkbox" id="studentModeCb" onchange="toggleStudentMode()" style="vertical-align:middle;margin-right:4px;"> 默认静音（指导语内仍可切换）
+    </label>
+    &nbsp;|&nbsp;
+    <label style="cursor:pointer;user-select:none;">
+      <input type="checkbox" id="autoPlayCb" onchange="toggleAutoPlay()" style="vertical-align:middle;margin-right:4px;"> 自动播放（指导语播完自动进下一步）
+    </label>
+    &nbsp;|&nbsp;
+    <a href="/examiner.html" style="color:#999;text-decoration:none;">切换主试 / 模式</a>
+  </div>
+
+<!-- F4 (2026-04-19): Progress API for block-level resume -->
+<script src="lib/progress.js?v=20260419a"></script>
+
+<script type="module">
+// ============== 跨被试陈旧数据自动清理(2026-04-19) ==============
+// 痛点: localStorage 和 OPFS 永不清会越堆越多,setItem/getItem 变慢,
+// 10-20 个被试后撞 5-10MB 配额,OPFS 孤儿 dir 吃掉持久化磁盘 quota.
+// 策略: 用 done_{sid}_{paradigm} 的时间戳当"被试活跃度"指标,
+//       最后一次 done > 7 天 → 视为陈旧,关联的 localStorage key 全部清.
+//       OPFS 里 meta.json 的 start_epoch > 1 天 → 清孤儿 dir.
+(async function autoCleanupStaleData() {
+  try {
+    const SEVEN_DAYS_MS = 7 * 24 * 3600 * 1000;
+    const ONE_DAY_MS = 24 * 3600 * 1000;
+    const now = Date.now();
+    const KNOWN_PARADIGMS = ['flanker','sart','rmet','nback','vstmb','visuospatial','interpersonal','clock','tmt','speech','precheck','eyetracking'];
+
+    // --- localStorage 清理 ---
+    // 1. 扫 done_ + progress_ 聚合每个 sid 最后活跃时间
+    //    (F4 2026-04-19: 加 progress_ 来源 — 只做 progress 没做完整 done 的被试也能识别活跃度)
+    const sidLastSeen = new Map();
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k) continue;
+      // done_{sid}_{paradigm}
+      if (k.startsWith('done_')) {
+        for (const p of KNOWN_PARADIGMS) {
+          const suffix = '_' + p;
+          if (k.endsWith(suffix)) {
+            const sid = k.slice(5, k.length - suffix.length);
+            const ts = parseInt(localStorage.getItem(k), 10) || 0;
+            const prev = sidLastSeen.get(sid) || 0;
+            if (ts > prev) sidLastSeen.set(sid, ts);
+            break;
+          }
+        }
+        continue;
+      }
+      // progress_{sid}_{paradigm} — 读 updatedAt
+      if (k.startsWith('progress_')) {
+        for (const p of KNOWN_PARADIGMS) {
+          const suffix = '_' + p;
+          if (k.endsWith(suffix)) {
+            const sid = k.slice(9, k.length - suffix.length);  // 'progress_'.length === 9
+            try {
+              const obj = JSON.parse(localStorage.getItem(k) || '{}');
+              const ts = parseInt(obj.updatedAt, 10) || 0;
+              const prev = sidLastSeen.get(sid) || 0;
+              if (ts > prev) sidLastSeen.set(sid, ts);
+            } catch (e) { /* corrupted progress,skip */ }
+            break;
+          }
+        }
+      }
+    }
+    // 2. 停滞被试 (> 7 天无活动)
+    const staleSids = new Set();
+    for (const [sid, ts] of sidLastSeen) {
+      if (now - ts > SEVEN_DAYS_MS) staleSids.add(sid);
+    }
+    // 3. 按 sid 精确匹配删除(避免 P1 误伤 P10: 只匹配 _{sid}_ 或 _{sid} 结尾)
+    const toRemove = [];
+    const tsBackupRe = /^backup_.+_(\d{13})$/;
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k) continue;
+      // 有时间戳的 backup_{p}_{sid}_{ts} 直接看时间戳
+      const m = k.match(tsBackupRe);
+      if (m) {
+        const ts = parseInt(m[1], 10);
+        if (now - ts > SEVEN_DAYS_MS) toRemove.push(k);
+        continue;
+      }
+      // 其他:按 sid 精确匹配
+      for (const sid of staleSids) {
+        if (k.endsWith('_' + sid) || k.includes('_' + sid + '_')) {
+          toRemove.push(k);
+          break;
+        }
+      }
+    }
+    toRemove.forEach(k => { try { localStorage.removeItem(k); } catch (e) {} });
+    if (toRemove.length > 0) {
+      console.log('[auto-cleanup] localStorage:', toRemove.length, 'stale keys removed for', staleSids.size, 'inactive subjects');
+    }
+
+    // --- OPFS 孤儿清理 ---
+    // 孤儿 = 录制中断/tab 被关 → 3min 延迟删没执行 → meta.json 残留
+    // > 1 天的 dir 已经不可能是当日在录,可以安全清
+    try {
+      const root = await navigator.storage.getDirectory();
+      let opfsCleaned = 0;
+      for await (const entry of root.values()) {
+        if (entry.kind !== 'directory') continue;
+        try {
+          const metaFh = await entry.getFileHandle('meta.json');
+          const metaFile = await metaFh.getFile();
+          const meta = JSON.parse(await metaFile.text());
+          const ageMs = now - (meta.start_epoch || 0);
+          if (ageMs > ONE_DAY_MS) {
+            await root.removeEntry(entry.name, { recursive: true });
+            opfsCleaned++;
+          }
+        } catch (e) { /* no meta or unreadable, skip */ }
+      }
+      if (opfsCleaned > 0) console.log('[auto-cleanup] OPFS:', opfsCleaned, 'orphan dirs removed');
+    } catch (e) { /* OPFS unavailable, silent */ }
+  } catch (e) {
+    console.warn('[auto-cleanup] failed:', e);
+  }
+})();
+
+// 2026-04-20: 撤销 dispatch 模式 — 测评系统不再自动上报给调度系统.
+// 调度系统改为纯手动: 主试在 dashboard 手机上手动点"开始/完成".
+// Launcher 保持零耦合,URL 参数 session/device 会被忽略(兼容老链接).
+const DISPATCH_ON = false;
+function dispatchReport() { return Promise.resolve(); /* no-op */ }
+
+// ============== 主试登录检查 + 模式显示 ==============
+// 没有主试信息就跳转到登录页(不会影响已登录主试的后续刷新)
+(function examinerGate() {
+  const name = localStorage.getItem('examiner_name');
+  if (!name || !name.trim()) {
+    window.location.replace('/examiner.html');
+    return;
+  }
+  // 已登录:右上角显示小字(主试 + 模式)
+  const badge = document.getElementById('examinerBadge');
+  if (badge) {
+    const id = localStorage.getItem('examiner_id');
+    const mode = localStorage.getItem('examiner_mode') || 'all';
+    const modeLabel = { 'all': '全部 9 项', 'group1': '第一组(8)', 'group2': '语音(1)' }[mode] || mode;
+    badge.textContent = '主试: ' + name + (id ? ' · ' + id : '') + ' · ' + modeLabel;
+    badge.style.display = 'block';
+  }
+})();
+
+// CameraRecorder no longer used — camera enabled via precheck module
+
+// 2026-04-22 分组方案(用户确认, 从 6+3 改为 8+1):
+//   第一组(8):空间导航 → 看眼读心 → 箭头判断 → 图片记忆 → 数字注意 → 视觉记忆 → 连线测试 → 画钟测试
+//   中间休息(换到语音岗)
+//   第二组(1):语音测评
+// 把语音独立为单独一岗,做语音的主试只做语音一项
+const PARADIGMS = [
+  // 第一组
+  { id:'visuospatial',  name:'空间导航',  eng:'Visuospatial',   desc:'视空间能力',   path:'paradigms/visuospatial/visuospatial.html', group:1 },
+  { id:'rmet',          name:'看眼读心',  eng:'RMET',           desc:'社会认知',     path:'paradigms/rmet/rmet.html',                   group:1 },
+  { id:'flanker',       name:'箭头判断',  eng:'Flanker',        desc:'冲突监控',     path:'paradigms/flanker/flanker.html',             group:1 },
+  { id:'nback',         name:'图片记忆',  eng:'N-back',         desc:'工作记忆',     path:'paradigms/nback/nback.html',                 group:1 },
+  { id:'sart',          name:'数字注意',  eng:'SART',           desc:'持续注意力',   path:'paradigms/sart/sart.html',                   group:1 },
+  { id:'vstmb',         name:'视觉记忆',  eng:'VSTMB',          desc:'短时记忆绑定', path:'paradigms/vstmb/vstmb.html',                 group:1 },
+  { id:'tmt',           name:'连线测试',  eng:'Trail Making',   desc:'注意力切换',   path:'paradigms/tmt/tmt.html',                     group:1 },
+  { id:'clock',         name:'画钟测试',  eng:'Clock Drawing',  desc:'执行功能',     path:'paradigms/clock/clock.html',                 group:1 },
+  // 第二组(仅语音)
+  { id:'speech',        name:'语音测评',  eng:'Speech',         desc:'语音语义',     path:'paradigms/speech/speech.html',               group:2 },
+];
+const TOTAL_GROUPS = 2;
+
+// ========== 模式管理 ==========
+// 主试登录时选定模式:
+//   'all'    — 全部 9 项(含中间休息页)
+//   'group1' — 仅第一组 8 项(独立设备施测)
+//   'group2' — 仅语音 1 项(独立设备施测)
+// localStorage key: examiner_mode
+function getMode() {
+  const m = localStorage.getItem('examiner_mode') || 'all';
+  return ['all', 'group1', 'group2'].includes(m) ? m : 'all';
+}
+// 当前模式下允许的组
+function allowedGroups() {
+  const m = getMode();
+  if (m === 'group1') return [1];
+  if (m === 'group2') return [2];
+  return [1, 2];
+}
+
+// ========== 分组状态管理 ==========
+// localStorage key: group_${sid} = "1" 或 "2"
+// 默认从 1 开始;所有第一组完成后可手动推进到 2;第二组不能返回 1(单向)
+// group1/group2 模式下,currentGroup 固定为对应组
+function getCurrentGroup() {
+  const m = getMode();
+  if (m === 'group1') return 1;
+  if (m === 'group2') return 2;
+  // 'all' 模式:按 sid 记录进度
+  const sid = getSid();
+  if (!sid) return 1;
+  const g = parseInt(localStorage.getItem(`group_${sid}`), 10);
+  return (g === 2) ? 2 : 1;
+}
+function setCurrentGroup(n) {
+  const sid = getSid();
+  if (!sid) return;
+  localStorage.setItem(`group_${sid}`, String(n));
+}
+function paradigmsInGroup(g) {
+  return PARADIGMS.filter(p => p.group === g);
+}
+function groupCompletion(g) {
+  const sid = getSid();
+  if (!sid) return { done: 0, total: 0 };
+  const list = paradigmsInGroup(g);
+  const done = list.filter(p => localStorage.getItem(`done_${sid}_${p.id}`)).length;
+  return { done, total: list.length };
+}
+// 当前模式下所有允许范式的完成情况
+function modeCompletion() {
+  const sid = getSid();
+  if (!sid) return { done: 0, total: 0 };
+  const groups = allowedGroups();
+  const list = PARADIGMS.filter(p => groups.includes(p.group));
+  const done = list.filter(p => localStorage.getItem(`done_${sid}_${p.id}`)).length;
+  return { done, total: list.length };
+}
+// 全局编号:P1-P9 (在用户指定顺序下固定)
+function globalOrder(paradigmId) {
+  return PARADIGMS.findIndex(p => p.id === paradigmId) + 1;
+}
+
+// camera/recording variables removed — camera managed by precheck + ParadigmCamera
+
+window.launchPrecheck = function() {
+  const sid = getSid();
+  if (!sid) { alert('请先输入被试编号'); return; }
+  const win = window.open(`paradigms/precheck/precheck.html?sid=${encodeURIComponent(sid)}`, '_blank');
+  if (!win) { alert('弹窗被拦截，请允许本站弹出窗口'); return; }
+  window.addEventListener('message', function h(e) {
+    if (e.data?.paradigm === 'precheck' && e.data?.status === 'done') {
+      const dot = document.getElementById('precheckDot');
+      const label = document.getElementById('precheckLabel');
+      const btn = document.getElementById('precheckBtn');
+      dot.classList.add('on');
+      label.textContent = '已完成 — 摄像头已启用';
+      btn.textContent = '重新检查';
+      window.removeEventListener('message', h);
+    }
+  });
+};
+
+function getSid() { return document.getElementById('sid').value.trim() || ''; }
+
+// ========== renderGrid: 按当前模式渲染 ==========
+// 模式:
+//   'all'    — 扁平显示全部 9 张卡片(不分组、不休息页)
+//   'group1' — 只显示第一组 8 张;完成后显示完成页
+//   'group2' — 只显示语音 1 张;完成后显示完成页
+function renderGrid() {
+  const sid = getSid();
+  const mode = getMode();
+  const grid = document.getElementById('paradigmGrid');
+  const header = document.getElementById('groupHeader');
+  const label = document.getElementById('groupLabel');
+  const progress = document.getElementById('groupProgress');
+  const rest = document.getElementById('restScreen');
+  const allDone = document.getElementById('allDoneScreen');
+  const actions = document.querySelector('.actions');
+
+  // 当前模式要显示的卡片列表
+  function currentList() {
+    if (mode === 'group1') return paradigmsInGroup(1);
+    if (mode === 'group2') return paradigmsInGroup(2);
+    return PARADIGMS;  // all: 全部 9
+  }
+  // 当前模式的标题(静态"评估项目"已在 HTML 里,此处只加副标题)
+  function makeLabel() {
+    if (mode === 'group1') return '第一组';
+    if (mode === 'group2') return '第二组';
+    return '';  // all: 不加副标题
+  }
+  // 完成页标题
+  function updateAllDoneTitle() {
+    const t = document.getElementById('allDoneTitle');
+    if (!t) return;
+    if (mode === 'group1') t.textContent = '第一组 8 项已完成';
+    else if (mode === 'group2') t.textContent = '语音测评已完成';
+    else t.textContent = '全部 9 项已完成';
+  }
+
+  // sid 未填:预览态(灰色卡片)
+  if (!sid) {
+    rest.style.display = 'none';
+    allDone.style.display = 'none';
+    grid.style.display = 'grid';
+    header.style.display = 'flex';
+    if (actions) actions.style.display = 'flex';
+    label.textContent = makeLabel();
+    progress.innerHTML = `<span style="color:#BBB;">请先在上方输入被试编号</span>`;
+    grid.innerHTML = currentList().map(p => {
+      const order = globalOrder(p.id);
+      return `
+        <div class="card preview" onclick="window.launchParadigm('${p.id}')">
+          <span class="order">${String(order).padStart(2,'0')}</span>
+          <span class="name">${p.name}</span>
+          <span class="eng">${p.eng}</span>
+          <span class="desc">${p.desc}</span>
+          <button class="go-btn">开始</button>
+        </div>`;
+    }).join('');
+    return;
+  }
+
+  // sid 已填:判断完成状态
+  const list = currentList();
+  const doneCount = list.filter(p => localStorage.getItem(`done_${sid}_${p.id}`)).length;
+
+  // 全部完成 → 完成页
+  if (doneCount === list.length) {
+    grid.style.display = 'none';
+    header.style.display = 'none';
+    rest.style.display = 'none';
+    updateAllDoneTitle();
+    allDone.style.display = 'block';
+    if (actions) actions.style.display = 'none';
+    return;
+  }
+
+  // 正常渲染卡片
+  rest.style.display = 'none';
+  allDone.style.display = 'none';
+  grid.style.display = 'grid';
+  header.style.display = 'flex';
+  if (actions) actions.style.display = 'flex';
+
+  label.textContent = makeLabel();
+  progress.textContent = `已完成 ${doneCount} / ${list.length}`;
+
+  grid.innerHTML = list.map(p => {
+    const done = localStorage.getItem(`done_${sid}_${p.id}`);
+    const order = globalOrder(p.id);
+    // F4 (2026-04-19): 检测"进行中"状态 — progress_ 有且 lastCompletedBlockIdx >= 0
+    let partial = null;
+    if (!done && window.ProgressAPI) {
+      const prog = window.ProgressAPI.read(p.id, sid);
+      if (prog && typeof prog.lastCompletedBlockIdx === 'number' && prog.lastCompletedBlockIdx >= 0 && prog.totalBlocks) {
+        partial = prog;
+      }
+    }
+    const stateClass = done ? 'done' : (partial ? 'partial' : '');
+    const badge = partial
+      ? `<span class="partial-badge">进行中 ${partial.lastCompletedBlockIdx + 1}/${partial.totalBlocks}</span>`
+      : '';
+    return `
+      <div class="card ${stateClass}" onclick="window.launchParadigm('${p.id}')">
+        <span class="order">${String(order).padStart(2,'0')}</span>
+        <span class="check">&#10003;</span>
+        ${badge}
+        <span class="name">${p.name}</span>
+        <span class="eng">${p.eng}</span>
+        <span class="desc">${p.desc}</span>
+        <button class="go-btn">${partial ? '接着做 / 从头' : '开始'}</button>
+      </div>`;
+  }).join('');
+}
+
+// ========== 主试点"进入第二组"按钮 ==========
+window.advanceToGroup2 = function() {
+  const sid = getSid();
+  if (!sid) return;
+  if (!confirm('进入语音测评后将无法返回前一组,确认继续?')) return;
+  setCurrentGroup(2);
+  renderGrid();
+  renderDataPanel();
+  // 滚动到顶部让主试看到第二组
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.saveSid = function() {
+  const sid = getSid();
+  if (!sid) { document.getElementById('sid').focus(); return; }
+  const ok = confirm(`确认被试编号为：${sid}\n\n请核对后点击"确定"开始评估`);
+  if (!ok) return;
+  const inp = document.getElementById('sid');
+  inp.classList.add('confirmed');
+  inp.readOnly = true;
+  const bar = document.getElementById('subjectBar');
+  // Replace confirm button with confirmed message
+  const btn = bar.querySelector('.confirm-btn');
+  if (btn) btn.style.display = 'none';
+  let msg = bar.querySelector('.confirmed-msg');
+  if (!msg) { msg = document.createElement('span'); msg.className = 'confirmed-msg'; bar.appendChild(msg); }
+  msg.textContent = '已确认：' + sid;
+  renderGrid();
+  // 全屏由主试在浏览器层面手动设置（F11 或菜单），不再自动触发
+  // 原因：window.open 打开范式时会退出全屏，自动全屏反而造成反复进出
+};
+
+window.launchParadigm = async function(id) {
+  const sid = getSid();
+  if (!sid) { alert('请先输入被试编号'); return; }
+
+  // F4 (2026-04-19): 如果有进行中的进度,弹对话框让主试选"接着做 / 从头 / 取消"
+  // f4_disabled flag 命中时回退到直接启动(无 resume 选项)
+  const f4Disabled = localStorage.getItem('f4_disabled') === '1';
+  let partial = null;
+  if (!f4Disabled && window.ProgressAPI) {
+    const prog = window.ProgressAPI.read(id, sid);
+    if (prog && typeof prog.lastCompletedBlockIdx === 'number' && prog.lastCompletedBlockIdx >= 0 && prog.totalBlocks) {
+      partial = prog;
+    }
+  }
+
+  if (partial) {
+    const choice = await window.showResumeDialog(id, partial);
+    if (choice === 'cancel') return;
+    if (choice === 'restart') {
+      // 清 progress + checkpoint,从头开始
+      try {
+        window.ProgressAPI.clear(id, sid);
+        localStorage.removeItem('checkpoint_' + id + '_' + sid);
+      } catch (e) { /* ignore */ }
+      await launchAndWait(id, {});
+      return;
+    }
+    // 'resume'
+    await launchAndWait(id, {
+      startBlock: partial.lastCompletedBlockIdx + 1,
+      skipInstructions: choice === 'resume_skip_instr' ? 1 : 0,
+    });
+    return;
+  }
+
+  await launchAndWait(id, {});
+};
+
+// F4 进行中对话框: 返回 'cancel' | 'restart' | 'resume' | 'resume_skip_instr'
+window.showResumeDialog = function(paradigmId, prog) {
+  return new Promise((resolve) => {
+    const nameMap = {
+      flanker: '箭头判断', sart: '数字注意', nback: '图片记忆', vstmb: '视觉记忆',
+      tmt: '连线测试', clock: '画钟测试', interpersonal: '人际距离', rmet: '看眼读心',
+      visuospatial: '空间导航', speech: '语音测评', eyetracking: '图片注视',
+    };
+    const name = nameMap[paradigmId] || paradigmId;
+    const nextBlock = prog.lastCompletedBlockIdx + 2; // 1-indexed 显示
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:"PingFang SC","Microsoft YaHei",sans-serif;';
+    overlay.innerHTML =
+      '<div style="background:white;border-radius:16px;padding:36px;text-align:center;max-width:560px;width:92%;">' +
+        '<div style="font-size:30px;font-weight:bold;color:#1A1A2E;margin-bottom:8px;">' + name + ' - 进行中</div>' +
+        '<div style="font-size:20px;color:#666;margin-bottom:20px;line-height:1.6;">' +
+          '上次完成到 <b style="color:#E65100;">第 ' + (prog.lastCompletedBlockIdx + 1) + ' 块 / 共 ' + prog.totalBlocks + ' 块</b>' +
+        '</div>' +
+        '<label style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:17px;color:#555;margin-bottom:22px;cursor:pointer;user-select:none;">' +
+          '<input type="checkbox" id="_resume_replay_instr" checked style="width:18px;height:18px;">' +
+          '重放本块完整指导语 / 音频' +
+          '<span style="font-size:13px;color:#999;">(默认勾选;取消勾选则只放简短提醒)</span>' +
+        '</label>' +
+        '<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">' +
+          '<button id="_resume_go" style="padding:16px 40px;font-size:22px;font-weight:600;border:none;border-radius:12px;background:#1E88E5;color:white;cursor:pointer;min-width:170px;">接着做(第 ' + nextBlock + ' 块)</button>' +
+          '<button id="_resume_restart" style="padding:16px 30px;font-size:18px;font-weight:600;border:2px solid #E0E0E0;border-radius:12px;background:#F5F5F5;color:#666;cursor:pointer;min-width:140px;">从头重做</button>' +
+          '<button id="_resume_cancel" style="padding:16px 24px;font-size:18px;font-weight:500;border:none;border-radius:12px;background:transparent;color:#888;cursor:pointer;">取消</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+
+    document.getElementById('_resume_go').addEventListener('click', () => {
+      const replayInstr = document.getElementById('_resume_replay_instr').checked;
+      overlay.remove();
+      resolve(replayInstr ? 'resume' : 'resume_skip_instr');
+    });
+    document.getElementById('_resume_restart').addEventListener('click', () => {
+      overlay.remove();
+      // 二次确认从头(会丢失上次进度)
+      if (confirm('从头重做会清除本次进度的中间数据,确认?')) {
+        resolve('restart');
+      } else {
+        resolve('cancel');
+      }
+    });
+    document.getElementById('_resume_cancel').addEventListener('click', () => {
+      overlay.remove();
+      resolve('cancel');
+    });
+  });
+};
+
+// Camera permission is now obtained during precheck (paradigms/precheck/precheck.html)
+// which sets localStorage.camera_enabled = 'true' for paradigm-camera.js to detect
+
+// ========== 启动范式并等待完成 ==========
+// F4 (2026-04-19): opts 支持 { startBlock, skipInstructions } 续传参数
+function launchAndWait(id, opts) {
+  opts = opts || {};
+  return new Promise(resolve => {
+    const sid = getSid();
+    const p = PARADIGMS.find(x => x.id === id);
+    if (!p) { resolve(); return; }
+    // 构造 URL 参数
+    const qs = new URLSearchParams({ sid });
+    if (opts.startBlock) qs.set('startBlock', String(opts.startBlock));
+    if (opts.skipInstructions) qs.set('skipInstructions', '1');
+    const win = window.open(`${p.path}?${qs.toString()}`, '_blank');
+    if (!win) { alert('弹窗被拦截，请允许本站弹出窗口'); resolve(); return; }
+
+    let resolved = false;
+    function done() {
+      if (resolved) return;
+      resolved = true;
+      clearInterval(closeChecker);
+      window.removeEventListener('message', msgHandler);
+      localStorage.setItem(`done_${sid}_${id}`, Date.now());
+      // done 时 progress_ 也应该被 end-screen 清了,这里再清一次兜底
+      try { if (window.ProgressAPI) window.ProgressAPI.clear(id, sid); } catch (e) {}
+      renderGrid();
+      renderDataPanel();
+      resolve();
+    }
+
+    // F4: partial 状态 — 不写 done_,只刷新 UI 让 partial badge 显示
+    function partial() {
+      if (resolved) return;
+      resolved = true;
+      clearInterval(closeChecker);
+      window.removeEventListener('message', msgHandler);
+      // 不写 done_,progress_ 已由范式写入
+      renderGrid();
+      renderDataPanel();
+      resolve();
+    }
+
+    function msgHandler(e) {
+      if (e.data?.paradigm !== id) return;
+      if (e.data.status === 'done') done();
+      else if (e.data.status === 'partial') partial();
+    }
+    window.addEventListener('message', msgHandler);
+
+    // 检测窗口被手动关闭（每2s轮询）
+    const closeChecker = setInterval(() => {
+      if (win.closed && !resolved) {
+        console.warn(`Paradigm ${id} window closed without completion`);
+        // F4: 窗口被关闭时,检查 progress_ 是否存在决定走 done 还是 partial
+        const prog = window.ProgressAPI ? window.ProgressAPI.read(id, sid) : null;
+        if (prog && typeof prog.lastCompletedBlockIdx === 'number' && prog.lastCompletedBlockIdx >= 0 && prog.totalBlocks && prog.lastCompletedBlockIdx < prog.totalBlocks - 1) {
+          partial();
+        } else {
+          done();
+        }
+      }
+    }, 2000);
+  });
+}
+
+window.runAll = async function() {
+  const sid = getSid();
+  if (!sid) { alert('请先输入被试编号'); return; }
+  const mode = getMode();
+  // 按当前模式的项目列表跑剩余
+  const list = (mode === 'group1') ? paradigmsInGroup(1)
+              : (mode === 'group2') ? paradigmsInGroup(2)
+              : PARADIGMS;  // 'all': 全部 9 项
+  for (const p of list) {
+    if (localStorage.getItem(`done_${sid}_${p.id}`)) continue;
+    await launchAndWait(p.id);
+  }
+};
+
+// ==========================================================
+// 按编号归档下载文件 — 完全离线,不依赖服务器
+// ==========================================================
+// 每个范式做完会 LocalPack 下载一个 {sid}_{范式}_{时间}.zip 到浏览器下载目录。
+// 本按钮让主试选择该下载目录,把所有 "{sid}_" 开头的文件【复制】到新建 "{sid}/" 子目录。
+// 复制不删原文件 — 原文件留在原处,主试事后自己清理。
+// 纯浏览器 File System Access API,不过网,不依赖服务器。
+window.archiveBySubjectId = async function() {
+  const sid = getSid();
+  if (!sid) { alert('请先输入被试编号'); return; }
+
+  if (!('showDirectoryPicker' in window)) {
+    alert('当前浏览器不支持归档功能。\n请使用 Surface 上的 Edge 浏览器,或电脑上的 Chrome / Edge。\n(Safari、Firefox 暂不支持 File System Access API)');
+    return;
+  }
+
+  // 1. 让主试选"下载"文件夹 — 文案明确
+  let folderHandle;
+  try {
+    folderHandle = await window.showDirectoryPicker({
+      mode: 'readwrite',
+      startIn: 'downloads',
+    });
+  } catch (e) {
+    if (e.name === 'AbortError') return;  // 主试取消
+    alert('打开文件夹出错: ' + e.message);
+    return;
+  }
+
+  // 2. 扫描当前文件夹下所有 {sid}_ 开头的文件
+  const prefix = sid + '_';
+  const matches = [];
+  try {
+    for await (const [name, handle] of folderHandle.entries()) {
+      if (handle.kind === 'file' && name.startsWith(prefix)) {
+        matches.push({ name, handle });
+      }
+    }
+  } catch (e) {
+    alert('读文件夹失败: ' + e.message);
+    return;
+  }
+
+  if (matches.length === 0) {
+    alert(
+      `在刚才选的文件夹里,没找到以 "${sid}_" 开头的文件。\n\n` +
+      `常见原因:\n` +
+      `1. 选错文件夹了 — 请选"下载"文件夹(平时每个范式做完下载 ZIP 的那个)\n` +
+      `2. 这个被试还没做过任何范式\n` +
+      `3. 浏览器的下载路径被改过,文件可能在别的目录\n\n` +
+      `查一下你的下载目录里有没有 ${sid}_xxx.zip 这样的文件。`
+    );
+    return;
+  }
+
+  // 3. 二次确认
+  const preview = matches.slice(0, 5).map(m => '• ' + m.name).join('\n');
+  const more = matches.length > 5 ? `\n... 还有 ${matches.length - 5} 个` : '';
+  const ok = confirm(
+    `找到 ${matches.length} 个文件,将全部复制到新建子文件夹 "${sid}/" 里。\n` +
+    `原文件保留在当前目录,不会删除。\n\n` +
+    preview + more + `\n\n` +
+    `点确定开始复制。`
+  );
+  if (!ok) return;
+
+  // 4. 创建 {sid}/ 子目录
+  let subDir;
+  try {
+    subDir = await folderHandle.getDirectoryHandle(sid, { create: true });
+  } catch (e) {
+    alert('新建文件夹 "' + sid + '/" 失败: ' + e.message);
+    return;
+  }
+
+  // 5. 纯复制(不删原文件;子目录里已有同名就跳过,不覆盖)
+  const copied = [], failed = [], skipped = [];
+  for (const { name, handle } of matches) {
+    try {
+      let exists = false;
+      try { await subDir.getFileHandle(name, { create: false }); exists = true; } catch (_) { /* 不存在,OK */ }
+      if (exists) { skipped.push(name); continue; }
+
+      const file = await handle.getFile();
+      const dest = await subDir.getFileHandle(name, { create: true });
+      const writable = await dest.createWritable();
+      await writable.write(file);
+      await writable.close();
+      copied.push(name);
+    } catch (e) {
+      failed.push(name + ': ' + (e.message || String(e)));
+    }
+  }
+
+  // 6. 结果反馈
+  let msg = `归档完成(复制,不删原文件)\n\n`;
+  msg += `成功复制: ${copied.length} / ${matches.length} 个文件到 "${sid}/" 子文件夹`;
+  if (skipped.length) {
+    msg += `\n\n跳过 ${skipped.length} 个(子文件夹里已存在同名,不覆盖):\n`;
+    msg += skipped.slice(0, 3).map(s => '• ' + s).join('\n');
+    if (skipped.length > 3) msg += `\n... 还有 ${skipped.length - 3} 个`;
+  }
+  if (failed.length) {
+    msg += `\n\n失败 ${failed.length} 个:\n`;
+    msg += failed.slice(0, 3).map(s => '• ' + s).join('\n');
+    if (failed.length > 3) msg += `\n... 还有 ${failed.length - 3} 个`;
+  }
+  alert(msg);
+  console.log('[归档]', { sid, copied, skipped, failed });
+};
+
+function renderDataPanel() {
+  const sid = getSid();
+  const panel = document.getElementById('dataPanel');
+  const list = document.getElementById('dataStatusList');
+  const summary = document.getElementById('dataSummary');
+  if (!sid) { panel.style.display = 'none'; return; }
+
+  function chipHtml(p, done) {
+    const bg = done ? '#F1F8E9' : '#F5F5F5';
+    const border = done ? '#C8E6C9' : '#E0E0E0';
+    const color = done ? '#2E7D32' : '#999';
+    const dot = done ? '#43A047' : '#CCC';
+    return `<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:${bg};border:1px solid ${border};border-radius:8px;font-size:14px;color:${color};font-weight:500;"><span style="width:8px;height:8px;border-radius:50%;background:${dot};flex-shrink:0;"></span>${p.name}</span>`;
+  }
+
+  // 只显示当前模式允许的项目(扁平,不加"第一组/第二组"分组标签)
+  const groups = allowedGroups();
+  const listInMode = PARADIGMS.filter(p => groups.includes(p.group));
+  let doneCount = 0;
+  let chips = '';
+  for (const p of listInMode) {
+    const done = localStorage.getItem(`done_${sid}_${p.id}`);
+    if (done) doneCount++;
+    chips += chipHtml(p, done);
+  }
+  list.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:8px;">${chips}</div>`;
+  summary.textContent = doneCount > 0 ? `已完成 ${doneCount} / ${listInMode.length} 项` : '';
+  panel.style.display = doneCount > 0 ? 'block' : 'none';
+}
+
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.status === 'done') { renderGrid(); renderDataPanel(); }
+});
+setInterval(function() { if (getSid()) { renderGrid(); renderDataPanel(); } }, 3000);
+
+renderGrid();
+renderDataPanel();
+
+// Restore precheck status on page load
+(function() {
+  const sid = getSid();
+  if (sid && localStorage.getItem(`done_${sid}_precheck`)) {
+    const dot = document.getElementById('precheckDot');
+    const label = document.getElementById('precheckLabel');
+    const btn = document.getElementById('precheckBtn');
+    if (dot) dot.classList.add('on');
+    if (label) label.textContent = '已完成 — 摄像头已启用';
+    if (btn) btn.textContent = '重新检查';
+  }
+})();
+
+/* ---- 主试模式开关 ---- */
+window.toggleTesterMode = function() {
+  const cb = document.getElementById('testerModeCb');
+  const warn = document.getElementById('testerModeWarning');
+  if (cb.checked) {
+    localStorage.setItem('tester_mode', '1');
+    if (warn) warn.style.display = 'block';
+  } else {
+    localStorage.removeItem('tester_mode');
+    if (warn) warn.style.display = 'none';
+  }
+};
+(function initTesterMode() {
+  const cb = document.getElementById('testerModeCb');
+  const warn = document.getElementById('testerModeWarning');
+  if (localStorage.getItem('tester_mode') === '1') {
+    if (cb) cb.checked = true;
+    if (warn) warn.style.display = 'block';
+  }
+})();
+
+/* ---- 默认静音开关 ---- */
+// VoiceGuide v4 起所有被试都是 step-by-step 交互,可在指导语内左上角切换音量
+// 勾选此项: 进入指导语默认静音(大学生测试 / 认知健全老人常用)
+// 不勾选: 进入指导语默认有语音,老人可自行静音
+// localStorage key 沿用 'student_mode' 保持兼容
+window.toggleStudentMode = function() {
+  const cb = document.getElementById('studentModeCb');
+  if (cb.checked) {
+    localStorage.setItem('student_mode', '1');
+  } else {
+    localStorage.removeItem('student_mode');
+  }
+};
+(function initStudentMode() {
+  const cb = document.getElementById('studentModeCb');
+  if (localStorage.getItem('student_mode') === '1' && cb) cb.checked = true;
+})();
+
+/* ---- 自动播放模式开关 ---- */
+// VoiceGuide 指导语: 每步音频播完后自动进下一步, 老人不用点"下一步"
+// 最后一步例外 — 必须手动点"开始",防止意外跳入练习
+window.toggleAutoPlay = function() {
+  const cb = document.getElementById('autoPlayCb');
+  if (cb.checked) {
+    localStorage.setItem('auto_play_mode', '1');
+  } else {
+    localStorage.removeItem('auto_play_mode');
+  }
+};
+(function initAutoPlay() {
+  const cb = document.getElementById('autoPlayCb');
+  if (localStorage.getItem('auto_play_mode') === '1' && cb) cb.checked = true;
+})();
+
+/* ---- Service Worker 注册 ---- */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function(reg) {
+    console.log('[SW] registered, scope:', reg.scope);
+  }).catch(function(e) {
+    console.warn('[SW] registration failed:', e);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>视空间导航 - 认知评估</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    body { overflow: hidden; background: #FFFFFF; }
+
+    #nav-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #nav-canvas {
+      display: block;
+      touch-action: none;
+    }
+
+    #nav-instruction {
+      position: fixed;
+      top: 24px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 36px;
+      color: #333;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+      max-width: 80vw;
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .nav-overlay h2 {
+      font-size: 48px;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .nav-overlay p {
+      font-size: 32px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 800px;
+      margin-bottom: 16px;
+    }
+
+    .nav-overlay .hint {
+      font-size: 24px;
+      color: #999;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-container">
+    <canvas id="nav-canvas"></canvas>
+    <div id="nav-instruction"></div>
+  </div>
+  <script src="../../lib/paradigm-camera.js?v=20260419f"></script>
+  <script src="../../lib/jszip.min.js?v=20260410b"></script>
+  <script src="../../lib/end-screen.js?v=20260419g"></script>
+  <script src="../../lib/safe-fetch.js?v=20260418a"></script>
+  <script src="../../lib/attention-probe.js?v=20260410e"></script>
+  <script src="../../lib/progress.js?v=20260419a"></script>
+  <script src="../../lib/touch-hardening.js?v=20260419c"></script>
+  <script src="../../lib/voice-guide.js?v=20260423j"></script>
+  <script type="module" src="visuospatial.js?v=20260423i"></script>
+</body>
+</html>

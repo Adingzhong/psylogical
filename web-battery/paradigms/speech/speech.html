@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>语音测评 - 认知评估</title>
+  <link rel="stylesheet" href="../../lib/jspsych.css?v=20260410e">
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    /* ===== Speech paradigm styles ===== */
+
+    /* Instruction page — fits 960px viewport with room for button */
+    .instr-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+      padding: 24px 40px 12px;
+      text-align: center;
+    }
+    .instr-title {
+      font-size: 44px;
+      font-weight: bold;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    .instr-body {
+      font-size: 32px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+    .instr-body b, .instr-body strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+    .instr-continue-btn {
+      margin-top: 12px !important;
+    }
+
+    /* Recording container — fits 960px viewport with button visible */
+    .speech-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: auto;
+      padding: 20px 40px 16px;
+      text-align: center;
+    }
+
+    /* Task label */
+    .speech-task-label {
+      font-size: 22px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    /* 1 分钟目标提示条 (主试 + 被试都能看到) — 朗读任务不显示 */
+    .speech-duration-hint {
+      display: inline-block;
+      background: #FFF3CD;
+      border: 2px solid #FFC107;
+      color: #5D4037;
+      padding: 8px 28px;
+      border-radius: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0 0 14px;
+      letter-spacing: 4px;
+    }
+
+    /* Stimulus display area */
+    .speech-stimulus {
+      max-width: 900px;
+      margin-bottom: 12px;
+    }
+
+    /* Stimulus prompt text */
+    .naming-prompt {
+      font-size: 32px;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    /* Stimulus image */
+    .speech-stimulus img {
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    /* Recording indicator */
+    .rec-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding: 8px 24px;
+      background: #FFF3F3;
+      border-radius: 40px;
+      border: 2px solid #FFCDD2;
+    }
+    .rec-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #F44336;
+      animation: rec-blink 1s infinite;
+    }
+    @keyframes rec-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+    .rec-timer {
+      font-size: 24px;
+      font-weight: bold;
+      color: #D32F2F;
+      font-variant-numeric: tabular-nums;
+      min-width: 50px;
+    }
+    .rec-label {
+      font-size: 22px;
+      color: #D32F2F;
+    }
+    /* 正计时目标"/60s": 小字柔和灰色,主试能看到但不抢戏 */
+    .rec-goal {
+      font-size: 16px;
+      color: #999;
+      font-variant-numeric: tabular-nums;
+      margin-left: -4px;
+    }
+    /* 音量条:小条放 timer 后,让主试随时看见麦克风活跃度 */
+    .rec-volume {
+      margin-left: 8px;
+      border-radius: 2px;
+      vertical-align: middle;
+      background: #E0E0E0;
+    }
+
+    /* Indicator when not recording / mic unavailable */
+    .rec-indicator.inactive {
+      background: #FFF8E1;
+      border-color: #FFE082;
+    }
+    .rec-indicator.inactive .rec-dot {
+      background: #FFA000;
+      animation: none;
+    }
+    .rec-indicator.inactive .rec-timer,
+    .rec-indicator.inactive .rec-label {
+      color: #F57F17;
+    }
+
+    /* Stop recording button */
+    .stop-btn {
+      font-family: var(--font) !important;
+      font-size: 42px !important;
+      min-height: 131px;
+      min-width: 300px;
+      padding: 20px 56px;
+      border: 2px solid #707070;
+      border-radius: 12px;
+      background: #B0B0B0;
+      color: #1A1A1A;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      margin-top: 12px;
+    }
+    .stop-btn:hover { background: #C0C0C0; }
+    .stop-btn:active { background: #8C8C8C; }
+    .stop-btn:disabled {
+      background: #E0E0E0;
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    /* Progress bar at top */
+    .speech-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+      z-index: 999;
+    }
+
+    /* Summary item counts */
+    .summary-grid {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+    .summary-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 14px 20px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      min-width: 140px;
+    }
+    .summary-item .count {
+      font-size: 40px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    .summary-item .label {
+      font-size: 20px;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div id="jspsych-target"></div>
+  <script src="../../lib/jspsych.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-button-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/html-keyboard-response.js?v=20260410e"></script>
+  <script src="../../lib/plugins/call-function.js?v=20260410e"></script>
+  <script src="../../lib/plugins/preload.js?v=20260410e"></script>
+  <script src="../../lib/paradigm-camera.js?v=20260419f"></script>
+  <script src="../../lib/jszip.min.js?v=20260410b"></script>
+  <script src="../../lib/end-screen.js?v=20260419g"></script>
+  <script src="../../lib/safe-fetch.js?v=20260418a"></script>
+  <script src="../../lib/attention-probe.js?v=20260410e"></script>
+  <script src="../../lib/progress.js?v=20260419a"></script>
+  <script src="../../lib/touch-hardening.js?v=20260419c"></script>
+  <script src="speech.js?v=20260423a"></script>
+</body>
+</html>

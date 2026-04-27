@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>B2 最后几个trial + 探针测试</title>
+<link rel="stylesheet" href="../../css/common.css">
+<link rel="stylesheet" href="nback.html">
+<style>
+  body { margin:0; background:#000; color:#fff; font-family:'PingFang SC',sans-serif; }
+  .stim-container { text-align:center; padding-top:4vh; }
+  .stim-img { max-height:60vh; max-width:80vw; object-fit:contain; }
+  .fixation { font-size:80px; color:#fff; display:flex; justify-content:center; align-items:center; height:80vh; }
+  .btn-row { display:flex; justify-content:center; gap:24px; position:fixed; bottom:40px; left:0; right:0; }
+  .resp-btn { font-size:36px; padding:16px 48px; border:2px solid #707070; border-radius:12px; background:#B0B0B0; color:#fff; cursor:pointer; font-family:'PingFang SC',sans-serif; }
+  .resp-btn:active { background:#8C8C8C; }
+  .fb { display:flex; justify-content:center; align-items:center; height:80vh; font-size:48px; }
+  .info { position:fixed; top:10px; right:20px; font-size:18px; color:#888; }
+</style>
+<script src="../../lib/attention-probe.js?v=20260410e"></script>
+</head>
+<body>
+<div class="info" id="info"></div>
+<div id="app"><div class="fb">加载中...</div></div>
+<script>
+const B = '../../stimuli/nback';
+const app = document.getElementById('app');
+const info = document.getElementById('info');
+
+// B2最后5个trial(从CSV: 17-21) + 探针 + 休息
+const trials = [
+  { image: 'B2/ListA/B2_S17_Bedroom_Sim.png', correct: 'similar' },
+  { image: 'B2/ListA/B2_S18_Kitchen_Diff.png', correct: 'different' },
+  { image: 'B2/ListA/B2_S19_LivingRoom_Base.png', correct: 'different' },
+  { image: 'B2/ListA/B2_S20_LivingRoom_Sim.png', correct: 'similar' },
+  { image: 'B2/ListA/B2_S21_Bedroom_Base.png', correct: 'different' },
+];
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function showTrial(t, idx) {
+  info.textContent = `${idx+1}/${trials.length}`;
+  // fixation
+  app.innerHTML = '<div class="fixation">+</div>';
+  await sleep(450);
+  // stimulus
+  return new Promise(resolve => {
+    app.innerHTML = `
+      <div class="stim-container"><img src="${B}/${t.image}" class="stim-img"></div>
+      <div class="btn-row">
+        <button class="resp-btn" data-r="same">一致</button>
+        <button class="resp-btn" data-r="similar">相似</button>
+        <button class="resp-btn" data-r="different">不同</button>
+      </div>`;
+    document.querySelectorAll('.resp-btn').forEach(b => {
+      b.onclick = () => {
+        const r = b.dataset.r;
+        const ok = r === t.correct;
+        app.innerHTML = `<div class="fb" style="color:${ok?'#66BB6A':'#E57373'}">${ok?'✓ 对了':'没关系，再看仔细'}</div>`;
+        setTimeout(resolve, 1500);
+      };
+    });
+  });
+}
+
+async function run() {
+  app.innerHTML = '<div class="fb" style="font-size:28px;">B2 最后5个trial → 探针 → 休息页</div>';
+  await sleep(2000);
+
+  for (let i = 0; i < trials.length; i++) {
+    await showTrial(trials[i], i);
+  }
+
+  // 探针
+  app.innerHTML = '';
+  if (typeof buildAttentionProbe === 'function') {
+    // 简易版探针
+    app.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:#fff;color:#333;">
+      <p style="font-size:28px;margin-bottom:24px;">请用1-9分评价您刚才对任务的专注程度</p>
+      <div style="display:flex;gap:12px;">
+        ${[1,2,3,4,5,6,7,8,9].map(n => `<button onclick="document.getElementById('app').innerHTML='<div class=fb style=color:#333;background:#fff>休息一下，准备好后继续</div>'" style="font-size:28px;padding:16px 24px;border:2px solid #ccc;border-radius:8px;background:#fff;cursor:pointer;">${n}</button>`).join('')}
+      </div>
+      <p style="font-size:18px;color:#999;margin-top:16px;">1=完全不专注 &nbsp; 9=非常专注</p>
+    </div>`;
+  }
+}
+
+run();
+</script>
+</body>
+</html>
